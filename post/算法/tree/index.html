@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Tree - 薛定谔的BUG</title><meta name="Description" content="二叉树"><meta property="og:title" content="Tree" />
+<meta property="og:description" content="二叉树" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://domyson.github.io/post/%E7%AE%97%E6%B3%95/tree/" /><meta property="og:image" content="https://domyson.github.io/favicon.ico"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-09-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-09-02T00:00:00+00:00" /><meta property="og:site_name" content="薛定谔的BUG" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://domyson.github.io/favicon.ico"/>
+
+<meta name="twitter:title" content="Tree"/>
+<meta name="twitter:description" content="二叉树"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://domyson.github.io/post/%E7%AE%97%E6%B3%95/tree/" /><link rel="prev" href="https://domyson.github.io/post/%E7%AE%97%E6%B3%95/consistenthash/" /><link rel="next" href="https://domyson.github.io/post/language/go/lock/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Tree",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/domyson.github.io\/post\/%E7%AE%97%E6%B3%95\/tree\/"
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "Tree","wordcount":  1930 ,
+        "url": "https:\/\/domyson.github.io\/post\/%E7%AE%97%E6%B3%95\/tree\/","datePublished": "2019-09-02T00:00:00+00:00","dateModified": "2019-09-02T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
+                "@type": "Person",
+                "name": "Treasure"
+            },"description": "二叉树"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="薛定谔的BUG"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span>LoveIt</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/post/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/domyson/domyson.github.io" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="选择语言">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/post/%E7%AE%97%E6%B3%95/tree/" selected>简体中文</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="薛定谔的BUG"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span>LoveIt</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/post/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/domyson/domyson.github.io" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="选择语言">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/post/%E7%AE%97%E6%B3%95/tree/" selected>简体中文</option></select>
+                </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">Tree</h1><div class="content" id="content"><h1 id="树-tree">树 <code>Tree</code></h1>
+<h2 id="定义">定义</h2>
+<blockquote>
+<p>树（Tree）是n（n&gt;=0)个结点的有限集。<code>n=0</code> 时称为空树。在任意一颗非空树中：</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">      A
+</span></span><span class="line"><span class="cl">     / \
+</span></span><span class="line"><span class="cl">    B   C
+</span></span><span class="line"><span class="cl">   /   / \
+</span></span><span class="line"><span class="cl">  D   E   F
+</span></span><span class="line"><span class="cl"> /|\   \
+</span></span><span class="line"><span class="cl">G H I   J
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>有且仅有一个特定的称为根（Root）的结点；</p>
+</li>
+<li>
+<p>当n&gt;1时，其余结点可分为m(m&gt;0)个互不相交的有限集T1、T2、&hellip;&hellip;、Tn，其中每一个集合本身又是一棵树，并且称为根的子树。</p>
+</li>
+<li>
+<p>n&gt;0时根结点是唯一的，不可能存在多个根结点，数据结构中的树只能有一个根结点。</p>
+</li>
+<li>
+<p>m&gt;0时，子树的个数没有限制，但它们一定是互不相交的。</p>
+</li>
+</ul>
+<h2 id="节点的度">节点的度</h2>
+<blockquote>
+<p>节点又有子树数目成为节点的 <code>度</code>，如上图</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">             A -度2
+</span></span><span class="line"><span class="cl">            / \
+</span></span><span class="line"><span class="cl">           B   C -度2
+</span></span><span class="line"><span class="cl">          /   / \
+</span></span><span class="line"><span class="cl">   度3 - D   E   F - 度0
+</span></span><span class="line"><span class="cl">        /|\   \
+</span></span><span class="line"><span class="cl">       G H I   J
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="节点的深度">节点的深度</h2>
+<blockquote>
+<p>该节点的深度为 4</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">------------------------------
+</span></span><span class="line"><span class="cl">          A         第一层       
+</span></span><span class="line"><span class="cl">-------- /-\------------------
+</span></span><span class="line"><span class="cl">        B   C       第二层 
+</span></span><span class="line"><span class="cl">-------/---/-\----------------        
+</span></span><span class="line"><span class="cl">      D   E   F     第三层
+</span></span><span class="line"><span class="cl">-----/|\---\------------------            
+</span></span><span class="line"><span class="cl">    G H I   J       第四层
+</span></span><span class="line"><span class="cl">------------------------------
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="二叉树-binarytree">二叉树 <code>BinaryTree</code></h1>
+<h2 id="定义-1">定义</h2>
+<blockquote>
+<p>二叉树是n(n&gt;=0)个结点的有限集合，该集合或者为空集（称为空二叉树），或者由一个根结点和两棵互不相交的、分别称为根结点的左子树和右子树组成。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">          A
+</span></span><span class="line"><span class="cl">         / \
+</span></span><span class="line"><span class="cl">        B   C
+</span></span><span class="line"><span class="cl">       /   / \
+</span></span><span class="line"><span class="cl">      D   E   F
+</span></span><span class="line"><span class="cl">     / \   \
+</span></span><span class="line"><span class="cl">    G   H   J
+</span></span><span class="line"><span class="cl">       /
+</span></span><span class="line"><span class="cl">      I
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="特点">特点</h2>
+<ul>
+<li>
+<p>每个结点最多有两颗子树，所以二叉树中不存在度大于2的结点。</p>
+</li>
+<li>
+<p>左子树和右子树是有顺序的，次序不能任意颠倒。</p>
+</li>
+<li>
+<p>即使树中某结点只有一棵子树，也要区分它是左子树还是右子树。</p>
+</li>
+</ul>
+<h2 id="性质">性质</h2>
+<ul>
+<li>
+<p>在二叉树的第i层上最多有2i-1 个节点 。（i&gt;=1）</p>
+</li>
+<li>
+<p>二叉树中如果深度为k,那么最多有2^k-1个节点。(k&gt;=1）</p>
+</li>
+<li>
+<p>n0=n2+1 n0表示度数为0的节点数，n2表示度数为2的节点数。</p>
+</li>
+<li>
+<p>在完全二叉树中，具有n个节点的完全二叉树的深度为[log2n]+1，其中[log2n]是向下取整。</p>
+</li>
+<li>
+<p>若对含 n 个结点的完全二叉树从上到下且从左至右进行 1 至 n 的编号，则对完全二叉树中任意一个编号为 i 的结点有如下特性：</p>
+<ul>
+<li>
+<p>若 i=1，则该结点是二叉树的根，无双亲, 否则，编号为 [i/2] 的结点为其双亲结点;</p>
+</li>
+<li>
+<p>若 2i&gt;n，则该结点无左孩子， 否则，编号为 2i 的结点为其左孩子结点；</p>
+</li>
+<li>
+<p>若 2i+1&gt;n，则该结点无右孩子结点， 否则，编号为2i+1 的结点为其右孩子结点。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="斜树">斜树</h2>
+<blockquote>
+<p>所有的结点都只有左子树的二叉树叫左斜树。所有结点都是只有右子树的二叉树叫右斜树。这两者统称为斜树。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">        A        A
+</span></span><span class="line"><span class="cl">       /          \
+</span></span><span class="line"><span class="cl">      B            C
+</span></span><span class="line"><span class="cl">     /              \
+</span></span><span class="line"><span class="cl">    D                F
+</span></span><span class="line"><span class="cl">   /
+</span></span><span class="line"><span class="cl">  G 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="满二叉">满二叉</h2>
+<blockquote>
+<p>在一棵二叉树中。如果所有分支结点都存在左子树和右子树，并且所有叶子都在同一层上，这样的二叉树称为满二叉树。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">        A
+</span></span><span class="line"><span class="cl">      /   \
+</span></span><span class="line"><span class="cl">     B     C
+</span></span><span class="line"><span class="cl">    / \   / \
+</span></span><span class="line"><span class="cl">   D   E F   G
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="特点-1">特点</h3>
+<ul>
+<li>
+<p>叶子只能出现在最下一层。出现在其它层就不可能达成平衡。</p>
+</li>
+<li>
+<p>非叶子结点的度一定是2。</p>
+</li>
+<li>
+<p>在同样深度的二叉树中，满二叉树的结点个数最多，叶子数最多。</p>
+</li>
+</ul>
+<h2 id="完全二叉树">完全二叉树</h2>
+<blockquote>
+<p>对一颗具有n个结点的二叉树按层编号，如果编号为i(1&lt;=i&lt;=n)的结点与同样深度的满二叉树中编号为i的结点在二叉树中位置完全相同，除了最后一层之外的其他每一层都被完全填充，并且所有结点都保持向左对齐。则这棵二叉树称为完全二叉树。满二叉树一定是完全二叉树，但反过来不一定成立。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">        A
+</span></span><span class="line"><span class="cl">      /   \
+</span></span><span class="line"><span class="cl">     B     C
+</span></span><span class="line"><span class="cl">    / \   /
+</span></span><span class="line"><span class="cl">   D   E F
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="特点-2">特点</h3>
+<ul>
+<li>
+<p>叶子结点只能出现在最下层和次下层。</p>
+</li>
+<li>
+<p>最下层的叶子结点集中在树的左部。</p>
+</li>
+<li>
+<p>倒数第二层若存在叶子结点，一定在右部连续位置。</p>
+</li>
+<li>
+<p>如果结点度为1，则该结点只有左孩子，即没有右子树。</p>
+</li>
+<li>
+<p>同样结点数目的二叉树，完全二叉树深度最小。</p>
+</li>
+</ul>
+<h2 id="二叉树的存储结构">二叉树的存储结构</h2>
+<h3 id="顺序存储">顺序存储</h3>
+<blockquote>
+<p>当二叉树为完全二叉树时数组刚好填满，当二叉树不为完全二叉树时将会浪费空间，当出现极限情况时,如斜树，将浪费大量空间</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">              A1
+</span></span><span class="line"><span class="cl">            /     \
+</span></span><span class="line"><span class="cl">          B2      C3
+</span></span><span class="line"><span class="cl">        /   \    /  \
+</span></span><span class="line"><span class="cl">      D4   E5  F6   G7
+</span></span><span class="line"><span class="cl">     / \   /
+</span></span><span class="line"><span class="cl">    H8 I9 J10  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">数组表示：
+</span></span><span class="line"><span class="cl">[A,B,C,D,E,F,G,H,I,J]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">若 D、H、I 结点不存在时
+</span></span><span class="line"><span class="cl">[A,B,C,-,E,F,G,-,-,J]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="二叉链表">二叉链表</h4>
+<blockquote>
+<p>当二叉树不为完全二叉树时，可以考虑链式存储</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//树结构
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">BinaryTree</span> <span class="kd">struct</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">val</span> <span class="kd">interface</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">left</span><span class="p">,</span><span class="nx">right</span> <span class="o">*</span><span class="nx">BinaryTree</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="二叉树遍历">二叉树遍历</h2>
+<h3 id="前序遍历">前序遍历</h3>
+<blockquote>
+<p>从二叉树的根结点出发，当第一次到达结点时就输出结点数据，按照先向左在向右的方向访问。上图的遍历顺序为 <code>A、B、D、H、I、E、J、C、F、G</code></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//前序遍历
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">PreOrderTraverse</span><span class="p">(</span><span class="nx">tree</span> <span class="o">*</span><span class="nx">BinaryTree</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">tree</span> <span class="o">==</span> <span class="kc">nil</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%+v &#34;</span><span class="p">,</span><span class="nx">tree</span><span class="p">.</span><span class="nx">val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">PreOrderTraverse</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">left</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">PreOrderTraverse</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">right</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="中序遍历">中序遍历</h3>
+<blockquote>
+<p>从二叉树的根结点出发，当第二次到达结点时就输出结点数据，按照先向左在向右的方向访问。上图的遍历顺序为 <code>H、D、I、B、J、E、A、F、C、G</code></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//中序遍历
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">InOrderTraverse</span><span class="p">(</span><span class="nx">tree</span> <span class="o">*</span><span class="nx">BinaryTree</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">tree</span> <span class="o">==</span> <span class="kc">nil</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">InOrderTraverse</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">left</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%+v &#34;</span><span class="p">,</span><span class="nx">tree</span><span class="p">.</span><span class="nx">val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">InOrderTraverse</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">right</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="后序遍历">后序遍历</h3>
+<blockquote>
+<p>从二叉树的根结点出发，当第三次到达结点时就输出结点数据，按照先向左在向右的方向访问。上图的遍历顺序为 <code>H、I、D、J、E、B、F、G、C、A</code></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//中序遍历
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">PostOrderTraverse</span><span class="p">(</span><span class="nx">tree</span> <span class="o">*</span><span class="nx">BinaryTree</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">tree</span> <span class="o">==</span> <span class="kc">nil</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">PostOrderTraverse</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">left</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">PostOrderTraverse</span><span class="p">(</span><span class="nx">tree</span><span class="p">.</span><span class="nx">right</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%+v &#34;</span><span class="p">,</span><span class="nx">tree</span><span class="p">.</span><span class="nx">val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="层序遍历">层序遍历</h3>
+<blockquote>
+<p>层次遍历就是按照树的层次自上而下的遍历二叉树。上图的遍历顺序为 <code>A、B、D、E、C、F、G、H、I、J</code></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">LayerOrderTraverse</span><span class="p">(</span><span class="nx">tree</span><span class="p">,</span><span class="nx">left</span><span class="p">,</span><span class="nx">right</span> <span class="o">*</span><span class="nx">BinaryTree</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="如何确定一个二叉树">如何确定一个二叉树</h2>
+<ul>
+<li>
+<p>前序+中序 可确定唯一</p>
+</li>
+<li>
+<p>后序+中序 可确定唯一</p>
+</li>
+<li>
+<p>前序+后序 不可确定唯一</p>
+</li>
+</ul>
+<h1 id="b树">B树</h1>
+<h1 id="b树-1">B+树</h1>
+<h1 id="红黑树">红黑树</h1></div><div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></div></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.103.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Treasure</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/valine@1.5.0/dist/Valine.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"valine":{"appId":"QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI","appKey":"WBmoGyJtbqUswvfLh6L8iEBr","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@14.0.0/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-CN","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
