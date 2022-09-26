@@ -2,7 +2,7 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://domyson.github.io/categories/</loc><lastmod>2022-09-21T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://domyson.github.io/categories/</loc><lastmod>2022-09-26T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://domyson.github.io/en/categories/"
@@ -11,8 +11,18 @@
                     hreflang="zh-cn"
                     href="https://domyson.github.io/categories/"
                     /></url><url>
-            <loc>https://domyson.github.io/post/</loc><lastmod>2022-09-21T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://domyson.github.io/categories/skynet/</loc><lastmod>2022-09-21T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://domyson.github.io/post/</loc><lastmod>2022-09-26T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://domyson.github.io/categories/skynet/</loc><lastmod>2022-09-26T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://domyson.github.io/post/skynet/subscription/</loc><lastmod>2022-09-26T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://domyson.github.io/</loc><lastmod>2022-09-26T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="https://domyson.github.io/en/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-cn"
+                    href="https://domyson.github.io/"
+                    /></url><url>
             <loc>https://domyson.github.io/tags/spb/</loc><lastmod>2022-09-21T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://domyson.github.io/post/skynet/spb/</loc><lastmod>2022-09-21T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://domyson.github.io/tags/</loc><lastmod>2022-09-21T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
@@ -24,15 +34,7 @@
                     hreflang="zh-cn"
                     href="https://domyson.github.io/tags/"
                     /></url><url>
-            <loc>https://domyson.github.io/</loc><lastmod>2022-09-21T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
-                        rel="alternate"
-                        hreflang="en"
-                        href="https://domyson.github.io/en/"
-                        /><xhtml:link
-                    rel="alternate"
-                    hreflang="zh-cn"
-                    href="https://domyson.github.io/"
-                    /></url><url>
+            <loc>https://domyson.github.io/post/skynet/message/</loc><lastmod>2022-07-22T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/tags/skynet-framework/</loc><lastmod>2022-06-20T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/post/skynet/skynet/</loc><lastmod>2022-06-20T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/tags/scpd/</loc><lastmod>2022-05-30T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

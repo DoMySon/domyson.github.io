@@ -9,7 +9,16 @@
     <managingEditor>262737999@qq.com (Treasure)</managingEditor>
     <webMaster>262737999@qq.com (Treasure)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 21 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>skynet subscription</title>
+      <link>https://domyson.github.io/post/skynet/subscription/</link>
+      <pubDate>Mon, 26 Sep 2022 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/skynet/subscription/</guid>
+      <description>简介 skynet subscription 最早构建于 skynet v1.1.0，但在 skynet v1.3.5之后的版本才可用。 最开始只是一个实验性的功能，因为通过业务也能实现，但在开发过程中，有时</description>
+    </item>
+    
     <item>
       <title>spb-skynet编码协议</title>
       <link>https://domyson.github.io/post/skynet/spb/</link>
@@ -17,6 +26,15 @@
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/skynet/spb/</guid>
       <description>前言 其实在cobweb之初就设计了一种编码协议(bbuf)，用于 RPC Server,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），</description>
+    </item>
+    
+    <item>
+      <title>skynet message</title>
+      <link>https://domyson.github.io/post/skynet/message/</link>
+      <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/skynet/message/</guid>
+      <description>简介 skynet是基于消息的服务框架，所以 skynet_message 是一个必不可少的一环 结构 skynet_message 并非是一个指针，而是一种数据承载，它被设计成一个很紧凑并且很小的结构,</description>
     </item>
     
     <item>

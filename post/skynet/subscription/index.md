@@ -1,0 +1,27 @@
+# skynet subscription
+
+
+
+
+
+# 简介
+
+`skynet subscription` 最早构建于 `skynet v1.1.0`，但在 `skynet v1.3.5`之后的版本才可用。
+
+最开始只是一个实验性的功能，因为通过业务也能实现，但在开发过程中，有时候需要知道某个服务是否退出，某个节点是否断开等底层通知，
+
+当时设计的方案有三种，主动式检测，hook，以及 `trigger-callback`
+
+而主动式的检查并不是一个很好的方案，hook 对原始代码入侵性太高， 而采取`trigger-callback`方式无论性能以及便捷度都是比主动式更好的方案
+
+
+# 使用
+
+`subscription` 模块非常简单，只有三个函数， `skynet.publish` `skynet.subscribe` `skynet.unsubscribe`
+
+
+# 关于 `nats`的封装
+
+最开始是从未考虑对其他消息队列进行封装，因为 `skynet` 不应当缝合其他框架而存在，后面提供只是证明 `skynet` 也可以通过封装其他第三方库进行开发，
+
+所以特别注意 `这个功能只是实验性功能` 它不保证实际项目的稳定性，是否封装由用户自己确定
