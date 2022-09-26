@@ -4,34 +4,34 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>skynet设计初衷以及特性 - 薛定谔的BUG</title><meta name="Description" content="测试下咯"><meta property="og:title" content="skynet设计初衷以及特性" />
-<meta property="og:description" content="简介 skynet是一个基于go 分布式服务器框架,灵感来自于skynet erlang. 设计目的 工作中开发一个分布式多人在线游戏的时候构建了一个cobweb" />
+        <title>skynet编码协议 - 薛定谔的BUG</title><meta name="Description" content="测试下咯"><meta property="og:title" content="skynet编码协议" />
+<meta property="og:description" content="前言 其实在cobweb之初就设计了一种编码协议(bbuf)，用于 RPC Server,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://domyson.github.io/post/skynet/skynet/" /><meta property="og:image" content="https://domyson.github.io/favicon.ico"/><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-06-20T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-06-20T00:00:00+00:00" /><meta property="og:site_name" content="薛定谔的BUG" />
+<meta property="og:url" content="https://domyson.github.io/post/skynet/spb/" /><meta property="og:image" content="https://domyson.github.io/favicon.ico"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-09-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-09-21T00:00:00+00:00" /><meta property="og:site_name" content="薛定谔的BUG" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://domyson.github.io/favicon.ico"/>
 
-<meta name="twitter:title" content="skynet设计初衷以及特性"/>
-<meta name="twitter:description" content="简介 skynet是一个基于go 分布式服务器框架,灵感来自于skynet erlang. 设计目的 工作中开发一个分布式多人在线游戏的时候构建了一个cobweb"/>
+<meta name="twitter:title" content="skynet编码协议"/>
+<meta name="twitter:description" content="前言 其实在cobweb之初就设计了一种编码协议(bbuf)，用于 RPC Server,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），"/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://domyson.github.io/post/skynet/skynet/" /><link rel="prev" href="https://domyson.github.io/post/others/%E5%BC%80%E6%BA%90%E5%BA%93/" /><link rel="next" href="https://domyson.github.io/post/skynet/spb/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://domyson.github.io/post/skynet/spb/" /><link rel="prev" href="https://domyson.github.io/post/skynet/skynet/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "skynet设计初衷以及特性",
+        "headline": "skynet编码协议",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/domyson.github.io\/post\/skynet\/skynet\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "skynet framework","wordcount":  1338 ,
-        "url": "https:\/\/domyson.github.io\/post\/skynet\/skynet\/","datePublished": "2022-06-20T00:00:00+00:00","dateModified": "2022-06-20T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@id": "https:\/\/domyson.github.io\/post\/skynet\/spb\/"
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "spb","wordcount":  1074 ,
+        "url": "https:\/\/domyson.github.io\/post\/skynet\/spb\/","datePublished": "2022-09-21T00:00:00+00:00","dateModified": "2022-09-21T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
                 "@type": "Person",
@@ -62,7 +62,7 @@
                     <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
                 </a><a href="javascript:void(0);" class="menu-item language" title="选择语言">
                     <i class="fa fa-globe" aria-hidden="true"></i>                      
-                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/post/skynet/skynet/" selected>简体中文</option></select>
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/post/skynet/spb/" selected>简体中文</option></select>
                 </a></div>
         </div>
     </div>
@@ -96,7 +96,7 @@
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a><a href="javascript:void(0);" class="menu-item" title="选择语言">
                     <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
-                    <select class="language-select" onchange="location = this.value;"><option value="/post/skynet/skynet/" selected>简体中文</option></select>
+                    <select class="language-select" onchange="location = this.value;"><option value="/post/skynet/spb/" selected>简体中文</option></select>
                 </a></div>
     </div>
 </header><div class="search-dropdown desktop">
@@ -105,135 +105,93 @@
     <div class="search-dropdown mobile">
         <div id="search-dropdown-mobile"></div>
     </div><main class="main">
-                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">skynet设计初衷以及特性</h1><div class="content" id="content"><h1 id="简介">简介</h1>
-<p>skynet是一个基于<code>go</code> 分布式服务器框架,灵感来自于<code>skynet</code> <code>erlang</code>.</p>
-<h1 id="设计目的">设计目的</h1>
-<p>工作中开发一个分布式多人在线游戏的时候构建了一个<code>cobweb</code>的分布式通讯框架（基于<code>golang</code>,<code>c</code>）。</p>
-<p>但是在实际开发过程中代码难以维护以及更新，主要是每次都需要跨平台进行编译，特别是<code>cgo</code> 往往需要指定平台的系统库。</p>
-<p>而且一些不规范的使用方式造成无法充分发挥多核的优势，可以参见 <code>关于Go协程的一些思考</code> 虽然1.16 支持抢占式，但错误的使用方式依然造成了cpu过高的问题。</p>
-<p>再者，高并发服务器会造成过多的 <code>goroutine</code> 被创建，极大浪费了内存以及cpu。</p>
-<p>基于以上目的，期望能对<code>cobweb</code> 进行一些更高程度的封装，以及底层重写。 所以 <code>skynet</code> 被设计了出来。</p>
-<p>虽然与云风大神的<code>skynet</code> 同名，但调度方式以及绝大部分api的使用方式是有很大区别的,并且不包含任何lua库，（包括但不限于协程池）</p>
-<h1 id="特性">特性</h1>
-<ol>
-<li>支持 <code>cgo</code> 沿用自 <code>cobweb</code></li>
-<li>支持 <code>plugins</code>，为了方便从外部直接加载以满足热更新需求 <code>unix only</code></li>
-<li>支持纯<code>go</code>,当然这是一句废话</li>
-<li>支持 <code>lua</code> 原因在于 <code>lua</code> 是一门简单并且性能很高的脚本语言，而且业务开发的成本会被降低</li>
-<li>mysql支持，dns支持，http支持</li>
-</ol>
-<h1 id="区别后续完善">区别（后续完善）</h1>
-<ol>
-<li>集群通讯，<code>skynet.send</code>,<code>skynet.call</code> 抹平了本地和集群的区别，不存在 <code>cluster</code> 这个命名空间或者库</li>
-<li>lua 序列化，编码格式完全区别与 <code>lua-seri.c</code>。</li>
-<li>sproto 当前支持 <code>go</code> <code>csharp</code> <code>lua</code>,测试性能高于 protobuf 15%左右，后续对应文章会单独贴出</li>
-<li>纯go实现的http框架，区别于 <code>net/http</code>,仅仅实现部分 <code>RFC</code> 标准</li>
-<li>支持同步调用超时</li>
-<li>内置消息订阅，也支持 <code>nats</code> （一个简单的封装）并不保证线上项目的稳定性</li>
-<li>消息发送默认都是指针，如有需要，可通过一些api来copy，并提供 <code>skynet.free</code> 方法来释放它。</li>
-</ol>
-<h1 id="api">API</h1>
-<h1 id="架构">架构</h1>
-<h1 id="版本历史">版本历史</h1>
-<h1 id="v111">v1.1.1</h1>
-<h2 id="fixed">Fixed</h2>
-<ul>
-<li>修复了<code>http</code>一个原子锁问题，但在高并发下可能会出现失败的情况</li>
-<li>修复了 <code>skynet.send(string,any)</code> 会产生两次搜索的情况</li>
-</ul>
-<h2 id="added">Added</h2>
-<ul>
-<li>skynet-lua 增加 <code>syknet.trace()</code> 用以输出当前堆栈</li>
-<li>skynet-lua 增加 <code>check_version()</code> 函数，校验skynet版本</li>
-</ul>
-<h1 id="v112">v1.1.2</h1>
-<h2 id="fixed-1">Fixed</h2>
-<ul>
-<li>
-<p>修复了<code>kill</code>函数重入导致越界的问题</p>
-</li>
-<li>
-<p>修复<code>http</code> 因为判断发送失败的错误，现在如果发送失败返回404</p>
-</li>
-</ul>
-<h2 id="mod">Mod</h2>
-<ul>
-<li><code>skynet.send(dst,...)</code> 现在传入参数可以是大于2个，当等于2，与之前无区别，当大于2则会转为<code>table</code></li>
-<li><code>skynet.send()</code> 现在不返回 <code>boolean</code>，而是返回一个<code>number</code>,为<code>0</code>则认为成功</li>
-<li><code>kill</code> 函数现在会立即退出当前服务</li>
-<li><code>killed</code> 事件不会被传入了</li>
-</ul>
-<h1 id="v120">v1.2.0</h1>
-<h2 id="mod-1">Mod</h2>
-<ul>
-<li>
-<p>取消了事件投递到达服务，会给出一个字符串类型的消息发送这类型，用以区别数据的来源位置以及类型</p>
-</li>
-<li>
-<p>与上述相关的问题，<code>skynet.send(dest,...)</code> 变为了 <code>skynet.send(dest,typ,...)</code> 现第二参数输入你自己的类型，以便于接收者区分，不要和服务同名，那是没有任何意义的
-主要是为了确定一种数据的类型，而非一系列服务，本身服务和数据类型并非是一对一的关系</p>
-</li>
-<li>
-<p><code>skynet.start</code> -&gt; <code>skynet.uptime</code></p>
-</li>
-</ul>
-<h1 id="v121">v1.2.1</h1>
-<h2 id="mod-2">Mod</h2>
-<ul>
-<li>现在 <code>skynet.warn</code>,<code>skynet.error</code>,<code>skynet.trace</code>,<code>skynet.debug</code> 支持传入任意类型参数</li>
-</ul>
-<h2 id="fixed-2">Fixed</h2>
-<ul>
-<li>修复了<code>cluster</code>消息无法被释放的bug</li>
-</ul>
-<h2 id="add">Add</h2>
-<ul>
-<li>增加 <code>skynet.call</code> <code>skynet.reply</code> 是一个组合调用。否则会造成协程被挂起</li>
-</ul>
-<h1 id="v122">v1.2.2</h1>
-<h2 id="add-1">Add</h2>
-<ul>
-<li>增加 <code>sproto</code> 协议解析，通过 <code>sproto = require(&quot;skynet.sproto&quot;)</code> 引用</li>
-<li><code>sproto</code>
-<ul>
-<li><code>errno = sproto.parse(path)</code> 解析文件描述</li>
-<li><code>bytes(usrdata),errno = sproto.encode(string,tab)</code> 按指定文件编码<code>table</code></li>
-<li><code>tab,errno = sproto.decode(string,bytes(userdata))</code> 按指定文件解码 <code>bytes</code> 解码为 <code>table</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="fixed-3">Fixed</h2>
-<ul>
-<li>修复<code>skynet.call</code> 的一个状态判定问题</li>
-</ul>
-<h1 id="v123">v1.2.3</h1>
-<h2 id="fixed-4">Fixed</h2>
-<ul>
-<li>
-<p>修复<code>http</code>的一个判断bug</p>
-</li>
-<li>
-<p>优化<code>cluster</code>传输逻辑，以及连接逻辑</p>
-</li>
-<li>
-<p><code>skynet.call</code> 现在支持远程调用</p>
-</li>
-</ul>
-<h1 id="v124">v1.2.4</h1>
-<h2 id="fixed-5">Fixed</h2>
-<ul>
-<li>
-<p>集群减少了每条连接 <code>64byte</code> 的额外分配</p>
-</li>
-<li>
-<p>缩减了调用方法深度</p>
-</li>
-<li>
-<p>减少了类型断言的次数</p>
-</li>
-</ul>
-<p>#v1.3.1</p>
-<p>todo</p>
+                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">skynet编码协议</h1><div class="content" id="content"><h1 id="前言">前言</h1>
+<p>其实在<code>cobweb</code>之初就设计了一种编码协议(bbuf)，用于 <code>RPC Server</code>,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护，
+而后期在研发 <code>skynet</code> 的时候，发现需要与多种语言交互，显然 <code>json</code>,<code>xml</code> 不是一个很好的选择，所以此库被重新提出来进行维护。</p>
+<h1 id="词法解析器">词法解析器</h1>
+<pre><code>## 因为需要和强类型和弱类型进行转换，词法解析器和描述文件需要一个抽象共用类型加以识别
+
+## Lua5.1 明显是没有整数类型，所以需要独立出 浮点和整形
+
+## Lua 纯数组table和hash table 的编码方式也是不同的
+</code></pre>
+<h1 id="代码生成器">代码生成器</h1>
+<pre><code>强类型和弱类型的识别是有很大区别，所以我对`Lua` 这边进行了直接解析，简单来说是直接通过 `Lexer` 生成此消息结构的元信息.(这点是完全区别于云风大神的`skynet`的)，
+强类型语言为了减少反射，我们需要通过文件描述来提供其成员或字段的类型以及位置而非通过反射，这个在编译期间就可以确定了。
+</code></pre>
+<h1 id="编码">编码</h1>
+<pre><code>## 减少内存分配
+     为了减少i/o和内存压力，最简单的办法是让一个字节能包含更多的消息， 如一个32bit的整形，它真的需要4byte的字节空间吗？,其二不同的分配大小影响执行速度，（如32byte和64kb 是存在明显区别），
+     所以需要动态计算分配尺寸。
+
+## 反射 
+    显然反射是所有带运行时语言的一个痛点，而通过 `unsafe.Pointer` 能明显提高执行速率，所以 `spb` 采用了大量非安全指针，
+
+    当然在 `bbuf` 设计之初是没有考虑嵌套消息的，原因在于不一定需要通过嵌套消息，因为这会加大分析负担，而实际情况恰恰相反，消息嵌套是实际业务中必不可少的一部分
+
+    但go语言的接口本质上是两个指针（其一指向类型系统，其二指向该类型的具体方法），所以要支持消息嵌套，我们需要一点点反射来支持。
+
+## API
+    我在这里提供两个主要语言的api （`go` `lua`）
+
+    ## Lua
+        ```lua
+            local spb = require(&quot;skyent.spb&quot;)
+            local err = spb.load(&quot;file path or dir path&quot;)  -- 注意 此函数执行结果在当前节点是共享的，所以只需要加载一次，并返回一个错误（string）
+            if err~=nil then
+                // do something
+            end
+
+            local data ,err = spb.marshal(string,table)   -- 此时返回的data是 `userdata`,不要尝试访问它，但你可以通过 `skynet.free` 来释放它.也可以通过`skynet.send,skynet.call` 来发送到其他服务.
+
+            local err = spb.unmarshal(string,data)  -- 仅返回一个错误，并将具体数据映射到传入的 `table` 中
+        ```
+
+    # go
+        ```go
+
+            spb.Marshal(msg,[n])   // 可选参数n 是为了减少 sizeof 的时间，如果你确定消息内容是一致的 那么这个值你可以传入，否则使用`-1`来让它自动计算
+
+            spb.Unmarshal([]byte,msg)
+
+        ```
+
+## spb文件结构
+    ```
+        package gen   // 包名，主要是为了在go和c#中区分同名协议
+        // 注释哦
+
+        enum Foo {
+            A : 0
+            B : 1
+            C : 2
+        }
+
+        message empty {}  // 一个空消息
+
+        message PhoneNumber{  
+            string number : 0 
+
+            integer type : 1  
+        }
+
+        message Person{
+            string name : 0
+            integer id : 1
+            string email: 2
+
+            *PhoneNumber phones : 3  // 嵌套类型的数组
+
+            PhoneNumber phone : 4  // 嵌套类型
+        }
+
+
+        message AddressBook {
+            *Person person : 0
+        }
+
+    ```
+</code></pre>
 </div><div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
             </noscript></div></div></div>

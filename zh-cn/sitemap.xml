@@ -2,7 +2,7 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://domyson.github.io/categories/</loc><lastmod>2022-06-20T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://domyson.github.io/categories/</loc><lastmod>2022-09-21T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://domyson.github.io/en/categories/"
@@ -11,11 +11,11 @@
                     hreflang="zh-cn"
                     href="https://domyson.github.io/categories/"
                     /></url><url>
-            <loc>https://domyson.github.io/post/</loc><lastmod>2022-06-20T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://domyson.github.io/tags/readme/</loc><lastmod>2022-06-20T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://domyson.github.io/categories/skynet/</loc><lastmod>2022-06-20T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://domyson.github.io/post/skynet/skynet/</loc><lastmod>2022-06-20T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://domyson.github.io/tags/</loc><lastmod>2022-06-20T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://domyson.github.io/post/</loc><lastmod>2022-09-21T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://domyson.github.io/categories/skynet/</loc><lastmod>2022-09-21T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://domyson.github.io/post/skynet/spb/</loc><lastmod>2022-09-21T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://domyson.github.io/tags/spb/</loc><lastmod>2022-09-21T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://domyson.github.io/tags/</loc><lastmod>2022-09-21T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://domyson.github.io/en/tags/"
@@ -24,7 +24,7 @@
                     hreflang="zh-cn"
                     href="https://domyson.github.io/tags/"
                     /></url><url>
-            <loc>https://domyson.github.io/</loc><lastmod>2022-06-20T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://domyson.github.io/</loc><lastmod>2022-09-21T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://domyson.github.io/en/"
@@ -33,6 +33,8 @@
                     hreflang="zh-cn"
                     href="https://domyson.github.io/"
                     /></url><url>
+            <loc>https://domyson.github.io/tags/skynet-framework/</loc><lastmod>2022-06-20T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://domyson.github.io/post/skynet/skynet/</loc><lastmod>2022-06-20T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/post/others/%E5%BC%80%E6%BA%90%E5%BA%93/</loc><lastmod>2022-04-15T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/categories/%E5%BC%80%E6%BA%90%E5%BA%93/</loc><lastmod>2022-04-15T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/post/others/%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81/</loc><lastmod>2022-04-15T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

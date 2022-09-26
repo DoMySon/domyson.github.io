@@ -9,9 +9,18 @@
     <managingEditor>262737999@qq.com (Treasure)</managingEditor>
     <webMaster>262737999@qq.com (Treasure)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 20 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>skynet的原理和设计</title>
+      <title>skynet编码协议</title>
+      <link>https://domyson.github.io/post/skynet/spb/</link>
+      <pubDate>Wed, 21 Sep 2022 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/skynet/spb/</guid>
+      <description>前言 其实在cobweb之初就设计了一种编码协议(bbuf)，用于 RPC Server,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），</description>
+    </item>
+    
+    <item>
+      <title>skynet设计初衷以及特性</title>
       <link>https://domyson.github.io/post/skynet/skynet/</link>
       <pubDate>Mon, 20 Jun 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
