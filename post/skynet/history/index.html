@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>scpd - 薛定谔的BUG</title><meta name="Description" content="测试下咯"><meta property="og:title" content="scpd" />
-<meta property="og:description" content="skynet历代版本变动 v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 skynet.send(string,any) 会产生两次搜索的情况 Added skynet-lua 增加 syknet.trace() 用以输出当前" />
+        <title>skynet版本变动 - 薛定谔的BUG</title><meta name="Description" content="测试下咯"><meta property="og:title" content="skynet版本变动" />
+<meta property="og:description" content="v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 skynet.send(string,any) 会产生两次搜索的情况 Added skynet-lua 增加 syknet.trace() 用以输出当前堆栈 skynet-lua 增加 check_version() 函数，校验s" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://domyson.github.io/post/skynet/history/" /><meta property="og:image" content="https://domyson.github.io/favicon.ico"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-04-30T00:00:00+00:00" />
@@ -14,8 +14,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://domyson.github.io/favicon.ico"/>
 
-<meta name="twitter:title" content="scpd"/>
-<meta name="twitter:description" content="skynet历代版本变动 v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 skynet.send(string,any) 会产生两次搜索的情况 Added skynet-lua 增加 syknet.trace() 用以输出当前"/>
+<meta name="twitter:title" content="skynet版本变动"/>
+<meta name="twitter:description" content="v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 skynet.send(string,any) 会产生两次搜索的情况 Added skynet-lua 增加 syknet.trace() 用以输出当前堆栈 skynet-lua 增加 check_version() 函数，校验s"/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -25,12 +25,12 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "scpd",
+        "headline": "skynet版本变动",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/skynet\/history\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","wordcount":  628 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","wordcount":  616 ,
         "url": "https:\/\/domyson.github.io\/post\/skynet\/history\/","datePublished": "2022-04-30T00:00:00+00:00","dateModified": "2022-04-30T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
@@ -105,8 +105,7 @@
     <div class="search-dropdown mobile">
         <div id="search-dropdown-mobile"></div>
     </div><main class="main">
-                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">scpd</h1><div class="content" id="content"><h1 id="skynet历代版本变动">skynet历代版本变动</h1>
-<h1 id="v111">v1.1.1</h1>
+                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">skynet版本变动</h1><div class="content" id="content"><h1 id="v111">v1.1.1</h1>
 <h2 id="fixed">Fixed</h2>
 <ul>
 <li>修复了<code>http</code>一个原子锁问题，但在高并发下可能会出现失败的情况</li>

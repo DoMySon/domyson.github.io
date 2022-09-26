@@ -38,12 +38,12 @@
     </item>
     
     <item>
-      <title>scpd</title>
+      <title>skynet版本变动</title>
       <link>https://domyson.github.io/post/skynet/history/</link>
       <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/skynet/history/</guid>
-      <description>skynet历代版本变动 v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 skynet.send(string,any) 会产生两次搜索的情况 Added skynet-lua 增加 syknet.trace() 用以输出当前</description>
+      <description>v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 skynet.send(string,any) 会产生两次搜索的情况 Added skynet-lua 增加 syknet.trace() 用以输出当前堆栈 skynet-lua 增加 check_version() 函数，校验s</description>
     </item>
     
     <item>

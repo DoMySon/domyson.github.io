@@ -1,9 +1,5 @@
-# scpd
+# skynet版本变动
 
-
-
-
-# skynet历代版本变动
 
 
 # v1.1.1
