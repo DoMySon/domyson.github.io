@@ -107,8 +107,5 @@ func Bytes2String(b []byte) string {
 }
 ```
 
-## Cgo
-
-[Cgo](/post/Cgo)
 
 > 还没写

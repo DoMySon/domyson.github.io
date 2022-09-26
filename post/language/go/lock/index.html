@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>golang内置锁 - 薛定谔的BUG</title><meta name="Description" content="Go Mutex"><meta property="og:title" content="golang内置锁" />
+        <title>Locker - 薛定谔的BUG</title><meta name="Description" content="Go Mutex"><meta property="og:title" content="Locker" />
 <meta property="og:description" content="Go Mutex" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://domyson.github.io/post/language/go/lock/" /><meta property="og:image" content="https://domyson.github.io/favicon.ico"/><meta property="article:section" content="post" />
@@ -14,7 +14,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://domyson.github.io/favicon.ico"/>
 
-<meta name="twitter:title" content="golang内置锁"/>
+<meta name="twitter:title" content="Locker"/>
 <meta name="twitter:description" content="Go Mutex"/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -25,12 +25,12 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "golang内置锁",
+        "headline": "Locker",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/language\/go\/lock\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "go","wordcount":  926 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "locker","wordcount":  926 ,
         "url": "https:\/\/domyson.github.io\/post\/language\/go\/lock\/","datePublished": "2019-12-11T00:00:00+00:00","dateModified": "2019-12-11T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
@@ -105,7 +105,7 @@
     <div class="search-dropdown mobile">
         <div id="search-dropdown-mobile"></div>
     </div><main class="main">
-                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">golang内置锁</h1><div class="content" id="content"><h1 id="syncmutex">sync.Mutex</h1>
+                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">Locker</h1><div class="content" id="content"><h1 id="syncmutex">sync.Mutex</h1>
 <ol>
 <li>
 <p>mutex相关的所有事情都是通过sync.Mutex类型的两个方法sync.Lock()和sync.Unlock()函数来完成的，前者用于获取sync.Mutex锁，后者用于释放sync.Mutex锁。sync.Mutex一旦被锁住，其它的Lock()操作就无法再获取它的锁，只有通过Unlock()释放锁之后才能通过Lock()继续获取锁。</p>

@@ -4,8 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Go性能分析 - 薛定谔的BUG</title><meta name="Description" content="Go单元测试&amp;基准测试"><meta property="og:title" content="Go性能分析" />
-<meta property="og:description" content="Go单元测试&amp;基准测试" />
+        <title>Go性能分析 - 薛定谔的BUG</title><meta name="Description" content="测试下咯"><meta property="og:title" content="Go性能分析" />
+<meta property="og:description" content="
+单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证。对于单元测试中单元的含义，一般要根据实际情况去判定其具体含义，如 C语言中单元指一个函数,单元就是人为规定的最小的被测功能模块。单元测试是在软件开发过程中要进行的最低级别的测试活动，软件的独立单元将在与程序的其他部分相隔离的情况下进行测试。
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://domyson.github.io/post/language/go/pprof/" /><meta property="og:image" content="https://domyson.github.io/favicon.ico"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2019-08-23T00:00:00+00:00" />
@@ -15,7 +17,9 @@
 <meta name="twitter:image" content="https://domyson.github.io/favicon.ico"/>
 
 <meta name="twitter:title" content="Go性能分析"/>
-<meta name="twitter:description" content="Go单元测试&amp;基准测试"/>
+<meta name="twitter:description" content="
+单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证。对于单元测试中单元的含义，一般要根据实际情况去判定其具体含义，如 C语言中单元指一个函数,单元就是人为规定的最小的被测功能模块。单元测试是在软件开发过程中要进行的最低级别的测试活动，软件的独立单元将在与程序的其他部分相隔离的情况下进行测试。
+"/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -36,7 +40,7 @@
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
                 "@type": "Person",
                 "name": "Treasure"
-            },"description": "Go单元测试\u0026基准测试"
+            },"description": ""
     }
     </script></head>
     <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>skynet编码协议 - 薛定谔的BUG</title><meta name="Description" content="测试下咯"><meta property="og:title" content="skynet编码协议" />
+        <title>spb-skynet编码协议 - 薛定谔的BUG</title><meta name="Description" content="测试下咯"><meta property="og:title" content="spb-skynet编码协议" />
 <meta property="og:description" content="前言 其实在cobweb之初就设计了一种编码协议(bbuf)，用于 RPC Server,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://domyson.github.io/post/skynet/spb/" /><meta property="og:image" content="https://domyson.github.io/favicon.ico"/><meta property="article:section" content="post" />
@@ -14,7 +14,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://domyson.github.io/favicon.ico"/>
 
-<meta name="twitter:title" content="skynet编码协议"/>
+<meta name="twitter:title" content="spb-skynet编码协议"/>
 <meta name="twitter:description" content="前言 其实在cobweb之初就设计了一种编码协议(bbuf)，用于 RPC Server,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），"/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -25,12 +25,12 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "skynet编码协议",
+        "headline": "spb-skynet编码协议",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/skynet\/spb\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "spb","wordcount":  1074 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "spb","wordcount":  1103 ,
         "url": "https:\/\/domyson.github.io\/post\/skynet\/spb\/","datePublished": "2022-09-21T00:00:00+00:00","dateModified": "2022-09-21T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
@@ -105,93 +105,160 @@
     <div class="search-dropdown mobile">
         <div id="search-dropdown-mobile"></div>
     </div><main class="main">
-                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">skynet编码协议</h1><div class="content" id="content"><h1 id="前言">前言</h1>
+                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">spb-skynet编码协议</h1><div class="content" id="content"><h1 id="前言">前言</h1>
 <p>其实在<code>cobweb</code>之初就设计了一种编码协议(bbuf)，用于 <code>RPC Server</code>,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护，
 而后期在研发 <code>skynet</code> 的时候，发现需要与多种语言交互，显然 <code>json</code>,<code>xml</code> 不是一个很好的选择，所以此库被重新提出来进行维护。</p>
 <h1 id="词法解析器">词法解析器</h1>
-<pre><code>## 因为需要和强类型和弱类型进行转换，词法解析器和描述文件需要一个抽象共用类型加以识别
-
-## Lua5.1 明显是没有整数类型，所以需要独立出 浮点和整形
-
-## Lua 纯数组table和hash table 的编码方式也是不同的
-</code></pre>
+<ul>
+<li>
+<p>因为需要和强类型和弱类型进行转换，词法解析器和描述文件需要一个抽象共用类型加以识别</p>
+</li>
+<li>
+<p>Lua5.1 是没有整数类型，需要区分 浮点和整形</p>
+</li>
+<li>
+<p>Lua table 纯数组table和hash table 的编码方式也是不同的</p>
+</li>
+</ul>
 <h1 id="代码生成器">代码生成器</h1>
-<pre><code>强类型和弱类型的识别是有很大区别，所以我对`Lua` 这边进行了直接解析，简单来说是直接通过 `Lexer` 生成此消息结构的元信息.(这点是完全区别于云风大神的`skynet`的)，
-强类型语言为了减少反射，我们需要通过文件描述来提供其成员或字段的类型以及位置而非通过反射，这个在编译期间就可以确定了。
-</code></pre>
+<p>强类型和弱类型的识别是有很大区别，所以我对<code>Lua</code> 这边进行了直接解析，简单来说是直接通过 <code>Lexer</code> 生成此消息结构的元信息.(这点是完全区别于云风大神的<code>skynet</code>的)，
+强类型语言为了减少反射，我们需要通过文件描述来提供其成员或字段的类型以及位置而非通过反射，这个在编译期间就可以确定了而非运行时。</p>
 <h1 id="编码">编码</h1>
-<pre><code>## 减少内存分配
-     为了减少i/o和内存压力，最简单的办法是让一个字节能包含更多的消息， 如一个32bit的整形，它真的需要4byte的字节空间吗？,其二不同的分配大小影响执行速度，（如32byte和64kb 是存在明显区别），
-     所以需要动态计算分配尺寸。
-
-## 反射 
-    显然反射是所有带运行时语言的一个痛点，而通过 `unsafe.Pointer` 能明显提高执行速率，所以 `spb` 采用了大量非安全指针，
-
-    当然在 `bbuf` 设计之初是没有考虑嵌套消息的，原因在于不一定需要通过嵌套消息，因为这会加大分析负担，而实际情况恰恰相反，消息嵌套是实际业务中必不可少的一部分
-
-    但go语言的接口本质上是两个指针（其一指向类型系统，其二指向该类型的具体方法），所以要支持消息嵌套，我们需要一点点反射来支持。
-
-## API
-    我在这里提供两个主要语言的api （`go` `lua`）
-
-    ## Lua
-        ```lua
-            local spb = require(&quot;skyent.spb&quot;)
-            local err = spb.load(&quot;file path or dir path&quot;)  -- 注意 此函数执行结果在当前节点是共享的，所以只需要加载一次，并返回一个错误（string）
-            if err~=nil then
-                // do something
-            end
-
-            local data ,err = spb.marshal(string,table)   -- 此时返回的data是 `userdata`,不要尝试访问它，但你可以通过 `skynet.free` 来释放它.也可以通过`skynet.send,skynet.call` 来发送到其他服务.
-
-            local err = spb.unmarshal(string,data)  -- 仅返回一个错误，并将具体数据映射到传入的 `table` 中
-        ```
-
-    # go
-        ```go
-
-            spb.Marshal(msg,[n])   // 可选参数n 是为了减少 sizeof 的时间，如果你确定消息内容是一致的 那么这个值你可以传入，否则使用`-1`来让它自动计算
-
-            spb.Unmarshal([]byte,msg)
-
-        ```
-
-## spb文件结构
-    ```
-        package gen   // 包名，主要是为了在go和c#中区分同名协议
-        // 注释哦
-
-        enum Foo {
-            A : 0
-            B : 1
-            C : 2
-        }
-
-        message empty {}  // 一个空消息
-
-        message PhoneNumber{  
-            string number : 0 
-
-            integer type : 1  
-        }
-
-        message Person{
-            string name : 0
-            integer id : 1
-            string email: 2
-
-            *PhoneNumber phones : 3  // 嵌套类型的数组
-
-            PhoneNumber phone : 4  // 嵌套类型
-        }
-
-
-        message AddressBook {
-            *Person person : 0
-        }
-
-    ```
-</code></pre>
+<ol>
+<li>
+<p>减少内存分配</p>
+<p>为了减少i/o和内存压力，最简单的办法是让一个字节能包含更多的消息， 如一个32bit的整形，它真的需要4byte的字节空间吗？,其二不同的分配大小影响执行速度，（如32byte和64kb 是存在明显区别），
+所以需要动态计算分配尺寸。</p>
+</li>
+<li>
+<p>反射</p>
+<p>显然反射是所有带运行时语言的一个痛点，而通过 <code>unsafe.Pointer</code> 能明显提高执行速率，所以 <code>spb</code> 采用了大量非安全指针，</p>
+<p>当然在 <code>bbuf</code> 设计之初是没有考虑嵌套消息的，原因在于不一定需要通过嵌套消息，因为这会加大分析负担，而实际情况恰恰相反，消息嵌套是实际业务中必不可少的一部分</p>
+<p>但go语言的接口本质上是两个指针（其一指向类型系统，其二指向该类型的具体方法），所以要支持消息嵌套，我们需要一点点反射来支持。</p>
+</li>
+<li>
+<p>API Example</p>
+<ol>
+<li>
+<p>Lua</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">spb</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s2">&#34;skyent.spb&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">err</span> <span class="o">=</span> <span class="n">spb.load</span><span class="p">(</span><span class="s2">&#34;file path or dir path&#34;</span><span class="p">)</span>  <span class="c1">-- 注意 此函数执行结果在当前节点是共享的，所以只需要加载一次，并返回一个错误（string）</span>
+</span></span><span class="line"><span class="cl"><span class="kr">if</span> <span class="n">err</span><span class="o">~=</span><span class="kc">nil</span> <span class="kr">then</span>
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="kr">do</span> <span class="n">something</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">data</span> <span class="p">,</span><span class="n">err</span> <span class="o">=</span> <span class="n">spb.marshal</span><span class="p">(</span><span class="n">string</span><span class="p">,</span><span class="n">table</span><span class="p">)</span>   <span class="c1">-- 此时返回的data是 `userdata`,不要尝试访问它，但你可以通过 `skynet.free` 来释放它.也可以通过`skynet.send,skynet.call` 来发送到其他服务.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">err</span> <span class="o">=</span> <span class="n">spb.unmarshal</span><span class="p">(</span><span class="n">string</span><span class="p">,</span><span class="n">data</span><span class="p">)</span>  <span class="c1">-- 仅返回一个错误，并将具体数据映射到传入的 `table` 中</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>go</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">spb</span><span class="p">.</span><span class="nf">Marshal</span><span class="p">(</span><span class="nx">msg</span><span class="p">,[</span><span class="nx">n</span><span class="p">])</span>   <span class="c1">// 可选参数n 是为了减少 sizeof 的时间，如果你确定消息内容是一致的 那么这个值你可以传入，否则使用`-1`来让它自动计算
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">spb</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="nx">msg</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+</li>
+<li>
+<p>spb文件结构</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">package gen   // 包名，主要是为了在go和c#中区分同名协议
+</span></span><span class="line"><span class="cl">// 注释哦
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">enum Foo {
+</span></span><span class="line"><span class="cl">    A : 0
+</span></span><span class="line"><span class="cl">    B : 1
+</span></span><span class="line"><span class="cl">    C : 2
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">message empty {}  // 一个空消息
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">message PhoneNumber{  
+</span></span><span class="line"><span class="cl">    string number : 0 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    integer type : 1  
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">message Person{
+</span></span><span class="line"><span class="cl">    string name : 0
+</span></span><span class="line"><span class="cl">    integer id : 1
+</span></span><span class="line"><span class="cl">    string email: 2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    *PhoneNumber phones : 3  // 嵌套类型的数组
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    PhoneNumber phone : 4  // 嵌套类型
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">message AddressBook {
+</span></span><span class="line"><span class="cl">    *Person person : 0
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="lua-序列化-skynetpackskynetunpack">Lua 序列化 (skynet.pack,skynet.unpack)</h2>
+<blockquote>
+<p><code>spb</code> 开发过程的附加产物，唯一的区别仅能在<code>lua</code>侧使用</p>
+</blockquote>
 </div><div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
             </noscript></div></div></div>

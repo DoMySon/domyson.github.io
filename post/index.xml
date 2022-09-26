@@ -11,7 +11,7 @@
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Wed, 21 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>skynet编码协议</title>
+      <title>spb-skynet编码协议</title>
       <link>https://domyson.github.io/post/skynet/spb/</link>
       <pubDate>Wed, 21 Sep 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
@@ -25,7 +25,43 @@
       <pubDate>Mon, 20 Jun 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/skynet/skynet/</guid>
-      <description>简介 skynet是一个基于go 分布式服务器框架,灵感来自于skynet erlang. 设计目的 工作中开发一个分布式多人在线游戏的时候构建了一个cobweb</description>
+      <description>简介 skynet是一个基于go 对等分布式服务器框架,灵感来自于skynet erlang. 设计原因 工作中开发一个分布式多人在线游戏的时候构建了一个cobw</description>
+    </item>
+    
+    <item>
+      <title>scpd</title>
+      <link>https://domyson.github.io/post/skynet/scpd/</link>
+      <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/skynet/scpd/</guid>
+      <description>简介 scpd模块是skynet底层集群模块，它承担了skynet网络节点之间的通讯职能。 架构 scpd 为了满足对等网络的性质，所以每次和其他节点建立</description>
+    </item>
+    
+    <item>
+      <title>scpd</title>
+      <link>https://domyson.github.io/post/skynet/history/</link>
+      <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/skynet/history/</guid>
+      <description>skynet历代版本变动 v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 skynet.send(string,any) 会产生两次搜索的情况 Added skynet-lua 增加 syknet.trace() 用以输出当前</description>
+    </item>
+    
+    <item>
+      <title>skynet定时器</title>
+      <link>https://domyson.github.io/post/skynet/timer/</link>
+      <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/skynet/timer/</guid>
+      <description>简介 timer 模块是 skynet 内置的一个定时模块，它并未使用时间轮，而是使用了小根堆</description>
+    </item>
+    
+    <item>
+      <title>allocator</title>
+      <link>https://domyson.github.io/post/skynet/allocator/</link>
+      <pubDate>Thu, 21 Apr 2022 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/skynet/allocator/</guid>
+      <description>简介 alloctor 模块主要是为了减少GC而开发。支持两套分配规则 基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet中它确实有更优秀</description>
     </item>
     
     <item>
@@ -393,15 +429,6 @@
     </item>
     
     <item>
-      <title>go历代版本</title>
-      <link>https://domyson.github.io/post/language/go/history/</link>
-      <pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate>
-      <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/language/go/history/</guid>
-      <description>&lt;h1 id=&#34;go-版本变迁差异&#34;&gt;Go 版本变迁差异&lt;/h1&gt;</description>
-    </item>
-    
-    <item>
       <title>Http</title>
       <link>https://domyson.github.io/post/net/http/</link>
       <pubDate>Sun, 09 Feb 2020 00:00:00 +0000</pubDate>
@@ -589,7 +616,7 @@
     </item>
     
     <item>
-      <title>golang内置锁</title>
+      <title>Locker</title>
       <link>https://domyson.github.io/post/language/go/lock/</link>
       <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
@@ -817,7 +844,7 @@
     </item>
     
     <item>
-      <title>Goroutine</title>
+      <title>Go协程的思考</title>
       <link>https://domyson.github.io/post/language/go/goroutine/</link>
       <pubDate>Sun, 12 May 2019 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
@@ -991,6 +1018,15 @@
 &lt;/table&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://domyson.github.io/post/language/lua/coroutine/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/language/lua/coroutine/</guid>
+      <description></description>
     </item>
     
     <item>

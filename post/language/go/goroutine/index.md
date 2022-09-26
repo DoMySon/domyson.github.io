@@ -1,4 +1,4 @@
-# Goroutine
+# Go协程的思考
 
 
 # 栈
@@ -109,5 +109,76 @@ go func(){
 
 # GC
 
-+ 因为 GC 操作是使用自己的一组 `Goroutine` 来执行的，这些 `Goroutine` 需要一个 `M` 来运行。所以 GC 会导致调度混乱。但是，因为调度器是知道 `Goroutine` 要做什么的，所以它可以做出明智的决策。其中一个明智的决策是，在 GC 过程中，暂停那些需要访问堆空间的 `Goroutine`（`Stop The World`），运行那些不需要访问堆空间的。
+因为 GC 操作是使用自己的一组 `Goroutine` 来执行的，这些 `Goroutine` 需要一个 `M` 来运行。所以 GC 会导致调度混乱。
 
+但是，因为调度器是知道 `Goroutine` 要做什么的，所以它可以做出明智的决策。其中一个明智的决策是，在 GC 过程中，暂停那些需要访问堆空间的 `Goroutine`（`Stop The World`），运行那些不需要访问堆空间的。
+
+
+
+# 思考
+
+大部分`goroutine`使用都是在网络层，这部分`goroutine` 我称为 `i/o 协程`,但对于高并发而言，`gorotuine` 也会导致内存过高，
+
+而关于`goroutine`的调度问题，除了上述所说，网络底层是通过 `i/o multiplex `事件来触发调度的,虽然 1.16 之后支持了抢占式调度，但错误的使用并不会提高性能，反而会降低.
+
+我们通过一组数据来证明它
+
+## 1 thread epoll
+```txt
+    Test Duration 10.1192694s:
+
+    1000 connections,fail: 0
+
+    Delay:    Avg        Max        Stdev
+        23.074671ms 226.0378ms  23.074671ms
+
+    Request/Sec: 17.60K/s
+    Written/Sec: 17.18M/s
+    Receive/Sec: 17.18M/s
+    TotalWritten: 173.89M
+    TotalReceive: 173.89M
+
+```
+
+
+## 4 thread epoll
+
+```txt
+    Test Duration 10.1532731s:
+
+    1000 connections,fail: 0
+
+    Delay:    Avg        Max        Stdev
+        14.70811ms 295.5518ms 14.30601ms
+
+    Request/Sec: 17.16K/s
+    Written/Sec: 16.76M/s
+    Receive/Sec: 16.76M/s
+    TotalWritten: 170.12M
+    TotalReceive: 170.12M
+```
+
+## standard go
+
+```txt
+    Test Duration 10.1377697s:
+
+    1000 connections,fail: 0
+
+    Delay:    Avg        Max        Stdev
+        14.855782ms 276.5472ms14.855782ms
+
+    Request/Sec: 17.22K/s
+    Written/Sec: 16.82M/s
+    Receive/Sec: 16.82M/s
+    TotalWritten: 170.48M
+    TotalReceive: 170.48M
+```
+
+从吞吐量可以看出，单 `epoll` 略高于其他方式，但综合数据同步以及内存使用来看，显然单 `epoll` 更适合
+
+
+
+# 总结
+
+`goroutine` 虽然减少了心智负担，但它牺牲了一些性能，所以我个人认为，`goroutine`更适合成为一个库，而非语言标准。

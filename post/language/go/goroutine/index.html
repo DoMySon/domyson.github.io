@@ -4,8 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Goroutine - 薛定谔的BUG</title><meta name="Description" content="Go 并发原理"><meta property="og:title" content="Goroutine" />
-<meta property="og:description" content="Go 并发原理" />
+        <title>Go协程的思考 - 薛定谔的BUG</title><meta name="Description" content="测试下咯"><meta property="og:title" content="Go协程的思考" />
+<meta property="og:description" content="栈
+
+一个 os 线程会有一个给固定大小的内存块（一般是 2MB），用来存储当前线程中调用或挂起函数的内部变量，固定大小的栈对于复杂和深层次递归是不够的，而 Goroutine 会以一个很小的栈（2KB）开始其生命周期，这个栈会动态伸缩，最大能到达 1GB（32位系统是 250M）
+
+调度方式
+
+os 线程由操作系统内核调用，每过一定时间（毫秒），硬件计时器会中断处理器，并调用一个名为 scheduler 的内建函数，这个函数会挂起当前执行的线程并保存内存中它的寄存器内存，然后检查线程列表并决定下一次执行哪个线程，并从内存中恢复该线程的寄存器信息，恢复该线程的线程并执行，这就是上下文切换，增加了 CPU 的运行周期。而 Go 的 runtime 包含了自身的调度器，和 os 线程不同是，Goroutine 属于用户级线程由语言支持，调度由语言支持，所有开销会减少很多（相比于内核上下文切换）。
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://domyson.github.io/post/language/go/goroutine/" /><meta property="og:image" content="https://domyson.github.io/favicon.ico"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2019-05-12T00:00:00+00:00" />
@@ -14,8 +21,15 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://domyson.github.io/favicon.ico"/>
 
-<meta name="twitter:title" content="Goroutine"/>
-<meta name="twitter:description" content="Go 并发原理"/>
+<meta name="twitter:title" content="Go协程的思考"/>
+<meta name="twitter:description" content="栈
+
+一个 os 线程会有一个给固定大小的内存块（一般是 2MB），用来存储当前线程中调用或挂起函数的内部变量，固定大小的栈对于复杂和深层次递归是不够的，而 Goroutine 会以一个很小的栈（2KB）开始其生命周期，这个栈会动态伸缩，最大能到达 1GB（32位系统是 250M）
+
+调度方式
+
+os 线程由操作系统内核调用，每过一定时间（毫秒），硬件计时器会中断处理器，并调用一个名为 scheduler 的内建函数，这个函数会挂起当前执行的线程并保存内存中它的寄存器内存，然后检查线程列表并决定下一次执行哪个线程，并从内存中恢复该线程的寄存器信息，恢复该线程的线程并执行，这就是上下文切换，增加了 CPU 的运行周期。而 Go 的 runtime 包含了自身的调度器，和 os 线程不同是，Goroutine 属于用户级线程由语言支持，调度由语言支持，所有开销会减少很多（相比于内核上下文切换）。
+"/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -25,18 +39,18 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Goroutine",
+        "headline": "Go协程的思考",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/language\/go\/goroutine\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "goroutine","wordcount":  1976 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "goroutine","wordcount":  2344 ,
         "url": "https:\/\/domyson.github.io\/post\/language\/go\/goroutine\/","datePublished": "2019-05-12T00:00:00+00:00","dateModified": "2019-05-12T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
                 "@type": "Person",
                 "name": "Treasure"
-            },"description": "Go 并发原理"
+            },"description": ""
     }
     </script></head>
     <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -105,7 +119,7 @@
     <div class="search-dropdown mobile">
         <div id="search-dropdown-mobile"></div>
     </div><main class="main">
-                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">Goroutine</h1><div class="content" id="content"><h1 id="栈">栈</h1>
+                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">Go协程的思考</h1><div class="content" id="content"><h1 id="栈">栈</h1>
 <blockquote>
 <p>一个 os 线程会有一个给固定大小的内存块（一般是 2MB），用来存储当前线程中调用或挂起函数的内部变量，固定大小的栈对于复杂和深层次递归是不够的，而 Goroutine 会以一个很小的栈（2KB）开始其生命周期，这个栈会动态伸缩，最大能到达 1GB（32位系统是 250M）</p>
 </blockquote>
@@ -247,9 +261,108 @@
 </li>
 </ul>
 <h1 id="gc">GC</h1>
-<ul>
-<li>因为 GC 操作是使用自己的一组 <code>Goroutine</code> 来执行的，这些 <code>Goroutine</code> 需要一个 <code>M</code> 来运行。所以 GC 会导致调度混乱。但是，因为调度器是知道 <code>Goroutine</code> 要做什么的，所以它可以做出明智的决策。其中一个明智的决策是，在 GC 过程中，暂停那些需要访问堆空间的 <code>Goroutine</code>（<code>Stop The World</code>），运行那些不需要访问堆空间的。</li>
-</ul></div><div id="comments"><div id="valine" class="comment"></div><noscript>
+<p>因为 GC 操作是使用自己的一组 <code>Goroutine</code> 来执行的，这些 <code>Goroutine</code> 需要一个 <code>M</code> 来运行。所以 GC 会导致调度混乱。</p>
+<p>但是，因为调度器是知道 <code>Goroutine</code> 要做什么的，所以它可以做出明智的决策。其中一个明智的决策是，在 GC 过程中，暂停那些需要访问堆空间的 <code>Goroutine</code>（<code>Stop The World</code>），运行那些不需要访问堆空间的。</p>
+<h1 id="思考">思考</h1>
+<p>大部分<code>goroutine</code>使用都是在网络层，这部分<code>goroutine</code> 我称为 <code>i/o 协程</code>,但对于高并发而言，<code>gorotuine</code> 也会导致内存过高，</p>
+<p>而关于<code>goroutine</code>的调度问题，除了上述所说，网络底层是通过 <code>i/o multiplex </code>事件来触发调度的,虽然 1.16 之后支持了抢占式调度，但错误的使用并不会提高性能，反而会降低.</p>
+<p>我们通过一组数据来证明它</p>
+<h2 id="1-thread-epoll">1 thread epoll</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">    Test Duration 10.1192694s:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    1000 connections,fail: 0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Delay:    Avg        Max        Stdev
+</span></span><span class="line"><span class="cl">        23.074671ms 226.0378ms  23.074671ms
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Request/Sec: 17.60K/s
+</span></span><span class="line"><span class="cl">    Written/Sec: 17.18M/s
+</span></span><span class="line"><span class="cl">    Receive/Sec: 17.18M/s
+</span></span><span class="line"><span class="cl">    TotalWritten: 173.89M
+</span></span><span class="line"><span class="cl">    TotalReceive: 173.89M
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-thread-epoll">4 thread epoll</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">    Test Duration 10.1532731s:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    1000 connections,fail: 0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Delay:    Avg        Max        Stdev
+</span></span><span class="line"><span class="cl">        14.70811ms 295.5518ms 14.30601ms
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Request/Sec: 17.16K/s
+</span></span><span class="line"><span class="cl">    Written/Sec: 16.76M/s
+</span></span><span class="line"><span class="cl">    Receive/Sec: 16.76M/s
+</span></span><span class="line"><span class="cl">    TotalWritten: 170.12M
+</span></span><span class="line"><span class="cl">    TotalReceive: 170.12M
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="standard-go">standard go</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">    Test Duration 10.1377697s:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    1000 connections,fail: 0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Delay:    Avg        Max        Stdev
+</span></span><span class="line"><span class="cl">        14.855782ms 276.5472ms14.855782ms
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Request/Sec: 17.22K/s
+</span></span><span class="line"><span class="cl">    Written/Sec: 16.82M/s
+</span></span><span class="line"><span class="cl">    Receive/Sec: 16.82M/s
+</span></span><span class="line"><span class="cl">    TotalWritten: 170.48M
+</span></span><span class="line"><span class="cl">    TotalReceive: 170.48M
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>从吞吐量可以看出，单 <code>epoll</code> 略高于其他方式，但综合数据同步以及内存使用来看，显然单 <code>epoll</code> 更适合</p>
+<h1 id="总结">总结</h1>
+<p><code>goroutine</code> 虽然减少了心智负担，但它牺牲了一些性能，所以我个人认为，<code>goroutine</code>更适合成为一个库，而非语言标准。</p></div><div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
             </noscript></div></div></div>
             </main><footer class="footer">
