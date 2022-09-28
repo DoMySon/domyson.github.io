@@ -34,7 +34,7 @@
       <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/skynet/message/</guid>
-      <description>简介 skynet是基于消息的服务框架，所以 skynet_message 是一个必不可少的一环 结构 skynet_message 并非是一个指针，而是一种数据承载，它被设计成一个很紧凑并且很小的结构,</description>
+      <description>简介 skynet是基于消息的服务框架，所以 skynet_message 是必不可少的一环 结构 skynet_message 并非是一个指针，而是一种数据承载，它被设计成一个很紧凑并且很小的结构,使得</description>
     </item>
     
     <item>
@@ -70,7 +70,7 @@
       <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/skynet/timer/</guid>
-      <description>简介 timer 模块是 skynet 内置的一个定时模块，它并未使用时间轮，而是使用了小根堆</description>
+      <description>简介 timer 模块是 skynet 内置的一个定时模块，使用了小根堆实现。 使用 skynet.timeout(d,fn) 注册一个到期时间，而之后将会触发这个函数，特别注意，此函数的执行协程同当前调用的协</description>
     </item>
     
     <item>
@@ -98,15 +98,6 @@
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/others/%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81/</guid>
       <description>产生的条件 互斥：资源不能被共享，只能由一个进程使用。 请求与保持：进程已获得了一些资源，但因请求其它资源被阻塞时，对已获得的资源保持不放。 不可</description>
-    </item>
-    
-    <item>
-      <title>B树</title>
-      <link>https://domyson.github.io/post/mysql/b%E6%A0%91/</link>
-      <pubDate>Thu, 14 Apr 2022 00:00:00 +0000</pubDate>
-      <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/mysql/b%E6%A0%91/</guid>
-      <description>B-树,这里的 B 表示 balance( 平衡的意思),B-树是一种多路自平衡的搜索树（B树是一颗多路平衡查找树） 它类似普通的平衡二叉树，不同的一点是B-树允许</description>
     </item>
     
     <item>

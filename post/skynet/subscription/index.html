@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/skynet\/subscription\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","wordcount":  330 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","wordcount":  337 ,
         "url": "https:\/\/domyson.github.io\/post\/skynet\/subscription\/","datePublished": "2022-09-26T00:00:00+00:00","dateModified": "2022-09-26T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
@@ -107,14 +107,14 @@
     </div><main class="main">
                 <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">skynet subscription</h1><div class="content" id="content"><h1 id="简介">简介</h1>
 <p><code>skynet subscription</code> 最早构建于 <code>skynet v1.1.0</code>，但在 <code>skynet v1.3.5</code>之后的版本才可用。</p>
-<p>最开始只是一个实验性的功能，因为通过业务也能实现，但在开发过程中，有时候需要知道某个服务是否退出，某个节点是否断开等底层通知，</p>
+<p>最开始只是一个实验性的功能，因为通过业务也能实现，但在开发过程中，有时候需要知道某个服务是否退出，某个节点是否断开等底层通知是非常有必要的</p>
 <p>当时设计的方案有三种，主动式检测，hook，以及 <code>trigger-callback</code></p>
 <p>而主动式的检查并不是一个很好的方案，hook 对原始代码入侵性太高， 而采取<code>trigger-callback</code>方式无论性能以及便捷度都是比主动式更好的方案</p>
 <h1 id="使用">使用</h1>
 <p><code>subscription</code> 模块非常简单，只有三个函数， <code>skynet.publish</code> <code>skynet.subscribe</code> <code>skynet.unsubscribe</code></p>
 <h1 id="关于-nats的封装">关于 <code>nats</code>的封装</h1>
 <p>最开始是从未考虑对其他消息队列进行封装，因为 <code>skynet</code> 不应当缝合其他框架而存在，后面提供只是证明 <code>skynet</code> 也可以通过封装其他第三方库进行开发，</p>
-<p>所以特别注意 <code>这个功能只是实验性功能</code> 它不保证实际项目的稳定性，是否封装由用户自己确定</p>
+<p>所以特别注意 <code>这个功能只是实验性功能</code> 它不保证实际项目的稳定性，是否深度开发取决于用户。</p>
 </div><div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
             </noscript></div></div></div>

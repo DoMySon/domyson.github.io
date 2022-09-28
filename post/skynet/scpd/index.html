@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/skynet\/scpd\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "scpd","wordcount":  554 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "scpd","wordcount":  714 ,
         "url": "https:\/\/domyson.github.io\/post\/skynet\/scpd\/","datePublished": "2022-05-30T00:00:00+00:00","dateModified": "2022-05-30T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
@@ -143,6 +143,9 @@
 <p>既然节点之间是双向连接，所以连接数量为 <code>f(n) =  n²-n</code>，如果节点过的时候，势必造成 <code>socket fd</code> 消耗殆尽，</p>
 <p>基于这个问题，可以通过内置的<code>tun</code>，来设置代理，这么一来，<code>tun</code>的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 <code>tun</code> 代理是不可见的，</p>
 <p>通过配置<code>tun</code>的规则开启多个，则可以实现业务拆分。</p>
+<h1 id="服务发现">服务发现</h1>
+<p><code>SCPD</code> 提供了一套服务发现机制，但其运作原理是不同于 <code>etcd</code> 或者 <code>consul</code>,它本身是一个惰性发现，取决于第一次调用并包含一个内置过期时间，（主要是减轻I/O负担）。</p>
+<p>你不需要知道它是如何运作的，本身它的设计就是不透明不公开的一个模块，你只需要知道在特定时间内它是有效的即可，那怕其中除了一些意外，无非只是浪费了两次通讯而已。</p>
 <h1 id="网络底层">网络底层</h1>
 <p>参考 <a href="/post/language/go/goroutine" rel="">Go协程的思考</a>,在<code>linux</code>下，我使用了 <code>epoll</code>。所以尽量部署到 <code>linux</code> 下以发挥更好的性能</p>
 </div><div id="comments"><div id="valine" class="comment"></div><noscript>

@@ -17,8 +17,6 @@
 
 <!--more-->
 
-# 官方地址
-
 [浅谈Unity内存管理](https://www.bilibili.com/video/av79798486)
 
 

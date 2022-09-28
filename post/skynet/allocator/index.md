@@ -25,7 +25,7 @@
 
 这个方法虽然简单，但是性能是低于 `SLAB-allocator`。
 
-但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是`skynet`默认使用的。
+但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是`skynet`默认使用的策略。
 
 
 
@@ -33,7 +33,7 @@
 
 + `skynet.alloc(n)` 用以分配指定大小的内存块
 
-+ `skynet.realloc(buf,n)` realloc函数会先检查b，确保是否需要重新分配内存，然后释放之前的`buf`
++ `skynet.realloc(buf,n)` realloc函数会先检查buf，确保是否需要重新分配内存，然后释放之前的`buf`
 
 + `skynet.append(buf,data)` 只是简化了 `realloc` 和 `copy` 的操作。
 

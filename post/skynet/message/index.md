@@ -6,7 +6,7 @@
 
 # 简介
 
-`skynet`是基于消息的服务框架，所以 `skynet_message` 是一个必不可少的一环
+`skynet`是基于消息的服务框架，所以 `skynet_message` 是必不可少的一环
 
 
 # 结构
@@ -15,7 +15,7 @@
 
 ```go
 type skynet_message struct{
-    _ [0]func()  // don't copy
+    _ [0]func()  // don't compare
 
     skynet_event byte
 
@@ -49,9 +49,9 @@ type skynet_message struct{
 + 接收
 
 用户能收到的数据不全是结构体的字段，关键性参数只有三个，`session`,`typ`,以及 `argument`,
-`session` 主要的作用是用以区分这条消息是否是同步请求，
-`typ` 仅仅是一个消息类别的区分，类似于消息号
-`argument` 才是真实的数据，特别的，在`lua`中这个值是会被解构。
+`session` 主要的作用是用以区分这条消息是否大于0，若为真，则其值就是请求序列号，本节点保证唯一
+`typ` 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义
+`argument` 才是真实的数据，它可以是任意值，特别的，在`lua`中这个值是会被解构，在跨节点通讯这个值恒为 `[]byte`，当不需要时记得 `skynet.free`
 
 
 
@@ -69,4 +69,4 @@ type skynet_message struct{
 
 这个很好理解，同`erlang` 主要是确保数据的一致性，保证重要的数据不会因为某个服务的意外退出而丢失了这些消息.
 
-当然是否开启也是可配置的.
+当然是否开启也是可配置.

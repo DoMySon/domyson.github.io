@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/skynet\/skynet\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "skynet framework","wordcount":  908 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "skynet framework","wordcount":  966 ,
         "url": "https:\/\/domyson.github.io\/post\/skynet\/skynet\/","datePublished": "2022-06-20T00:00:00+00:00","dateModified": "2022-06-20T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
@@ -141,7 +141,8 @@
 <p><code>skynet</code> 是函数式以及低抽象的架构</p>
 <p>纯函数式主要是受 <code>c language</code> 的影响。也更贴合职责单一的原则</p>
 <p>而低抽象是因为<code>go interface</code> 并非零成本抽象，它由一定的性能代价。所以整个<code>skynet</code> 只有一个接口 <code>Freeable</code>。</p>
-<p><code>skynet</code>执行文件仅仅<code>6.8mb</code>,而运行内存仅仅 <code>2.4mb</code></p>
+<h1 id="运行">运行</h1>
+<p><code>skynet</code>执行文件仅仅<code>6.8mb</code>,而运行内存仅仅 <code>2.4mb</code>，65535个Lua服务仅占用<code>1.8GB</code>,也就是每个 <code>Lua服务</code> 仅占用 <code>28kb</code>,如果是<code>go</code>服务那么将会更小</p>
 </div><div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
             </noscript></div></div></div>

@@ -20,4 +20,4 @@
 
 
 
-# 实现一个简单的消息队列
+# 实现一个简单的消息队列  [skynet message](/post/skynet/message)
