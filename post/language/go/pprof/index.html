@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Go性能分析 - 薛定谔的BUG</title><meta name="Description" content="测试下咯"><meta property="og:title" content="Go性能分析" />
+<meta property="og:description" content="
+单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证。对于单元测试中单元的含义，一般要根据实际情况去判定其具体含义，如 C语言中单元指一个函数,单元就是人为规定的最小的被测功能模块。单元测试是在软件开发过程中要进行的最低级别的测试活动，软件的独立单元将在与程序的其他部分相隔离的情况下进行测试。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://domyson.github.io/post/language/go/pprof/" /><meta property="og:image" content="https://domyson.github.io/favicon.ico"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-08-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-08-23T00:00:00+00:00" /><meta property="og:site_name" content="薛定谔的BUG" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://domyson.github.io/favicon.ico"/>
+
+<meta name="twitter:title" content="Go性能分析"/>
+<meta name="twitter:description" content="
+单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证。对于单元测试中单元的含义，一般要根据实际情况去判定其具体含义，如 C语言中单元指一个函数,单元就是人为规定的最小的被测功能模块。单元测试是在软件开发过程中要进行的最低级别的测试活动，软件的独立单元将在与程序的其他部分相隔离的情况下进行测试。
+"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://domyson.github.io/post/language/go/pprof/" /><link rel="prev" href="https://domyson.github.io/post/unity/ilruntime/" /><link rel="next" href="https://domyson.github.io/post/language/go/unsafe/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Go性能分析",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/domyson.github.io\/post\/language\/go\/pprof\/"
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "pprof","wordcount":  1820 ,
+        "url": "https:\/\/domyson.github.io\/post\/language\/go\/pprof\/","datePublished": "2019-08-23T00:00:00+00:00","dateModified": "2019-08-23T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
+                "@type": "Person",
+                "name": "Treasure"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="薛定谔的BUG"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span>LoveIt</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/post/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/domyson/domyson.github.io" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="选择语言">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/post/language/go/pprof/" selected>简体中文</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="薛定谔的BUG"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span>LoveIt</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/post/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/domyson/domyson.github.io" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="选择语言">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/post/language/go/pprof/" selected>简体中文</option></select>
+                </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">Go性能分析</h1><div class="content" id="content"><blockquote>
+<p>单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证。对于单元测试中单元的含义，一般要根据实际情况去判定其具体含义，如 C语言中单元指一个函数,单元就是人为规定的最小的被测功能模块。单元测试是在软件开发过程中要进行的最低级别的测试活动，软件的独立单元将在与程序的其他部分相隔离的情况下进行测试。</p>
+</blockquote>
+<h2 id="go-test-命令"><code>go test</code> 命令</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>-v</code></td>
+<td style="text-align:center">输出细节信息。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-run regexp</code></td>
+<td style="text-align:center">运行满足正则匹配的函数。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-count=n</code></td>
+<td style="text-align:center">运行多少次，默认一次。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-cover</code></td>
+<td style="text-align:center">开启覆盖率测试。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="测试规范">测试规范</h1>
+<ul>
+<li>测试脚本必须以 <code>*_test.go</code> 来命名，并且不会被编译到执行文件中</li>
+</ul>
+<h1 id="t-测试"><code>T</code> 测试</h1>
+<blockquote>
+<p>又称 <code>单元测试</code>，测试函数以 <code>TestXXX(t *testing.T)</code> 表示，仅接受一个 <code>*testing.T</code> 类型参数</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Test_Sum</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">a</span> <span class="o">:=</span> <span class="s">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100000</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">a</span> <span class="o">+=</span> <span class="s">&#34;a&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">Output:
+</span></span></span><span class="line"><span class="cl"><span class="cm">=== RUN   Test_Sum
+</span></span></span><span class="line"><span class="cl"><span class="cm">--- PASS: Test_Sum (0.75s) 表示测试结果和时间
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="t-方法"><code>T</code> 方法</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>Fail</code></td>
+<td style="text-align:center">标记失败，但继续执行</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>FailNow</code></td>
+<td style="text-align:center">失败并立即中止当前函数测试</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>Log</code></td>
+<td style="text-align:center">输出信息</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>Error</code></td>
+<td style="text-align:center">相当于 <code>Fail + Log</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>Fatal</code></td>
+<td style="text-align:center">相当于 <code>FailNow + Log</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>Skip</code></td>
+<td style="text-align:center">跳过当前测试函数，用于多个测试同时进行</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>SetBytes</code></td>
+<td style="text-align:center">开启字节数处理</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>ReportAllocs</code></td>
+<td style="text-align:center">报告内存分配状况，对应命令行参数 -benchmem</td>
+</tr>
+</tbody>
+</table>
+<h1 id="b-测试"><code>B</code> 测试</h1>
+<blockquote>
+<p>又称 <code>基准测试</code>，基准测试函数以 <code>BenchmarkXXX(b *testing.B)</code> 表示，仅接受一个 <code>*testing.B</code> 参数类型。
+若要使用 <code>go test</code> 执行 <code>Benchmark</code>，必须使用 <code>-bench=functionName</code> 指定性能测试函数，或者 <code>.</code> 测试所有 <code>Benchmark*</code> 函数，也可以再添加测试脚本名，指定测试改脚本内的所有 <code>*</code> 函数。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">BenchmarkJoin</span><span class="p">(</span><span class="nx">b</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">a</span> <span class="o">:=</span> <span class="s">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">a</span> <span class="o">+=</span> <span class="s">&#34;a&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">Output:
+</span></span></span><span class="line"><span class="cl"><span class="cm">goos                :测试系统
+</span></span></span><span class="line"><span class="cl"><span class="cm">goarch              :系统架构
+</span></span></span><span class="line"><span class="cl"><span class="cm">pkg                 :测试包名
+</span></span></span><span class="line"><span class="cl"><span class="cm">Benchmark_main-4    :测试函数使用几个cpu核心
+</span></span></span><span class="line"><span class="cl"><span class="cm">5000000             :总执行次数
+</span></span></span><span class="line"><span class="cl"><span class="cm">1530 ns/op          :执行一次耗时 1530ns
+</span></span></span><span class="line"><span class="cl"><span class="cm">1104 B/op           :每次执行分配 1104字节
+</span></span></span><span class="line"><span class="cl"><span class="cm">7 allocs/op         :每次执行申请了 7 次内存
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="benchmark-命令参数"><code>benchmark</code> 命令参数</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>-bench=func</code></td>
+<td style="text-align:center">指定测试函数名</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-benchmem</code></td>
+<td style="text-align:center">是否输出内存测试信息</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-cpu=4</code></td>
+<td style="text-align:center">指定使用多少CPU逻辑核心测试</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-benchtime=3s</code></td>
+<td style="text-align:center">指定测试时长</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-timeout=5s</code></td>
+<td style="text-align:center">测试超时时间</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-memprofile memp.out</code></td>
+<td style="text-align:center">输出内存分析文件</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-cpuprofile cpup.out</code></td>
+<td style="text-align:center">输出cpu分析文件</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-memprofilerate=N</code></td>
+<td style="text-align:center">调整采样率，1/N</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-blockprofile block.out</code></td>
+<td style="text-align:center">输出阻塞性能分析文件</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-count n</code></td>
+<td style="text-align:center">运行多少次测试，默认1次</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>-v</code></td>
+<td style="text-align:center">显示测试的详细信息</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>go test</code> 运行测试文件时，会提示找不到该定义，只需要在执行 <code>*_test.go</code> 脚本时，后面加上所引用的库文件即可</p>
+</blockquote>
+<h1 id="性能分析">性能分析</h1>
+<h2 id="pprof">pprof</h2>
+<blockquote>
+<p>Go语言自带强大的性能测试工具pprof。</p>
+</blockquote>
+<h3 id="关注的模块">关注的模块</h3>
+<ul>
+<li>
+<p>CPU profile：报告程序的 CPU 使用情况，按照一定频率去采集应用程序在 CPU 和寄存器上面的数据</p>
+</li>
+<li>
+<p>Memory Profile（Heap Profile）：报告程序的内存使用情况</p>
+</li>
+<li>
+<p>Block Profiling：报告 goroutines 不在运行状态的情况，可以用来分析和查找死锁等性能瓶颈</p>
+</li>
+<li>
+<p>Goroutine Profiling：报告 goroutines 的使用情况，有哪些 goroutine，它们的调用关系是怎样的</p>
+</li>
+</ul>
+<h3 id="如何使用">如何使用</h3>
+<p>pprof开启后，每隔一段时间（10ms）就会收集下当前的堆栈信息，获取格格函数占用的CPU以及内存资源；最后通过对这些采样数据进行分析，形成一个性能分析报告。</p>
+<blockquote>
+<p>注意，只应该在性能测试的时候才在代码中引入pprof。</p>
+</blockquote>
+<p><code>pprof</code> 涉及两个包</p>
+<ul>
+<li>
+<p><code>net/http/pprof</code>：主要是通过 Http 的方式将信息实时显示，如果服务器长久运行，推荐这种方式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nx">_</span> <span class="s">&#34;net/http/pprof&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//如果使用默认的 http.DefaultServeMux
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">http</span><span class="p">.</span><span class="nf">ListenAndServe</span><span class="p">(</span><span class="s">&#34;0.0.0.0:8000&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//如果自定义Mux
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">r</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/debug/pprof&#34;</span><span class="p">,</span><span class="nx">pprof</span><span class="p">.</span><span class="nx">Index</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">r</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/debug/pprof/cmdline&#34;</span><span class="p">,</span><span class="nx">pprof</span><span class="p">.</span><span class="nx">Cmdline</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">r</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/debug/pprof/profile&#34;</span><span class="p">,</span><span class="nx">pprof</span><span class="p">.</span><span class="nx">Profile</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">r</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/debug/pprof/symbol&#34;</span><span class="p">,</span><span class="nx">pprof</span><span class="p">.</span><span class="nx">Symbol</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">r</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/debug/pprof/trace&#34;</span><span class="p">,</span><span class="nx">pprof</span><span class="p">.</span><span class="nx">Trace</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><code>runtime/pprof</code>：</p>
+<ol>
+<li>
+<p>通过 <code>pprof.StartCPUProfile(w io.Writer)</code> 开启Cpu分析，<code>pprof.StopCPUProfile()</code> 停止Cpu分析。</p>
+</li>
+<li>
+<p>通过 <code>pprof.WriteHeapProfile(w io.Writer)</code> 记录堆信息。</p>
+</li>
+<li>
+<p>得到 <code>dump</code> 文件后，使用 <code>go tool pprof</code> 来进行分析。</p>
+</li>
+<li>
+<p><code>go tool pprof</code> 默认使用 <code>-inuse-space</code> 进行统计，还可以使用 <code>-inuse-objects</code> 查看对象分配数量。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="go-tool-pprof--h"><code>go tool pprof -h</code></h3>
+<blockquote>
+<p>命令格式：<code>go tool pprof &lt;format&gt; [options] [binary] &lt;source&gt; ...</code></p>
+</blockquote>
+<ul>
+<li>
+<p>format 默认不填的话将打开shell交互命令</p>
+</li>
+<li>
+<p>binary 可选cpu或者memory分析文件</p>
+</li>
+<li>
+<p>go tool pprof -http=:9999 binary 直接网页浏览</p>
+</li>
+</ul>
+<h3 id="go-tool-trace"><code>go tool trace</code></h3>
+<blockquote>
+<p>命令格式：<code>go tool trace [flags] trace.out</code></p>
+</blockquote>
+<p>在代码中如何直接生成</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;runtime/trace&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">f</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">trace</span><span class="p">.</span><span class="nf">Start</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//do something
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">trace</span><span class="p">.</span><span class="nf">Stop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// go run xxx.go &gt; trace.out
+</span></span></span><span class="line"><span class="cl"><span class="c1">// go tool trace -http=:7777 trace.out 查看
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// go test -trace xxx.go 也可以生成 trace.out 文件
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>支持分析 <code>network blocking</code>,<code>sync</code>,<code>syscall</code>,<code>sche</code></p>
+</li>
+<li>
+<p>-http=:6060 直接在网页上分析</p>
+</li>
+</ul>
+<h3 id="火焰图">火焰图</h3>
+<ol>
+<li>下载 <code>graphviz</code></li>
+</ol>
+<p><a href="https://graphviz.gitlab.io/_pages/Download/Download_windows.html" target="_blank" rel="noopener noreffer ">windows</a></p>
+<p>macOS：<code>brew install graphviz</code></p>
+<p>centos：<code>yum install -y graphviz</code></p>
+<ol start="2">
+<li>名词解释</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Type: cpu    									分析类型为cpu
+</span></span><span class="line"><span class="cl">Time: Apr 14, 2020 at 4:20pm (CST)				分析开始时间
+</span></span><span class="line"><span class="cl">Duration: 30s, Total samples = 140ms ( 0.47%)	采样时间30s，采样间隔140ms
+</span></span><span class="line"><span class="cl">Entering interactive mode (type &#34;help&#34; for commands, &#34;o&#34; for options)
+</span></span><span class="line"><span class="cl">(pprof) top10									分析前10的耗时
+</span></span><span class="line"><span class="cl">Showing nodes accounting for 140ms, 100% of 140ms total		显示出来的函数占用了140ms，占总时间的100%
+</span></span><span class="line"><span class="cl">Dropped 67 nodes (cum &lt;= 0.03s)					总计耗时小于0.03s的67个函数丢弃不显示
+</span></span><span class="line"><span class="cl">Showing top 10 nodes out of 47					总共47个函数，只显示了前10个
+</span></span><span class="line"><span class="cl">      flat  flat%   sum%        cum   cum%
+</span></span><span class="line"><span class="cl">      50ms 35.71% 35.71%       50ms 35.71%  runtime.stdcall1
+</span></span><span class="line"><span class="cl">      20ms 14.29% 50.00%       50ms 35.71%  runtime.timerproc
+</span></span><span class="line"><span class="cl">      10ms  7.14% 57.14%       10ms  7.14%  runtime.casgstatus
+</span></span><span class="line"><span class="cl">      10ms  7.14% 64.29%       10ms  7.14%  runtime.cgocall
+</span></span><span class="line"><span class="cl">      10ms  7.14% 71.43%       20ms 14.29%  runtime.chansend
+</span></span><span class="line"><span class="cl">      10ms  7.14% 78.57%       10ms  7.14%  runtime.mget
+</span></span><span class="line"><span class="cl">      10ms  7.14% 85.71%       10ms  7.14%  runtime.osyield
+</span></span><span class="line"><span class="cl">      10ms  7.14% 92.86%       10ms  7.14%  runtime.stdcall2
+</span></span><span class="line"><span class="cl">      10ms  7.14%   100%       10ms  7.14%  sync.(*entry).load
+</span></span><span class="line"><span class="cl">         0     0%   100%       10ms  7.14%  encoding/json.(*encodeState).marshal
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sum% 	= 上一行的flat%+本行的flat%,
+</span></span><span class="line"><span class="cl">flat% 	= 自身执行时长和total时长的比例 50ms/140ms=0.3571
+</span></span><span class="line"><span class="cl">cum% 	= 自身代码+所有调用的函数的执行时长和total时长的比例
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="expvar">expvar</h2></div><div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></div></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.104.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Treasure</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/valine@1.5.0/dist/Valine.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"valine":{"appId":"QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI","appKey":"WBmoGyJtbqUswvfLh6L8iEBr","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@14.0.0/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"zh-CN","pageSize":10,"placeholder":"你的评论 ...","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
