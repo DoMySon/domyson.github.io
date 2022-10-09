@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/unknown\/ucpd\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "ucpd","wordcount":  740 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "ucpd","wordcount":  706 ,
         "url": "https:\/\/domyson.github.io\/post\/unknown\/ucpd\/","datePublished": "2022-05-30T00:00:00+00:00","dateModified": "2022-05-30T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
@@ -108,9 +108,18 @@
                 <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">ucpd</h1><div class="content" id="content"><h1 id="简介">简介</h1>
 <p><code>ucpd</code>模块是<code>ukn</code>底层集群模块，它承担了<code>ukn</code>网络节点之间的通讯职能。全名为(<code>ukn cluster port daemon</code>)</p>
 <h1 id="架构">架构</h1>
-<p><code>ucpd</code> 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接，</p>
-<p>当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来，所以来说，<code>ucpd</code>可以支持任意网络协议，如 <code>tcp</code>,<code>udp</code> 甚至是 <code>unix</code>,</p>
+<ol>
+<li>
+<p><code>ucpd</code> 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接，
+当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来，所以来说，</p>
+</li>
+<li>
+<p><code>ucpd</code>可以支持任意网络协议，如 <code>tcp</code>,<code>udp</code> 甚至是 <code>unix</code>,</p>
+</li>
+<li>
 <p>当然一个好记的节点名称是非常有必要的，所以<code>ucpd</code>也内置了一套非标准的本地 <code>dns</code>系统</p>
+</li>
+</ol>
 <h1 id="使用">使用</h1>
 <p><code>ucpd</code>的启动也非常简单，无须任何代码，仅仅只需要在 <code>ukn.toml</code> 中配置一下即可，使用的时候跟节点内通讯无任何区别，但要求参数必须是 <code>[]byte</code> 类型，参考 <a href="/post/ukn/spb" rel="">SPB</a>
 如</p>
@@ -147,15 +156,15 @@
 <p>2022-10-07 此模块被弃用，可以用多节点的方式做到，如 <code>ukn.send(&quot;n1.n2.n3@name&quot;)</code></p>
 </blockquote>
 <h1 id="服务发现">服务发现</h1>
-<p><code>ucpd</code> 提供了一套服务发现机制，但其运作原理是不同于 <code>etcd</code> 或者 <code>consul</code>,它本身是一个惰性发现，取决于第一次调用并包含一个内置过期时间，（主要是减轻I/O负担）。</p>
-<p>你不需要知道它是如何运作的，本身它的设计就是不透明不公开的一个模块，你只需要知道在特定时间内它是有效的即可，那怕其中出了一些意外，无非只是浪费了两次通讯而已。</p>
+<p><code>ucpd</code> 提供了一套服务发现机制，但其运作原理是不同于 <code>etcd</code> 或者 <code>consul</code>,它本身是一个惰性发现，取决于第一次调用的地址是否正确返回。</p>
+<p>你不需要知道它是如何运作的，，你只需要知道在特定时间内它是有效的即可，那怕其中出了一些意外，无非只是浪费了两次通讯而已。</p>
 <h1 id="网络底层">网络底层</h1>
 <p>参考 <a href="/post/language/go/goroutine" rel="">Go协程的思考</a>,在<code>linux</code>下，我使用了 <code>epoll</code>。所以尽量部署到 <code>linux</code> 下以发挥更好的性能</p>
 </div><div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
             </noscript></div></div></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.104.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.103.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Treasure</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

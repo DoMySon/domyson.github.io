@@ -37,6 +37,6 @@
 
 + `ukn.realloc(buf,n)` realloc函数会先检查buf，确保是否需要重新分配内存，然后释放之前的`buf`
 
-+ `ukn.append(buf,data)` 只是简化了 `realloc` 和 `copy` 的操作。
++ `ukn.append(buf,data)` 简化了 `realloc` 和 `copy` 的操作。
 
 + `ukn.free(buf)` 释放一段内存

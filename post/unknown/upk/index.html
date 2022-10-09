@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/unknown\/upk\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "ukp","wordcount":  1388 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "ukp","wordcount":  1373 ,
         "url": "https:\/\/domyson.github.io\/post\/unknown\/upk\/","datePublished": "2022-09-21T00:00:00+00:00","dateModified": "2022-09-21T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
@@ -122,9 +122,18 @@
 </li>
 </ul>
 <h2 id="代码生成器">代码生成器</h2>
-<p>强类型和弱类型的识别是有很大区别，所以我对<code>Lua</code> 这边进行了直接解析，简单来说是直接通过 <code>Lexer</code> 生成此消息结构的元信息.(这点是完全区别于云风大神的<code>ukn</code>的)，
-强类型语言为了减少反射，我们需要通过文件描述来提供其成员或字段的类型以及位置而非通过反射，这个在编译期间就可以确定了而非运行时。</p>
-<h2 id="编码">编码</h2>
+<ol>
+<li>
+<p>强类型和弱类型的识别是有很大区别，所以我对<code>Lua</code> 这边进行了直接解析，简单来说是直接通过 <code>Lexer</code> 生成此消息结构的元信息.</p>
+</li>
+<li>
+<p>强类型语言为了减少反射，我们需要通过文件描述来提供其成员或字段的类型以及位置而非通过反射，这个在编译期间就可以确定了而非运行时。</p>
+</li>
+<li>
+<p>此模块在当前进程中的所有服务是生效的</p>
+</li>
+</ol>
+<h2 id="设计思路">设计思路</h2>
 <ol>
 <li>
 <p>减少内存分配</p>
@@ -226,7 +235,7 @@
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">package gen   // 包名，主要是为了在go和c#中区分同名协议
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">package gen   // 区分同名消息
 </span></span><span class="line"><span class="cl">// 注释哦
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">enum Foo {  // 一个枚举，最终会转换为 uint32 类型进行编码
@@ -278,7 +287,7 @@
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
             </noscript></div></div></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.104.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.103.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Treasure</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

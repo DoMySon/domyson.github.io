@@ -6,18 +6,14 @@
 
 # 简介
 
-`unknown`是基于消息的服务框架，所以 `ukn_message` 是必不可少的一环
+`unknown`是基于消息的服务框架，所以 `ukn_message` 是必不可少的一环。
 
 
-# 结构
-
-`ukn_message` 并非是一个指针，而是一种数据承载，它被设计成一个很紧凑并且很小的结构,使得它会被分配到`stack`上，减轻了gc负担
+# `ukn_message`
 
 ```go
 type ukn_message struct{
-    nocopy  // don't 
-
-    _ [0]func()  // don't compare
+    nocopy  // don't copy
 
     ukn_event byte
 
@@ -28,7 +24,6 @@ type ukn_message struct{
     source pid
 
     argument unsafe.Pointer
-
 }
 ```
 
