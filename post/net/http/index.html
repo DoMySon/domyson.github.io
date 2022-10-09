@@ -4,39 +4,39 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>Go Memory - 薛定谔的BUG</title><meta name="Description" content="测试下咯"><meta property="og:title" content="Go Memory" />
-<meta property="og:description" content="虚拟内存 虚拟内存屏蔽了RAM和Disk,向进程提供远大于物理内存的内存空间，简单来说就是使用了 memory map 分别映射了RAM和Disk的某个区域 堆栈 栈" />
+        <title>Http - 薛定谔的BUG</title><meta name="Description" content="解决并发场景下的数据竞争问题"><meta property="og:title" content="Http" />
+<meta property="og:description" content="解决并发场景下的数据竞争问题" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://domyson.github.io/post/language/go/memory/" /><meta property="og:image" content="https://domyson.github.io/favicon.ico"/><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-10-07T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-10-07T00:00:00+00:00" /><meta property="og:site_name" content="薛定谔的BUG" />
+<meta property="og:url" content="https://domyson.github.io/post/net/http/" /><meta property="og:image" content="https://domyson.github.io/favicon.ico"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-02-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-02-09T00:00:00+00:00" /><meta property="og:site_name" content="薛定谔的BUG" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://domyson.github.io/favicon.ico"/>
 
-<meta name="twitter:title" content="Go Memory"/>
-<meta name="twitter:description" content="虚拟内存 虚拟内存屏蔽了RAM和Disk,向进程提供远大于物理内存的内存空间，简单来说就是使用了 memory map 分别映射了RAM和Disk的某个区域 堆栈 栈"/>
+<meta name="twitter:title" content="Http"/>
+<meta name="twitter:description" content="解决并发场景下的数据竞争问题"/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://domyson.github.io/post/language/go/memory/" /><link rel="prev" href="https://domyson.github.io/post/unknown/subscription/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://domyson.github.io/post/net/http/" /><link rel="prev" href="https://domyson.github.io/post/net/tls/" /><link rel="next" href="https://domyson.github.io/post/language/go/gc/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Go Memory",
+        "headline": "Http",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/domyson.github.io\/post\/language\/go\/memory\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "","wordcount":  642 ,
-        "url": "https:\/\/domyson.github.io\/post\/language\/go\/memory\/","datePublished": "2022-10-07T00:00:00+00:00","dateModified": "2022-10-07T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@id": "https:\/\/domyson.github.io\/post\/net\/http\/"
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "http","wordcount":  779 ,
+        "url": "https:\/\/domyson.github.io\/post\/net\/http\/","datePublished": "2020-02-09T00:00:00+00:00","dateModified": "2020-02-09T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
                 "@type": "Person",
                 "name": "Treasure"
-            },"description": ""
+            },"description": "解决并发场景下的数据竞争问题"
     }
     </script></head>
     <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -62,7 +62,7 @@
                     <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
                 </a><a href="javascript:void(0);" class="menu-item language" title="选择语言">
                     <i class="fa fa-globe" aria-hidden="true"></i>                      
-                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/post/language/go/memory/" selected>简体中文</option></select>
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/post/net/http/" selected>简体中文</option></select>
                 </a></div>
         </div>
     </div>
@@ -96,7 +96,7 @@
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a><a href="javascript:void(0);" class="menu-item" title="选择语言">
                     <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
-                    <select class="language-select" onchange="location = this.value;"><option value="/post/language/go/memory/" selected>简体中文</option></select>
+                    <select class="language-select" onchange="location = this.value;"><option value="/post/net/http/" selected>简体中文</option></select>
                 </a></div>
     </div>
 </header><div class="search-dropdown desktop">
@@ -105,118 +105,98 @@
     <div class="search-dropdown mobile">
         <div id="search-dropdown-mobile"></div>
     </div><main class="main">
-                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">Go Memory</h1><div class="content" id="content"><h1 id="虚拟内存">虚拟内存</h1>
+                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">Http</h1><div class="content" id="content"><h1 id="http-请求构成">Http 请求构成</h1>
+<h2 id="请求行">请求行</h2>
 <blockquote>
-<p>虚拟内存屏蔽了<code>RAM</code>和<code>Disk</code>,向进程提供远大于物理内存的内存空间，简单来说就是使用了 <code>memory map</code> 分别映射了<code>RAM</code>和<code>Disk</code>的某个区域</p>
+<p>请求行以一个方法符号开头，以空格分开，后面跟着请求的URI和协议的版本，格式如下：Method Request-URI HTTP-Version CRLF  其中 Method表示请求方法；Request-URI是一个统一资源标识符；HTTP-Version表示请求的HTTP协议版本；CRLF表示回车和换行（除了作为结尾的CRLF外，不允许出现单独的CR或LF字符）。</p>
 </blockquote>
-<h1 id="堆栈">堆栈</h1>
-<blockquote>
-<p>栈的方向向低地址增长，而堆恰好相反</p>
-</blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Vritual memory address
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    |       kernel      |
-</span></span><span class="line"><span class="cl">    |-------------------| 0xC00000000
-</span></span><span class="line"><span class="cl">    | ---argv,evniron---|
-</span></span><span class="line"><span class="cl">    | -------stack -----|
-</span></span><span class="line"><span class="cl">    | ---------↓--------|
-</span></span><span class="line"><span class="cl">    | ----stack top-----|
-</span></span><span class="line"><span class="cl">    |                   |
-</span></span><span class="line"><span class="cl">    |    unallocated    |
-</span></span><span class="line"><span class="cl">    |       
-</span></span><span class="line"><span class="cl">    |        heap       |
-</span></span><span class="line"><span class="cl">    |
-</span></span><span class="line"><span class="cl">    | uninitialized data|
-</span></span><span class="line"><span class="cl">    | initialized data  |
-</span></span><span class="line"><span class="cl">    |   program Code    |
-</span></span><span class="line"><span class="cl">    |                   | 0x08048000
-</span></span><span class="line"><span class="cl">    |                   | 0x00000000   
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h1 id="tcmalloc"><code>Tcmalloc</code></h1>
-<blockquote>
-<p>也许同时<code>google</code>出品吧</p>
-</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Method</th>
+<th style="text-align:center">Desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">GET</td>
+<td style="text-align:center">请求获取Request-URI所标识的资源</td>
+</tr>
+<tr>
+<td style="text-align:center">POST</td>
+<td style="text-align:center">在Request-URI所标识的资源后附加新的数据</td>
+</tr>
+<tr>
+<td style="text-align:center">HEAD</td>
+<td style="text-align:center">请求获取由Request-URI所标识的资源的响应消息报头</td>
+</tr>
+<tr>
+<td style="text-align:center">PUT</td>
+<td style="text-align:center">请求服务器存储一个资源，并用Request-URI作为其标识</td>
+</tr>
+<tr>
+<td style="text-align:center">DELETE</td>
+<td style="text-align:center">请求服务器删除Request-URI所标识的资源</td>
+</tr>
+<tr>
+<td style="text-align:center">TRACE</td>
+<td style="text-align:center">请求服务器回送收到的请求信息，主要用于测试或诊断</td>
+</tr>
+<tr>
+<td style="text-align:center">CONNECT</td>
+<td style="text-align:center">保留将来使用</td>
+</tr>
+<tr>
+<td style="text-align:center">OPTIONS</td>
+<td style="text-align:center">请求查询服务器的性能，或者查询与资源相关的选项和需求</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>
-<p>Page</p>
-<p>操作系统对内存管理以页为单位，<code>Tcmalloc</code> 也是如此，但其不一定相等，而是倍数关系(x64 Page 为8kb)</p>
-</li>
-<li>
-<p>Span</p>
-<p>一组连续的<code>Page</code>称为<code>Span</code>,是<code>Tcmalloc</code>的基本单位</p>
-</li>
-<li>
-<p>ThreadCache</p>
-<p>每个线程自身的<code>Cache</code>,包含多个空闲内存块链表，每个单独的链表大小是一致的，方便申请时不需要遍历全局，而且是无锁访问</p>
-</li>
-<li>
-<p>CentarlCache</p>
-<p>所有线程共享的空闲内存块，链表数量同 <code>ThreadCache</code>,当<code>ThreadCache</code>不够时会从其申请，但它是需要加锁</p>
-</li>
-<li>
-<p>PageHeap</p>
-<p>对堆内存的抽象，也是由若干链表组成，链表保存的是 <code>Span</code>，当 <code>CentarlCache</code>不足时，获取空闲<code>Span</code>然后拆分成若干内存块，并添加到对应大小的链表中以供分配，否则将会放回</p>
-</li>
-</ul>
-<h2 id="对象大小">对象大小</h2>
-<pre><code>小对象: 0~256kb
-中对象: 257kb~1mb
-大对象: &gt; 1mb
-</code></pre>
-<h1 id="go内存模型">Go内存模型</h1>
+<p><code>POST</code> 和 <code>GET</code> 的区别:</p>
 <ul>
 <li>
-<p>Page</p>
-<p>同 <code>Tcmalloc Page</code></p>
+<p>副作用：服务器上的资源做改变，如搜索是无副作用的，注册是副作用的。</p>
 </li>
 <li>
-<p>Span</p>
-<p>同 <code>tcmalloc span</code></p>
-</li>
-<li>
-<p>mcache</p>
-<p>类似于 <code>tcmalloc ThreadCache</code>,区别在于前者和线程保定，后者和golang的 <code>P</code> 绑定</p>
-</li>
-<li>
-<p>mcentral
-类似于 <code>tcmalloc CentarlCache</code></p>
-</li>
-<li>
-<p>mheap</p>
-<p>类似于 <code>tcmalloc pageheap</code></p>
+<p>幂等：幂等指发送 M 和 N 次请求（两者不相同且都大于 1），服务器上资源的状态一致。</p>
 </li>
 </ul>
-<h2 id="对象大小定义">对象大小定义</h2>
-<pre><code>&gt; golang 并未区分为大中小对象，而是区分为 tiny，小，大，如 tiny[1byte,16byte),并且不包含指针,小对象为[16b,32kb],大对象 &gt; 32kb
-</code></pre>
-</div><div id="comments"><div id="valine" class="comment"></div><noscript>
+<p>在规范的应用场景上说，Get 多用于无副作用，幂等的场景，例如搜索关键字。Post 多用于副作用，不幂等的场景，例如注册。</p>
+<ul>
+<li>
+<p>Get 请求能缓存，Post 不能</p>
+</li>
+<li>
+<p>Post 相对 Get 安全一点点，因为Get 请求都包含在 URL 里（当然你想写到 body 里也是可以的），且会被浏览器保存历史纪录。Post 不会，但是在抓包的情况下都是一样。</p>
+</li>
+<li>
+<p>URL有长度限制，会影响 Get 请求，但是这个长度限制是浏览器规定的，不是 RFC 规定的</p>
+</li>
+<li>
+<p>Post 支持更多的编码类型且不对数据类型限制</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="消息报头">消息报头</h2>
+<h2 id="请求正文">请求正文</h2>
+<h1 id="http-响应构成">Http 响应构成</h1>
+<h2 id="状态行">状态行</h2>
+<blockquote>
+<p>HTTP-Version Status-Code Reason-Phrase CRLF。其中，HTTP-Version表示服务器HTTP协议的版本；Status-Code表示服务器发回的响应状态代码；Reason-Phrase表示状态代码的文本描述。</p>
+</blockquote>
+<h2 id="消息报头-1">消息报头</h2>
+<h2 id="响应正文">响应正文</h2>
+<blockquote>
+<p>首部分为请求首部和响应首部，并且部分首部两种通用</p>
+</blockquote>
+<p><a href="/post/Http" rel="">See Http Tool</a></p></div><div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
             </noscript></div></div></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.103.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.104.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Treasure</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
