@@ -79,16 +79,21 @@ Vritual memory address
 
 + mcache
 
-    类似于 `tcmalloc ThreadCache`,区别在于前者和线程保定，后者和golang的 `P` 绑定
+    类似于 `tcmalloc ThreadCache`,区别在于前者和线程绑定，后者和golang的 `P` 绑定
 
 + mcentral
     类似于 `tcmalloc CentarlCache`
     
 + mheap
 
-    类似于 `tcmalloc pageheap` 
+    类似于 `tcmalloc pageheap` ，当初始化一个大对象时，直接走 heap 分配，go后期版本叫做 `arenas`
 
 ## 对象大小定义
 
     > golang 并未区分为大中小对象，而是区分为 tiny，小，大，如 tiny[1byte,16byte),并且不包含指针,小对象为[16b,32kb],大对象 > 32kb
     
+
+
+# 逃逸分析
+
+> go build -gcflags="-m"

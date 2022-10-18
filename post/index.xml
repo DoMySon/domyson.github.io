@@ -9,7 +9,25 @@
     <managingEditor>262737999@qq.com (Treasure)</managingEditor>
     <webMaster>262737999@qq.com (Treasure)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 07 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ukn-scheduler</title>
+      <link>https://domyson.github.io/post/unknown/scheduler/</link>
+      <pubDate>Tue, 18 Oct 2022 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/unknown/scheduler/</guid>
+      <description>调度器以及调度规则 分为两个部分,lua和go Lua lua本质上是一个单线程的语言，天生不支持多线程，而在ukn框架中我们需要让它能够模拟类似于中</description>
+    </item>
+    
+    <item>
+      <title>ai 模块设计思路</title>
+      <link>https://domyson.github.io/post/unity/ai/</link>
+      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/unity/ai/</guid>
+      <description>占个坑</description>
+    </item>
+    
     <item>
       <title>Go Memory</title>
       <link>https://domyson.github.io/post/language/go/memory/</link>
@@ -101,6 +119,15 @@
     </item>
     
     <item>
+      <title>sync.Pool</title>
+      <link>https://domyson.github.io/post/language/go/sync.pool/</link>
+      <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/language/go/sync.pool/</guid>
+      <description>结构分析 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 type Pool struct { noCopy noCopy local unsafe.Pointer // P 本地池，固定尺寸，实际</description>
+    </item>
+    
+    <item>
       <title>如何避免死锁</title>
       <link>https://domyson.github.io/post/others/%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81/</link>
       <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
@@ -176,6 +203,15 @@
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/others/mysql/mysql100%E9%97%AE/</guid>
       <description>聚集、非聚集、联合索引 A1: 聚集索引（主键索引）所有ROW都会按照主键索引进行排序 A2: 非聚集索引即普通索引加上字段 A3: 几个字段组成的索引 A4: 聚集索引在</description>
+    </item>
+    
+    <item>
+      <title>Go GC分析</title>
+      <link>https://domyson.github.io/post/language/go/gc/</link>
+      <pubDate>Sat, 26 Feb 2022 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/language/go/gc/</guid>
+      <description>如何启用GC跟踪 GODEBUG=gctrace=1 go run *.go 其中 gctrace=1 表示只针对这个进程进行GC追踪 标记流程 go采用三色标记法，主要是为了提高并发度，这样扫描过程可以拆分为多个阶段</description>
     </item>
     
     <item>
@@ -418,35 +454,6 @@
     </item>
     
     <item>
-      <title>Go GC分析</title>
-      <link>https://domyson.github.io/post/language/go/gc/</link>
-      <pubDate>Wed, 26 Feb 2020 00:00:00 +0000</pubDate>
-      <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/language/go/gc/</guid>
-      <description>&lt;h1 id=&#34;如何启用gc跟踪&#34;&gt;如何启用GC跟踪&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;GODEBUG=gctrace=1 go run *.go&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;其中 &lt;code&gt;gctrace=1&lt;/code&gt; 表示只针对这个进程进行GC追踪&lt;/p&gt;
-&lt;h1 id=&#34;输出分析&#34;&gt;输出分析&lt;/h1&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;gc 1 @0.035s 0%: 0+0.99+0 ms clock, 0+0/0/0+0 ms cpu, 4-&amp;gt;5-&amp;gt;1 MB, 5 MB goal, 12 P
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;scvg: 0 MB released
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;scvg: inuse: 5, idle: 2, sys: 7, released: 2, consumed: 5 (MB)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;GC forced
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description>
-    </item>
-    
-    <item>
       <title>TLS</title>
       <link>https://domyson.github.io/post/linux/tls/</link>
       <pubDate>Sun, 09 Feb 2020 00:00:00 +0000</pubDate>
@@ -588,15 +595,6 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证。对于单元测试中单元的含义，一般要根据实际情况去判定其具体含义，如 C语言中单元指一个函数,单元就是人为规定的最小的被测功能模块。单元测试是在软件开发过程中要进行的最低级别的测试活动，软件的独立单元将在与程序的其他部分相隔离的情况下进行测试。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title>ILRuntime</title>
-      <link>https://domyson.github.io/post/unity/ilruntime/</link>
-      <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
-      <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/unity/ilruntime/</guid>
-      <description>这是一个介绍</description>
     </item>
     
     <item>
@@ -957,29 +955,11 @@
     
     <item>
       <title></title>
-      <link>https://domyson.github.io/post/language/lua/coroutine/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/language/lua/coroutine/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
       <link>https://domyson.github.io/post/linux/file/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/linux/file/</guid>
       <description>Liunx 文件系统 对于 drwxr-xr-x 4 root root 4096 Nov 28 00:00 hook 文件类型 符号 描述 d 目录 l 符号链接 s 套接字文件 b 块设备文件 c 字符设备文件 p 命名管道文件 - 普通文件，不属于上述任</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://domyson.github.io/post/unity/dots/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/unity/dots/</guid>
-      <description></description>
     </item>
     
   </channel>

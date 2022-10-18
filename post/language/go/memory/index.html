@@ -19,7 +19,7 @@
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://domyson.github.io/post/language/go/memory/" /><link rel="prev" href="https://domyson.github.io/post/unknown/subscription/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://domyson.github.io/post/language/go/memory/" /><link rel="prev" href="https://domyson.github.io/post/unknown/subscription/" /><link rel="next" href="https://domyson.github.io/post/unity/ai/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/language\/go\/memory\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "","wordcount":  642 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "","wordcount":  677 ,
         "url": "https:\/\/domyson.github.io\/post\/language\/go\/memory\/","datePublished": "2022-10-07T00:00:00+00:00","dateModified": "2022-10-07T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
@@ -198,7 +198,7 @@
 </li>
 <li>
 <p>mcache</p>
-<p>类似于 <code>tcmalloc ThreadCache</code>,区别在于前者和线程保定，后者和golang的 <code>P</code> 绑定</p>
+<p>类似于 <code>tcmalloc ThreadCache</code>,区别在于前者和线程绑定，后者和golang的 <code>P</code> 绑定</p>
 </li>
 <li>
 <p>mcentral
@@ -206,12 +206,16 @@
 </li>
 <li>
 <p>mheap</p>
-<p>类似于 <code>tcmalloc pageheap</code></p>
+<p>类似于 <code>tcmalloc pageheap</code> ，当初始化一个大对象时，直接走 heap 分配，go后期版本叫做 <code>arenas</code></p>
 </li>
 </ul>
 <h2 id="对象大小定义">对象大小定义</h2>
 <pre><code>&gt; golang 并未区分为大中小对象，而是区分为 tiny，小，大，如 tiny[1byte,16byte),并且不包含指针,小对象为[16b,32kb],大对象 &gt; 32kb
 </code></pre>
+<h1 id="逃逸分析">逃逸分析</h1>
+<blockquote>
+<p>go build -gcflags=&quot;-m&quot;</p>
+</blockquote>
 </div><div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
             </noscript></div></div></div>

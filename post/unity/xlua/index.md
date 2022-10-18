@@ -76,12 +76,6 @@ xLua只会生成加了该配置的类型，`不会自动生成其父类的适配
 如果希望把一个lua函数适配到一个C# delegate（一类是C#侧各种回调：UI事件，delegate参数，比如List<T>:ForEach；另外一类场景是通过 LuaTable的Get函数 指明一个lua函数绑定到一个delegate）。或者把一个lua table适配到一个C# interface，该delegate或者interface需要加上该配置。
 
 
-## `[GCOptimize]`
-
-一个C#纯值类型（注：指的是一个只包含值类型的struct，可以嵌套其它只包含值类型的struct）或者C#枚举值加上了这个配置。xLua会为该类型生成gc优化代码，效果是该值类型在lua和c#间传递不产生（C#）gc alloc，该类型的数组访问也不产生gc。各种无GC的场景.
-
-除枚举之外，包含无参构造函数的复杂类型，都会生成lua table到该类型，以及改类型的一维数组的转换代码，这将会优化这个转换的性能，包括更少的gc alloc。
-
 
 ## `[BlackList]`
 
@@ -197,6 +191,25 @@ end)
 
 assert(coroutine.resume(co))
 ```
+
+
+
+
+
+# xlua 优化
+
++ wrapper文件生成，减少反射，调用原理即是出栈和入栈的区别
+
++ 调用C#静态方法以提供库给lua侧使用，因为c#和lua vm的本质不同，计算放在c#侧明显快于lua
+
++ 委托也生成 wrapper，LuaCallCSharp
+
++ GCOptimize  `[GCOptimize]`
+
+一个C#纯值类型（注：指的是一个只包含值类型的struct，可以嵌套其它只包含值类型的struct）或者C#枚举值加上了这个配置。xLua会为该类型生成gc优化代码，效果是该值类型在lua和c#间传递不产生（C#）gc alloc，该类型的数组访问也不产生gc。各种无GC的场景.
+
+除枚举之外，包含无参构造函数的复杂类型，都会生成lua table到该类型，以及改类型的一维数组的转换代码，这将会优化这个转换的性能，包括更少的gc alloc。
+
 
 
 # 第三方库集成
