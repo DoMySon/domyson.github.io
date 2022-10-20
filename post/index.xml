@@ -88,7 +88,7 @@
       <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/unknown/timer/</guid>
-      <description>简介 timer 模块是 ukn 内置的一个定时模块，使用了小根堆实现。 apis ukn.sleep(d) 这个函数将会挂起当前协程，在lua和 go中将会有不同的表现，这取决于这两者底层之间的</description>
+      <description>简介 timer 模块是 ukn 内置的一个定时模块，使用了小根堆实现。 apis ukn.sleep(d) 这个函数将会挂起当前协程，在lua和 go中将会有不同的表现，取决于两者底层之间的区别</description>
     </item>
     
     <item>
@@ -171,10 +171,10 @@
     
     <item>
       <title>消息队列</title>
-      <link>https://domyson.github.io/post/mq/</link>
+      <link>https://domyson.github.io/post/others/mq/</link>
       <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/mq/</guid>
+      <guid>https://domyson.github.io/post/others/mq/</guid>
       <description>它的本质，就是个转发器，包含发消息、存消息、消费消息的过程 优势 应用解耦 流量削峰 异步处理 通讯 削峰 当某个系统处理为n时，而此时请求量为 m*n 时，系统</description>
     </item>
     

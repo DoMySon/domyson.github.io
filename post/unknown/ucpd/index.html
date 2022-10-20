@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/unknown\/ucpd\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "ucpd","wordcount":  706 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "ucpd","wordcount":  705 ,
         "url": "https:\/\/domyson.github.io\/post\/unknown\/ucpd\/","datePublished": "2022-05-30T00:00:00+00:00","dateModified": "2022-05-30T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
@@ -157,7 +157,7 @@
 </blockquote>
 <h1 id="服务发现">服务发现</h1>
 <p><code>ucpd</code> 提供了一套服务发现机制，但其运作原理是不同于 <code>etcd</code> 或者 <code>consul</code>,它本身是一个惰性发现，取决于第一次调用的地址是否正确返回。</p>
-<p>你不需要知道它是如何运作的，，你只需要知道在特定时间内它是有效的即可，那怕其中出了一些意外，无非只是浪费了两次通讯而已。</p>
+<p>你不需要知道它是如何运作的，你只需要知道在特定时间内它是有效的即可，那怕其中出了一些意外，无非只是浪费了两次通讯而已。</p>
 <h1 id="网络底层">网络底层</h1>
 <p>参考 <a href="/post/language/go/goroutine" rel="">Go协程的思考</a>,在<code>linux</code>下，我使用了 <code>epoll</code>。所以尽量部署到 <code>linux</code> 下以发挥更好的性能</p>
 </div><div id="comments"><div id="valine" class="comment"></div><noscript>
