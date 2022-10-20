@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>allocator - 薛定谔的BUG</title><meta name="Description" content="测试下咯"><meta property="og:title" content="allocator" />
+        <title>ukn-allocator - 薛定谔的BUG</title><meta name="Description" content="测试下咯"><meta property="og:title" content="ukn-allocator" />
 <meta property="og:description" content="简介 alloctor 模块主要是为了减少GC而开发。支持两套分配规则 基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在ukn中它确实有更优秀的性能" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://domyson.github.io/post/unknown/allocator/" /><meta property="og:image" content="https://domyson.github.io/favicon.ico"/><meta property="article:section" content="post" />
@@ -14,7 +14,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://domyson.github.io/favicon.ico"/>
 
-<meta name="twitter:title" content="allocator"/>
+<meta name="twitter:title" content="ukn-allocator"/>
 <meta name="twitter:description" content="简介 alloctor 模块主要是为了减少GC而开发。支持两套分配规则 基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在ukn中它确实有更优秀的性能"/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -25,12 +25,12 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "allocator",
+        "headline": "ukn-allocator",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/unknown\/allocator\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "allocator","wordcount":  465 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "allocator","wordcount":  481 ,
         "url": "https:\/\/domyson.github.io\/post\/unknown\/allocator\/","datePublished": "2022-04-21T00:00:00+00:00","dateModified": "2022-04-21T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
@@ -105,14 +105,17 @@
     <div class="search-dropdown mobile">
         <div id="search-dropdown-mobile"></div>
     </div><main class="main">
-                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">allocator</h1><div class="content" id="content"><h1 id="简介">简介</h1>
+                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">ukn-allocator</h1><div class="content" id="content"><h1 id="简介">简介</h1>
 <p><code>alloctor</code> 模块主要是为了减少<code>GC</code>而开发。支持两套分配规则</p>
 <h1 id="基于-slab-算法的分段内存分配器">基于 <code>SLAB</code> 算法的分段内存分配器</h1>
 <p><code>SLAB</code> 最开始是阅读 <code>linux</code> 源码学习的算法，在<code>ukn</code>中它确实有更优秀的性能，因为它直接分配了一块共用内存，所以不会产生任何GC和真实分配,
 ，但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。</p>
 <p>哪怕内置的<code>Debug</code>模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 <code>Debug</code> 只能定位到存在 <code>memory-leak</code>，而无法知道具体位置。</p>
 <p><code>slab-allocator</code> 对业务开发很不友好，最终只是将它保留作为可选项，是否使用取决于业务实际需要，因为它违背了 <code>ukn</code> 的设计初衷。</p>
-<p><code>slab-allocator</code> 正确的使用几乎不存在内存碎片，因为它共用了一块大内存</p>
+<p>如果需要使用可以在编译指令中指明<code>slab</code></p>
+<blockquote>
+<p>2020-10-18 阅读sync.Pool源码，看看能不能够和指定的P进行绑定，减少锁</p>
+</blockquote>
 <h1 id="基于-syncpool-的分段内存分配器">基于 <code>sync.Pool</code> 的分段内存分配器</h1>
 <p>这个方法虽然简单，但是性能是低于 <code>SLAB-allocator</code>。</p>
 <p>但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是<code>ukn</code>默认使用的策略。</p>
@@ -122,7 +125,7 @@
 <p><code>ukn.alloc(n)</code> 用以分配指定大小的内存块</p>
 </li>
 <li>
-<p><code>ukn.realloc(buf,n)</code> realloc函数会先检查buf，确保是否需要重新分配内存，然后释放之前的<code>buf</code></p>
+<p><code>ukn.realloc(buf,n)</code> realloc函数会先检查buf，确保是否需要重新分配内存</p>
 </li>
 <li>
 <p><code>ukn.append(buf,data)</code> 简化了 <code>realloc</code> 和 <code>copy</code> 的操作。</p>

@@ -48,10 +48,10 @@
     
     <item>
       <title>ukp 编码协议</title>
-      <link>https://domyson.github.io/post/unknown/upk/</link>
+      <link>https://domyson.github.io/post/unknown/ukp/</link>
       <pubDate>Wed, 21 Sep 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/unknown/upk/</guid>
+      <guid>https://domyson.github.io/post/unknown/ukp/</guid>
       <description>前言 其实在cobweb之初就设计了一种编码协议(bbuf)，用于 RPC Server,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），</description>
     </item>
     
@@ -101,7 +101,7 @@
     </item>
     
     <item>
-      <title>allocator</title>
+      <title>ukn-allocator</title>
       <link>https://domyson.github.io/post/unknown/allocator/</link>
       <pubDate>Thu, 21 Apr 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>

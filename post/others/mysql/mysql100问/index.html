@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/others\/mysql\/mysql100%E9%97%AE\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "mysql","wordcount":  1121 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "mysql","wordcount":  2728 ,
         "url": "https:\/\/domyson.github.io\/post\/others\/mysql\/mysql100%E9%97%AE\/","datePublished": "2022-04-06T00:00:00+00:00","dateModified": "2022-04-06T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
@@ -220,48 +220,79 @@
 </ul>
 <h1 id="索引">索引</h1>
 <blockquote>
-<p>提高数据库表访问速度的一种数据结构</p>
+<p>提高数据库表访问速度的一种数据结构，索引是一个文件，它需要占物理空间</p>
 </blockquote>
-<ol>
-<li>
-<p>优点</p>
-<p>加快数据查找速度，加快分组和排序的速度</p>
-</li>
-<li>
-<p>缺点</p>
-<p>占用空间，降低增删改的效率，因为索引是动态维护的</p>
-</li>
-<li>
-<p>何时不用</p>
+<h2 id="优缺点">优缺点</h2>
+<pre><code>+ 加快数据查找速度，加快分组和排序的速度
++ 占用空间，降低增删改的效率，因为索引是动态维护的
+</code></pre>
+<h2 id="何时不用">何时不用</h2>
+<pre><code>+ `where` 中用不到的字段
+
++ 表记录较少
+
++ 经常增删改
+
++ 区分不高的字段
+
++ 参与列计算的列
+</code></pre>
+<h2 id="结构">结构</h2>
+<pre><code>hash表和b+树（默认）
+</code></pre>
+<h3 id="b树">B+树</h3>
+<pre><code>B+树更适应磁盘特性，相比于B树减少了I/O的读写次数，而B+树的非叶子节点只存key，因此单页可以存储更多的key，一次读入内存的需要查找的key就更多，因为数据只存在叶子节点上，查询效率为O(logN)，
+而B树非叶子节点缓存了数据，只能通过中序遍历按序遍历，B+树叶子节点使用链表进行连接，所以遍历所有数据只需要遍历一边叶子节点，效率更高
+
+虽然hash索引查找更快，但存储时时无序的，所以无法排序，并且不支持模糊查找，也不支持范围查找
+</code></pre>
+<h2 id="分类">分类</h2>
 <ul>
 <li>
-<p><code>where</code> 中用不到的字段</p>
+<p>主键索引 唯一非空索引，列不允许重复</p>
 </li>
 <li>
-<p>表记录较少</p>
+<p>组合索引 在多个字段上创建的索引，需要遵从最左前缀原则，即在查询条件中，只有使用了组合索引的第一个字段，索引才会被使用</p>
 </li>
 <li>
-<p>经常增删改</p>
+<p>唯一索引 列值唯一但可以为空
+<code>sql alter table talbe_name add unique(field...) </code></p>
 </li>
 <li>
-<p>区分不高的字段</p>
-</li>
-<li>
-<p>参与列计算的列</p>
+<p>普通索引 基本索引类型，没有唯一限制，允许为null</p>
 </li>
 </ul>
+<pre><code>```sql
+    alter table table_name add index index_name(field...)
+```
+</code></pre>
+<ul>
+<li>全文索引 主要用来查询文本中的关键字，只能在 <code>char,varchar,text</code>上使用（innodb不支持全文索引）
+<code>sql alter table table_name add fulltext(field) </code></li>
+</ul>
+<h2 id="原理">原理</h2>
+<pre><code>&gt; 索引用来快速查询具有特定值的记录，如果没有索引，一般而言需要遍历整张表
+
++ 将创建了索引的列的内容进行排序
+
++ 对排序内容生成倒排表
+
++ 在倒排表内容上拼接数据地址链
+
++ 查询的时候先拿到倒排表，去除数据地址链，从而难道具体数据
+</code></pre>
+<h2 id="聚簇索引和非聚簇索引的区别">聚簇索引和非聚簇索引的区别</h2>
+<ul>
+<li>
+<p>聚簇索引 将索引和数据放到了同一行，找到了索引也就找到了数据，无须进行回表查询操作</p>
+<blockquote>
+<p>innodb 必然会有一个聚簇索引，通常是主键，若没有，则优先选择非空的唯一索引，若也没有，则会创建一个隐藏的 row_id 作为聚簇索引</p>
+</blockquote>
 </li>
 <li>
-<p>结构</p>
-<p>hash表和b+数（默认）</p>
+<p>非聚簇索引 将索引和数据分开，找到索引后通过对应的地址找到数据行</p>
 </li>
-<li>
-<p>分类</p>
-<p>主键索引 唯一非空索引</p>
-<p>唯一索引 列值唯一但可以为空</p>
-<p>全文索引 只能在 <code>char,varchar,text</code>上使用</p>
-</li>
-</ol>
+</ul>
 <h1 id="事务四大特性">事务四大特性</h1>
 <ol>
 <li>
@@ -289,9 +320,110 @@
 <p>Repeated Read 默认</p>
 </li>
 <li>
-<p>Serializable</p>
+<p>Serializable 串行化</p>
 </li>
 </ol>
+<h2 id="隔离级别所带来的问题">隔离级别所带来的问题</h2>
+<ul>
+<li>
+<p>脏读 事务A读到了其他事务未提交的数据</p>
+</li>
+<li>
+<p>不可重复读 事务A读到了其他事务多次修改的数据，导致结果不一样</p>
+</li>
+<li>
+<p>幻读 事务A读到了其他事务修改的新数据，而在之前并没有这个数据</p>
+</li>
+</ul>
+<blockquote>
+<p>重复读和幻读的区别在于前者是修改，后者是插入或者删除，sql标准中规定的RR级别不能消除幻读，但mysql的RR可以，原因在于间隙锁<code>Gap lock</code></p>
+</blockquote>
+<p>|:-:|:-:|:-:|:-:|
+|隔离级别/问题|脏读|不可重复读|幻读|
+|RU|√|√|√|
+|RC|×|√|√|
+|RR|×|×|√|
+|SE|×|×|×|</p>
+<h2 id="mvcc">MVCC</h2>
+<blockquote>
+<p>mysql 的 RR级别是通过MVCC多版本并发控制的实现的，它通过管理数据行的多个版本来实现数据库并发控制，通过比较版本号来决定数据是否显示</p>
+</blockquote>
+<p>mvcc在很多情况下避免加锁，大多数都实现了非阻塞读操作，写操作也是锁定必要行，innodb在每行记录后面保存两个隐藏列，分别是<code>创建版本号</code>和<code>删除版本号</code>,每开始一个新的事务系统版本号都会递增，事务开始的时刻的系统版本号
+会作为事务的版本号，用以和查询到的每行记录的版本号进行比较，在RR级别下的工作方式：</p>
+<ul>
+<li>
+<p>select 需要同时满足查版本号早于当前版本的数据行，行的删除版本要么未定义，要么大于当前数据版本号</p>
+</li>
+<li>
+<p>insert 为插入的每一行记录保存当前系统版本作为创建版本号</p>
+</li>
+<li>
+<p>delete</p>
+</li>
+<li>
+<p>update</p>
+</li>
+</ul>
+<h1 id="锁">锁</h1>
+<h2 id="行锁">行锁</h2>
+<pre><code>操作只锁住某一行，不能其它行有影响，它是一种排它锁（写锁）防止其他事务修改当前事务的操作数据，（innodb）默认锁机制
+特点是开销大，加锁慢，会出现死锁，锁的颗粒最小，并发最高，冲突最低
+</code></pre>
+<ul>
+<li>
+<p>表锁
+操作时会锁定整张表，（myisam）的默认机制</p>
+<p>特定是开销小，加锁快，不会出现死锁，锁的颗粒大，并发低，冲突高</p>
+</li>
+<li>
+<p>页锁
+操作是锁住一页数据（16kb）
+特定是介于行锁和表锁之间，会出现死锁，并发度一般</p>
+</li>
+<li>
+<p>读写锁
+处理并发读读和写时，通常使用共享锁（读锁）和排他锁（写锁）</p>
+<ul>
+<li>
+<p>读锁时共享的，相互之间不会阻塞，多个事务同一时刻能获取同一资源，但是不可修改数据</p>
+</li>
+<li>
+<p>写锁时排他的，其他事务不能获取这条数据的读锁和写锁</p>
+</li>
+<li>
+<p>加锁的sql</p>
+<ul>
+<li>
+<p>select * form table // 不加锁</p>
+</li>
+<li>
+<p>update/insert/delete // 加排他锁</p>
+</li>
+<li>
+<p>select &amp; form table where id // id如果是索引，就加排他锁</p>
+</li>
+<li>
+<p>select * form table where id lock in share mode // 共享锁</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="死锁">死锁</h2>
+<blockquote>
+<p>当多个事务以不同的顺序锁定资源，或者同时锁定同一个资源都会产生死锁</p>
+</blockquote>
+<h3 id="解决思路">解决思路</h3>
+<pre><code>+ innodb 可以自动检测死锁，使用一个事务回滚，另一个事务继续
+
++ 设置超时等待参数 `innodb_local_wait_timeout`
+</code></pre>
+<h3 id="如何避免">如何避免</h3>
+<pre><code>+ 不同业务并发访问多个表时，编写相同的顺序访问
+
++ 在事务中如果更新记录，使用排他锁
+</code></pre>
 <h1 id="binlog-redolog-undolog">binlog redolog undolog</h1>
 </div><div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.

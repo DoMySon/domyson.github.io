@@ -1,4 +1,4 @@
-# allocator
+# ukn-allocator
 
 
 
@@ -18,9 +18,10 @@
 
 `slab-allocator` 对业务开发很不友好，最终只是将它保留作为可选项，是否使用取决于业务实际需要，因为它违背了 `ukn` 的设计初衷。
 
-`slab-allocator` 正确的使用几乎不存在内存碎片，因为它共用了一块大内存
+如果需要使用可以在编译指令中指明`slab`
 
 
+> 2020-10-18 阅读sync.Pool源码，看看能不能够和指定的P进行绑定，减少锁
 
 
 # 基于 `sync.Pool` 的分段内存分配器
@@ -35,7 +36,7 @@
 
 + `ukn.alloc(n)` 用以分配指定大小的内存块
 
-+ `ukn.realloc(buf,n)` realloc函数会先检查buf，确保是否需要重新分配内存，然后释放之前的`buf`
++ `ukn.realloc(buf,n)` realloc函数会先检查buf，确保是否需要重新分配内存
 
 + `ukn.append(buf,data)` 简化了 `realloc` 和 `copy` 的操作。
 
