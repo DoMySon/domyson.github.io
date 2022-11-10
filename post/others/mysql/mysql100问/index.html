@@ -256,7 +256,7 @@
 </li>
 <li>
 <p>唯一索引 列值唯一但可以为空
-<code>sql alter table talbe_name add unique(field...) </code></p>
+<code>sql alter table talbe_name add unique(field...) </code></p>
 </li>
 <li>
 <p>普通索引 基本索引类型，没有唯一限制，允许为null</p>
@@ -268,7 +268,7 @@
 </code></pre>
 <ul>
 <li>全文索引 主要用来查询文本中的关键字，只能在 <code>char,varchar,text</code>上使用（innodb不支持全文索引）
-<code>sql alter table table_name add fulltext(field) </code></li>
+<code>sql alter table table_name add fulltext(field) </code></li>
 </ul>
 <h2 id="原理">原理</h2>
 <pre><code>&gt; 索引用来快速查询具有特定值的记录，如果没有索引，一般而言需要遍历整张表
@@ -400,7 +400,7 @@
 <p>update/insert/delete // 加排他锁</p>
 </li>
 <li>
-<p>select &amp; form table where id // id如果是索引，就加排他锁</p>
+<p>select * form table where id // id如果是索引，就加排他锁</p>
 </li>
 <li>
 <p>select * form table where id lock in share mode // 共享锁</p>
@@ -429,7 +429,7 @@
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
             </noscript></div></div></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.103.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.104.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Treasure</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
