@@ -2,7 +2,7 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://domyson.github.io/categories/</loc><lastmod>2022-11-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://domyson.github.io/categories/</loc><lastmod>2022-11-24T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://domyson.github.io/en/categories/"
@@ -11,10 +11,10 @@
                     hreflang="zh-cn"
                     href="https://domyson.github.io/categories/"
                     /></url><url>
-            <loc>https://domyson.github.io/categories/personal/</loc><lastmod>2022-11-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://domyson.github.io/post/</loc><lastmod>2022-11-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://domyson.github.io/post/personal/ukn%E5%BC%80%E5%8F%91%E6%84%9F%E6%83%B3/</loc><lastmod>2022-11-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://domyson.github.io/</loc><lastmod>2022-11-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>https://domyson.github.io/post/</loc><lastmod>2022-11-24T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://domyson.github.io/categories/redis/</loc><lastmod>2022-11-24T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://domyson.github.io/post/mysql/redis/</loc><lastmod>2022-11-24T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+            <loc>https://domyson.github.io/</loc><lastmod>2022-11-24T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://domyson.github.io/en/"
@@ -23,15 +23,10 @@
                     hreflang="zh-cn"
                     href="https://domyson.github.io/"
                     /></url><url>
-            <loc>https://domyson.github.io/categories/others/</loc><lastmod>2022-10-31T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>https://domyson.github.io/post/others/expression/</loc><lastmod>2022-10-31T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-            <loc>https://domyson.github.io/categories/ukn/</loc><lastmod>2022-10-18T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
-            <loc>https://domyson.github.io/post/unknown/scheduler/</loc><lastmod>2022-10-18T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
-            <loc>https://domyson.github.io/post/unity/ai/</loc><lastmod>2022-10-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
-            <loc>https://domyson.github.io/categories/go/</loc><lastmod>2022-10-07T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
-            <loc>https://domyson.github.io/post/language/go/memory/</loc><lastmod>2022-10-07T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
-            <loc>https://domyson.github.io/post/unknown/subscription/</loc><lastmod>2022-09-26T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://domyson.github.io/tags/</loc><lastmod>2022-09-21T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>https://domyson.github.io/categories/mvcc/</loc><lastmod>2022-11-20T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+            <loc>https://domyson.github.io/post/mysql/mvcc/</loc><lastmod>2022-11-20T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+            <loc>https://domyson.github.io/tags/mysql/</loc><lastmod>2022-11-20T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+            <loc>https://domyson.github.io/tags/</loc><lastmod>2022-11-20T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://domyson.github.io/en/tags/"
@@ -40,6 +35,18 @@
                     hreflang="zh-cn"
                     href="https://domyson.github.io/tags/"
                     /></url><url>
+            <loc>https://domyson.github.io/post/linux/iptables/</loc><lastmod>2022-11-19T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+            <loc>https://domyson.github.io/categories/linux/</loc><lastmod>2022-11-19T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+            <loc>https://domyson.github.io/categories/personal/</loc><lastmod>2022-11-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
+            <loc>https://domyson.github.io/post/personal/%E5%BF%83%E8%B7%AF%E5%8E%86%E7%A8%8B/</loc><lastmod>2022-11-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
+            <loc>https://domyson.github.io/categories/others/</loc><lastmod>2022-10-31T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://domyson.github.io/post/others/expression/</loc><lastmod>2022-10-31T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://domyson.github.io/categories/ukn/</loc><lastmod>2022-10-18T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://domyson.github.io/post/unknown/scheduler/</loc><lastmod>2022-10-18T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://domyson.github.io/post/unity/ai/</loc><lastmod>2022-10-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://domyson.github.io/categories/go/</loc><lastmod>2022-10-07T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://domyson.github.io/post/language/go/memory/</loc><lastmod>2022-10-07T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://domyson.github.io/post/unknown/subscription/</loc><lastmod>2022-09-26T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/tags/ukp/</loc><lastmod>2022-09-21T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/post/unknown/ukp/</loc><lastmod>2022-09-21T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/post/unknown/message/</loc><lastmod>2022-07-22T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
@@ -58,17 +65,15 @@
             <loc>https://domyson.github.io/post/others/%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81/</loc><lastmod>2022-04-15T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/post/language/go/sync.map/</loc><lastmod>2022-04-14T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/categories/db/</loc><lastmod>2022-04-13T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://domyson.github.io/tags/mysql/</loc><lastmod>2022-04-13T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://domyson.github.io/post/others/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/</loc><lastmod>2022-04-13T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://domyson.github.io/post/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/</loc><lastmod>2022-04-13T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/tags/mq/</loc><lastmod>2022-04-11T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/post/others/mq/</loc><lastmod>2022-04-11T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://domyson.github.io/post/others/mysql/innodb/</loc><lastmod>2022-04-07T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://domyson.github.io/post/mysql/innodb/</loc><lastmod>2022-04-07T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/post/language/go/cgo/</loc><lastmod>2022-04-06T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://domyson.github.io/post/others/mysql/mysql100%E9%97%AE/</loc><lastmod>2022-04-06T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://domyson.github.io/post/mysql/mysql100%E9%97%AE/</loc><lastmod>2022-04-06T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/categories/%E5%85%AB%E8%82%A1%E6%96%87/</loc><lastmod>2022-04-06T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/tags/gc/</loc><lastmod>2022-02-26T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/post/language/go/gc/</loc><lastmod>2022-02-26T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://domyson.github.io/categories/linux/</loc><lastmod>2021-09-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/tags/tcp/</loc><lastmod>2021-09-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/post/linux/tcp/</loc><lastmod>2021-09-16T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/tags/c/</loc><lastmod>2020-07-04T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
@@ -96,11 +101,12 @@
             <loc>https://domyson.github.io/post/language/go/lock/</loc><lastmod>2019-12-11T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/tags/ascii/</loc><lastmod>2019-08-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/post/others/ascii/</loc><lastmod>2019-08-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://domyson.github.io/tags/k8s/</loc><lastmod>2019-08-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://domyson.github.io/post/docker/k8s/</loc><lastmod>2019-08-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/post/language/go/unsafe/</loc><lastmod>2019-08-25T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/post/language/go/pprof/</loc><lastmod>2019-08-23T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/tags/pprof/</loc><lastmod>2019-08-23T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/tags/database/</loc><lastmod>2019-07-24T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://domyson.github.io/categories/redis/</loc><lastmod>2019-07-24T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/post/others/redis/</loc><lastmod>2019-07-24T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/post/others/protobuf/</loc><lastmod>2019-05-13T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://domyson.github.io/tags/goroutine/</loc><lastmod>2019-05-12T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

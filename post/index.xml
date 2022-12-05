@@ -9,14 +9,41 @@
     <managingEditor>262737999@qq.com (Treasure)</managingEditor>
     <webMaster>262737999@qq.com (Treasure)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 10 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>redis</title>
+      <link>https://domyson.github.io/post/mysql/redis/</link>
+      <pubDate>Thu, 24 Nov 2022 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/mysql/redis/</guid>
+      <description>Redis Remote Dictionary Server,采用 ANSI C 编写的 K-V数据库 类型 string 最大存储值为256mb，底层由SDS(simple dynamic string)实现，优势是访问长度仅</description>
+    </item>
+    
+    <item>
+      <title>mvcc</title>
+      <link>https://domyson.github.io/post/mysql/mvcc/</link>
+      <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/mysql/mvcc/</guid>
+      <description>MVCC multi-version concurent control 多版本控制系统，一般用于数据库的并发访问 MVCC在MySQL InnoDB中的实现主要是为了提高数据库的并发性能，用更好的方式去处理读</description>
+    </item>
+    
+    <item>
+      <title>iptables and ipvs</title>
+      <link>https://domyson.github.io/post/linux/iptables/</link>
+      <pubDate>Sat, 19 Nov 2022 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/linux/iptables/</guid>
+      <description>iptables iptables 基于 netfilter 采用一条条规则链表，时间复杂度为O(n)，最主要的是 iptables 专为防火墙设计 ipvs ipvs 同样基于 netfilter，但底层采用的是hash表，索引</description>
+    </item>
+    
     <item>
       <title>ukn开发感想</title>
-      <link>https://domyson.github.io/post/personal/ukn%E5%BC%80%E5%8F%91%E6%84%9F%E6%83%B3/</link>
+      <link>https://domyson.github.io/post/personal/%E5%BF%83%E8%B7%AF%E5%8E%86%E7%A8%8B/</link>
       <pubDate>Thu, 10 Nov 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/personal/ukn%E5%BC%80%E5%8F%91%E6%84%9F%E6%83%B3/</guid>
-      <description>感想 今天是 ukn 开发的第六个月，每次提交修修改改了几次，仔细斟酌，想兼容跟快的速度以及跟简单的api操作。 cobweb到 unknown 经历了创业失败到现在的</description>
+      <guid>https://domyson.github.io/post/personal/%E5%BF%83%E8%B7%AF%E5%8E%86%E7%A8%8B/</guid>
+      <description>感想 今天是 ukn 开发的第六个月，每次提交修修改改了几次，仔细斟酌，想兼容跟快的速度以及跟简单的api操作。 cobweb到 unknown 经历了创业失败，经历了</description>
     </item>
     
     <item>
@@ -168,10 +195,10 @@
     
     <item>
       <title>mysql batch update</title>
-      <link>https://domyson.github.io/post/others/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/</link>
+      <link>https://domyson.github.io/post/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/</link>
       <pubDate>Wed, 13 Apr 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/others/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/</guid>
+      <guid>https://domyson.github.io/post/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/</guid>
       <description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;最近开发公会功能，需要定时保存一些，如果每次都是以公会为单位的话，相当于n个公会执行了n次&lt;code&gt;UPDATE&lt;/code&gt;操作&lt;/p&gt;
 &lt;h1 id=&#34;实现&#34;&gt;实现&lt;/h1&gt;
@@ -198,10 +225,10 @@
     
     <item>
       <title>innodb</title>
-      <link>https://domyson.github.io/post/others/mysql/innodb/</link>
+      <link>https://domyson.github.io/post/mysql/innodb/</link>
       <pubDate>Thu, 07 Apr 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/others/mysql/innodb/</guid>
+      <guid>https://domyson.github.io/post/mysql/innodb/</guid>
       <description>Innodb 事务隔离级别有四种默认是RR READ UNCOMMITTED 未提交读，A事务修改了数据但未提交，B事务可以读到这些未提交的数据（脏读） READ COMMITTED 提交读，A事务可以读取到其他</description>
     </item>
     
@@ -216,10 +243,10 @@
     
     <item>
       <title>mysql100问</title>
-      <link>https://domyson.github.io/post/others/mysql/mysql100%E9%97%AE/</link>
+      <link>https://domyson.github.io/post/mysql/mysql100%E9%97%AE/</link>
       <pubDate>Wed, 06 Apr 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/others/mysql/mysql100%E9%97%AE/</guid>
+      <guid>https://domyson.github.io/post/mysql/mysql100%E9%97%AE/</guid>
       <description>聚集、非聚集、联合索引 A1: 聚集索引（主键索引）所有ROW都会按照主键索引进行排序 A2: 非聚集索引即普通索引加上字段 A3: 几个字段组成的索引 A4: 聚集索引在</description>
     </item>
     
@@ -591,6 +618,15 @@
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/others/ascii/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>K8S</title>
+      <link>https://domyson.github.io/post/docker/k8s/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/docker/k8s/</guid>
+      <description>什么是kubernets</description>
     </item>
     
     <item>
