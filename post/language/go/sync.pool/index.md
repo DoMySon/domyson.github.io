@@ -1,4 +1,4 @@
-# sync.Pool
+# sync.pool
 
 
 

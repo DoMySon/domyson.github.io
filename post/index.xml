@@ -9,7 +9,16 @@
     <managingEditor>262737999@qq.com (Treasure)</managingEditor>
     <webMaster>262737999@qq.com (Treasure)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 24 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>kubernets</title>
+      <link>https://domyson.github.io/post/cloud_native/k8s/k8s/</link>
+      <pubDate>Sun, 11 Dec 2022 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/cloud_native/k8s/k8s/</guid>
+      <description> </description>
+    </item>
+    
     <item>
       <title>redis</title>
       <link>https://domyson.github.io/post/mysql/redis/</link>
@@ -38,7 +47,7 @@
     </item>
     
     <item>
-      <title>ukn开发感想</title>
+      <title>开发感想</title>
       <link>https://domyson.github.io/post/personal/%E5%BF%83%E8%B7%AF%E5%8E%86%E7%A8%8B/</link>
       <pubDate>Thu, 10 Nov 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
@@ -92,11 +101,11 @@
     </item>
     
     <item>
-      <title>ukp 编码协议</title>
-      <link>https://domyson.github.io/post/unknown/ukp/</link>
+      <title>bbuf 编码协议</title>
+      <link>https://domyson.github.io/post/unknown/bbuf/</link>
       <pubDate>Wed, 21 Sep 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/unknown/ukp/</guid>
+      <guid>https://domyson.github.io/post/unknown/bbuf/</guid>
       <description>前言 其实在cobweb之初就设计了一种编码协议(bbuf)，用于 RPC Server,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），</description>
     </item>
     
@@ -164,7 +173,7 @@
     </item>
     
     <item>
-      <title>sync.Pool</title>
+      <title>sync.pool</title>
       <link>https://domyson.github.io/post/language/go/sync.pool/</link>
       <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
@@ -266,6 +275,15 @@
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/linux/tcp/</guid>
       <description>三次握手 tcp client发送连接请求报文，报文首部同步标记位 SYN=1 同时随机序列号 seq=x，此时 tcp client 进入 SYNC-SENT 状态的 tcp server 若同意连接则确认报文为 ACK=1,SYN=1,ASK=x+1,seq=y 返回给</description>
+    </item>
+    
+    <item>
+      <title>cloud native</title>
+      <link>https://domyson.github.io/post/cloud_native/cloud/</link>
+      <pubDate>Sat, 19 Dec 2020 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/cloud_native/cloud/</guid>
+      <description>什么是云原生 Cloud表示应用程序位于云中，而不是传统的数据中心； Native表示应用程序从设计之初即考虑到云的环境，原生为云而设计，在云上</description>
     </item>
     
     <item>
@@ -533,10 +551,10 @@
     
     <item>
       <title>DockerNetwork</title>
-      <link>https://domyson.github.io/post/docker/dockernetwork/</link>
+      <link>https://domyson.github.io/post/cloud_native/docker/dockernetwork/</link>
       <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/docker/dockernetwork/</guid>
+      <guid>https://domyson.github.io/post/cloud_native/docker/dockernetwork/</guid>
       <description>&lt;h1 id=&#34;docker-network&#34;&gt;Docker Network&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;Docker&lt;/code&gt; 在安装时候，默认创建三个网络 &lt;code&gt;bridge（默认）&lt;/code&gt;,&lt;code&gt;none&lt;/code&gt;,&lt;code&gt;host&lt;/code&gt;。&lt;/p&gt;
@@ -622,10 +640,10 @@
     
     <item>
       <title>K8S</title>
-      <link>https://domyson.github.io/post/docker/k8s/</link>
+      <link>https://domyson.github.io/post/cloud_native/docker/k8s/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/docker/k8s/</guid>
+      <guid>https://domyson.github.io/post/cloud_native/docker/k8s/</guid>
       <description>什么是kubernets</description>
     </item>
     
@@ -848,10 +866,10 @@
     
     <item>
       <title>Docker</title>
-      <link>https://domyson.github.io/post/docker/docker/</link>
+      <link>https://domyson.github.io/post/cloud_native/docker/docker/</link>
       <pubDate>Tue, 12 Mar 2019 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/docker/docker/</guid>
+      <guid>https://domyson.github.io/post/cloud_native/docker/docker/</guid>
       <description>&lt;h1 id=&#34;docker简介&#34;&gt;Docker简介&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -868,10 +886,10 @@
     
     <item>
       <title>Dockerfile</title>
-      <link>https://domyson.github.io/post/docker/dockerfile/</link>
+      <link>https://domyson.github.io/post/cloud_native/docker/dockerfile/</link>
       <pubDate>Tue, 12 Mar 2019 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/docker/dockerfile/</guid>
+      <guid>https://domyson.github.io/post/cloud_native/docker/dockerfile/</guid>
       <description>&lt;h1 id=&#34;dockerfile&#34;&gt;Dockerfile&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;Dockerfile&lt;/code&gt; 是一个包含用于组合映像的命令的文本文档。可以使用在命令行中调用任何命令。 Docker通过读取Dockerfile中的指令自动生成映像。&lt;code&gt;docker build&lt;/code&gt; 命令用于从 &lt;code&gt;Dockerfile&lt;/code&gt;构建映像。命令中使用 &lt;code&gt;-f&lt;/code&gt; 标志指向文件系统中任何位置的 &lt;code&gt;Dockerfile&lt;/code&gt; 文件。&lt;/p&gt;

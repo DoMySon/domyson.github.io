@@ -1,14 +1,25 @@
-# ukp 编码协议
+# bbuf 编码协议
 
 
 
 # 前言
 
 其实在`cobweb`之初就设计了一种编码协议(bbuf)，用于 `RPC Server`,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护，
-而后期在研发 `ukn` 的时候，发现需要与多种语言交互，显然 `json`,`xml` 不是一个很好的选择，而 `protobuf` 对弱类型语言支持不友好，所以此库被重新提出来进行维护。
+而后期在研发 `ukn` 的时候，发现需要与多种语言交互，显然 `json`,`xml` 不是一个很好的选择，而 `protobuf` 对弱类型语言支持不友好。
 
 
-# 架构
+## Benchmark
+
+- cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz
+- os: windows11
+- arch: amd64
+
+:-:|:-:|:-:|:-:
+format|compress rate|encode rate|decode rate
+json std|0%|0%( 213.8 ns/op)|0%(1204ns/op)
+proto v3|-40%|-51%(98.36 ns/op)|-84%(190.1ns/op)
+bbuf|-40%|-76% (65.21 ns/op)|-95%(62.18ns/op)
+
 
 ## 词法解析器
 
@@ -115,3 +126,7 @@
 # 未来将支持
 
 + `rpc` 服务定义
+
+
+
+
