@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/unity\/assetbundle\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "","wordcount":  839 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "","wordcount":  1081 ,
         "url": "https:\/\/domyson.github.io\/post\/unity\/assetbundle\/","datePublished": "2020-09-10T00:00:00+00:00","dateModified": "2020-09-10T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
@@ -202,6 +202,16 @@
 也会先预热，但之后就会立即卸载，以保证不会占用过多的内存资源</p>
 </li>
 </ul>
+<h1 id="引用httpszhuanlanzhihucomp593117796"><a href="https://zhuanlan.zhihu.com/p/593117796" target="_blank" rel="noopener noreffer ">引用</a></h1>
+<ol>
+<li>运行时，AssetBundle驻留控制在40MB以内、数量在1000个以内；</li>
+<li>使用LZ4压缩+LoadFromFile加载；</li>
+<li>结合项目情况根据依赖树制定打包策略，如公共资源单独打AssetBundle、按使用场景和功能类型分包、独立资源打到一起、Shader/字体等（较为细碎、内存不高、高频使用、最好常驻的）资源打包到一起，启动游戏的时候常驻内存；</li>
+<li>结合热更新需求打包；</li>
+<li>依赖打包，追求0冗余；</li>
+<li>粒度具体没有定值，近期经验上来看会需要尤其警惕AssetBundle包体超过10MB的。
+另外</li>
+</ol>
 </div><div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
             </noscript></div></div></div>

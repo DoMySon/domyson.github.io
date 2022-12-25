@@ -39,16 +39,28 @@
 &lt;p&gt;Remote Dictionary Server,采用 ANSI C 编写的 K-V数据库&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1 id=&#34;类型&#34;&gt;类型&lt;/h1&gt;
-&lt;h2 id=&#34;string&#34;&gt;string&lt;/h2&gt;
-&lt;p&gt;最大存储值为256mb，底层由SDS(simple dynamic string)实现，优势是访问长度仅需O(1)&lt;/p&gt;
-&lt;h2 id=&#34;hash&#34;&gt;hash&lt;/h2&gt;
-&lt;h2 id=&#34;list&#34;&gt;list&lt;/h2&gt;
-&lt;p&gt;存储有序字符串，最大2^32-1个元素&lt;/p&gt;
-&lt;h2 id=&#34;set&#34;&gt;set&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;string
+最大存储值为256mb，底层由SDS(simple dynamic string)实现，优势是访问长度仅需O(1)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;hash&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;list
+存储有序字符串，最大2^32-1个元素&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;set&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;同list，但不允许重复&lt;/p&gt;
-&lt;h2 id=&#34;zset&#34;&gt;zset&lt;/h2&gt;
-&lt;p&gt;已排序的都字符串集合，但不允许重复&lt;/p&gt;
-&lt;h2 id=&#34;特殊的&#34;&gt;特殊的&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;sorted set
+已排序的都字符串集合，但不允许重复&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;ndash; 其它&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;GEO 地理位置&lt;/li&gt;
 &lt;li&gt;HyperLogLog 基数统计&lt;/li&gt;
@@ -373,7 +385,7 @@
       <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/unity/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
-      <description>模型 降低模型面数 （300-1500） 遮挡剔除 LOD mesh合批 音频 短音频使用Wav，长音频使用mp3 纹理 Mipmap mipmap用于减少渲染的带宽压力，但</description>
+      <description>音频 短音频使用Wav，长音频使用mp3 纹理 Mipmap mipmap用于减少渲染的带宽压力，但会有额外的内存开销，一般而言UI是建议关闭的，3D模型看情</description>
     </item>
     
     <item>
@@ -1109,18 +1121,7 @@
       <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/unity/xlua/</guid>
-      <description>&lt;h1 id=&#34;xlua&#34;&gt;XLua&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/Tencent/xLua/releases&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;XLua下载&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/Tencent/xLua/blob/master/Assets/XLua/Doc/hotfix.md&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;配置文档&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/Tencent/xLua/blob/master/Assets/XLua/Doc/faq.md&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;FAQ&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <description>XLua XLua下载 配置文档 FAQ 标签 [Hotfix] 开启 HOTFIX_ENABLE 宏 通过热补丁的方式修复代码 xlua.hotfix函数 [LuaCallCsharp] 一个C#类型加了这个配置，xLua会生成这个类型的</description>
     </item>
     
     <item>

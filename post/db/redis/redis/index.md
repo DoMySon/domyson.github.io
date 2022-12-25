@@ -10,33 +10,30 @@
 
 # 类型
 
-## string
-
+- string
 最大存储值为256mb，底层由SDS(simple dynamic string)实现，优势是访问长度仅需O(1)
 
 
-## hash
+- hash
 
 
-
-## list
-
+- list
 存储有序字符串，最大2^32-1个元素
 
-## set
+- set
 
 同list，但不允许重复
 
-## zset
-
+- sorted set
 已排序的都字符串集合，但不允许重复
 
-
-## 特殊的
+-- 其它
 
 1. GEO 地理位置
 2. HyperLogLog 基数统计
 3. Bitsmap bit数组，类似boolean filter
+
+
 
 
 # redis设计架构

@@ -9,7 +9,6 @@
 
 + [FAQ](https://github.com/Tencent/xLua/blob/master/Assets/XLua/Doc/faq.md)
 
-<!--more-->
 
 # 标签
 

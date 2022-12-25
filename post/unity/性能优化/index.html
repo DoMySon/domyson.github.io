@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>性能优化 - 薛定谔的BUG</title><meta name="Description" content="测试下咯"><meta property="og:title" content="性能优化" />
-<meta property="og:description" content="模型 降低模型面数 （300-1500） 遮挡剔除 LOD mesh合批 音频 短音频使用Wav，长音频使用mp3 纹理 Mipmap mipmap用于减少渲染的带宽压力，但" />
+<meta property="og:description" content="音频 短音频使用Wav，长音频使用mp3 纹理 Mipmap mipmap用于减少渲染的带宽压力，但会有额外的内存开销，一般而言UI是建议关闭的，3D模型看情" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://domyson.github.io/post/unity/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" /><meta property="og:image" content="https://domyson.github.io/favicon.ico"/><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-10-10T00:00:00+00:00" />
@@ -15,7 +15,7 @@
 <meta name="twitter:image" content="https://domyson.github.io/favicon.ico"/>
 
 <meta name="twitter:title" content="性能优化"/>
-<meta name="twitter:description" content="模型 降低模型面数 （300-1500） 遮挡剔除 LOD mesh合批 音频 短音频使用Wav，长音频使用mp3 纹理 Mipmap mipmap用于减少渲染的带宽压力，但"/>
+<meta name="twitter:description" content="音频 短音频使用Wav，长音频使用mp3 纹理 Mipmap mipmap用于减少渲染的带宽压力，但会有额外的内存开销，一般而言UI是建议关闭的，3D模型看情"/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/unity\/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "","wordcount":  1552 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "","wordcount":  2311 ,
         "url": "https:\/\/domyson.github.io\/post\/unity\/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96\/","datePublished": "2020-10-10T00:00:00+00:00","dateModified": "2020-10-10T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
@@ -105,22 +105,7 @@
     <div class="search-dropdown mobile">
         <div id="search-dropdown-mobile"></div>
     </div><main class="main">
-                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">性能优化</h1><div class="content" id="content"><h1 id="模型">模型</h1>
-<ul>
-<li>
-<p>降低模型面数 （300-1500）</p>
-</li>
-<li>
-<p>遮挡剔除</p>
-</li>
-<li>
-<p>LOD</p>
-</li>
-<li>
-<p>mesh合批</p>
-</li>
-</ul>
-<h1 id="音频">音频</h1>
+                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">性能优化</h1><div class="content" id="content"><h1 id="音频">音频</h1>
 <ul>
 <li>短音频使用Wav，长音频使用mp3</li>
 </ul>
@@ -173,6 +158,32 @@
 <p>每次draw call，GPU Instancing只渲染相同(identical )的网格，但是每个实例(instance)可以有不同的参数(例如，color或scale)，以增加变化(variation)，减少重复的出现。</p>
 <p>GPU Instancing可以减少每个场景draw calls次数。这显著提升了渲染性能。</p>
 <h1 id="physics">Physics</h1>
+<ul>
+<li>
+<p>Auto Simulation
+根据项目实际需要是否开启物理模拟，默认是是开启的</p>
+</li>
+<li>
+<p>Fixed Timestep
+过小的值会操成计算量过大，过大的值可能造成部分机制异常(如卡墙，穿透等)，根据项目实际来确定</p>
+</li>
+<li>
+<p>Maximum Allowed Timestep
+这里我们需要先知道物理系统本身的特性，即当游戏上一帧卡顿时，Unity会在当前帧非常靠前的阶段连续调用N次FixedUpdate.PhysicsFixedUpdate，Maximum Allowed Timestep的意义就在于单帧限制物理更新的次数，</p>
+</li>
+<li>
+<p>Contact数量是否合理
+减少不必要的物理碰撞检测，如盾牌和地面，或者当场景contact为0时，且存在物理消耗应当关闭 Auto Simulation</p>
+</li>
+<li>
+<p>Auto Sync Transforms</p>
+</li>
+</ul>
+<p>勾选Auto Sync Transforms后，发生Physics Query时，Unity会将Rigidbody/Collider的Tranform变化同步到物理引擎，如Position，Scale等。另外勾选AutoSimulation时，Unity会在每次物理更新的时候自动同步一次Rigidbody和Collider，所以当关闭AutoSimulation后，如果项目中使用了射线检测或者NGUI，通常需要Auto Sync Transforms进行勾选，否则会发生射线检测结果不准确或者UI事件不响应的情况。</p>
+<ul>
+<li>Raycast
+减少射线检测</li>
+</ul>
 <h1 id="unity-托管内存">Unity 托管内存</h1>
 <ol>
 <li>
@@ -195,6 +206,12 @@
 </li>
 </ol>
 <p><a href="https://www.bilibili.com/video/av79798486" target="_blank" rel="noopener noreffer ">浅谈Unity内存管理</a></p>
+<h1 id="提升加载场景速度">提升加载场景速度</h1>
+<ul>
+<li></li>
+</ul>
+<p><code>Application.backgroundLoadingPriority为High</code>
+Application.backgroundLoadingPriority这个API会限制主线程的集成的时间，默认设置是ThreadPriority.BelowNormal，也就是每一帧执行主线程集成的操作耗时不能超过4毫秒，这将会导致每一帧剩余的时间用于等待或者渲染，而这些等待和渲染的时间都是无意义的耗时。如果把这个设置改为ThreadPriority.High，那么每一帧执行主线程集成的操作耗时可以增加到50毫秒，大大减少了所需要的帧数。</p>
 <h1 id="分析工具">分析工具</h1>
 <p>UnityProfiler，UWA</p>
 </div><div id="comments"><div id="valine" class="comment"></div><noscript>
