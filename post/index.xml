@@ -9,7 +9,16 @@
     <managingEditor>262737999@qq.com (Treasure)</managingEditor>
     <webMaster>262737999@qq.com (Treasure)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 11 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>conf</title>
+      <link>https://domyson.github.io/post/sknt/conf/</link>
+      <pubDate>Sat, 17 Dec 2022 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/sknt/conf/</guid>
+      <description>sknt配置相关项 在1.4.0版本之前，类似于skynet，是通过一个lua来作为配置文件启动的，但之后实现了一个高性能的ini解析器来作为</description>
+    </item>
+    
     <item>
       <title>kubernets</title>
       <link>https://domyson.github.io/post/cloud_native/k8s/k8s/</link>
@@ -52,7 +61,7 @@
       <pubDate>Thu, 10 Nov 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/personal/%E5%BF%83%E8%B7%AF%E5%8E%86%E7%A8%8B/</guid>
-      <description>感想 今天是 ukn 开发的第六个月，每次提交修修改改了几次，仔细斟酌，想兼容跟快的速度以及跟简单的api操作。 cobweb到 unknown 经历了创业失败，经历了</description>
+      <description>2022-12-6 一个多月，每天从内卷的工作中抽出时间来完善它，一边希望着开源，一边觉得它还不够完善 有时问自己当初选择这条路是否正确。 总之 时隔三个月终于算是</description>
     </item>
     
     <item>
@@ -65,24 +74,6 @@
     </item>
     
     <item>
-      <title>ukn-scheduler</title>
-      <link>https://domyson.github.io/post/unknown/scheduler/</link>
-      <pubDate>Tue, 18 Oct 2022 00:00:00 +0000</pubDate>
-      <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/unknown/scheduler/</guid>
-      <description>调度器以及调度规则 分为两个部分,lua和go Lua lua本质上是一个单线程的语言，天生不支持多线程，而在ukn框架中我们需要让它能够模拟类似于中</description>
-    </item>
-    
-    <item>
-      <title>ai 模块设计思路</title>
-      <link>https://domyson.github.io/post/unity/ai/</link>
-      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
-      <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/unity/ai/</guid>
-      <description>占个坑</description>
-    </item>
-    
-    <item>
       <title>Go Memory</title>
       <link>https://domyson.github.io/post/language/go/memory/</link>
       <pubDate>Fri, 07 Oct 2022 00:00:00 +0000</pubDate>
@@ -92,75 +83,84 @@
     </item>
     
     <item>
-      <title>ukn publish/subscribe</title>
-      <link>https://domyson.github.io/post/unknown/subscription/</link>
+      <title>第三方模块的封装</title>
+      <link>https://domyson.github.io/post/sknt/third/</link>
       <pubDate>Mon, 26 Sep 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/unknown/subscription/</guid>
-      <description>简介 ukn subscription 最早起草于 ukn v1.1.0，但在 ukn v1.3.5之后的版本才可用。 最开始只是一个实验性的功能，因为通过业务也能实现 但在开发过程中，有时候</description>
+      <guid>https://domyson.github.io/post/sknt/third/</guid>
+      <description>nats 最开始是从未考虑对其他消息队列进行封装，因为 sknt 不应当缝合其他框架而存在，后面提供只是证明 sknt 也可以通过封装其他第三方库进行开发， 所以特别注意</description>
     </item>
     
     <item>
       <title>bbuf 编码协议</title>
-      <link>https://domyson.github.io/post/unknown/bbuf/</link>
+      <link>https://domyson.github.io/post/sknt/bbuf/</link>
       <pubDate>Wed, 21 Sep 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/unknown/bbuf/</guid>
+      <guid>https://domyson.github.io/post/sknt/bbuf/</guid>
       <description>前言 其实在cobweb之初就设计了一种编码协议(bbuf)，用于 RPC Server,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），</description>
     </item>
     
     <item>
-      <title>ukn message</title>
-      <link>https://domyson.github.io/post/unknown/message/</link>
+      <title>sknt message</title>
+      <link>https://domyson.github.io/post/sknt/message/</link>
       <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/unknown/message/</guid>
-      <description>简介 unknown是基于消息的服务框架，所以 ukn_message 是必不可少的一环。 ukn_message 1 2 3 4 5 6 7 8 9 10 11 12 13 type ukn_message struct{ nocopy // don&amp;#39;t copy ukn_event byte session uint32 typ uint32 source pid argument unsafe.Pointer } 服务的消息队</description>
+      <guid>https://domyson.github.io/post/sknt/message/</guid>
+      <description>简介 sknt是基于消息的服务框架，它承担了其中消息的传递。 服务的消息队列 存在两个版本，一个是基于go channel，另外一个基于无锁缓冲队列</description>
     </item>
     
     <item>
-      <title>ukn设计初衷以及特性</title>
-      <link>https://domyson.github.io/post/unknown/ukn/</link>
+      <title>sknt设计初衷以及特性</title>
+      <link>https://domyson.github.io/post/sknt/sknt/</link>
       <pubDate>Mon, 20 Jun 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/unknown/ukn/</guid>
-      <description>简介 ukn 是一个基于消息和服务的分布式服务框架，采用go编写，致力于简化开发难度和成本， 它是一个年轻的框架，仅仅经历了两款项目羽翼军团 我在民国淘</description>
+      <guid>https://domyson.github.io/post/sknt/sknt/</guid>
+      <description>简介 sknt 是一个基于消息和服务的分布式服务框架，采用go编写，致力于简化开发难度和成本， 它是一个年轻的框架，仅仅经历了两款项目 羽翼军团 我在民国淘</description>
     </item>
     
     <item>
-      <title>ucpd</title>
-      <link>https://domyson.github.io/post/unknown/ucpd/</link>
+      <title>sknmpd</title>
+      <link>https://domyson.github.io/post/sknt/sknpmd/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/unknown/ucpd/</guid>
-      <description>简介 ucpd模块是ukn底层集群模块，它承担了ukn网络节点之间的通讯职能。全名为(ukn cluster port daemon) 架构 ucpd 为了满足对等网络的性质，所以每次和其他</description>
+      <guid>https://domyson.github.io/post/sknt/sknpmd/</guid>
+      <description>简介 sknmpd模块是sknt底层集群模块，它承担了sknt网络节点之间的通讯职能。全名为(simple keenly net managment port daemon) 架构 sknmpd 为了满足对等网络的性</description>
     </item>
     
     <item>
-      <title>ukn_timer</title>
-      <link>https://domyson.github.io/post/unknown/timer/</link>
+      <title>timer</title>
+      <link>https://domyson.github.io/post/sknt/timer/</link>
       <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/unknown/timer/</guid>
-      <description>简介 timer 模块是 ukn 内置的一个定时模块，使用了小根堆实现。 apis ukn.sleep(d) 这个函数将会挂起当前协程，在lua和 go中将会有不同的表现，取决于两者底层之间的区别</description>
+      <guid>https://domyson.github.io/post/sknt/timer/</guid>
+      <description>简介 timer 模块是 sknt 内置的一个定时模块，使用了小根堆实现。 apis sknt.sleep(d) 这个函数将会挂起当前协程，在lua和 go中将会有不同的表现，取决于两者底层之间的区别</description>
     </item>
     
     <item>
-      <title>ukn版本</title>
-      <link>https://domyson.github.io/post/unknown/history/</link>
+      <title>version change</title>
+      <link>https://domyson.github.io/post/sknt/version/</link>
       <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/unknown/history/</guid>
-      <description>v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 ukn.send(string,any) 会产生两次搜索的情况 Added ukn-lua 增加 ukn.trace() 用以输出当前堆栈 ukn-lua 增加 check_version() 函数，校验u</description>
+      <guid>https://domyson.github.io/post/sknt/version/</guid>
+      <description>v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 sknt.send(string,any) 会产生两次搜索的情况 Added sknt-lua 增加 sknt.trace() 用以输出当前堆栈 sknt-lua 增加 check_version() 函数，校验s</description>
     </item>
     
     <item>
-      <title>ukn-allocator</title>
-      <link>https://domyson.github.io/post/unknown/allocator/</link>
+      <title>allocator</title>
+      <link>https://domyson.github.io/post/sknt/allocator/</link>
       <pubDate>Thu, 21 Apr 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/unknown/allocator/</guid>
-      <description>简介 alloctor 模块主要是为了减少GC而开发。支持两套分配规则 基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在ukn中它确实有更优秀的性能</description>
+      <guid>https://domyson.github.io/post/sknt/allocator/</guid>
+      <description>简介 alloctor 模块主要是为了减少GC而开发。现支持两套分配规则 基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在sknt中它确实有更优秀的</description>
+    </item>
+    
+    <item>
+      <title>pid</title>
+      <link>https://domyson.github.io/post/sknt/pid/</link>
+      <pubDate>Thu, 21 Apr 2022 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/sknt/pid/</guid>
+      <description>PID Pid 是当前服务的唯一id，它确保在当前节点以及集群中唯一。 但重新启动节点之后，它的值可能会发生改变，所以不要尝试保存它，但可以确定的是集群中</description>
     </item>
     
     <item>
@@ -284,6 +284,24 @@
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/cloud_native/cloud/</guid>
       <description>什么是云原生 Cloud表示应用程序位于云中，而不是传统的数据中心； Native表示应用程序从设计之初即考虑到云的环境，原生为云而设计，在云上</description>
+    </item>
+    
+    <item>
+      <title>性能优化</title>
+      <link>https://domyson.github.io/post/unity/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/unity/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
+      <description>模型 降低模型面数 （300-1500） 遮挡剔除 LOD mesh合批 音频 短音频使用Wav，长音频使用mp3 纹理 Mipmap mipmap用于减少渲染的带宽压力，但</description>
+    </item>
+    
+    <item>
+      <title>assetbundle</title>
+      <link>https://domyson.github.io/post/unity/assetbundle/</link>
+      <pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/unity/assetbundle/</guid>
+      <description>Assetbundle 一种包外资源的存储方案，方便更新以及加载 Manifest 每一个文件夹下都会有一个 Manifest文件，其作用是包含了其下资源的引用关系 AB管理 资源分类 一</description>
     </item>
     
     <item>
@@ -592,35 +610,6 @@
     </item>
     
     <item>
-      <title>Unity内存管理</title>
-      <link>https://domyson.github.io/post/unity/memory/</link>
-      <pubDate>Fri, 27 Dec 2019 00:00:00 +0000</pubDate>
-      <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/unity/memory/</guid>
-      <description>&lt;h1 id=&#34;unity-托管内存&#34;&gt;Unity 托管内存&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;用户代码分配的内存本质上在 &lt;code&gt;IL2CPP&lt;/code&gt; 构建的 &lt;code&gt;VM&lt;/code&gt; 的托管内存(&lt;code&gt;Managed Memory&lt;/code&gt;)上，所以用户代码分配遵从于这个 &lt;code&gt;VM&lt;/code&gt; 的分配方式。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;IL2CPP&lt;/code&gt; 采用的是 &lt;code&gt;Boehm&lt;/code&gt; 回收算法,这算法的缺陷是 &lt;code&gt;不分代&lt;/code&gt;，&lt;code&gt;不压缩&lt;/code&gt;，虽然提高了效率，但由于用户申请内存的不确定性，容易造成内存碎片，不利于此块的内存重使用。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;内存以 &lt;code&gt;Block&lt;/code&gt; 来管理，当一个 &lt;code&gt;Block&lt;/code&gt; 6次GC没有被访问，才会返回给 OS。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;Zombie Memory&lt;/code&gt;,由于用户不主动释放，但实际没有使用。那么这块内存将不会被回收。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;对于一个物体，应该是 &lt;code&gt;Destory&lt;/code&gt; 而不是置为 &lt;code&gt;Null&lt;/code&gt;。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;下一代采用 &lt;code&gt;渐进式GC&lt;/code&gt;（分帧GC，使CPU峰值更平滑），可以手动开关。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;</description>
-    </item>
-    
-    <item>
       <title>Locker</title>
       <link>https://domyson.github.io/post/language/go/lock/</link>
       <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
@@ -630,21 +619,21 @@
     </item>
     
     <item>
+      <title>组合AI</title>
+      <link>https://domyson.github.io/post/unity/ai/</link>
+      <pubDate>Tue, 10 Dec 2019 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/unity/ai/</guid>
+      <description>什么是AI 一串由外部因素影响行为的实体？ 内部条件分支构建的行为？ 学习并采取对应策略的结果？（Alpa go） AI设计思想 特别注意这是笔者自己的</description>
+    </item>
+    
+    <item>
       <title>ASCII</title>
       <link>https://domyson.github.io/post/others/ascii/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/others/ascii/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>K8S</title>
-      <link>https://domyson.github.io/post/cloud_native/docker/k8s/</link>
-      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
-      <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/cloud_native/docker/k8s/</guid>
-      <description>什么是kubernets</description>
     </item>
     
     <item>
