@@ -39,7 +39,7 @@
   9. 消息发送默认都是指针，如有需要，可通过一些api来copy，并提供 `sknt.free` 方法来释放它。
 
 
-# [UCPD](/post/sknt/sknmpd)
+# [sknmpd](/post/sknt/sknmpd)
 
 > 在`sknt`中每个节点都是平等的，不存在谁依赖于谁，这也是`cobweb`的设计初衷。所以`sknt` 不支持 master/slave 模式，但可以通过业务代码来实现，而非框架本身。
 
