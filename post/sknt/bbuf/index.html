@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/sknt\/bbuf\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "bbuf","wordcount":  1511 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "bbuf","wordcount":  1533 ,
         "url": "https:\/\/domyson.github.io\/post\/sknt\/bbuf\/","datePublished": "2022-09-21T00:00:00+00:00","dateModified": "2022-09-21T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
@@ -107,7 +107,7 @@
     </div><main class="main">
                 <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">bbuf 编码协议</h1><div class="content" id="content"><h1 id="前言">前言</h1>
 <p>其实在<code>cobweb</code>之初就设计了一种编码协议(bbuf)，用于 <code>RPC Server</code>,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护，
-而后期在研发 <code>ukn</code> 的时候，发现需要与多种语言交互，显然 <code>json</code>,<code>xml</code> 不是一个很好的选择，而 <code>protobuf</code> 对弱类型语言支持不友好。</p>
+而后期在研发 <code>sknt</code> 的时候，发现需要与多种语言交互，显然 <code>json</code>,<code>xml</code> 不是一个很好的选择，而 <code>protobuf</code> 对弱类型语言支持不友好。</p>
 <h2 id="benchmark">Benchmark</h2>
 <ul>
 <li>cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz</li>
@@ -177,7 +177,7 @@
 </li>
 <li>
 <p><code>unsafe.Pointer</code></p>
-<p>显然反射是所有带运行时语言的一个痛点，而通过 <code>unsafe.Pointer</code> 能明显提高执行速率，所以 <code>ukp</code> 采用了大量非安全指针操作，所以关于生成文件尽量不要进行任何编辑，以免造成内存偏移位置错误。</p>
+<p>显然反射是所有带运行时语言的一个痛点，而通过 <code>unsafe.Pointer</code> 能明显提高执行速率，所以 <code>bbuf</code> 采用了大量非安全指针操作，所以关于生成文件尽量不要进行任何编辑，以免造成内存偏移位置错误。</p>
 </li>
 <li>
 <p>interface</p>
@@ -185,7 +185,7 @@
 <p>因为但go语言的接口本质上是两个指针（其一指向类型系统，其二指向该类型的具体方法），为了能够指针能正确到的索引到指定类型，我们需要一点点反射来支持（这个只会在启动时运行，大可不必担心）。</p>
 </li>
 <li>
-<p>API Example</p>
+<p>在<code>sknt</code>中使用</p>
 <ol>
 <li>Lua</li>
 </ol>
@@ -204,13 +204,13 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">bbuf</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s2">&#34;ukn.bbuf&#34;</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">bbuf</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s2">&#34;sknt.bbuf&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">err</span> <span class="o">=</span> <span class="n">bbuf.load</span><span class="p">(</span><span class="s2">&#34;file path or dir path&#34;</span><span class="p">)</span>  <span class="c1">-- 注意 此函数执行结果在当前节点是共享的，所以只需要加载一次，并返回一个错误（string）</span>
 </span></span><span class="line"><span class="cl"><span class="kr">if</span> <span class="n">err</span><span class="o">~=</span><span class="kc">nil</span> <span class="kr">then</span>
 </span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="kr">do</span> <span class="n">something</span>
 </span></span><span class="line"><span class="cl"><span class="kr">end</span>
-</span></span><span class="line"><span class="cl"><span class="c1">-- 此时返回的data是 `userdata`,不要尝试访问它，但你可以通过 `ukn.free` 来尝试，主要取决于这个userdata是否实现了 Freeable 接口.</span>
-</span></span><span class="line"><span class="cl"><span class="c1">-- 也可以通过`ukn.send,ukn.call` 来发送到其他服务</span>
+</span></span><span class="line"><span class="cl"><span class="c1">-- 此时返回的data是 `userdata`,不要尝试访问它，但你可以通过 `sknt.free` 来尝试，主要取决于这个userdata是否实现了 Freeable 接口.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">-- 也可以通过`sknt.send,sknt.call` 来发送到其他服务</span>
 </span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">data</span> <span class="p">,</span><span class="n">err</span> <span class="o">=</span> <span class="n">bbuf.marshal</span><span class="p">(</span><span class="n">string</span><span class="p">,</span><span class="n">table</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">-- 仅返回一个错误，并将具体数据映射到传入的 `table` 中</span>
@@ -311,7 +311,7 @@
 </div>
 </div></li>
 </ol>
-<h2 id="lua-序列化-uknpackuknunpack">Lua 序列化 (ukn.pack,ukn.unpack)</h2>
+<h2 id="lua-序列化-skntpackskntunpack">Lua 序列化 (sknt.pack,sknt.unpack)</h2>
 <ul>
 <li>
 <p><code>bbuf</code> 开发过程的附加产物，唯一的区别仅能在<code>lua</code>侧使用,不支持<code>userdata</code>,<code>function</code>,<code>thread</code></p>
@@ -325,7 +325,12 @@
 </blockquote>
 <h1 id="未来将支持">未来将支持</h1>
 <ul>
-<li><code>rpc</code> 定义</li>
+<li>
+<p><code>rpc</code> 定义</p>
+</li>
+<li>
+<p>指定字段便宜解码（beta）</p>
+</li>
 </ul>
 </div><div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.

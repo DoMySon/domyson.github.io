@@ -1,11 +1,9 @@
-# Dockerfile
-
+# dockerfile
 
 # Dockerfile
 
 > `Dockerfile` 是一个包含用于组合映像的命令的文本文档。可以使用在命令行中调用任何命令。 Docker通过读取Dockerfile中的指令自动生成映像。`docker build` 命令用于从 `Dockerfile`构建映像。命令中使用 `-f` 标志指向文件系统中任何位置的 `Dockerfile` 文件。
 
-<!--more-->
 ## FROM
 
 > 指定基础镜像

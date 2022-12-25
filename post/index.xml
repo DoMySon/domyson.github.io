@@ -20,29 +20,128 @@
     </item>
     
     <item>
-      <title>kubernets</title>
+      <title>kubernetes</title>
       <link>https://domyson.github.io/post/cloud_native/k8s/k8s/</link>
       <pubDate>Sun, 11 Dec 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/cloud_native/k8s/k8s/</guid>
-      <description> </description>
+      <description>什么是k8s k8s是为容器服务而生的一个可移植容器的编排管理工具 K8S实现了什么 服务发现 （etcd) 服务调度 （kube-scheduler）</description>
     </item>
     
     <item>
       <title>redis</title>
-      <link>https://domyson.github.io/post/mysql/redis/</link>
+      <link>https://domyson.github.io/post/db/redis/redis/</link>
       <pubDate>Thu, 24 Nov 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/mysql/redis/</guid>
-      <description>Redis Remote Dictionary Server,采用 ANSI C 编写的 K-V数据库 类型 string 最大存储值为256mb，底层由SDS(simple dynamic string)实现，优势是访问长度仅</description>
+      <guid>https://domyson.github.io/post/db/redis/redis/</guid>
+      <description>&lt;h1 id=&#34;redis&#34;&gt;Redis&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Remote Dictionary Server,采用 ANSI C 编写的 K-V数据库&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;类型&#34;&gt;类型&lt;/h1&gt;
+&lt;h2 id=&#34;string&#34;&gt;string&lt;/h2&gt;
+&lt;p&gt;最大存储值为256mb，底层由SDS(simple dynamic string)实现，优势是访问长度仅需O(1)&lt;/p&gt;
+&lt;h2 id=&#34;hash&#34;&gt;hash&lt;/h2&gt;
+&lt;h2 id=&#34;list&#34;&gt;list&lt;/h2&gt;
+&lt;p&gt;存储有序字符串，最大2^32-1个元素&lt;/p&gt;
+&lt;h2 id=&#34;set&#34;&gt;set&lt;/h2&gt;
+&lt;p&gt;同list，但不允许重复&lt;/p&gt;
+&lt;h2 id=&#34;zset&#34;&gt;zset&lt;/h2&gt;
+&lt;p&gt;已排序的都字符串集合，但不允许重复&lt;/p&gt;
+&lt;h2 id=&#34;特殊的&#34;&gt;特殊的&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;GEO 地理位置&lt;/li&gt;
+&lt;li&gt;HyperLogLog 基数统计&lt;/li&gt;
+&lt;li&gt;Bitsmap bit数组，类似boolean filter&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;redis设计架构&#34;&gt;redis设计架构&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;单线程业务，多线程存储，redis6.0引入多线程也仅仅是为了提高解析命令的速度&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚拟内存&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;虚拟内存机制就是暂时把不经常访问的数据(冷数据)从内存交换到磁盘中，从而腾出宝贵的内存空间用于其它需要访问的数据(热数据)。通过VM功能可以实现冷热数据分离，使热数据仍在内存中、冷数据保存到磁盘。这样就可以避免因为内存不足而造成访问速度下降的问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;击穿穿透雪崩&#34;&gt;击穿，穿透，雪崩&lt;/h1&gt;
+&lt;h2 id=&#34;击穿&#34;&gt;击穿&lt;/h2&gt;
+&lt;p&gt;某个key在过期点的时候，突然出现大量请求查找这个key&lt;/p&gt;
+&lt;h2 id=&#34;穿透&#34;&gt;穿透&lt;/h2&gt;
+&lt;p&gt;访问一个不存在的key的时候&lt;/p&gt;
+&lt;h2 id=&#34;雪崩&#34;&gt;雪崩&lt;/h2&gt;
+&lt;p&gt;指缓存中数据大批量到过期时间，访问落到db上，造成db压力过大&lt;/p&gt;
+&lt;h1 id=&#34;持久化机制&#34;&gt;持久化机制&lt;/h1&gt;
+&lt;h2 id=&#34;rdb&#34;&gt;RDB&lt;/h2&gt;
+&lt;p&gt;RDB持久化，是指在指定的时间间隔内，执行指定次数的写操作，将内存中的数据集快照写入磁盘中，它是Redis默认的持久化方式。执行完操作后，在指定目录下会生成一个dump.rdb文件，Redis 重启的时候，通过加载dump.rdb文件来恢复数据&lt;/p&gt;
+&lt;p&gt;分为手动触发和自动触发&lt;/p&gt;
+&lt;p&gt;优点 适合大规模的数据恢复场景，如备份，全量复制等&lt;/p&gt;
+&lt;p&gt;缺点 没办法做到实时持久化/秒级持久化。&lt;/p&gt;
+&lt;h2 id=&#34;aof&#34;&gt;AOF&lt;/h2&gt;
+&lt;p&gt;采用日志的形式来记录每个写操作，追加到文件中，重启时再重新执行AOF文件中的命令来恢复数据。它主要解决数据持久化的实时性问题&lt;/p&gt;
+&lt;p&gt;优点 数据一致性和完整性更高
+缺点 内容越多，文件越大，恢复变慢&lt;/p&gt;
+&lt;h1 id=&#34;高可用&#34;&gt;高可用&lt;/h1&gt;
+&lt;h2 id=&#34;主从&#34;&gt;主从&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;类似mysql主从，master负责写，slave负责读&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;哨兵&#34;&gt;哨兵&lt;/h2&gt;
+&lt;p&gt;监视其他节点的状态&lt;/p&gt;
+&lt;h2 id=&#34;集群&#34;&gt;集群&lt;/h2&gt;
+&lt;p&gt;Gossip，HashSlot 16384&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/427496556&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;View&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;基本数据结构&#34;&gt;基本数据结构&lt;/h1&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;类型&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;介绍&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;string&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;键值对&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;has&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;hash表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;list&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;字符串列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;set&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;无重复列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;sorted set&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;有序无重复列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;subscribe/publish&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;发布订阅模式&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;http://doc.redisfans.com/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;Redis命令&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://redis.io/download&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;Redis下载&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
       <title>mvcc</title>
-      <link>https://domyson.github.io/post/mysql/mvcc/</link>
+      <link>https://domyson.github.io/post/db/mysql/mvcc/</link>
       <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/mysql/mvcc/</guid>
+      <guid>https://domyson.github.io/post/db/mysql/mvcc/</guid>
       <description>MVCC multi-version concurent control 多版本控制系统，一般用于数据库的并发访问 MVCC在MySQL InnoDB中的实现主要是为了提高数据库的并发性能，用更好的方式去处理读</description>
     </item>
     
@@ -53,24 +152,6 @@
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/linux/iptables/</guid>
       <description>iptables iptables 基于 netfilter 采用一条条规则链表，时间复杂度为O(n)，最主要的是 iptables 专为防火墙设计 ipvs ipvs 同样基于 netfilter，但底层采用的是hash表，索引</description>
-    </item>
-    
-    <item>
-      <title>开发感想</title>
-      <link>https://domyson.github.io/post/personal/%E5%BF%83%E8%B7%AF%E5%8E%86%E7%A8%8B/</link>
-      <pubDate>Thu, 10 Nov 2022 00:00:00 +0000</pubDate>
-      <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/personal/%E5%BF%83%E8%B7%AF%E5%8E%86%E7%A8%8B/</guid>
-      <description>2022-12-6 一个多月，每天从内卷的工作中抽出时间来完善它，一边希望着开源，一边觉得它还不够完善 有时问自己当初选择这条路是否正确。 总之 时隔三个月终于算是</description>
-    </item>
-    
-    <item>
-      <title>算数表达式</title>
-      <link>https://domyson.github.io/post/others/expression/</link>
-      <pubDate>Mon, 31 Oct 2022 00:00:00 +0000</pubDate>
-      <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/others/expression/</guid>
-      <description>前缀表达式 中缀表达式 后缀表达式</description>
     </item>
     
     <item>
@@ -120,10 +201,10 @@
     
     <item>
       <title>sknmpd</title>
-      <link>https://domyson.github.io/post/sknt/sknpmd/</link>
+      <link>https://domyson.github.io/post/sknt/sknmpd/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/sknt/sknpmd/</guid>
+      <guid>https://domyson.github.io/post/sknt/sknmpd/</guid>
       <description>简介 sknmpd模块是sknt底层集群模块，它承担了sknt网络节点之间的通讯职能。全名为(simple keenly net managment port daemon) 架构 sknmpd 为了满足对等网络的性</description>
     </item>
     
@@ -182,15 +263,6 @@
     </item>
     
     <item>
-      <title>如何避免死锁</title>
-      <link>https://domyson.github.io/post/others/%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81/</link>
-      <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
-      <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/others/%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81/</guid>
-      <description>产生的条件 互斥：资源不能被共享，只能由一个进程使用。 请求与保持：进程已获得了一些资源，但因请求其它资源被阻塞时，对已获得的资源保持不放。 不可</description>
-    </item>
-    
-    <item>
       <title>sync.Map</title>
       <link>https://domyson.github.io/post/language/go/sync.map/</link>
       <pubDate>Thu, 14 Apr 2022 00:00:00 +0000</pubDate>
@@ -204,10 +276,10 @@
     
     <item>
       <title>mysql batch update</title>
-      <link>https://domyson.github.io/post/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/</link>
+      <link>https://domyson.github.io/post/db/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/</link>
       <pubDate>Wed, 13 Apr 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/</guid>
+      <guid>https://domyson.github.io/post/db/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/</guid>
       <description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;最近开发公会功能，需要定时保存一些，如果每次都是以公会为单位的话，相当于n个公会执行了n次&lt;code&gt;UPDATE&lt;/code&gt;操作&lt;/p&gt;
 &lt;h1 id=&#34;实现&#34;&gt;实现&lt;/h1&gt;
@@ -234,10 +306,10 @@
     
     <item>
       <title>innodb</title>
-      <link>https://domyson.github.io/post/mysql/innodb/</link>
+      <link>https://domyson.github.io/post/db/mysql/innodb/</link>
       <pubDate>Thu, 07 Apr 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/mysql/innodb/</guid>
+      <guid>https://domyson.github.io/post/db/mysql/innodb/</guid>
       <description>Innodb 事务隔离级别有四种默认是RR READ UNCOMMITTED 未提交读，A事务修改了数据但未提交，B事务可以读到这些未提交的数据（脏读） READ COMMITTED 提交读，A事务可以读取到其他</description>
     </item>
     
@@ -252,10 +324,10 @@
     
     <item>
       <title>mysql100问</title>
-      <link>https://domyson.github.io/post/mysql/mysql100%E9%97%AE/</link>
+      <link>https://domyson.github.io/post/db/mysql/mysql100%E9%97%AE/</link>
       <pubDate>Wed, 06 Apr 2022 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/mysql/mysql100%E9%97%AE/</guid>
+      <guid>https://domyson.github.io/post/db/mysql/mysql100%E9%97%AE/</guid>
       <description>聚集、非聚集、联合索引 A1: 聚集索引（主键索引）所有ROW都会按照主键索引进行排序 A2: 非聚集索引即普通索引加上字段 A3: 几个字段组成的索引 A4: 聚集索引在</description>
     </item>
     
@@ -274,7 +346,16 @@
       <pubDate>Thu, 16 Sep 2021 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/linux/tcp/</guid>
-      <description>三次握手 tcp client发送连接请求报文，报文首部同步标记位 SYN=1 同时随机序列号 seq=x，此时 tcp client 进入 SYNC-SENT 状态的 tcp server 若同意连接则确认报文为 ACK=1,SYN=1,ASK=x+1,seq=y 返回给</description>
+      <description>什么是 Tcp 三次握手 tcp client发送连接请求报文，报文首部同步标记位 SYN=1 同时随机序列号 seq=x，此时 tcp client 进入 SYNC-SENT 状态的 tcp server 若同意连接则确认报文为</description>
+    </item>
+    
+    <item>
+      <title>unsafe包</title>
+      <link>https://domyson.github.io/post/language/go/unsafe/</link>
+      <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/language/go/unsafe/</guid>
+      <description>Golang 默认指针是类型安全的，但它有很多限制。Golang 还有非类型安全的指针，这就是 unsafe 包提供的 unsafe.Pointer。在某些情况下，它会使</description>
     </item>
     
     <item>
@@ -310,189 +391,7 @@
       <pubDate>Sat, 04 Jul 2020 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/language/c/preprocessor/</guid>
-      <description>&lt;h1 id=&#34;预处理器&#34;&gt;预处理器&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;#pragma&lt;/code&gt; 用于指示编译器完成一些特定的动作&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;#pragma message usermessage&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//example:test.c
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#define IOS
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#if defined IOS
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;   &lt;span class=&#34;cp&#34;&gt;#pragma message &amp;#34;ready complie ios...&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#endif
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//complie output:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;   &lt;span class=&#34;nl&#34;&gt;note&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pragma&lt;/span&gt; &lt;span class=&#34;nl&#34;&gt;message&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ready&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;complie&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ios&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;...&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;#pragma once 确保头文件仅被编译一次&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//example:test.h
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;#pragma once
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;value&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//example:test.c
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;test.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;test.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;#pragma pack(size_t) 指定内存对齐&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//example:test.c
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 2byte 对齐
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;#pragma pack(2)
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;foo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;nl&#34;&gt;c2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;short&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 4byte 对齐
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;#pragma pack(4)
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;bar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;shirt&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(){&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;%d&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;sizeof&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;foo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;//8
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;%d&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;sizeof&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;bar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;//12
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;在不同编译器之间不可移植，在不同编译器可能以不同的方式解释，预处理器将忽略不被识别的此指令&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;指令&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;描述&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;#define&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;定义宏&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;#include&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;包含一个源代码文件&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;#undef&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;取消一个定义的宏&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;#ifdef&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;是否定义了宏&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;#ifndef&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;是否没有定义一个宏&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;#if&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;条件检测&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;#else&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;条件分支&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;#elif&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;条件分支&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;#endif&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;结束条件分支&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;#error&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;当遇到标准错误，输出错误消息&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;#pragma&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;使用标准化方法，向编译器发布特殊的命令到编译器中&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;#line&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;重置下一行行数&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;#line 100&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;</description>
+      <description>预处理器 #pragma 用于指示编译器完成一些特定的动作 #pragma message usermessage 1 2 3 4 5 6 7 8 //example:test.c #include &amp;lt;stdio.h&amp;gt; #define IOS #if defined IOS #pragma message &amp;#34;ready complie ios...&amp;#34; #endif //complie output: note: #pragma message: ready complie ios... #pragma once 确保头文件仅被编译一次 1 2 3</description>
     </item>
     
     <item>
@@ -540,8 +439,7 @@
       <pubDate>Sun, 09 Feb 2020 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/linux/tls/</guid>
-      <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
-&lt;p&gt;传输层安全性协议（Transport Layer Security），及其前身 &lt;code&gt;SSL3.0&lt;/code&gt; 之后安全套接层（Secure Sockets Layer，缩写作SSL）是一种安全协议，目的是为互联网通信提供安全及数据完整性保障。SSL包含记录层（Record Layer）和传输层，记录层协议确定传输层数据的封装格式。传输层安全协议使用X.509认证，之后利用&lt;code&gt;RSA&lt;/code&gt; 加密演算来对通信方做身份认证，之后交换对称密钥作为会谈密钥（Session key）。这个会谈密钥是用来将通信两方交换的数据做加密，保证两个应用间通信的保密性和可靠性，使客户与服务器应用之间的通信不被攻击者窃听。&lt;/p&gt;</description>
+      <description>简介 传输层安全性协议（Transport Layer Security），及其前身 SSL3.0 之后安全套接层（Secure Sockets Layer，缩写作SSL）是一种安全协</description>
     </item>
     
     <item>
@@ -568,35 +466,21 @@
     </item>
     
     <item>
+      <title>dockerfile</title>
+      <link>https://domyson.github.io/post/cloud_native/docker/dockerfile/</link>
+      <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
+      <author>262737999@qq.com (Treasure)</author>
+      <guid>https://domyson.github.io/post/cloud_native/docker/dockerfile/</guid>
+      <description>Dockerfile Dockerfile 是一个包含用于组合映像的命令的文本文档。可以使用在命令行中调用任何命令。 Docker通过读取Dockerfile中的指令自动生成映像。d</description>
+    </item>
+    
+    <item>
       <title>DockerNetwork</title>
       <link>https://domyson.github.io/post/cloud_native/docker/dockernetwork/</link>
       <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/cloud_native/docker/dockernetwork/</guid>
-      <description>&lt;h1 id=&#34;docker-network&#34;&gt;Docker Network&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Docker&lt;/code&gt; 在安装时候，默认创建三个网络 &lt;code&gt;bridge（默认）&lt;/code&gt;,&lt;code&gt;none&lt;/code&gt;,&lt;code&gt;host&lt;/code&gt;。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;docker network create --driver [bridge|host|none|container] networkname&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;bridge&lt;/code&gt;：默认模式，容器使用独立 network Namespace，并连接到&lt;code&gt;docker0&lt;/code&gt;虚拟网卡（默认模式）。通过该网桥以及Iptables nat表配置与宿主机通信，此模式会为每一个容器分配Network Namespace、设置IP等，并将一个主机上的容器连接到同一个网桥 &lt;code&gt;docker0&lt;/code&gt; 中。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;host&lt;/code&gt;：与宿主机共享网络，此时容器没有使用网络的namespace，&lt;code&gt;-p&lt;/code&gt; 将不会起任何作用。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;container&lt;/code&gt;：新创建的容器和已经存在的一个容器共享一个Network Namespace,新创建的容器不会创建自己的网卡，配置自己的IP，而是和一个指定的容器共享IP、端口范围等。同样，两个容器除了网络方面，其他的如文件系统、进程列表等还是隔离的。两个容器的进程可以通过lo网卡设备通信。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;none&lt;/code&gt;：该模式将容器放置在它自己的网络栈中，但是并不进行任何配置。实际上，该模式关闭了容器的网络功能，在以下两种情况下是有用的：容器并不需要网络（例如只需要写磁盘卷的批处理任务）。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;container&lt;/code&gt;：与指定的容器共享网络，如果有的话。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <description>Docker Network Docker 在安装时候，默认创建三个网络 bridge（默认）,none,host。 docker network create --driver [bridge|host|none|container] networkname bridge：默认模式，容器使用独立 network Namespa</description>
     </item>
     
     <item>
@@ -605,8 +489,7 @@
       <pubDate>Sun, 29 Dec 2019 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/language/go/mod/</guid>
-      <description>&lt;h1 id=&#34;module&#34;&gt;Module&lt;/h1&gt;
-&lt;p&gt;Golang 从1.11版本开始支持官方自带的依赖管理模块。根据项目路径中的 &lt;code&gt;go.mod&lt;/code&gt; 文件来建立依赖管理。&lt;/p&gt;</description>
+      <description>Module Golang 从1.11版本开始支持官方自带的依赖管理模块。根据项目路径中的 go.mod 文件来建立依赖管理。 依赖添加 通过 import 自动添加到 go.mod 文件中 1 import &amp;#34;github.com/xxx/yyy&amp;#34; 编辑 go.mod 文件 1 2</description>
     </item>
     
     <item>
@@ -628,26 +511,6 @@
     </item>
     
     <item>
-      <title>ASCII</title>
-      <link>https://domyson.github.io/post/others/ascii/</link>
-      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
-      <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/others/ascii/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>unsafe包</title>
-      <link>https://domyson.github.io/post/language/go/unsafe/</link>
-      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
-      <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/language/go/unsafe/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;Golang 默认指针是类型安全的，但它有很多限制。Golang 还有非类型安全的指针，这就是 unsafe 包提供的 unsafe.Pointer。在某些情况下，它会使代码更高效，当然，也更危险。unsafe 包用于 Go 编译器，在编译阶段使用。从名字就可以看出来，它是不安全的，官方并不建议使用。Go 语言类型系统是为了安全和效率设计的，有时，安全会导致效率低下。unsafe 包绕过了 Go 的类型系统，达到直接操作内存的目的，使用它有一定的风险性。但是在某些场景下，使用 unsafe 包提供的函数会提升代码的效率，Go 源码中也是大量使用 unsafe 包。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
       <title>Go性能分析</title>
       <link>https://domyson.github.io/post/language/go/pprof/</link>
       <pubDate>Fri, 23 Aug 2019 00:00:00 +0000</pubDate>
@@ -655,56 +518,6 @@
       <guid>https://domyson.github.io/post/language/go/pprof/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证。对于单元测试中单元的含义，一般要根据实际情况去判定其具体含义，如 C语言中单元指一个函数,单元就是人为规定的最小的被测功能模块。单元测试是在软件开发过程中要进行的最低级别的测试活动，软件的独立单元将在与程序的其他部分相隔离的情况下进行测试。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title>Redis</title>
-      <link>https://domyson.github.io/post/others/redis/</link>
-      <pubDate>Wed, 24 Jul 2019 00:00:00 +0000</pubDate>
-      <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/others/redis/</guid>
-      <description>&lt;h1 id=&#34;liunx安装&#34;&gt;Liunx安装&lt;/h1&gt;
-&lt;h1 id=&#34;基本数据结构&#34;&gt;基本数据结构&lt;/h1&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;类型&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;介绍&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;string&lt;/code&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;键值对&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;has&lt;/code&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;hash表&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;list&lt;/code&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;字符串列表&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;set&lt;/code&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;无重复列表&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;sorted set&lt;/code&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;有序无重复列表&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;subscribe/publish&lt;/code&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;发布订阅模式&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;http://doc.redisfans.com/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;Redis命令&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://redis.io/download&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;Redis下载&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;</description>
     </item>
     
@@ -859,7 +672,9 @@
       <pubDate>Tue, 12 Mar 2019 00:00:00 +0000</pubDate>
       <author>262737999@qq.com (Treasure)</author>
       <guid>https://domyson.github.io/post/cloud_native/docker/docker/</guid>
-      <description>&lt;h1 id=&#34;docker简介&#34;&gt;Docker简介&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;什么是docker&#34;&gt;什么是docker&lt;/h1&gt;
+&lt;p&gt;Docker 是一个开源的容器引擎，可以轻松的为任何应用创建一个轻量级的、可移植的、自给自足的容器。开发者和系统管理员在笔记本上编译测试通过的容器可以批量地在生产环境中部署，包括 VMs（虚拟机）、bare metal、OpenStack 集群、云端、数据中心和其他的基础应用平台。容器是完全使用沙箱机制，相互之间不会有任何接口。&lt;/p&gt;
+&lt;h1 id=&#34;有什么优势&#34;&gt;有什么优势&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;轻量，在一台机器上运行的多个Docker容器可以共享这台机器的操作系统内核；它们能够迅速启动，只需占用很少的计算和内存资源。镜像是通过文件系统层进行构造的，并共享一些公共文件。这样就能尽量降低磁盘用量，并能更快地下载镜像。&lt;/p&gt;
@@ -870,19 +685,371 @@
 &lt;li&gt;
 &lt;p&gt;安全，Docker 赋予应用的隔离性不仅限于彼此隔离，还独立于底层的基础设施。Docker默认提供最强的隔离，因此应用出现问题，也只是单个容器的问题，而不会波及到整台机器。&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>Dockerfile</title>
-      <link>https://domyson.github.io/post/cloud_native/docker/dockerfile/</link>
-      <pubDate>Tue, 12 Mar 2019 00:00:00 +0000</pubDate>
-      <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/cloud_native/docker/dockerfile/</guid>
-      <description>&lt;h1 id=&#34;dockerfile&#34;&gt;Dockerfile&lt;/h1&gt;
+&lt;li&gt;
+&lt;p&gt;一次发布，到处使用&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;docker和虚拟机&#34;&gt;Docker和虚拟机&lt;/h1&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Dockerfile&lt;/code&gt; 是一个包含用于组合映像的命令的文本文档。可以使用在命令行中调用任何命令。 Docker通过读取Dockerfile中的指令自动生成映像。&lt;code&gt;docker build&lt;/code&gt; 命令用于从 &lt;code&gt;Dockerfile&lt;/code&gt;构建映像。命令中使用 &lt;code&gt;-f&lt;/code&gt; 标志指向文件系统中任何位置的 &lt;code&gt;Dockerfile&lt;/code&gt; 文件。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+&lt;p&gt;容器和虚拟机具有相似的资源隔离和分配优势，但功能有所不同，因为容器虚拟化的是操作系统，而不是硬件，因此容器更容易移植，效率也更高。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;传统虚拟机技术是虚拟出一套硬件后，在其上运行一个完整操作系统，在该系统上再运行所需应用进程；而容器内的应用进程直接运行于宿主的内核，容器内没有自己的内核，而且也没有进行硬件虚拟。因此容器要比传统虚拟机更为轻便。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;特性&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;容器&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;虚拟机&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;启动&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;秒级&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;分钟级&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;硬盘&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;MB&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;GB&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;性能&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;接近原生&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;弱于原生&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;支持量&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;单机上千&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;单机几十左右&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;容器是一个应用层抽象，用于将代码和依赖资源打包在一起。 多个容器可以在同一台机器上运行，共享操作系统内核，但各自作为独立的进程在用户空间中运行 。与虚拟机相比， 容器占用的空间较少（容器镜像大小通常只有几十兆），瞬间就能完成启动。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚拟机（VM）是一个物理硬件层抽象，用于将一台服务器变成多台服务器。 管理程序允许多个VM在一台机器上运行。每个VM都包含一整套操作系统、一个或多个应用、必要的二进制文件和库资源，因此占用大量空间。而且VM启动也十分缓慢 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;虚拟机更擅长于彻底隔离整个运行环境。例如，云服务提供商通常采用虚拟机技术隔离不同的用户。而 Docker 通常用于隔离不同的应用 ，例如前端，后端以及数据库。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;docker基本组成&#34;&gt;Docker基本组成&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;镜像 （Image）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;容器（Container）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;仓库（Repository）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;镜像image-一个特殊的文件系统&#34;&gt;镜像（Image）—— 一个特殊的文件系统&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;操作系统分为内核和用户空间。对于Linux而言，内核启动后，会挂载root文件系统为其提供用户空间支持。而Docker镜像（Image），就相当于是一个root文件系统。Docker镜像是一个特殊的文件系统，除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）。 镜像不包含任何动态数据，其内容在构建之后也不会被改变。Docker设计时，就充分利用Union FS的技术，将其设计为分层存储的架构。 镜像实际是由多层文件系统联合组成。镜像构建时，会一层层构建，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层。比如，删除前一层文件的操作，实际不是真的删除前一层的文件，而是仅在当前层标记为该文件已删除。在最终容器运行的时候，虽然不会看到这个文件，但是实际上该文件会一直跟随镜像。因此，在构建镜像的时候，需要额外小心，每一层尽量只包含该层需要添加的东西，任何额外的东西应该在该层构建结束前清理掉。分层存储的特征还使得镜像的复用、定制变的更为容易。甚至可以用之前构建好的镜像作为基础层，然后进一步添加新的层，以定制自己所需的内容，构建新的镜像。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;容器container-镜像运行时的实体&#34;&gt;容器（Container）—— 镜像运行时的实体&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;镜像（Image）和容器（Container）的关系，就像是面向对象程序设计中的类和实例一样，镜像是静态的定义，容器是镜像运行时的实体。容器可以被创建、启动、停止、删除、暂停等 。容器的实质是进程，但与直接在宿主执行的进程不同，容器进程运行于属于自己的独立的命名空间。前面讲过镜像使用的是分层存储，容器也是如此。容器存储层的生存周期和容器一样，容器消亡时，容器存储层也随之消亡。因此，任何保存于容器存储层的信息都会随容器删除而丢失。按照Docker最佳实践的要求，容器不应该向其存储层内写入任何数据 ，容器存储层要保持无状态化。所有的文件写入操作，都应该使用数据卷（Volume）、或者绑定宿主目录，在这些位置的读写会跳过容器存储层，直接对宿主（或网络存储）发生读写，其性能和稳定性更高。数据卷的生存周期独立于容器，容器消亡，数据卷不会消亡。因此， 使用数据卷后，容器可以随意删除、重新run，数据却不会丢失。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;仓库repository-集中存放镜像文件的地方&#34;&gt;仓库（Repository）—— 集中存放镜像文件的地方&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;镜像构建完成后，可以很容易的在当前宿主上运行，但是， 如果需要在其它服务器上使用这个镜像，我们就需要一个集中的存储、分发镜像的服务，Docker Registry就是这样的服务。一个Docker Registry中可以包含多个仓库（Repository）；每个仓库可以包含多个标签（Tag）；每个标签对应一个镜像。所以说：镜像仓库是Docker用来集中存放镜像文件的地方类似于我们之前常用的代码仓库。通常，一个仓库会包含同一个软件不同版本的镜像，而标签就常用于对应该软件的各个版本 。我们可以通过&amp;lt;仓库名&amp;gt;:&amp;lt;标签&amp;gt;的格式来指定具体是这个软件哪个版本的镜像。如果不给出标签，将以latest作为默认标签。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;docker-registry公开服务和私有docker-registry&#34;&gt;Docker Registry公开服务和私有Docker Registry&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Docker Registry公开服务是开放给用户使用、允许用户管理镜像的Registry服务。一般这类公开服务允许用户免费上传、下载公开的镜像，并可能提供收费服务供用户管理私有镜像。最常使用的Registry公开服务是官方的Docker Hub ，这也是默认的Registry，并拥有大量的高质量的官方镜像，网址为：hub.docker.com/ 。在国内访问Docker Hub可能会比较慢国内也有一些云服务商提供类似于Docker Hub的公开服务。除了使用公开服务外，用户还可以在本地搭建私有Docker Registry 。Docker官方提供了Docker Registry镜像，可以直接使用做为私有Registry服务。开源的Docker Registry镜像只提供了Docker Registry API的服务端实现，足以支持Docker命令，不影响使用。但不包含图形界面，以及镜像维护、用户管理、访问控制等高级功能。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;image&#34;&gt;Image&lt;/h1&gt;
+&lt;h2 id=&#34;查看拉取删除&#34;&gt;查看、拉取、删除&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;搜索镜像&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker search name[:tag]&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;拉取镜像,若不指定tag则默认拉取&lt;code&gt;latest&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker pull name[:tag]&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看本地所有镜像&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker images&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;删除镜像，可以多个删除&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker rmi [option] image ... &lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-f&lt;/code&gt; 强制删除&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;制作推送&#34;&gt;制作、推送&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在指定路径中找到 &lt;a href=&#34;https://domyson.github.io/post/Dockerfile&#34; rel=&#34;&#34;&gt;Dockerfile&lt;/a&gt; 并构建Image, 后面是路径，但路径中必须存在 &lt;code&gt;Dockerfile&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker build -t [:namespace]/name:tag Path&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;给镜像赋予新的标签, &lt;code&gt;namespace&lt;/code&gt; 必须为 &lt;code&gt;dockerid&lt;/code&gt;，除非另外购买。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker tag oldname:oldtag  namespace/newname:newtag&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将镜像上传至 docker 仓库 DockerHub 上,&lt;code&gt;namespace&lt;/code&gt; 必须是用户名,也可以上传至 &lt;code&gt;Gitlab&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker push namespace/name:tag&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;提交修改的镜像&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker commit [-a] [-m] CONTAINER [REPOSITORY[:TAG]]&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-a&lt;/code&gt; 指明提交者&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-m&lt;/code&gt; 提交信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在原有镜像的基础上，再叠加上容器的存储层，并构成新的镜像。以后我们运行这个新镜像的时候，就会拥有原有容器最后的文件变化。
+此方式更新的镜像有依赖通过 &lt;code&gt;docker save -o dst [REPOSITORY[:TAG]]&lt;/code&gt;存盘,删除所有镜像,再通过 &lt;code&gt;docker load -i path&lt;/code&gt; 加载新镜像。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;container&#34;&gt;Container&lt;/h1&gt;
+&lt;h2 id=&#34;查看容器&#34;&gt;查看容器&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;docker ps [-a|-s]&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-a&lt;/code&gt; 查看所有容器。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-s&lt;/code&gt; 查看已启动的容器。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;产看容器进程&#34;&gt;产看容器进程&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;docker top containerID&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;移除容器&#34;&gt;移除容器&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;可以多个同时删除&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;docker rm container ...  [option]&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-f&lt;/code&gt; : 强制删除容器。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-v&lt;/code&gt; : 若删除容器则数据卷也删除。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;停止容器&#34;&gt;停止容器&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;可以同时停止多个&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;docker stop container ...&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;启动容器&#34;&gt;启动容器&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;docker run [:--name] [:-e] [:-v] [:-h] [:--net] [:-p prot0:prot1] [:-d|-i] [:-t] [:--rm] [:--restart] [:--privileged=false] [:--ip] [:--network=] name:tag [:shell]&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;run&lt;/code&gt; 命令将会启动 &lt;code&gt;dockerfile&lt;/code&gt; 中定义的 &lt;code&gt;CMD&lt;/code&gt; 或 &lt;code&gt;ENTRYPOINT&lt;/code&gt; 指令。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;--name=xxx&lt;/code&gt; 指定容器运行时的名称，可不选，默认为随机字符。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-p Host0:Host1&lt;/code&gt; 表示本地 Host0 映射容器 Host1 端口,若为 &lt;code&gt;-P&lt;/code&gt; 则随机映射49000 ~ 49900 端口。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-d&lt;/code&gt;：分离模式: 在后台运行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-h&lt;/code&gt;：指定主机域名。如 &lt;code&gt;-h domyson.cn&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-e&lt;/code&gt;：为 &lt;code&gt;dockerfile&lt;/code&gt; 中的 &lt;code&gt;ENV&lt;/code&gt; 的参数变量,设置环境变量，或者覆盖已存在的环境变量 &lt;code&gt;-e TZ=&amp;quot;Asia/Shanghai&amp;quot;&lt;/code&gt; 设置时区为上海。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-u&lt;/code&gt;：&lt;del&gt;指定执行用户，一般为 &lt;code&gt;root&lt;/code&gt;。&lt;/del&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;--rm&lt;/code&gt;：停止容器就移除。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-it&lt;/code&gt;: 以交互模式运行容器 (不同于 &lt;code&gt;-d&lt;/code&gt; : 以分离模式运行容器),这意味着交互回话 session 结束时,容器就会停止运行，与 &lt;code&gt;-d&lt;/code&gt; 互斥。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-v&lt;/code&gt; : 容器内创建一个数据卷。多次重复使用 -v 标记可以创建多个数据卷，也可以挂载一个主机目录作为数据卷 path0:path1(其中path0是主机目录，path1是容器目录)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;--link container&lt;/code&gt; : &lt;del&gt;连接到其他容器。&lt;/del&gt; 这个方法以后将被弃用，推荐使用 &lt;code&gt;--network&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;--network NETWORK&lt;/code&gt;：指定连接到的网络。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;--ip&lt;/code&gt;：指定容器的ip。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;--restart&lt;/code&gt;：&lt;code&gt;no、on-failure:n、always&lt;/code&gt; 设置容器自动重启模式，若容器已经启动，可以通过 &lt;code&gt;docker update --restart args&lt;/code&gt; 来设置参数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;--privileged&lt;/code&gt;：真正给予 &lt;code&gt;Container 中 root 用户&lt;/code&gt; root权限，否则 &lt;code&gt;root&lt;/code&gt; 只是一个普通用户。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;shell&lt;/code&gt;：指定交互的方式，一般为bash &lt;code&gt;bash -c &amp;quot;cmd string&amp;quot;&lt;/code&gt;，这条命令将由启动容器执行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;查看容器日志&#34;&gt;查看容器日志&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;docker logs [opt] CONTAINER&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-f&lt;/code&gt; : 跟踪日志输出&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;--since&lt;/code&gt; :显示某个开始时间的所有日志&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-t&lt;/code&gt; : 显示时间戳&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;--tail N&lt;/code&gt; :仅列出最新N条容器日志&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;进入指定容器&#34;&gt;进入指定容器&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;docker exec [opt] CONTAINER shell [:args]&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-d&lt;/code&gt; ：分离模式: 在后台运行&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-it&lt;/code&gt;：以交互模式运行容器 (不同于 -d : 以分离模式运行容器),这意味着交互回话 session 结束时,容器就会停止运行。与 &lt;code&gt;-d&lt;/code&gt; 互斥&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-u&lt;/code&gt;：指定运行用户,一般设置为 root&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;进入容器内部之后，通过 &lt;code&gt;exit&lt;/code&gt; 退出&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;容器通讯方式&#34;&gt;容器通讯方式&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://domyson.github.io/2020/01/Docker-Network/&#34; rel=&#34;&#34;&gt;See DockerNetwork&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;镜像体积优化&#34;&gt;镜像体积优化&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Docker&lt;/code&gt; 由多个 &lt;code&gt;Layers&lt;/code&gt; 组成（上限是127层）。而 &lt;a href=&#34;https://domyson.github.io/2019/03/Dockerfile&#34; rel=&#34;&#34;&gt;Dockerfile&lt;/a&gt; 每一条指令都会创建一层 &lt;code&gt;Layers&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;优化基础镜像&#34;&gt;优化基础镜像&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;使用 &lt;code&gt;Alpine&lt;/code&gt; 基础镜像&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Alpine是一个高度精简又包含了基本工具的轻量级Linux发行版，基础镜像仅 &lt;code&gt;4.41MB&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用 &lt;code&gt;scratch&lt;/code&gt; 基础镜像&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;scratch是一个空镜像，只能用于构建其他镜像&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用 &lt;code&gt;busybox&lt;/code&gt; 基础镜像&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果希望镜像里可以包含一些常用的Linux工具，busybox镜像是个不错选择，镜像本身只有1.16M，非常便于构建小镜像。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;串联-dockerfile-指令&#34;&gt;串联 &lt;code&gt;Dockerfile&lt;/code&gt; 指令&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;通过  &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt; 和 &lt;code&gt;\&lt;/code&gt; 将多个 &lt;code&gt;Run&lt;/code&gt; 命令合并成一个&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;多段构建&#34;&gt;多段构建&lt;/h2&gt;
+&lt;p&gt;待完善&lt;/p&gt;
+&lt;h2 id=&#34;heading&#34;&gt;&lt;/h2&gt;
+&lt;h1 id=&#34;docker数据卷&#34;&gt;Docker数据卷&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;数据卷可以在容器之间共享和重用&lt;/li&gt;
+&lt;li&gt;对数据卷的修改会立马生效&lt;/li&gt;
+&lt;li&gt;对数据卷的更新，不会影响镜像&lt;/li&gt;
+&lt;li&gt;数据卷默认会一直存在，即使容器被删除&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;创建数据卷&#34;&gt;创建数据卷&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;在 run 命令中 -v /data 标记来创建一个数据卷并挂载到容器里。在一次 run 中多次使用可以挂载多个数据卷。(创建一个容器，并加载一个数据卷到容器的 /data 目录)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;也可以在 Dockerfile 中使用  VOLUME  来添加一个或者多个新的卷到由该镜像创建的任意容器。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;删除数据卷&#34;&gt;删除数据卷&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;数据卷是被设计用来持久化数据的，它的生命周期独立于容器，Docker不会在容器被删除后自动删除数据卷，并且也不存在垃圾回收这样的机制来处理没有任何容器引用的数据卷。如果需要在删除容器的同时移除数据卷。可以在删除容器的时候使用  docker rm -v  这个命令。无主的数据卷可能会占据很多空间，要清理会很麻烦。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;挂载一个主机目录作为数据卷&#34;&gt;挂载一个主机目录作为数据卷&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker run -d -P --name web -v /src/webapp:/opt/webapp[:权限]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;上面的命令加载主机的  /src/webapp  目录到容器的  /opt/webapp  目录，默认权限是读写，也可以指定为只读(ro)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;--volumes-from 在run的时候指定数据卷容器
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;查看数据卷的信息&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker inspect contianerID&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看所有数据卷&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker volume ls&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;清除所有无主数据卷&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker volume prune&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;docker权限验证&#34;&gt;Docker权限验证&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;版本&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker version&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;登陆&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker login&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;登出&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;docker logout&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;docker远程访问&#34;&gt;Docker远程访问&lt;/h1&gt;
+&lt;h1 id=&#34;docker-compose&#34;&gt;Docker-Compose&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Docker-Compose&lt;/code&gt; （docker编排）是 docker 提供的一个命令行工具，用来定义和运行由多个容器组成的应用。可以通过 docker-compose.yml 文件声明式的定义应用程序的各个服务，并由单个命令完成应用的创建和启动。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.docker.com/compose/&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;官方文档&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;Docker-Compose&lt;/code&gt;将所管理的容器分为三层，分别是工程（project），服务（service）以及容器（container）。Docker-Compose运行目录下的所有文件（docker-compose.yml，extends文件或环境变量文件等）组成一个工程，若无特殊指定工程名即为当前目录名。一个工程当中可包含多个服务，每个服务中定义了容器运行的镜像，参数，依赖。一个服务当中可包括多个容器实例，Docker-Compose并没有解决负载均衡的问题，因此需要借助其它工具实现服务发现及负载均衡。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -954,18 +1121,6 @@
 &lt;p&gt;&lt;a href=&#34;https://github.com/Tencent/xLua/blob/master/Assets/XLua/Doc/faq.md&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer &#34;&gt;FAQ&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>线程锁</title>
-      <link>https://domyson.github.io/post/others/lock/</link>
-      <pubDate>Tue, 26 Feb 2019 00:00:00 +0000</pubDate>
-      <author>262737999@qq.com (Treasure)</author>
-      <guid>https://domyson.github.io/post/others/lock/</guid>
-      <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;锁是传统并发程序对共享资源进行访问控制的主要手段。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
     </item>
     
     <item>

@@ -3,8 +3,6 @@
 
 > Golang 默认指针是类型安全的，但它有很多限制。Golang 还有非类型安全的指针，这就是 unsafe 包提供的 unsafe.Pointer。在某些情况下，它会使代码更高效，当然，也更危险。unsafe 包用于 Go 编译器，在编译阶段使用。从名字就可以看出来，它是不安全的，官方并不建议使用。Go 语言类型系统是为了安全和效率设计的，有时，安全会导致效率低下。unsafe 包绕过了 Go 的类型系统，达到直接操作内存的目的，使用它有一定的风险性。但是在某些场景下，使用 unsafe 包提供的函数会提升代码的效率，Go 源码中也是大量使用 unsafe 包。
 
-<!--more-->
-
 # `unsafe` 包
 
 ```go
@@ -45,6 +43,8 @@ func Alignof(x AribitraryType) uintptr{}
 + `unsafe.Poniter`：本身指向一个确定内存的地址，相当于其它类型指针的一个抽象，那么其指向的内存将不会被GC。
 
 # 应用
+
+[bbuf](/post/sknt/bbuf)
  
 
 ## 获取 `slice` 的长度和容量

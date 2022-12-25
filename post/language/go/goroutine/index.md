@@ -124,6 +124,7 @@ go func(){
 我们通过一组数据来证明它
 
 ## 1 thread epoll
+
 ```txt
     Test Duration 10.1192694s:
 
@@ -137,7 +138,6 @@ go func(){
     Receive/Sec: 17.18M/s
     TotalWritten: 173.89M
     TotalReceive: 173.89M
-
 ```
 
 
@@ -175,7 +175,7 @@ go func(){
     TotalReceive: 170.48M
 ```
 
-从吞吐量可以看出，单 `epoll` 略高于其他方式，但综合数据同步以及内存使用来看，显然单 `epoll` 更适合
+从吞吐量可以看出，单 `epoll` 略高于其他方式，但综合数据同步以及内存使用来看，显然单线程 `epoll` 更适合
 
 
 

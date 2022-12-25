@@ -20,4 +20,4 @@
 
 
 
-# 实现一个简单的消息队列  [ukn_message](/post/unknown/message)
+# 实现一个消息队列  [sknt](/post/sknt/message)

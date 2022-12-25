@@ -73,9 +73,6 @@
 #pragma|使用标准化方法，向编译器发布特殊的命令到编译器中
 #line|重置下一行行数|#line 100
 
-<!--more-->
-
-
 # Example
 ```c
 #define unsigned int Byte

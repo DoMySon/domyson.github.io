@@ -5,7 +5,7 @@
 # 前言
 
 其实在`cobweb`之初就设计了一种编码协议(bbuf)，用于 `RPC Server`,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护，
-而后期在研发 `ukn` 的时候，发现需要与多种语言交互，显然 `json`,`xml` 不是一个很好的选择，而 `protobuf` 对弱类型语言支持不友好。
+而后期在研发 `sknt` 的时候，发现需要与多种语言交互，显然 `json`,`xml` 不是一个很好的选择，而 `protobuf` 对弱类型语言支持不友好。
 
 
 ## Benchmark
@@ -48,7 +48,7 @@ bbuf|-40%|-76% (65.21 ns/op)|-95%(62.18ns/op)
 
 2. `unsafe.Pointer`
     
-    显然反射是所有带运行时语言的一个痛点，而通过 `unsafe.Pointer` 能明显提高执行速率，所以 `ukp` 采用了大量非安全指针操作，所以关于生成文件尽量不要进行任何编辑，以免造成内存偏移位置错误。
+    显然反射是所有带运行时语言的一个痛点，而通过 `unsafe.Pointer` 能明显提高执行速率，所以 `bbuf` 采用了大量非安全指针操作，所以关于生成文件尽量不要进行任何编辑，以免造成内存偏移位置错误。
 
 
 3. interface
@@ -57,16 +57,16 @@ bbuf|-40%|-76% (65.21 ns/op)|-95%(62.18ns/op)
 
     因为但go语言的接口本质上是两个指针（其一指向类型系统，其二指向该类型的具体方法），为了能够指针能正确到的索引到指定类型，我们需要一点点反射来支持（这个只会在启动时运行，大可不必担心）。
 
-3. API Example
+3. 在`sknt`中使用
     1. Lua
     ```lua
-    local bbuf = require("ukn.bbuf")
+    local bbuf = require("sknt.bbuf")
     local err = bbuf.load("file path or dir path")  -- 注意 此函数执行结果在当前节点是共享的，所以只需要加载一次，并返回一个错误（string）
     if err~=nil then
         // do something
     end
-    -- 此时返回的data是 `userdata`,不要尝试访问它，但你可以通过 `ukn.free` 来尝试，主要取决于这个userdata是否实现了 Freeable 接口.
-    -- 也可以通过`ukn.send,ukn.call` 来发送到其他服务
+    -- 此时返回的data是 `userdata`,不要尝试访问它，但你可以通过 `sknt.free` 来尝试，主要取决于这个userdata是否实现了 Freeable 接口.
+    -- 也可以通过`sknt.send,sknt.call` 来发送到其他服务
     local data ,err = bbuf.marshal(string,table)
 
     -- 仅返回一个错误，并将具体数据映射到传入的 `table` 中
@@ -119,7 +119,7 @@ bbuf|-40%|-76% (65.21 ns/op)|-95%(62.18ns/op)
     ```
 
 
-## Lua 序列化 (ukn.pack,ukn.unpack)
+## Lua 序列化 (sknt.pack,sknt.unpack)
 
 - `bbuf` 开发过程的附加产物，唯一的区别仅能在`lua`侧使用,不支持`userdata`,`function`,`thread`
 
@@ -131,6 +131,8 @@ bbuf|-40%|-76% (65.21 ns/op)|-95%(62.18ns/op)
 # 未来将支持
 
 + `rpc` 定义
+
++ 指定字段便宜解码（beta）
 
 
 

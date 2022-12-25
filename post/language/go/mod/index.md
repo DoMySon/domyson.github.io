@@ -5,7 +5,6 @@
 
 Golang 从1.11版本开始支持官方自带的依赖管理模块。根据项目路径中的 `go.mod` 文件来建立依赖管理。
 
-<!--more-->
 
 ## 依赖添加
 
@@ -56,6 +55,6 @@ Golang 从1.11版本开始支持官方自带的依赖管理模块。根据项目
 /*
     go.mod文件
 
-    replace utopia v0.0.1 => ../utopia
+    replace boost-go v0.0.1 => ../boost-go
 */
 ```
