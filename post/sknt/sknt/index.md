@@ -38,7 +38,7 @@
   6. 提供`tcp` `udp`,`unix`支持
   7. 不特别区分远程或者本地调用 `sknt.send`,`sknt.call` 抹平了本地和集群的区别 参见 [sknmpd](/post/sknt/sknmpd)
   8. 实现的http框架，区别于 `net/http`,仅仅实现部分 `RFC` 标准,兼容此框架
-  9. 消息发送默认都是指针，如有需要，可通过一些api来copy，并提供 `sknt.free` 方法来释放它。
+  9. 消息发送默认都是指针，如有需要，可通过一些api来序列化，并使用 `sknt.free` 方法来释放它。
 
 
 # [sknmpd](/post/sknt/sknmpd)

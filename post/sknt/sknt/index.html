@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/sknt\/sknt\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","wordcount":  934 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","wordcount":  933 ,
         "url": "https:\/\/domyson.github.io\/post\/sknt\/sknt\/","datePublished": "2022-06-20T00:00:00+00:00","dateModified": "2022-06-20T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
@@ -130,7 +130,7 @@
 <li>提供<code>tcp</code> <code>udp</code>,<code>unix</code>支持</li>
 <li>不特别区分远程或者本地调用 <code>sknt.send</code>,<code>sknt.call</code> 抹平了本地和集群的区别 参见 <a href="/post/sknt/sknmpd" rel="">sknmpd</a></li>
 <li>实现的http框架，区别于 <code>net/http</code>,仅仅实现部分 <code>RFC</code> 标准,兼容此框架</li>
-<li>消息发送默认都是指针，如有需要，可通过一些api来copy，并提供 <code>sknt.free</code> 方法来释放它。</li>
+<li>消息发送默认都是指针，如有需要，可通过一些api来序列化，并使用 <code>sknt.free</code> 方法来释放它。</li>
 </ol>
 <h1 id="sknmpdpostskntsknmpd"><a href="/post/sknt/sknmpd" rel="">sknmpd</a></h1>
 <blockquote>
