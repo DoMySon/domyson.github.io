@@ -39,7 +39,7 @@ main = pool
 #     cookie= "hello world"  # defualt the skynet version.
 
 
-# 当前节点全局环境变量设置，通过 boost.getenv(key) 来获取值
+# 当前节点全局环境变量设置，通过 sknt.getenv(key) 来获取值
 [env]
 node1 = 192.168.2.31:3002
 node2 = :3003

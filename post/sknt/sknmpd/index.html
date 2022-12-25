@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/sknt\/sknmpd\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "sknmpd","wordcount":  714 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","keywords": "sknmpd","wordcount":  708 ,
         "url": "https:\/\/domyson.github.io\/post\/sknt\/sknmpd\/","datePublished": "2022-05-30T00:00:00+00:00","dateModified": "2022-05-30T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
@@ -111,10 +111,10 @@
 <ol>
 <li>
 <p><code>sknmpd</code> 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接，
-当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来，所以来说，</p>
+当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来</p>
 </li>
 <li>
-<p><code>sknmpd</code>可以支持任意网络协议，如 <code>tcp</code>,<code>udp</code> 甚至是 <code>unix</code>,</p>
+<p><code>sknmpd</code>可以支持任意网络协议，如 <code>tcp</code>,<code>udp</code> 甚至是 <code>unix</code></p>
 </li>
 <li>
 <p>当然一个好记的节点名称是非常有必要的，所以<code>sknmpd</code>也内置了一套非标准的本地 <code>dns</code>系统</p>
@@ -129,8 +129,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="n">sknt.send</span><span class="p">(</span><span class="s2">&#34;host:port@name&#34;</span><span class="p">,...)</span> <span class="o">//</span> <span class="err">通过域名或者地址</span><span class="o">+</span><span class="err">端口的形式和其他节点进行通讯</span>
-</span></span><span class="line"><span class="cl"><span class="n">sknt.send</span><span class="p">(</span><span class="n">pid</span><span class="p">,...)</span>              <span class="o">//</span> <span class="err">通过</span><span class="n">pid亦可</span>
+<pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="n">sknt.send</span><span class="p">(</span><span class="s2">&#34;host:port@name&#34;</span><span class="p">,...)</span> <span class="c1">-- 通过域名或者地址+端口的形式和其他节点进行通讯</span>
+</span></span><span class="line"><span class="cl"><span class="n">sknt.send</span><span class="p">(</span><span class="n">pid</span><span class="p">,...)</span>              <span class="c1">-- 通过pid亦可</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="tunnel"><del>tunnel</del></h1>
