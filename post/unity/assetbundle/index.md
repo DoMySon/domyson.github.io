@@ -80,4 +80,3 @@ public class ABManagment{
 4. 结合热更新需求打包；
 5. 依赖打包，追求0冗余；
 6. 粒度具体没有定值，近期经验上来看会需要尤其警惕AssetBundle包体超过10MB的。
-另外
