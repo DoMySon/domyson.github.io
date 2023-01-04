@@ -82,7 +82,7 @@ Vritual memory address
     类似于 `tcmalloc ThreadCache`,区别在于前者和线程绑定，后者和golang的 `P` 绑定
 
 + mcentral
-    类似于 `tcmalloc CentarlCache`
+    类似于 `tcmalloc CentarlCache`，用以mcache空间不够时从这里申请
     
 + mheap
 

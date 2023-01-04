@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/domyson.github.io\/post\/db\/mysql\/mysql100%E9%97%AE\/"
-        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","wordcount":  2728 ,
+        },"image": ["https:\/\/domyson.github.io\/images\/Apple-Devices-Preview.png"],"genre": "post","wordcount":  2991 ,
         "url": "https:\/\/domyson.github.io\/post\/db\/mysql\/mysql100%E9%97%AE\/","datePublished": "2022-04-06T00:00:00+00:00","dateModified": "2022-04-06T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/domyson.github.io\/images\/favicon.ico"},"author": {
@@ -271,16 +271,23 @@
 <code>sql alter table table_name add fulltext(field) </code></li>
 </ul>
 <h2 id="原理">原理</h2>
-<pre><code>&gt; 索引用来快速查询具有特定值的记录，如果没有索引，一般而言需要遍历整张表
-
-+ 将创建了索引的列的内容进行排序
-
-+ 对排序内容生成倒排表
-
-+ 在倒排表内容上拼接数据地址链
-
-+ 查询的时候先拿到倒排表，去除数据地址链，从而难道具体数据
-</code></pre>
+<blockquote>
+<p>索引用来快速查询具有特定值的记录，如果没有索引，一般而言需要遍历整张表</p>
+</blockquote>
+<ul>
+<li>
+<p>将创建了索引的列的内容进行排序</p>
+</li>
+<li>
+<p>对排序内容生成倒排表</p>
+</li>
+<li>
+<p>在倒排表内容上拼接数据地址链</p>
+</li>
+<li>
+<p>查询的时候先拿到倒排表，去除数据地址链，从而难道具体数据</p>
+</li>
+</ul>
 <h2 id="聚簇索引和非聚簇索引的区别">聚簇索引和非聚簇索引的区别</h2>
 <ul>
 <li>
@@ -344,45 +351,19 @@
 |RC|×|√|√|
 |RR|×|×|√|
 |SE|×|×|×|</p>
-<h2 id="mvcc">MVCC</h2>
-<blockquote>
-<p>mysql 的 RR级别是通过MVCC多版本并发控制的实现的，它通过管理数据行的多个版本来实现数据库并发控制，通过比较版本号来决定数据是否显示</p>
-</blockquote>
-<p>mvcc在很多情况下避免加锁，大多数都实现了非阻塞读操作，写操作也是锁定必要行，innodb在每行记录后面保存两个隐藏列，分别是<code>创建版本号</code>和<code>删除版本号</code>,每开始一个新的事务系统版本号都会递增，事务开始的时刻的系统版本号
-会作为事务的版本号，用以和查询到的每行记录的版本号进行比较，在RR级别下的工作方式：</p>
-<ul>
-<li>
-<p>select 需要同时满足查版本号早于当前版本的数据行，行的删除版本要么未定义，要么大于当前数据版本号</p>
-</li>
-<li>
-<p>insert 为插入的每一行记录保存当前系统版本作为创建版本号</p>
-</li>
-<li>
-<p>delete</p>
-</li>
-<li>
-<p>update</p>
-</li>
-</ul>
+<h2 id="mvccpostdbmysqlmvcc"><a href="/post/db/mysql/mvcc" rel="">MVCC</a></h2>
 <h1 id="锁">锁</h1>
 <h2 id="行锁">行锁</h2>
-<pre><code>操作只锁住某一行，不能其它行有影响，它是一种排它锁（写锁）防止其他事务修改当前事务的操作数据，（innodb）默认锁机制
-特点是开销大，加锁慢，会出现死锁，锁的颗粒最小，并发最高，冲突最低
-</code></pre>
-<ul>
-<li>
-<p>表锁
-操作时会锁定整张表，（myisam）的默认机制</p>
+<p>操作只锁住某一行，不能其它行有影响，它是一种排它锁（写锁）防止其他事务修改当前事务的操作数据，（innodb）默认锁机制
+特点是开销大，加锁慢，会出现死锁，锁的颗粒最小，并发最高，冲突最低</p>
+<h2 id="表锁">表锁</h2>
+<p>操作时会锁定整张表，（myisam）的默认机制</p>
 <p>特定是开销小，加锁快，不会出现死锁，锁的颗粒大，并发低，冲突高</p>
-</li>
-<li>
-<p>页锁
-操作是锁住一页数据（16kb）
+<h2 id="页锁">页锁</h2>
+<p>操作是锁住一页数据（16kb）
 特定是介于行锁和表锁之间，会出现死锁，并发度一般</p>
-</li>
-<li>
-<p>读写锁
-处理并发读读和写时，通常使用共享锁（读锁）和排他锁（写锁）</p>
+<h2 id="读写锁">读写锁</h2>
+<p>处理并发读读和写时，通常使用共享锁（读锁）和排他锁（写锁）</p>
 <ul>
 <li>
 <p>读锁时共享的，相互之间不会阻塞，多个事务同一时刻能获取同一资源，但是不可修改数据</p>
@@ -408,8 +389,6 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 <h2 id="死锁">死锁</h2>
 <blockquote>
 <p>当多个事务以不同的顺序锁定资源，或者同时锁定同一个资源都会产生死锁</p>
@@ -424,13 +403,26 @@
 
 + 在事务中如果更新记录，使用排他锁
 </code></pre>
-<h1 id="binlog-redolog-undolog">binlog redolog undolog</h1>
+<h1 id="binlog-redolog-undolog-relaylog">binlog redolog undolog relaylog</h1>
+<h2 id="binlog">binlog</h2>
+<p>　　事务提交的时候，一次性将事务中的sql语句（一个事物可能对应多个sql语句）按照一定的格式记录到binlog中。</p>
+<p>　　这里与redo log很明显的差异就是redo log并不一定是在事务提交的时候刷新到磁盘，redo log是在事务开始之后就开始逐步写入磁盘。</p>
+<p>　　因此对于事务的提交，即便是较大的事务，提交（commit）都是很快的，但是在开启了bin_log的情况下，对于较大事务的提交，可能会变得比较慢一些。</p>
+<p>用于复制，在主从复制中，从库利用主库上的binlog进行重播，实现主从同步。</p>
+<p>用于数据库的基于时间点的还原。</p>
+<h2 id="redolog">redolog</h2>
+<p>事务开始之后就产生redo log，redo log的落盘并不是随着事务的提交才写入的，而是在事务的执行过程中，便开始写入redo log文件中。</p>
+<p>确保事务的持久性。redo日志记录事务执行后的状态，用来恢复未写入data file的已成功事务更新的数据。防止在发生故障的时间点，尚有脏页未写入磁盘，在重启mysql服务的时候，根据redo log进行重做，从而达到事务的持久性这一特性。</p>
+<h2 id="undolog">undolog</h2>
+<p>事务开始之前，将当前是的版本生成undo log，undo 也会产生 redo 来保证undo log的可靠性</p>
+<p>保证数据的原子性，保存了事务发生之前的数据的一个版本，可以用于回滚，同时可以提供多版本并发控制下的读（MVCC），也即非锁定读</p>
+<h2 id="relaylog">relaylog</h2>
 </div><div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
             </noscript></div></div></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.104.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Treasure</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Treasure</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 
