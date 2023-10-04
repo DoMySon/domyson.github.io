@@ -9,10 +9,10 @@
     <lastBuildDate>Sun, 11 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/categories/cloud-native/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>kubernetes</title>
-      <link>https://domyson.github.io/post/cloud_native/k8s/k8s/</link>
+      <link>https://domyson.github.io/post/cloud_native/k8s/</link>
       <pubDate>Sun, 11 Dec 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://domyson.github.io/post/cloud_native/k8s/k8s/</guid>
+      <guid>https://domyson.github.io/post/cloud_native/k8s/</guid>
       <description>什么是k8s k8s是为容器服务而生的一个可移植容器的编排管理工具
 K8S实现了什么 服务发现 （etcd) 服务调度 （kube-scheduler） 负载均衡 (service) 服务自愈 (controller) 服务弹性扩容 横向扩容 存储卷挂载 (volume) 调度 Kubernetes 可以把用户提交的容器放到 Kubernetes 管理的集群的某一台节点上去。Kubernetes 的调度器是执行这项能力的组件，它会观察正在被调度的这个容器的大小、规格。 比如说它所需要的 CPU 以及它所需要的 memory，然后在集群中找一台相对比较空闲的机器来进行一次 placement，也就是一次放置的操作。
 自动修复 Kubernetes 有一个节点健康检查的功能，它会监测这个集群中所有的宿主机，当宿主机本身出现故障，或者软件出现故障的时候，这个节点健康检查会自动对它进行发现。Kubernetes 会把运行在这些失败节点上的容器进行自动迁移，迁移到一个正在健康运行的宿主机上，来完成集群内容器的一个自动恢复。
@@ -57,10 +57,10 @@ servic mesh：服务网格是用于控制应用的不同部分之间如何共享
     
     <item>
       <title>dockerfile</title>
-      <link>https://domyson.github.io/post/cloud_native/docker/dockerfile/</link>
+      <link>https://domyson.github.io/post/cloud_native/dockerfile/</link>
       <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://domyson.github.io/post/cloud_native/docker/dockerfile/</guid>
+      <guid>https://domyson.github.io/post/cloud_native/dockerfile/</guid>
       <description>Dockerfile Dockerfile 是一个包含用于组合映像的命令的文本文档。可以使用在命令行中调用任何命令。 Docker通过读取Dockerfile中的指令自动生成映像。docker build 命令用于从 Dockerfile构建映像。命令中使用 -f 标志指向文件系统中任何位置的 Dockerfile 文件。
 FROM 指定基础镜像
 FROM &amp;lt;image&amp;gt;:&amp;lt;tag&amp;gt;
@@ -77,10 +77,10 @@ USER root LABEL 为镜像指定标签，LABEL会继承基础镜像中的LABEL，
     
     <item>
       <title>DockerNetwork</title>
-      <link>https://domyson.github.io/post/cloud_native/docker/dockernetwork/</link>
+      <link>https://domyson.github.io/post/cloud_native/dockernetwork/</link>
       <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://domyson.github.io/post/cloud_native/docker/dockernetwork/</guid>
+      <guid>https://domyson.github.io/post/cloud_native/dockernetwork/</guid>
       <description>Docker Network Docker 在安装时候，默认创建三个网络 bridge（默认）,none,host。
 docker network create --driver [bridge|host|none|container] networkname
 bridge：默认模式，容器使用独立 network Namespace，并连接到docker0虚拟网卡（默认模式）。通过该网桥以及Iptables nat表配置与宿主机通信，此模式会为每一个容器分配Network Namespace、设置IP等，并将一个主机上的容器连接到同一个网桥 docker0 中。
@@ -100,10 +100,10 @@ overlay </description>
     
     <item>
       <title>Docker</title>
-      <link>https://domyson.github.io/post/cloud_native/docker/docker/</link>
+      <link>https://domyson.github.io/post/cloud_native/docker/</link>
       <pubDate>Tue, 12 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://domyson.github.io/post/cloud_native/docker/docker/</guid>
+      <guid>https://domyson.github.io/post/cloud_native/docker/</guid>
       <description>&lt;h1 id=&#34;什么是docker&#34;&gt;什么是docker&lt;/h1&gt;
 &lt;p&gt;Docker 是一个开源的容器引擎，可以轻松的为任何应用创建一个轻量级的、可移植的、自给自足的容器。开发者和系统管理员在笔记本上编译测试通过的容器可以批量地在生产环境中部署，包括 VMs（虚拟机）、bare metal、OpenStack 集群、云端、数据中心和其他的基础应用平台。容器是完全使用沙箱机制，相互之间不会有任何接口。&lt;/p&gt;
 &lt;h1 id=&#34;有什么优势&#34;&gt;有什么优势&lt;/h1&gt;

@@ -9,10 +9,10 @@
     <lastBuildDate>Thu, 02 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>dockerfile</title>
-      <link>https://domyson.github.io/post/cloud_native/docker/dockerfile/</link>
+      <link>https://domyson.github.io/post/cloud_native/dockerfile/</link>
       <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://domyson.github.io/post/cloud_native/docker/dockerfile/</guid>
+      <guid>https://domyson.github.io/post/cloud_native/dockerfile/</guid>
       <description>Dockerfile Dockerfile 是一个包含用于组合映像的命令的文本文档。可以使用在命令行中调用任何命令。 Docker通过读取Dockerfile中的指令自动生成映像。docker build 命令用于从 Dockerfile构建映像。命令中使用 -f 标志指向文件系统中任何位置的 Dockerfile 文件。
 FROM 指定基础镜像
 FROM &amp;lt;image&amp;gt;:&amp;lt;tag&amp;gt;
@@ -29,10 +29,10 @@ USER root LABEL 为镜像指定标签，LABEL会继承基础镜像中的LABEL，
     
     <item>
       <title>DockerNetwork</title>
-      <link>https://domyson.github.io/post/cloud_native/docker/dockernetwork/</link>
+      <link>https://domyson.github.io/post/cloud_native/dockernetwork/</link>
       <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://domyson.github.io/post/cloud_native/docker/dockernetwork/</guid>
+      <guid>https://domyson.github.io/post/cloud_native/dockernetwork/</guid>
       <description>Docker Network Docker 在安装时候，默认创建三个网络 bridge（默认）,none,host。
 docker network create --driver [bridge|host|none|container] networkname
 bridge：默认模式，容器使用独立 network Namespace，并连接到docker0虚拟网卡（默认模式）。通过该网桥以及Iptables nat表配置与宿主机通信，此模式会为每一个容器分配Network Namespace、设置IP等，并将一个主机上的容器连接到同一个网桥 docker0 中。
@@ -52,10 +52,10 @@ overlay </description>
     
     <item>
       <title>Docker</title>
-      <link>https://domyson.github.io/post/cloud_native/docker/docker/</link>
+      <link>https://domyson.github.io/post/cloud_native/docker/</link>
       <pubDate>Tue, 12 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://domyson.github.io/post/cloud_native/docker/docker/</guid>
+      <guid>https://domyson.github.io/post/cloud_native/docker/</guid>
       <description>&lt;h1 id=&#34;什么是docker&#34;&gt;什么是docker&lt;/h1&gt;
 &lt;p&gt;Docker 是一个开源的容器引擎，可以轻松的为任何应用创建一个轻量级的、可移植的、自给自足的容器。开发者和系统管理员在笔记本上编译测试通过的容器可以批量地在生产环境中部署，包括 VMs（虚拟机）、bare metal、OpenStack 集群、云端、数据中心和其他的基础应用平台。容器是完全使用沙箱机制，相互之间不会有任何接口。&lt;/p&gt;
 &lt;h1 id=&#34;有什么优势&#34;&gt;有什么优势&lt;/h1&gt;

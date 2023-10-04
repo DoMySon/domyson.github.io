@@ -9,10 +9,10 @@
     <lastBuildDate>Sun, 11 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>kubernetes</title>
-      <link>https://domyson.github.io/post/cloud_native/k8s/k8s/</link>
+      <link>https://domyson.github.io/post/cloud_native/k8s/</link>
       <pubDate>Sun, 11 Dec 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://domyson.github.io/post/cloud_native/k8s/k8s/</guid>
+      <guid>https://domyson.github.io/post/cloud_native/k8s/</guid>
       <description>什么是k8s k8s是为容器服务而生的一个可移植容器的编排管理工具
 K8S实现了什么 服务发现 （etcd) 服务调度 （kube-scheduler） 负载均衡 (service) 服务自愈 (controller) 服务弹性扩容 横向扩容 存储卷挂载 (volume) 调度 Kubernetes 可以把用户提交的容器放到 Kubernetes 管理的集群的某一台节点上去。Kubernetes 的调度器是执行这项能力的组件，它会观察正在被调度的这个容器的大小、规格。 比如说它所需要的 CPU 以及它所需要的 memory，然后在集群中找一台相对比较空闲的机器来进行一次 placement，也就是一次放置的操作。
 自动修复 Kubernetes 有一个节点健康检查的功能，它会监测这个集群中所有的宿主机，当宿主机本身出现故障，或者软件出现故障的时候，这个节点健康检查会自动对它进行发现。Kubernetes 会把运行在这些失败节点上的容器进行自动迁移，迁移到一个正在健康运行的宿主机上，来完成集群内容器的一个自动恢复。
