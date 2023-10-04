@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tinyc on Treasure</title>
+    <link>https://domyson.github.io/categories/tinyc/</link>
+    <description>Recent content in tinyc on Treasure</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 04 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/categories/tinyc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>tinyc</title>
+      <link>https://domyson.github.io/post/tinyc/1/</link>
+      <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/post/tinyc/1/</guid>
+      <description>序 一直以来不开发自己语言的程序都不是真正的程序员
+目标 强类型脚本语言
+支持单线程对称协程
+支持宿主语言交互
+寄存虚拟机</description>
+    </item>
+    
+    <item>
+      <title>词法分析器</title>
+      <link>https://domyson.github.io/post/tinyc/2/</link>
+      <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/post/tinyc/2/</guid>
+      <description>词法分析器 </description>
+    </item>
+    
+  </channel>
+</rss>

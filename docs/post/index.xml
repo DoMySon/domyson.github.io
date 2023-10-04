@@ -6,7 +6,29 @@
     <description>Recent content in Posts on Treasure</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 17 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 04 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>tinyc</title>
+      <link>https://domyson.github.io/post/tinyc/1/</link>
+      <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/post/tinyc/1/</guid>
+      <description>序 一直以来不开发自己语言的程序都不是真正的程序员
+目标 强类型脚本语言
+支持单线程对称协程
+支持宿主语言交互
+寄存虚拟机</description>
+    </item>
+    
+    <item>
+      <title>词法分析器</title>
+      <link>https://domyson.github.io/post/tinyc/2/</link>
+      <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/post/tinyc/2/</guid>
+      <description>词法分析器 </description>
+    </item>
+    
     <item>
       <title>conf</title>
       <link>https://domyson.github.io/post/sknt/conf/</link>
@@ -128,20 +150,21 @@ PageHeap
     </item>
     
     <item>
-      <title>bbuf 编码协议</title>
-      <link>https://domyson.github.io/post/sknt/bbuf/</link>
+      <title>kproto 编码协议</title>
+      <link>https://domyson.github.io/post/kproto/</link>
       <pubDate>Wed, 21 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://domyson.github.io/post/sknt/bbuf/</guid>
-      <description>前言 其实在cobweb之初就设计了一种编码协议(bbuf)，用于 RPC Server,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护， 而后期在研发 sknt 的时候，发现需要与多种语言交互，显然 json,xml 不是一个很好的选择，而 protobuf 对弱类型语言支持不友好。
-Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd64 format compress rate encode rate decode rate json std 0% 0%( 213.8 ns/op) 0%(1204ns/op) proto v3 -40% -51%(98.36 ns/op) -84%(190.1ns/op) bbuf -40% -76% (65.21 ns/op) -95%(62.18ns/op) 词法解析器 因为需要和强类型和弱类型进行转换，词法解析器和描述文件需要一个抽象共用类型加以识别，所以对于强类型语言是通过生成描述文件识别的。
-Lua5.1 是没有整数类型，需要区分浮点和整形的区别，这涉及到最终编码的尺寸，bbuf对它们进行了区分
+      <guid>https://domyson.github.io/post/kproto/</guid>
+      <description>前言 其实在cobweb之初就设计了一种编码协议(kproto)，用于内部消息的编码,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护， 而后期在研发的时候，发现需要与多种语言交互，显然 json,xml 不是一个很好的选择，而 protobuf 对弱类型语言支持不友好。
+Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd64 format compress rate encode rate decode rate json std 0% 0%( 213.8 ns/op) 0%(1204ns/op) proto v3 -40% -51%(98.36 ns/op) -84%(190.1ns/op) kproto -40% -76% (65.21 ns/op) -95%(62.18ns/op) 词法解析器 因为需要和强类型和弱类型进行转换，词法解析器和描述文件需要一个抽象共用类型加以识别，所以对于强类型语言是通过生成描述文件识别的。
+Lua5.1 是没有整数类型，需要区分浮点和整形的区别，这涉及到最终编码的尺寸，kproto对它们进行了区分
 Lua table 纯数组table和hash table 的编码方式也是不同的，这依赖于 table 在底层的结构，若非必要不要混合。
 代码生成器 强类型和弱类型的识别是有很大区别，所以我对Lua 这边进行了直接解析，简单来说是直接通过 Lexer 生成此消息结构的元信息.
 强类型语言为了减少反射，我们需要通过文件描述来提供其成员或字段的类型以及位置而非通过反射，这个在编译期间就可以确定了而非运行时。
 此模块在当前进程中的所有服务是生效的
 设计思路 减少内存分配
-为了减少i/o和内存压力，最简单的办法是让一个字节能包含更多的消息， 如一个32bit的整形，它真的需要4byte的字节空间吗？,其二不同的分配大小影响执行速度，（如32byte和64kb 是存在明显区别）， 所以需要动态计算分配尺寸。</description>
+为了减少i/o和内存压力，最简单的办法是让一个字节能包含更多的消息， 如一个32bit的整形，它真的需要4byte的字节空间吗？,其二不同的分配大小影响执行速度，（如32byte和64kb 是存在明显区别）， 所以需要动态计算分配尺寸。
+unsafe.Pointer</description>
     </item>
     
     <item>
@@ -239,18 +262,18 @@ v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意�
       
       <guid>https://domyson.github.io/post/sknt/allocator/</guid>
       <description>简介 alloctor 模块主要是为了减少GC而开发。现支持两套分配规则
-基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在sknt中它确实有更优秀的性能，因为它直接分配了一块共用内存，所以不会产生任何GC和真实分配, ，但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。
+基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet中它确实有更优秀的性能，因为它直接分配了一块共用内存，所以不会产生任何GC和真实分配, ，但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。
 哪怕内置的Debug模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 Debug 只能定位到存在 memory-leak，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失
-slab-allocator 对业务开发很不友好，最终只是将它保留作为可选项，是否使用取决于业务实际需要，因为它违背了 sknt 的设计初衷。
+slab-allocator 对业务开发很不友好，最终只是将它保留作为可选项，是否使用取决于业务实际需要，因为它违背了 skynet 的设计初衷。
 如果需要使用可以在编译指令中指明slab
 2020-10-18 阅读sync.Pool源码，看看能不能够和指定的P进行绑定，减少锁
 基于 sync.Pool 的分段内存分配器 将不同size的buffer放入不同的池中，按需进行分配，减少race的开销
 这个方法虽然简单，但是性能是低于 slab-allocator。
-但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是sknt默认使用的策略。
-API sknt.alloc(n) 用以分配指定大小的内存块
-sknt.realloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存
-sknt.append(buf,data) 简化了 realloc 和 copy 的操作。
-sknt.free(buf) 释放一段内存，为了兼容slab，要求释放的是 buf(0)这个位置</description>
+但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是skynet默认使用的策略。
+API skynet.alloc(n) 用以分配指定大小的内存块
+skynet.realloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存
+skynet.append(buf,data) 简化了 realloc 和 copy 的操作。
+skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址是否属于当前段</description>
     </item>
     
     <item>
