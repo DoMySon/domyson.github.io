@@ -1,2 +1,1 @@
-# domyson.github.io
-The path of program development
+# personal blog

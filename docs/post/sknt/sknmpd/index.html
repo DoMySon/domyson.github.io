@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>sknmpd // Treasure</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.119.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Treasure" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/main.min.3c3c186cd62e563ad6e2f00a89dbee656ab912d1d46f856b5605dd0232521e2a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="sknmpd"/>
+<meta name="twitter:description" content="简介 sknmpd模块是sknt底层集群模块，它承担了sknt网络节点之间的通讯职能。全名为(simple keenly net managment port daemon)
+架构 sknmpd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来
+sknmpd可以支持任意网络协议，如 tcp,udp 甚至是 unix
+当然一个好记的节点名称是非常有必要的，所以sknmpd也内置了一套非标准的本地 dns系统
+使用 sknmpd的启动也非常简单，无须任何代码，仅仅只需要在 sknt.toml 中配置一下即可，使用的时候跟节点内通讯无任何区别，但要求参数必须是 []byte 类型，参考 bbuf 如
+sknt.send(&#34;host:port@name&#34;,...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 sknt.send(pid,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
+基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，
+通过配置tun的规则开启多个，则可以实现业务拆分。
+2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&quot;n1.n2.n3@name&quot;)
+服务发现 sknmpd 提供了一套服务发现机制，但其运作原理是不同于 etcd 或者 consul,它本身是一个惰性发现，取决于第一次调用的地址是否正确返回。
+你不需要知道它是如何运作的，你只需要知道在特定时间内它是有效的即可，那怕其中出了一些意外，无非只是浪费了两次通讯而已。
+gossip sknmpd整个发现流程是基于 gossip 算法来发现的,但一些api依然可以主动触发
+网络底层 参考 Go协程的思考,在linux下，使用了 epoll。所以尽量部署到 linux 下以发挥更好的性能"/>
+
+    <meta property="og:title" content="sknmpd" />
+<meta property="og:description" content="简介 sknmpd模块是sknt底层集群模块，它承担了sknt网络节点之间的通讯职能。全名为(simple keenly net managment port daemon)
+架构 sknmpd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来
+sknmpd可以支持任意网络协议，如 tcp,udp 甚至是 unix
+当然一个好记的节点名称是非常有必要的，所以sknmpd也内置了一套非标准的本地 dns系统
+使用 sknmpd的启动也非常简单，无须任何代码，仅仅只需要在 sknt.toml 中配置一下即可，使用的时候跟节点内通讯无任何区别，但要求参数必须是 []byte 类型，参考 bbuf 如
+sknt.send(&#34;host:port@name&#34;,...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 sknt.send(pid,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
+基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，
+通过配置tun的规则开启多个，则可以实现业务拆分。
+2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&quot;n1.n2.n3@name&quot;)
+服务发现 sknmpd 提供了一套服务发现机制，但其运作原理是不同于 etcd 或者 consul,它本身是一个惰性发现，取决于第一次调用的地址是否正确返回。
+你不需要知道它是如何运作的，你只需要知道在特定时间内它是有效的即可，那怕其中出了一些意外，无非只是浪费了两次通讯而已。
+gossip sknmpd整个发现流程是基于 gossip 算法来发现的,但一些api依然可以主动触发
+网络底层 参考 Go协程的思考,在linux下，使用了 epoll。所以尽量部署到 linux 下以发挥更好的性能" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://domyson.github.io/post/sknt/sknmpd/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-05-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-05-30T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://domyson.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Treasure" /></a>
+      <span class="app-header-title">Treasure</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/about/">About</a>
+      </nav>
+      <p>无关迟暮,不问翻覆</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/domyson" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">sknmpd</h1>
+      <div class="post-meta">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          May 30, 2022
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://domyson.github.io/tags/sknmpd/">sknmpd</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="简介">简介</h1>
+<p><code>sknmpd</code>模块是<code>sknt</code>底层集群模块，它承担了<code>sknt</code>网络节点之间的通讯职能。全名为(<code>simple keenly net managment port daemon</code>)</p>
+<h1 id="架构">架构</h1>
+<ol>
+<li>
+<p><code>sknmpd</code> 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接，
+当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来</p>
+</li>
+<li>
+<p><code>sknmpd</code>可以支持任意网络协议，如 <code>tcp</code>,<code>udp</code> 甚至是 <code>unix</code></p>
+</li>
+<li>
+<p>当然一个好记的节点名称是非常有必要的，所以<code>sknmpd</code>也内置了一套非标准的本地 <code>dns</code>系统</p>
+</li>
+</ol>
+<h1 id="使用">使用</h1>
+<p><code>sknmpd</code>的启动也非常简单，无须任何代码，仅仅只需要在 <code>sknt.toml</code> 中配置一下即可，使用的时候跟节点内通讯无任何区别，但要求参数必须是 <code>[]byte</code> 类型，参考 <a href="/post/sknt/bbuf">bbuf</a>
+如</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>sknt.send(<span style="color:#e6db74">&#34;host:port@name&#34;</span>,...) <span style="color:#75715e">-- 通过域名或者地址+端口的形式和其他节点进行通讯</span>
+</span></span><span style="display:flex;"><span>sknt.send(pid,...)              <span style="color:#75715e">-- 通过pid亦可</span>
+</span></span></code></pre></div><h1 id="tunnel"><del>tunnel</del></h1>
+<p>既然节点之间是双向连接，所以连接数量为 <code>f(n) =  n²-n</code>，如果节点过的时候，势必造成 <code>socket fd</code> 消耗殆尽，</p>
+<p>基于这个问题，可以通过内置的<code>tun</code>，来设置代理，这么一来，<code>tun</code>的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 <code>tun</code> 代理是不可见的，</p>
+<p>通过配置<code>tun</code>的规则开启多个，则可以实现业务拆分。</p>
+<blockquote>
+<p>2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 <code>send(&quot;n1.n2.n3@name&quot;)</code></p>
+</blockquote>
+<h1 id="服务发现">服务发现</h1>
+<p><code>sknmpd</code> 提供了一套服务发现机制，但其运作原理是不同于 <code>etcd</code> 或者 <code>consul</code>,它本身是一个惰性发现，取决于第一次调用的地址是否正确返回。</p>
+<p>你不需要知道它是如何运作的，你只需要知道在特定时间内它是有效的即可，那怕其中出了一些意外，无非只是浪费了两次通讯而已。</p>
+<h2 id="gossip">gossip</h2>
+<blockquote>
+<p>sknmpd整个发现流程是基于 <code>gossip</code> 算法来发现的,但一些api依然可以主动触发</p>
+</blockquote>
+<h1 id="网络底层">网络底层</h1>
+<p>参考 <a href="/post/language/go/goroutine">Go协程的思考</a>,在<code>linux</code>下，使用了 <code>epoll</code>。所以尽量部署到 <code>linux</code> 下以发挥更好的性能</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>allocator // Treasure</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.119.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Treasure" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/main.min.3c3c186cd62e563ad6e2f00a89dbee656ab912d1d46f856b5605dd0232521e2a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="allocator"/>
+<meta name="twitter:description" content="简介 alloctor 模块主要是为了减少GC而开发。现支持两套分配规则
+基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在sknt中它确实有更优秀的性能，因为它直接分配了一块共用内存，所以不会产生任何GC和真实分配, ，但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。
+哪怕内置的Debug模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 Debug 只能定位到存在 memory-leak，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失
+slab-allocator 对业务开发很不友好，最终只是将它保留作为可选项，是否使用取决于业务实际需要，因为它违背了 sknt 的设计初衷。
+如果需要使用可以在编译指令中指明slab
+2020-10-18 阅读sync.Pool源码，看看能不能够和指定的P进行绑定，减少锁
+基于 sync.Pool 的分段内存分配器 将不同size的buffer放入不同的池中，按需进行分配，减少race的开销
+这个方法虽然简单，但是性能是低于 slab-allocator。
+但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是sknt默认使用的策略。
+API sknt.alloc(n) 用以分配指定大小的内存块
+sknt.realloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存
+sknt.append(buf,data) 简化了 realloc 和 copy 的操作。
+sknt.free(buf) 释放一段内存，为了兼容slab，要求释放的是 buf(0)这个位置"/>
+
+    <meta property="og:title" content="allocator" />
+<meta property="og:description" content="简介 alloctor 模块主要是为了减少GC而开发。现支持两套分配规则
+基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在sknt中它确实有更优秀的性能，因为它直接分配了一块共用内存，所以不会产生任何GC和真实分配, ，但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。
+哪怕内置的Debug模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 Debug 只能定位到存在 memory-leak，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失
+slab-allocator 对业务开发很不友好，最终只是将它保留作为可选项，是否使用取决于业务实际需要，因为它违背了 sknt 的设计初衷。
+如果需要使用可以在编译指令中指明slab
+2020-10-18 阅读sync.Pool源码，看看能不能够和指定的P进行绑定，减少锁
+基于 sync.Pool 的分段内存分配器 将不同size的buffer放入不同的池中，按需进行分配，减少race的开销
+这个方法虽然简单，但是性能是低于 slab-allocator。
+但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是sknt默认使用的策略。
+API sknt.alloc(n) 用以分配指定大小的内存块
+sknt.realloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存
+sknt.append(buf,data) 简化了 realloc 和 copy 的操作。
+sknt.free(buf) 释放一段内存，为了兼容slab，要求释放的是 buf(0)这个位置" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://domyson.github.io/post/sknt/allocator/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-04-21T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://domyson.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Treasure" /></a>
+      <span class="app-header-title">Treasure</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/about/">About</a>
+      </nav>
+      <p>无关迟暮,不问翻覆</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/domyson" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">allocator</h1>
+      <div class="post-meta">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Apr 21, 2022
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="简介">简介</h1>
+<p><code>alloctor</code> 模块主要是为了减少<code>GC</code>而开发。现支持两套分配规则</p>
+<h1 id="基于-slab-算法的分段内存分配器">基于 <code>SLAB</code> 算法的分段内存分配器</h1>
+<p><code>SLAB</code> 最开始是阅读 <code>linux</code> 源码学习的算法，在<code>sknt</code>中它确实有更优秀的性能，因为它直接分配了一块共用内存，所以不会产生任何GC和真实分配,
+，但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。</p>
+<p>哪怕内置的<code>Debug</code>模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 <code>Debug</code> 只能定位到存在 <code>memory-leak</code>，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失</p>
+<p><code>slab-allocator</code> 对业务开发很不友好，最终只是将它保留作为可选项，是否使用取决于业务实际需要，因为它违背了 <code>sknt</code> 的设计初衷。</p>
+<p>如果需要使用可以在编译指令中指明<code>slab</code></p>
+<blockquote>
+<p>2020-10-18 阅读sync.Pool源码，看看能不能够和指定的P进行绑定，减少锁</p>
+</blockquote>
+<h1 id="基于-syncpool-的分段内存分配器">基于 <code>sync.Pool</code> 的分段内存分配器</h1>
+<p>将不同size的buffer放入不同的池中，按需进行分配，减少race的开销</p>
+<p>这个方法虽然简单，但是性能是低于 <code>slab-allocator</code>。</p>
+<p>但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是<code>sknt</code>默认使用的策略。</p>
+<h1 id="api">API</h1>
+<ul>
+<li>
+<p><code>sknt.alloc(n)</code> 用以分配指定大小的内存块</p>
+</li>
+<li>
+<p><code>sknt.realloc(buf,n)</code> realloc函数会先检查buf，确保是否需要重新分配内存</p>
+</li>
+<li>
+<p><code>sknt.append(buf,data)</code> 简化了 <code>realloc</code> 和 <code>copy</code> 的操作。</p>
+</li>
+<li>
+<p><code>sknt.free(buf)</code> 释放一段内存，为了兼容<code>slab</code>，要求释放的是 buf(0)这个位置</p>
+</li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>性能优化 // Treasure</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.119.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Treasure" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/main.min.3c3c186cd62e563ad6e2f00a89dbee656ab912d1d46f856b5605dd0232521e2a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="性能优化"/>
+<meta name="twitter:description" content="音频 短音频使用Wav，长音频使用mp3 纹理 Mipmap mipmap用于减少渲染的带宽压力，但会有额外的内存开销，一般而言UI是建议关闭的，3D模型看情况开启
+Read/Write 纹理尺寸 不同大小的纹理尺寸对内存的占用也是不同，依照项目的实际情况来决定Size
+格式 由于ETC、PVRTC等格式均为有损压缩，因此，当纹理色差范围跨度较大时，均不可避免地造成不同程度的“阶梯”状的色阶问题。因此，很多研发团队使用RGBA32/ARGB32格式来实现更好的效果。但是，这种做法将造成很大的内存占用
+ETC1 不支持透明通道问题 可以通过 RGB24 &#43; Alpha8 &#43; Shader 的方式达到比较好的效果
+ECT2，ASTC 但需要设备支持 OpenGL ES3.0
+LOD unity内置的一项技术，主要是根据目标离相机的距离来断定使用何种精度的模型，减少顶点数的绘制，但代价就是要牺牲部分内存
+Occlusion culling 遮挡剔除 遮挡剔除是用来消除躲在其他物件后面看不到的物件，这代表资源不会浪费在计算那些看不到的顶点上，进而提升性能
+batching dynamic batching 将一些足够小的网格，在CPU上转换它们的顶点，将许多相似的顶点组合在一起，并一次性绘制它们。 无论静态还是动态合批都要求使用相同的材质，动态合批有以下限制：
+&#43; 如果GameObjects在Transform上包含镜像，则不会对其进行动态合批处理&#43; 使用多个pass的shader不会被动态合批处理&#43; 使用不同的Material实例会导致GameObjects不能一起批处理，即使它们基本相同。&#43; [官方25个不能动批的情况](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FUnity-Technologies%2FBatchBreakingCause)static batching 静态合批是将静态（不移动）GameObjects组合成大网格，然后进行绘制。静态合批使用比较简单，PlayerSettings中开启static batching，然后对需要静态合批物体的Static打钩即可，unity会自动合并被标记为static的对象，前提它们共享相同的材质，并且不移动，被标记为static的物体不能在游戏中移动，旋转或缩放。但是静态批处理需要额外的内存来存储合并的几何体。注意如果多个GameObject在静态批处理之前共享相同的几何体，则会在编辑器或运行时为每个GameObject创建几何体的副本，这会增大内存的开销
+GPU Instancing 使用GPU Instancing可以一次渲染(render)相同网格的多个副本，仅使用少量DrawCalls。在渲染诸如建筑、树木、草等在场景中重复出现的事物时，GPU Instancing很有用。
+每次draw call，GPU Instancing只渲染相同(identical )的网格，但是每个实例(instance)可以有不同的参数(例如，color或scale)，以增加变化(variation)，减少重复的出现。
+GPU Instancing可以减少每个场景draw calls次数。这显著提升了渲染性能。
+Physics Auto Simulation 根据项目实际需要是否开启物理模拟，默认是是开启的
+Fixed Timestep 过小的值会操成计算量过大，过大的值可能造成部分机制异常(如卡墙，穿透等)，根据项目实际来确定
+Maximum Allowed Timestep 这里我们需要先知道物理系统本身的特性，即当游戏上一帧卡顿时，Unity会在当前帧非常靠前的阶段连续调用N次FixedUpdate.PhysicsFixedUpdate，Maximum Allowed Timestep的意义就在于单帧限制物理更新的次数，"/>
+
+    <meta property="og:title" content="性能优化" />
+<meta property="og:description" content="音频 短音频使用Wav，长音频使用mp3 纹理 Mipmap mipmap用于减少渲染的带宽压力，但会有额外的内存开销，一般而言UI是建议关闭的，3D模型看情况开启
+Read/Write 纹理尺寸 不同大小的纹理尺寸对内存的占用也是不同，依照项目的实际情况来决定Size
+格式 由于ETC、PVRTC等格式均为有损压缩，因此，当纹理色差范围跨度较大时，均不可避免地造成不同程度的“阶梯”状的色阶问题。因此，很多研发团队使用RGBA32/ARGB32格式来实现更好的效果。但是，这种做法将造成很大的内存占用
+ETC1 不支持透明通道问题 可以通过 RGB24 &#43; Alpha8 &#43; Shader 的方式达到比较好的效果
+ECT2，ASTC 但需要设备支持 OpenGL ES3.0
+LOD unity内置的一项技术，主要是根据目标离相机的距离来断定使用何种精度的模型，减少顶点数的绘制，但代价就是要牺牲部分内存
+Occlusion culling 遮挡剔除 遮挡剔除是用来消除躲在其他物件后面看不到的物件，这代表资源不会浪费在计算那些看不到的顶点上，进而提升性能
+batching dynamic batching 将一些足够小的网格，在CPU上转换它们的顶点，将许多相似的顶点组合在一起，并一次性绘制它们。 无论静态还是动态合批都要求使用相同的材质，动态合批有以下限制：
+&#43; 如果GameObjects在Transform上包含镜像，则不会对其进行动态合批处理&#43; 使用多个pass的shader不会被动态合批处理&#43; 使用不同的Material实例会导致GameObjects不能一起批处理，即使它们基本相同。&#43; [官方25个不能动批的情况](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FUnity-Technologies%2FBatchBreakingCause)static batching 静态合批是将静态（不移动）GameObjects组合成大网格，然后进行绘制。静态合批使用比较简单，PlayerSettings中开启static batching，然后对需要静态合批物体的Static打钩即可，unity会自动合并被标记为static的对象，前提它们共享相同的材质，并且不移动，被标记为static的物体不能在游戏中移动，旋转或缩放。但是静态批处理需要额外的内存来存储合并的几何体。注意如果多个GameObject在静态批处理之前共享相同的几何体，则会在编辑器或运行时为每个GameObject创建几何体的副本，这会增大内存的开销
+GPU Instancing 使用GPU Instancing可以一次渲染(render)相同网格的多个副本，仅使用少量DrawCalls。在渲染诸如建筑、树木、草等在场景中重复出现的事物时，GPU Instancing很有用。
+每次draw call，GPU Instancing只渲染相同(identical )的网格，但是每个实例(instance)可以有不同的参数(例如，color或scale)，以增加变化(variation)，减少重复的出现。
+GPU Instancing可以减少每个场景draw calls次数。这显著提升了渲染性能。
+Physics Auto Simulation 根据项目实际需要是否开启物理模拟，默认是是开启的
+Fixed Timestep 过小的值会操成计算量过大，过大的值可能造成部分机制异常(如卡墙，穿透等)，根据项目实际来确定
+Maximum Allowed Timestep 这里我们需要先知道物理系统本身的特性，即当游戏上一帧卡顿时，Unity会在当前帧非常靠前的阶段连续调用N次FixedUpdate.PhysicsFixedUpdate，Maximum Allowed Timestep的意义就在于单帧限制物理更新的次数，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://domyson.github.io/post/unity/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-10-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-10-10T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://domyson.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Treasure" /></a>
+      <span class="app-header-title">Treasure</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/about/">About</a>
+      </nav>
+      <p>无关迟暮,不问翻覆</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/domyson" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">性能优化</h1>
+      <div class="post-meta">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Oct 10, 2020
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://domyson.github.io/tags/">Tags</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="音频">音频</h1>
+<ul>
+<li>短音频使用Wav，长音频使用mp3</li>
+</ul>
+<h1 id="纹理">纹理</h1>
+<h2 id="mipmap">Mipmap</h2>
+<p>mipmap用于减少渲染的带宽压力，但会有额外的内存开销，一般而言UI是建议关闭的，3D模型看情况开启</p>
+<h2 id="readwrite">Read/Write</h2>
+<h2 id="纹理尺寸">纹理尺寸</h2>
+<p>不同大小的纹理尺寸对内存的占用也是不同，依照项目的实际情况来决定Size</p>
+<h2 id="格式">格式</h2>
+<ul>
+<li>
+<p>由于ETC、PVRTC等格式均为有损压缩，因此，当纹理色差范围跨度较大时，均不可避免地造成不同程度的“阶梯”状的色阶问题。因此，很多研发团队使用RGBA32/ARGB32格式来实现更好的效果。但是，这种做法将造成很大的内存占用</p>
+</li>
+<li>
+<p>ETC1 不支持透明通道问题
+可以通过 RGB24 + Alpha8 + Shader 的方式达到比较好的效果</p>
+</li>
+<li>
+<p>ECT2，ASTC
+但需要设备支持 OpenGL ES3.0</p>
+</li>
+</ul>
+<h1 id="lod">LOD</h1>
+<p>unity内置的一项技术，主要是根据目标离相机的距离来断定使用何种精度的模型，减少顶点数的绘制，但代价就是要牺牲部分内存</p>
+<h1 id="occlusion-culling-遮挡剔除">Occlusion culling 遮挡剔除</h1>
+<p>遮挡剔除是用来消除躲在其他物件后面看不到的物件，这代表资源不会浪费在计算那些看不到的顶点上，进而提升性能</p>
+<h1 id="batching">batching</h1>
+<ul>
+<li>dynamic batching</li>
+</ul>
+<p>将一些足够小的网格，在CPU上转换它们的顶点，将许多相似的顶点组合在一起，并一次性绘制它们。
+无论静态还是动态合批都要求使用相同的材质，动态合批有以下限制：</p>
+<pre><code>+ 如果GameObjects在Transform上包含镜像，则不会对其进行动态合批处理
+
++ 使用多个pass的shader不会被动态合批处理
+
++ 使用不同的Material实例会导致GameObjects不能一起批处理，即使它们基本相同。
+
++ [官方25个不能动批的情况](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FUnity-Technologies%2FBatchBreakingCause)
+</code></pre>
+<ul>
+<li>static batching</li>
+</ul>
+<p>静态合批是将静态（不移动）GameObjects组合成大网格，然后进行绘制。静态合批使用比较简单，PlayerSettings中开启static batching，然后对需要静态合批物体的Static打钩即可，unity会自动合并被标记为static的对象，前提它们共享相同的材质，并且不移动，被标记为static的物体不能在游戏中移动，旋转或缩放。但是静态批处理需要额外的内存来存储合并的几何体。注意如果多个GameObject在静态批处理之前共享相同的几何体，则会在编辑器或运行时为每个GameObject创建几何体的副本，这会增大内存的开销</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/70123645">GPU Instancing</a></li>
+</ul>
+<p>使用GPU Instancing可以一次渲染(render)相同网格的多个副本，仅使用少量DrawCalls。在渲染诸如建筑、树木、草等在场景中重复出现的事物时，GPU Instancing很有用。</p>
+<p>每次draw call，GPU Instancing只渲染相同(identical )的网格，但是每个实例(instance)可以有不同的参数(例如，color或scale)，以增加变化(variation)，减少重复的出现。</p>
+<p>GPU Instancing可以减少每个场景draw calls次数。这显著提升了渲染性能。</p>
+<h1 id="physics">Physics</h1>
+<ul>
+<li>
+<p>Auto Simulation
+根据项目实际需要是否开启物理模拟，默认是是开启的</p>
+</li>
+<li>
+<p>Fixed Timestep
+过小的值会操成计算量过大，过大的值可能造成部分机制异常(如卡墙，穿透等)，根据项目实际来确定</p>
+</li>
+<li>
+<p>Maximum Allowed Timestep
+这里我们需要先知道物理系统本身的特性，即当游戏上一帧卡顿时，Unity会在当前帧非常靠前的阶段连续调用N次FixedUpdate.PhysicsFixedUpdate，Maximum Allowed Timestep的意义就在于单帧限制物理更新的次数，</p>
+</li>
+<li>
+<p>Contact数量是否合理
+减少不必要的物理碰撞检测，如盾牌和地面，或者当场景contact为0时，且存在物理消耗应当关闭 Auto Simulation</p>
+</li>
+<li>
+<p>Auto Sync Transforms</p>
+</li>
+</ul>
+<p>勾选Auto Sync Transforms后，发生Physics Query时，Unity会将Rigidbody/Collider的Tranform变化同步到物理引擎，如Position，Scale等。另外勾选AutoSimulation时，Unity会在每次物理更新的时候自动同步一次Rigidbody和Collider，所以当关闭AutoSimulation后，如果项目中使用了射线检测或者NGUI，通常需要Auto Sync Transforms进行勾选，否则会发生射线检测结果不准确或者UI事件不响应的情况。</p>
+<ul>
+<li>Raycast
+减少射线检测</li>
+</ul>
+<h1 id="unity-托管内存">Unity 托管内存</h1>
+<ol>
+<li>
+<p>用户代码分配的内存本质上在 <code>IL2CPP</code> 构建的 <code>VM</code> 的托管内存(<code>Managed Memory</code>)上，所以用户代码分配遵从于这个 <code>VM</code> 的分配方式。</p>
+</li>
+<li>
+<p><code>IL2CPP</code> 采用的是 <code>Boehm</code> 回收算法,这算法的缺陷是 <code>不分代</code>，<code>不压缩</code>，虽然提高了效率，但由于用户申请内存的不确定性，容易造成内存碎片，不利于此块的内存重使用。</p>
+</li>
+<li>
+<p>内存以 <code>Block</code> 来管理，当一个 <code>Block</code> 6次GC没有被访问，才会返回给 OS。</p>
+</li>
+<li>
+<p><code>Zombie Memory</code>,由于用户不主动释放，但实际没有使用。那么这块内存将不会被回收。</p>
+</li>
+<li>
+<p>对于一个物体，应该是 <code>Destory</code> 而不是置为 <code>Null</code>。</p>
+</li>
+<li>
+<p>下一代采用 <code>渐进式GC</code>（分帧GC，使CPU峰值更平滑），可以手动开关。</p>
+</li>
+</ol>
+<p><a href="https://www.bilibili.com/video/av79798486">浅谈Unity内存管理</a></p>
+<h1 id="提升加载场景速度">提升加载场景速度</h1>
+<p>-
+<code>Application.backgroundLoadingPriority为High</code>
+Application.backgroundLoadingPriority这个API会限制主线程的集成的时间，默认设置是ThreadPriority.BelowNormal，也就是每一帧执行主线程集成的操作耗时不能超过4毫秒，这将会导致每一帧剩余的时间用于等待或者渲染，而这些等待和渲染的时间都是无意义的耗时。如果把这个设置改为ThreadPriority.High，那么每一帧执行主线程集成的操作耗时可以增加到50毫秒，大大减少了所需要的帧数。</p>
+<h1 id="分析工具">分析工具</h1>
+<p>UnityProfiler，UWA</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

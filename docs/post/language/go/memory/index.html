@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Go Memory // Treasure</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.119.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Treasure" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/main.min.3c3c186cd62e563ad6e2f00a89dbee656ab912d1d46f856b5605dd0232521e2a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go Memory"/>
+<meta name="twitter:description" content="虚拟内存 虚拟内存屏蔽了RAM和Disk,向进程提供远大于物理内存的内存空间，简单来说就是使用了 memory map 分别映射了RAM和Disk的某个区域
+堆栈 栈的方向向低地址增长，而堆恰好相反
+Vritual memory address | kernel | |-------------------| 0xC00000000 | ---argv,evniron---| | -------stack -----| | ---------↓--------| | ----stack top-----| | | | unallocated | | | heap | | | uninitialized data| | initialized data | | program Code | | | 0x08048000 | | 0x00000000 Tcmalloc 也许同时google出品吧
+Page
+操作系统对内存管理以页为单位，Tcmalloc 也是如此，但其不一定相等，而是倍数关系(x64 Page 为8kb)
+Span
+一组连续的Page称为Span,是Tcmalloc的基本单位
+ThreadCache
+每个线程自身的Cache,包含多个空闲内存块链表，每个单独的链表大小是一致的，方便申请时不需要遍历全局，而且是无锁访问
+CentarlCache
+所有线程共享的空闲内存块，链表数量同 ThreadCache,当ThreadCache不够时会从其申请，但它是需要加锁
+PageHeap
+对堆内存的抽象，也是由若干链表组成，链表保存的是 Span，当 CentarlCache不足时，获取空闲Span然后拆分成若干内存块，并添加到对应大小的链表中以供分配，否则将会放回"/>
+
+    <meta property="og:title" content="Go Memory" />
+<meta property="og:description" content="虚拟内存 虚拟内存屏蔽了RAM和Disk,向进程提供远大于物理内存的内存空间，简单来说就是使用了 memory map 分别映射了RAM和Disk的某个区域
+堆栈 栈的方向向低地址增长，而堆恰好相反
+Vritual memory address | kernel | |-------------------| 0xC00000000 | ---argv,evniron---| | -------stack -----| | ---------↓--------| | ----stack top-----| | | | unallocated | | | heap | | | uninitialized data| | initialized data | | program Code | | | 0x08048000 | | 0x00000000 Tcmalloc 也许同时google出品吧
+Page
+操作系统对内存管理以页为单位，Tcmalloc 也是如此，但其不一定相等，而是倍数关系(x64 Page 为8kb)
+Span
+一组连续的Page称为Span,是Tcmalloc的基本单位
+ThreadCache
+每个线程自身的Cache,包含多个空闲内存块链表，每个单独的链表大小是一致的，方便申请时不需要遍历全局，而且是无锁访问
+CentarlCache
+所有线程共享的空闲内存块，链表数量同 ThreadCache,当ThreadCache不够时会从其申请，但它是需要加锁
+PageHeap
+对堆内存的抽象，也是由若干链表组成，链表保存的是 Span，当 CentarlCache不足时，获取空闲Span然后拆分成若干内存块，并添加到对应大小的链表中以供分配，否则将会放回" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://domyson.github.io/post/language/go/memory/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-07T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://domyson.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Treasure" /></a>
+      <span class="app-header-title">Treasure</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/about/">About</a>
+      </nav>
+      <p>无关迟暮,不问翻覆</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/domyson" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Go Memory</h1>
+      <div class="post-meta">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Oct 7, 2022
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://domyson.github.io/tags/">Tags</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="虚拟内存">虚拟内存</h1>
+<blockquote>
+<p>虚拟内存屏蔽了<code>RAM</code>和<code>Disk</code>,向进程提供远大于物理内存的内存空间，简单来说就是使用了 <code>memory map</code> 分别映射了<code>RAM</code>和<code>Disk</code>的某个区域</p>
+</blockquote>
+<h1 id="堆栈">堆栈</h1>
+<blockquote>
+<p>栈的方向向低地址增长，而堆恰好相反</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Vritual memory address
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    |       kernel      |
+</span></span><span style="display:flex;"><span>    |-------------------| 0xC00000000
+</span></span><span style="display:flex;"><span>    | ---argv,evniron---|
+</span></span><span style="display:flex;"><span>    | -------stack -----|
+</span></span><span style="display:flex;"><span>    | ---------↓--------|
+</span></span><span style="display:flex;"><span>    | ----stack top-----|
+</span></span><span style="display:flex;"><span>    |                   |
+</span></span><span style="display:flex;"><span>    |    unallocated    |
+</span></span><span style="display:flex;"><span>    |       
+</span></span><span style="display:flex;"><span>    |        heap       |
+</span></span><span style="display:flex;"><span>    |
+</span></span><span style="display:flex;"><span>    | uninitialized data|
+</span></span><span style="display:flex;"><span>    | initialized data  |
+</span></span><span style="display:flex;"><span>    |   program Code    |
+</span></span><span style="display:flex;"><span>    |                   | 0x08048000
+</span></span><span style="display:flex;"><span>    |                   | 0x00000000   
+</span></span></code></pre></div><h1 id="tcmalloc"><code>Tcmalloc</code></h1>
+<blockquote>
+<p>也许同时<code>google</code>出品吧</p>
+</blockquote>
+<ul>
+<li>
+<p>Page</p>
+<p>操作系统对内存管理以页为单位，<code>Tcmalloc</code> 也是如此，但其不一定相等，而是倍数关系(x64 Page 为8kb)</p>
+</li>
+<li>
+<p>Span</p>
+<p>一组连续的<code>Page</code>称为<code>Span</code>,是<code>Tcmalloc</code>的基本单位</p>
+</li>
+<li>
+<p>ThreadCache</p>
+<p>每个线程自身的<code>Cache</code>,包含多个空闲内存块链表，每个单独的链表大小是一致的，方便申请时不需要遍历全局，而且是无锁访问</p>
+</li>
+<li>
+<p>CentarlCache</p>
+<p>所有线程共享的空闲内存块，链表数量同 <code>ThreadCache</code>,当<code>ThreadCache</code>不够时会从其申请，但它是需要加锁</p>
+</li>
+<li>
+<p>PageHeap</p>
+<p>对堆内存的抽象，也是由若干链表组成，链表保存的是 <code>Span</code>，当 <code>CentarlCache</code>不足时，获取空闲<code>Span</code>然后拆分成若干内存块，并添加到对应大小的链表中以供分配，否则将会放回</p>
+</li>
+</ul>
+<h2 id="对象大小">对象大小</h2>
+<pre><code>小对象: 0~256kb
+中对象: 257kb~1mb
+大对象: &gt; 1mb
+</code></pre>
+<h1 id="go内存模型">Go内存模型</h1>
+<ul>
+<li>
+<p>Page</p>
+<p>同 <code>Tcmalloc Page</code></p>
+</li>
+<li>
+<p>Span</p>
+<p>同 <code>tcmalloc span</code></p>
+</li>
+<li>
+<p>mcache</p>
+<p>类似于 <code>tcmalloc ThreadCache</code>,区别在于前者和线程绑定，后者和golang的 <code>P</code> 绑定</p>
+</li>
+<li>
+<p>mcentral
+类似于 <code>tcmalloc CentarlCache</code>，用以mcache空间不够时从这里申请</p>
+</li>
+<li>
+<p>mheap</p>
+<p>类似于 <code>tcmalloc pageheap</code> ，当初始化一个大对象时，直接走 heap 分配，go后期版本叫做 <code>arenas</code></p>
+</li>
+</ul>
+<h2 id="对象大小定义">对象大小定义</h2>
+<pre><code>&gt; golang 并未区分为大中小对象，而是区分为 tiny，小，大，如 tiny[1byte,16byte),并且不包含指针,小对象为[16b,32kb],大对象 &gt; 32kb
+</code></pre>
+<h1 id="逃逸分析">逃逸分析</h1>
+<blockquote>
+<p>go build -gcflags=&quot;-m&quot;</p>
+</blockquote>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

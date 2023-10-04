@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Treasure</title>
+    <link>https://domyson.github.io/categories/</link>
+    <description>Recent content in Categories on Treasure</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 17 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>sknt</title>
+      <link>https://domyson.github.io/categories/sknt/</link>
+      <pubDate>Sat, 17 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/categories/sknt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cloud native</title>
+      <link>https://domyson.github.io/categories/cloud-native/</link>
+      <pubDate>Sun, 11 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/categories/cloud-native/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>redis</title>
+      <link>https://domyson.github.io/categories/redis/</link>
+      <pubDate>Thu, 24 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/categories/redis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mysql</title>
+      <link>https://domyson.github.io/categories/mysql/</link>
+      <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/categories/mysql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>https://domyson.github.io/categories/linux/</link>
+      <pubDate>Sat, 19 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/categories/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Go</title>
+      <link>https://domyson.github.io/categories/go/</link>
+      <pubDate>Fri, 07 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/categories/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>开源库</title>
+      <link>https://domyson.github.io/categories/%E5%BC%80%E6%BA%90%E5%BA%93/</link>
+      <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/categories/%E5%BC%80%E6%BA%90%E5%BA%93/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>others</title>
+      <link>https://domyson.github.io/categories/others/</link>
+      <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/categories/others/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>unity</title>
+      <link>https://domyson.github.io/categories/unity/</link>
+      <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/categories/unity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>c</title>
+      <link>https://domyson.github.io/categories/c/</link>
+      <pubDate>Sat, 04 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/categories/c/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>network</title>
+      <link>https://domyson.github.io/categories/network/</link>
+      <pubDate>Sun, 09 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/categories/network/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

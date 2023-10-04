@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bbuf on Treasure</title>
+    <link>https://domyson.github.io/tags/bbuf/</link>
+    <description>Recent content in bbuf on Treasure</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 21 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/tags/bbuf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>bbuf 编码协议</title>
+      <link>https://domyson.github.io/post/sknt/bbuf/</link>
+      <pubDate>Wed, 21 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/post/sknt/bbuf/</guid>
+      <description>前言 其实在cobweb之初就设计了一种编码协议(bbuf)，用于 RPC Server,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护， 而后期在研发 sknt 的时候，发现需要与多种语言交互，显然 json,xml 不是一个很好的选择，而 protobuf 对弱类型语言支持不友好。
+Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd64 format compress rate encode rate decode rate json std 0% 0%( 213.8 ns/op) 0%(1204ns/op) proto v3 -40% -51%(98.36 ns/op) -84%(190.1ns/op) bbuf -40% -76% (65.21 ns/op) -95%(62.18ns/op) 词法解析器 因为需要和强类型和弱类型进行转换，词法解析器和描述文件需要一个抽象共用类型加以识别，所以对于强类型语言是通过生成描述文件识别的。
+Lua5.1 是没有整数类型，需要区分浮点和整形的区别，这涉及到最终编码的尺寸，bbuf对它们进行了区分
+Lua table 纯数组table和hash table 的编码方式也是不同的，这依赖于 table 在底层的结构，若非必要不要混合。
+代码生成器 强类型和弱类型的识别是有很大区别，所以我对Lua 这边进行了直接解析，简单来说是直接通过 Lexer 生成此消息结构的元信息.
+强类型语言为了减少反射，我们需要通过文件描述来提供其成员或字段的类型以及位置而非通过反射，这个在编译期间就可以确定了而非运行时。
+此模块在当前进程中的所有服务是生效的
+设计思路 减少内存分配
+为了减少i/o和内存压力，最简单的办法是让一个字节能包含更多的消息， 如一个32bit的整形，它真的需要4byte的字节空间吗？,其二不同的分配大小影响执行速度，（如32byte和64kb 是存在明显区别）， 所以需要动态计算分配尺寸。</description>
+    </item>
+    
+  </channel>
+</rss>

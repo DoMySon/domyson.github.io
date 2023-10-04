@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>bbuf 编码协议 // Treasure</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.119.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Treasure" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/main.min.3c3c186cd62e563ad6e2f00a89dbee656ab912d1d46f856b5605dd0232521e2a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="bbuf 编码协议"/>
+<meta name="twitter:description" content="前言 其实在cobweb之初就设计了一种编码协议(bbuf)，用于 RPC Server,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护， 而后期在研发 sknt 的时候，发现需要与多种语言交互，显然 json,xml 不是一个很好的选择，而 protobuf 对弱类型语言支持不友好。
+Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd64 format compress rate encode rate decode rate json std 0% 0%( 213.8 ns/op) 0%(1204ns/op) proto v3 -40% -51%(98.36 ns/op) -84%(190.1ns/op) bbuf -40% -76% (65.21 ns/op) -95%(62.18ns/op) 词法解析器 因为需要和强类型和弱类型进行转换，词法解析器和描述文件需要一个抽象共用类型加以识别，所以对于强类型语言是通过生成描述文件识别的。
+Lua5.1 是没有整数类型，需要区分浮点和整形的区别，这涉及到最终编码的尺寸，bbuf对它们进行了区分
+Lua table 纯数组table和hash table 的编码方式也是不同的，这依赖于 table 在底层的结构，若非必要不要混合。
+代码生成器 强类型和弱类型的识别是有很大区别，所以我对Lua 这边进行了直接解析，简单来说是直接通过 Lexer 生成此消息结构的元信息.
+强类型语言为了减少反射，我们需要通过文件描述来提供其成员或字段的类型以及位置而非通过反射，这个在编译期间就可以确定了而非运行时。
+此模块在当前进程中的所有服务是生效的
+设计思路 减少内存分配
+为了减少i/o和内存压力，最简单的办法是让一个字节能包含更多的消息， 如一个32bit的整形，它真的需要4byte的字节空间吗？,其二不同的分配大小影响执行速度，（如32byte和64kb 是存在明显区别）， 所以需要动态计算分配尺寸。"/>
+
+    <meta property="og:title" content="bbuf 编码协议" />
+<meta property="og:description" content="前言 其实在cobweb之初就设计了一种编码协议(bbuf)，用于 RPC Server,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护， 而后期在研发 sknt 的时候，发现需要与多种语言交互，显然 json,xml 不是一个很好的选择，而 protobuf 对弱类型语言支持不友好。
+Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd64 format compress rate encode rate decode rate json std 0% 0%( 213.8 ns/op) 0%(1204ns/op) proto v3 -40% -51%(98.36 ns/op) -84%(190.1ns/op) bbuf -40% -76% (65.21 ns/op) -95%(62.18ns/op) 词法解析器 因为需要和强类型和弱类型进行转换，词法解析器和描述文件需要一个抽象共用类型加以识别，所以对于强类型语言是通过生成描述文件识别的。
+Lua5.1 是没有整数类型，需要区分浮点和整形的区别，这涉及到最终编码的尺寸，bbuf对它们进行了区分
+Lua table 纯数组table和hash table 的编码方式也是不同的，这依赖于 table 在底层的结构，若非必要不要混合。
+代码生成器 强类型和弱类型的识别是有很大区别，所以我对Lua 这边进行了直接解析，简单来说是直接通过 Lexer 生成此消息结构的元信息.
+强类型语言为了减少反射，我们需要通过文件描述来提供其成员或字段的类型以及位置而非通过反射，这个在编译期间就可以确定了而非运行时。
+此模块在当前进程中的所有服务是生效的
+设计思路 减少内存分配
+为了减少i/o和内存压力，最简单的办法是让一个字节能包含更多的消息， 如一个32bit的整形，它真的需要4byte的字节空间吗？,其二不同的分配大小影响执行速度，（如32byte和64kb 是存在明显区别）， 所以需要动态计算分配尺寸。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://domyson.github.io/post/sknt/bbuf/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-09-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-09-21T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://domyson.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Treasure" /></a>
+      <span class="app-header-title">Treasure</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/about/">About</a>
+      </nav>
+      <p>无关迟暮,不问翻覆</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/domyson" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">bbuf 编码协议</h1>
+      <div class="post-meta">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Sep 21, 2022
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          2 min read
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://domyson.github.io/tags/bbuf/">bbuf</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="前言">前言</h1>
+<p>其实在<code>cobweb</code>之初就设计了一种编码协议(bbuf)，用于 <code>RPC Server</code>,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护，
+而后期在研发 <code>sknt</code> 的时候，发现需要与多种语言交互，显然 <code>json</code>,<code>xml</code> 不是一个很好的选择，而 <code>protobuf</code> 对弱类型语言支持不友好。</p>
+<h2 id="benchmark">Benchmark</h2>
+<ul>
+<li>cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz</li>
+<li>os: windows11</li>
+<li>arch: amd64</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">format</th>
+<th style="text-align:center">compress rate</th>
+<th style="text-align:center">encode rate</th>
+<th style="text-align:center">decode rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">json std</td>
+<td style="text-align:center">0%</td>
+<td style="text-align:center">0%( 213.8 ns/op)</td>
+<td style="text-align:center">0%(1204ns/op)</td>
+</tr>
+<tr>
+<td style="text-align:center">proto v3</td>
+<td style="text-align:center">-40%</td>
+<td style="text-align:center">-51%(98.36 ns/op)</td>
+<td style="text-align:center">-84%(190.1ns/op)</td>
+</tr>
+<tr>
+<td style="text-align:center">bbuf</td>
+<td style="text-align:center">-40%</td>
+<td style="text-align:center">-76% (65.21 ns/op)</td>
+<td style="text-align:center">-95%(62.18ns/op)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="词法解析器">词法解析器</h2>
+<ul>
+<li>
+<p>因为需要和强类型和弱类型进行转换，词法解析器和描述文件需要一个抽象共用类型加以识别，所以对于强类型语言是通过生成描述文件识别的。</p>
+</li>
+<li>
+<p>Lua5.1 是没有整数类型，需要区分浮点和整形的区别，这涉及到最终编码的尺寸，bbuf对它们进行了区分</p>
+</li>
+<li>
+<p>Lua table 纯数组table和hash table 的编码方式也是不同的，这依赖于 table 在底层的结构，若非必要不要混合。</p>
+</li>
+</ul>
+<h2 id="代码生成器">代码生成器</h2>
+<ol>
+<li>
+<p>强类型和弱类型的识别是有很大区别，所以我对<code>Lua</code> 这边进行了直接解析，简单来说是直接通过 <code>Lexer</code> 生成此消息结构的元信息.</p>
+</li>
+<li>
+<p>强类型语言为了减少反射，我们需要通过文件描述来提供其成员或字段的类型以及位置而非通过反射，这个在编译期间就可以确定了而非运行时。</p>
+</li>
+<li>
+<p>此模块在当前进程中的所有服务是生效的</p>
+</li>
+</ol>
+<h2 id="设计思路">设计思路</h2>
+<ol>
+<li>
+<p>减少内存分配</p>
+<p>为了减少i/o和内存压力，最简单的办法是让一个字节能包含更多的消息， 如一个32bit的整形，它真的需要4byte的字节空间吗？,其二不同的分配大小影响执行速度，（如32byte和64kb 是存在明显区别），
+所以需要动态计算分配尺寸。</p>
+</li>
+<li>
+<p><code>unsafe.Pointer</code></p>
+<p>显然反射是所有带运行时语言的一个痛点，而通过 <code>unsafe.Pointer</code> 能明显提高执行速率，所以 <code>bbuf</code> 采用了大量非安全指针操作，所以关于生成文件尽量不要进行任何编辑，以免造成内存偏移位置错误。</p>
+</li>
+<li>
+<p>interface</p>
+<p>当然在 <code>bbuf</code> 设计之初是没有考虑嵌套消息的，其他方式亦可实现，因为这会加大分析负担，而实际情况恰恰相反，消息嵌套是实际业务中必不可少的一部分，它明显降低了技术门槛，</p>
+<p>因为但go语言的接口本质上是两个指针（其一指向类型系统，其二指向该类型的具体方法），为了能够指针能正确到的索引到指定类型，我们需要一点点反射来支持（这个只会在启动时运行，大可不必担心）。</p>
+</li>
+<li>
+<p>在<code>sknt</code>中使用</p>
+<ol>
+<li>Lua</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#66d9ef">local</span> bbuf <span style="color:#f92672">=</span> require(<span style="color:#e6db74">&#34;sknt.bbuf&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> err <span style="color:#f92672">=</span> bbuf.load(<span style="color:#e6db74">&#34;file path or dir path&#34;</span>)  <span style="color:#75715e">-- 注意 此函数执行结果在当前节点是共享的，所以只需要加载一次，并返回一个错误（string）</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> err<span style="color:#f92672">~=</span><span style="color:#66d9ef">nil</span> <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">//</span> <span style="color:#66d9ef">do</span> something
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 此时返回的data是 `userdata`,不要尝试访问它，但你可以通过 `sknt.free` 来尝试，主要取决于这个userdata是否实现了 Freeable 接口.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 也可以通过`sknt.send,sknt.call` 来发送到其他服务</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> data ,err <span style="color:#f92672">=</span> bbuf.marshal(string,table)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 仅返回一个错误，并将具体数据映射到传入的 `table` 中</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> err <span style="color:#f92672">=</span> bbuf.unmarshal(string,data)  
+</span></span></code></pre></div><ol start="2">
+<li>go</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// 可选参数n 是为了减少 sizeof 的时间，如果你确定消息内容是一致的 那么这个值你可以传入，否则使用`-1`来让它自动计算
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">bbuf</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">msg</span>[,<span style="color:#a6e22e">n</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">bbuf</span>.<span style="color:#a6e22e">Unmarshal</span>([]<span style="color:#66d9ef">byte</span>,<span style="color:#a6e22e">msg</span>)
+</span></span></code></pre></div></li>
+<li>
+<p>bbuf</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>package gen   // 区分同名消息
+</span></span><span style="display:flex;"><span>// 注释
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>enum Foo {  // 一个枚举，最终会转换为 uint32 类型进行编码
+</span></span><span style="display:flex;"><span>    A : 0
+</span></span><span style="display:flex;"><span>    B : 1
+</span></span><span style="display:flex;"><span>    C : 2
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>message empty {}  // 一个空消息
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>message PhoneNumber{  
+</span></span><span style="display:flex;"><span>    string number : 0 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    integer type : 1  // 整形的抽象类型，具体编码和长度取决于当前语言，包含(i16,u16,i32,u32,i64,u64)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    float f : 2       // 浮点的抽象类型，具体编码和长度取决于当前语言 (f32,f64)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>message Person{
+</span></span><span style="display:flex;"><span>    string name : 0
+</span></span><span style="display:flex;"><span>    integer id : 1
+</span></span><span style="display:flex;"><span>    string email: 2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    *PhoneNumber phones : 3  // 嵌套类型的数组
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    PhoneNumber phone : 4  // 嵌套类型
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>message AddressBook {
+</span></span><span style="display:flex;"><span>    *Person person : 0
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="lua-序列化-skntpackskntunpack">Lua 序列化 (sknt.pack,sknt.unpack)</h2>
+<ul>
+<li>
+<p><code>bbuf</code> 开发过程的附加产物，唯一的区别仅能在<code>lua</code>侧使用,不支持<code>userdata</code>,<code>function</code>,<code>thread</code></p>
+</li>
+<li>
+<p><code>bbuf</code> 产生的会导致新的内存分配，记得释放它，不然会造成GC</p>
+</li>
+</ul>
+<blockquote>
+<p>这里特别注明，<code>userdata</code>不支持仅仅是为了兼容节点通讯。因为它本质上一个8byte的整形(x64),而其他物理机或者进程的内存地址是不同的</p>
+</blockquote>
+<h1 id="未来将支持">未来将支持</h1>
+<ul>
+<li>
+<p><code>rpc</code> 定义</p>
+</li>
+<li>
+<p>指定字段便宜解码（beta）</p>
+</li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

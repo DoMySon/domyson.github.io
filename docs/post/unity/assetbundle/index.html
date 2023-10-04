@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>assetbundle // Treasure</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.119.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Treasure" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/main.min.3c3c186cd62e563ad6e2f00a89dbee656ab912d1d46f856b5605dd0232521e2a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="assetbundle"/>
+<meta name="twitter:description" content="Assetbundle 一种包外资源的存储方案，方便更新以及加载
+Manifest 每一个文件夹下都会有一个 Manifest文件，其作用是包含了其下资源的引用关系
+AB管理 资源分类 一般而言我们会根据语言版本进行分类，（如一些有图片文字的资源），然后根据资源的通用性区分是否是共享资源，以减少AB资源冗余，二是根据模块业务来细分。
+资源加载 首先应当加载Manifest文件读取相关依赖，常用的做法是加载到内存由用户自己控制，因为原始的结构是树状结构，当层次比较深的时候会造成搜索时间过长，转为字典的方式确保索引时间为O(1)
+依赖相关的问题，如A依赖于C，A被第一次被加载时，是需要先检查是否C是否被加载。
+资源卸载 资源卸载一般都为引用计数的方式，但某些情况下可能会出现刚卸载完就需要被再次使用的场景，这个时候做一个对象池维护一定量的内存资源是合理的方式
+其次是资源依赖，如A引用了C，B引用了C，若此时A，B被卸载的时候，C的引用数为0，那么这个时候是否应该卸载C呢？，答案是否定的，也许会存在 D，E,F 同样依赖于C，这个时候最好的做法是将这个资源放入池中，开启循环技术，当到达某个阈值时再释放.
+public class ABAsset{ public int Ref; public int tick; } public class ABManagment{ // per frame or interval call. public void GC(){ for (){ ... if (ab.Ref == 0){ ab.tick --; if(ab.tick &lt;= 0){ // release. } } } } } 存在的问题
+上述方案从程序的角度上看来是没有逻辑问题的，但如果程序员忘记释放了如何解决这个问题，笔者这里分为两种，
+一种非Monobehaviour的类，可以通过析构函数。
+构建一个公共抽象，由父类实现。
+资源分包 常常见到的问题是一般资源分多大合适，官方给出的建议是3~5MB,但现实情况是分不了这么细怎么办，比如登陆场景的立绘。为了达到效果肯定是不会过大的压缩。这就引申出另外一个问题，过大的资源如何保证不卡顿。一般而言像这种大资源分两种情况
+长期使用 笔者项目一般会做资源预热，像这类资源我们会在首次登陆切换场景的时候就直接加载，保证不会被回收。
+仅使用一次 也会先预热，但之后就会立即卸载，以保证不会占用过多的内存资源
+引用 运行时，AssetBundle驻留控制在40MB以内、数量在1000个以内； 使用LZ4压缩&#43;LoadFromFile加载； 结合项目情况根据依赖树制定打包策略，如公共资源单独打AssetBundle、按使用场景和功能类型分包、独立资源打到一起、Shader/字体等（较为细碎、内存不高、高频使用、最好常驻的）资源打包到一起，启动游戏的时候常驻内存； 结合热更新需求打包； 依赖打包，追求0冗余； 粒度具体没有定值，近期经验上来看会需要尤其警惕AssetBundle包体超过10MB的。 "/>
+
+    <meta property="og:title" content="assetbundle" />
+<meta property="og:description" content="Assetbundle 一种包外资源的存储方案，方便更新以及加载
+Manifest 每一个文件夹下都会有一个 Manifest文件，其作用是包含了其下资源的引用关系
+AB管理 资源分类 一般而言我们会根据语言版本进行分类，（如一些有图片文字的资源），然后根据资源的通用性区分是否是共享资源，以减少AB资源冗余，二是根据模块业务来细分。
+资源加载 首先应当加载Manifest文件读取相关依赖，常用的做法是加载到内存由用户自己控制，因为原始的结构是树状结构，当层次比较深的时候会造成搜索时间过长，转为字典的方式确保索引时间为O(1)
+依赖相关的问题，如A依赖于C，A被第一次被加载时，是需要先检查是否C是否被加载。
+资源卸载 资源卸载一般都为引用计数的方式，但某些情况下可能会出现刚卸载完就需要被再次使用的场景，这个时候做一个对象池维护一定量的内存资源是合理的方式
+其次是资源依赖，如A引用了C，B引用了C，若此时A，B被卸载的时候，C的引用数为0，那么这个时候是否应该卸载C呢？，答案是否定的，也许会存在 D，E,F 同样依赖于C，这个时候最好的做法是将这个资源放入池中，开启循环技术，当到达某个阈值时再释放.
+public class ABAsset{ public int Ref; public int tick; } public class ABManagment{ // per frame or interval call. public void GC(){ for (){ ... if (ab.Ref == 0){ ab.tick --; if(ab.tick &lt;= 0){ // release. } } } } } 存在的问题
+上述方案从程序的角度上看来是没有逻辑问题的，但如果程序员忘记释放了如何解决这个问题，笔者这里分为两种，
+一种非Monobehaviour的类，可以通过析构函数。
+构建一个公共抽象，由父类实现。
+资源分包 常常见到的问题是一般资源分多大合适，官方给出的建议是3~5MB,但现实情况是分不了这么细怎么办，比如登陆场景的立绘。为了达到效果肯定是不会过大的压缩。这就引申出另外一个问题，过大的资源如何保证不卡顿。一般而言像这种大资源分两种情况
+长期使用 笔者项目一般会做资源预热，像这类资源我们会在首次登陆切换场景的时候就直接加载，保证不会被回收。
+仅使用一次 也会先预热，但之后就会立即卸载，以保证不会占用过多的内存资源
+引用 运行时，AssetBundle驻留控制在40MB以内、数量在1000个以内； 使用LZ4压缩&#43;LoadFromFile加载； 结合项目情况根据依赖树制定打包策略，如公共资源单独打AssetBundle、按使用场景和功能类型分包、独立资源打到一起、Shader/字体等（较为细碎、内存不高、高频使用、最好常驻的）资源打包到一起，启动游戏的时候常驻内存； 结合热更新需求打包； 依赖打包，追求0冗余； 粒度具体没有定值，近期经验上来看会需要尤其警惕AssetBundle包体超过10MB的。 " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://domyson.github.io/post/unity/assetbundle/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-09-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-09-10T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://domyson.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Treasure" /></a>
+      <span class="app-header-title">Treasure</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/about/">About</a>
+      </nav>
+      <p>无关迟暮,不问翻覆</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/domyson" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">assetbundle</h1>
+      <div class="post-meta">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Sep 10, 2020
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://domyson.github.io/tags/">Tags</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="assetbundle">Assetbundle</h1>
+<blockquote>
+<p>一种包外资源的存储方案，方便更新以及加载</p>
+</blockquote>
+<h1 id="manifest">Manifest</h1>
+<blockquote>
+<p>每一个文件夹下都会有一个 Manifest文件，其作用是包含了其下资源的引用关系</p>
+</blockquote>
+<h1 id="ab管理">AB管理</h1>
+<ul>
+<li>资源分类</li>
+</ul>
+<p>一般而言我们会根据语言版本进行分类，（如一些有图片文字的资源），然后根据资源的通用性区分是否是共享资源，以减少AB资源冗余，二是根据模块业务来细分。</p>
+<ul>
+<li>资源加载</li>
+</ul>
+<p>首先应当加载<code>Manifest</code>文件读取相关依赖，常用的做法是加载到内存由用户自己控制，因为原始的结构是树状结构，当层次比较深的时候会造成搜索时间过长，转为字典的方式确保索引时间为O(1)</p>
+<p>依赖相关的问题，如A依赖于C，A被第一次被加载时，是需要先检查是否C是否被加载。</p>
+<ul>
+<li>资源卸载</li>
+</ul>
+<p>资源卸载一般都为引用计数的方式，但某些情况下可能会出现刚卸载完就需要被再次使用的场景，这个时候做一个对象池维护一定量的内存资源是合理的方式</p>
+<p>其次是资源依赖，如A引用了C，B引用了C，若此时A，B被卸载的时候，C的引用数为0，那么这个时候是否应该卸载C呢？，答案是否定的，也许会存在 D，E,F 同样依赖于C，这个时候最好的做法是将这个资源放入池中，开启循环技术，当到达某个阈值时再释放.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ABAsset</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> Ref;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> tick;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ABManagment</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// per frame or interval call.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> GC(){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (){
+</span></span><span style="display:flex;"><span>            ...
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (ab.Ref == <span style="color:#ae81ff">0</span>){
+</span></span><span style="display:flex;"><span>                ab.tick --;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(ab.tick &lt;= <span style="color:#ae81ff">0</span>){
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// release.</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>存在的问题</p>
+<p>上述方案从程序的角度上看来是没有逻辑问题的，但如果程序员忘记释放了如何解决这个问题，笔者这里分为两种，</p>
+<ul>
+<li>
+<p>一种非<code>Monobehaviour</code>的类，可以通过析构函数。</p>
+</li>
+<li>
+<p>构建一个公共抽象，由父类实现。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="资源分包">资源分包</h1>
+<p>常常见到的问题是一般资源分多大合适，官方给出的建议是<code>3~5MB</code>,但现实情况是分不了这么细怎么办，比如登陆场景的立绘。为了达到效果肯定是不会过大的压缩。这就引申出另外一个问题，过大的资源如何保证不卡顿。一般而言像这种大资源分两种情况</p>
+<ul>
+<li>
+<p>长期使用
+笔者项目一般会做资源预热，像这类资源我们会在首次登陆切换场景的时候就直接加载，保证不会被回收。</p>
+</li>
+<li>
+<p>仅使用一次
+也会先预热，但之后就会立即卸载，以保证不会占用过多的内存资源</p>
+</li>
+</ul>
+<h1 id="引用httpszhuanlanzhihucomp593117796"><a href="https://zhuanlan.zhihu.com/p/593117796">引用</a></h1>
+<ol>
+<li>运行时，AssetBundle驻留控制在40MB以内、数量在1000个以内；</li>
+<li>使用LZ4压缩+LoadFromFile加载；</li>
+<li>结合项目情况根据依赖树制定打包策略，如公共资源单独打AssetBundle、按使用场景和功能类型分包、独立资源打到一起、Shader/字体等（较为细碎、内存不高、高频使用、最好常驻的）资源打包到一起，启动游戏的时候常驻内存；</li>
+<li>结合热更新需求打包；</li>
+<li>依赖打包，追求0冗余；</li>
+<li>粒度具体没有定值，近期经验上来看会需要尤其警惕AssetBundle包体超过10MB的。</li>
+</ol>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

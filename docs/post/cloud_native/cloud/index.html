@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>cloud native // Treasure</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.119.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Treasure" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/main.min.3c3c186cd62e563ad6e2f00a89dbee656ab912d1d46f856b5605dd0232521e2a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="cloud native"/>
+<meta name="twitter:description" content="什么是云原生 Cloud表示应用程序位于云中，而不是传统的数据中心；
+Native表示应用程序从设计之初即考虑到云的环境，原生为云而设计，在云上以最佳姿势运行，充分利用和发挥云平台的弹性&#43;分布式优势。
+简单理解为：云原生 = DevOps&#43;持续交付(Continuous Delivery)&#43;微服务(Micro Services)&#43;敏捷基础设施(Agile Infrastructure)&#43;12要素(The Twelve-Factor App)&#43;服务网格（Service Mesh）&#43;声明式API。
+云原生产生的背景 随着云计算的发展，企业上云是必然趋势。目前大部分云化的应用都是基于传统软件架构搭建的，然后移植到云上运行，和云平台整合度非常低，主要体现以下几个方面
+操作系统依赖强
+系统紧耦合
+手动化拓展
+恢复缓慢
+瀑布发布
+云原生的定义 不同的人有不同的定义
+简单来说，cloud native 为用户指定了一条底心智负担，敏捷，可拓展，可复制的方式最大化利用云能力，发挥云价值的最佳路径
+cloud native 相关技术 主要包括 容器，微服务，service-mesh，不可变基础设施，声明式api
+容器技术
+微服务
+service-mesh
+不可变基础设施
+声明式api
+cloud native 意义 编排和管理 编排和调度 容器的编排和管理可以说是云原生的基石，而 Kubernetes 可以说是这个领域的事实标准，但事实上k8s只是一个充分条件而不是必要条件，因为其它的也可以做，如 Docker Swarm
+一致性和服务发现：各服务之间的协同以及服务发现是分布式计算中的核心，分布式架构作为云原生的基础特性之一可以说是不可或缺的功能组件，如 zookeeper ，consul，etcd等
+RPC：
+服务代理
+API网关：主要对所有API的调度进行进行统一接入和管理，认证，授权等。
+servic mesh：服务网格是用于控制应用的不同部分之间如何共享数据，服务网格是内置于应用程序中的专用基础架构层，用于记录应用的不同部分是否能正常交互。服务网格可以更细粒度地为每个服务提供限流、管控、熔断、安全等功能 （Istio）"/>
+
+    <meta property="og:title" content="cloud native" />
+<meta property="og:description" content="什么是云原生 Cloud表示应用程序位于云中，而不是传统的数据中心；
+Native表示应用程序从设计之初即考虑到云的环境，原生为云而设计，在云上以最佳姿势运行，充分利用和发挥云平台的弹性&#43;分布式优势。
+简单理解为：云原生 = DevOps&#43;持续交付(Continuous Delivery)&#43;微服务(Micro Services)&#43;敏捷基础设施(Agile Infrastructure)&#43;12要素(The Twelve-Factor App)&#43;服务网格（Service Mesh）&#43;声明式API。
+云原生产生的背景 随着云计算的发展，企业上云是必然趋势。目前大部分云化的应用都是基于传统软件架构搭建的，然后移植到云上运行，和云平台整合度非常低，主要体现以下几个方面
+操作系统依赖强
+系统紧耦合
+手动化拓展
+恢复缓慢
+瀑布发布
+云原生的定义 不同的人有不同的定义
+简单来说，cloud native 为用户指定了一条底心智负担，敏捷，可拓展，可复制的方式最大化利用云能力，发挥云价值的最佳路径
+cloud native 相关技术 主要包括 容器，微服务，service-mesh，不可变基础设施，声明式api
+容器技术
+微服务
+service-mesh
+不可变基础设施
+声明式api
+cloud native 意义 编排和管理 编排和调度 容器的编排和管理可以说是云原生的基石，而 Kubernetes 可以说是这个领域的事实标准，但事实上k8s只是一个充分条件而不是必要条件，因为其它的也可以做，如 Docker Swarm
+一致性和服务发现：各服务之间的协同以及服务发现是分布式计算中的核心，分布式架构作为云原生的基础特性之一可以说是不可或缺的功能组件，如 zookeeper ，consul，etcd等
+RPC：
+服务代理
+API网关：主要对所有API的调度进行进行统一接入和管理，认证，授权等。
+servic mesh：服务网格是用于控制应用的不同部分之间如何共享数据，服务网格是内置于应用程序中的专用基础架构层，用于记录应用的不同部分是否能正常交互。服务网格可以更细粒度地为每个服务提供限流、管控、熔断、安全等功能 （Istio）" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://domyson.github.io/post/cloud_native/cloud/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-12-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-12-19T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://domyson.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Treasure" /></a>
+      <span class="app-header-title">Treasure</span>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/about/">About</a>
+      </nav>
+      <p>无关迟暮,不问翻覆</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/domyson" target="_blank" rel="noreferrer noopener me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">cloud native</h1>
+      <div class="post-meta">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Dec 19, 2020
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="什么是云原生">什么是云原生</h1>
+<p>Cloud表示应用程序位于云中，而不是传统的数据中心；</p>
+<p>Native表示应用程序从设计之初即考虑到云的环境，原生为云而设计，在云上以最佳姿势运行，充分利用和发挥云平台的弹性+分布式优势。</p>
+<p>简单理解为：云原生 = DevOps+持续交付(Continuous Delivery)+微服务(Micro Services)+敏捷基础设施(Agile Infrastructure)+12要素(The Twelve-Factor App)+服务网格（Service Mesh）+声明式API。</p>
+<h1 id="云原生产生的背景">云原生产生的背景</h1>
+<p>随着云计算的发展，企业上云是必然趋势。目前大部分云化的应用都是基于传统软件架构搭建的，然后移植到云上运行，和云平台整合度非常低，主要体现以下几个方面</p>
+<ul>
+<li>
+<p>操作系统依赖强</p>
+</li>
+<li>
+<p>系统紧耦合</p>
+</li>
+<li>
+<p>手动化拓展</p>
+</li>
+<li>
+<p>恢复缓慢</p>
+</li>
+<li>
+<p>瀑布发布</p>
+</li>
+</ul>
+<h1 id="云原生的定义">云原生的定义</h1>
+<p>不同的人有不同的定义</p>
+<p>简单来说，cloud native 为用户指定了一条底心智负担，敏捷，可拓展，可复制的方式最大化利用云能力，发挥云价值的最佳路径</p>
+<h1 id="cloud-native-相关技术">cloud native 相关技术</h1>
+<p>主要包括 容器，微服务，service-mesh，不可变基础设施，声明式api</p>
+<ul>
+<li>
+<p>容器技术</p>
+</li>
+<li>
+<p>微服务</p>
+</li>
+<li>
+<p>service-mesh</p>
+</li>
+<li>
+<p>不可变基础设施</p>
+</li>
+<li>
+<p>声明式api</p>
+</li>
+</ul>
+<h1 id="cloud-native-意义">cloud native 意义</h1>
+<h1 id="编排和管理">编排和管理</h1>
+<h2 id="编排和调度">编排和调度</h2>
+<ul>
+<li>
+<p>容器的编排和管理可以说是云原生的基石，而 Kubernetes 可以说是这个领域的事实标准，但事实上k8s只是一个充分条件而不是必要条件，因为其它的也可以做，如 Docker Swarm</p>
+</li>
+<li>
+<p>一致性和服务发现：各服务之间的协同以及服务发现是分布式计算中的核心，分布式架构作为云原生的基础特性之一可以说是不可或缺的功能组件，如 zookeeper ，consul，etcd等</p>
+</li>
+<li>
+<p>RPC：</p>
+</li>
+<li>
+<p>服务代理</p>
+</li>
+<li>
+<p>API网关：主要对所有API的调度进行进行统一接入和管理，认证，授权等。</p>
+</li>
+<li>
+<p>servic mesh：服务网格是用于控制应用的不同部分之间如何共享数据，服务网格是内置于应用程序中的专用基础架构层，用于记录应用的不同部分是否能正常交互。服务网格可以更细粒度地为每个服务提供限流、管控、熔断、安全等功能 （Istio）</p>
+</li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
