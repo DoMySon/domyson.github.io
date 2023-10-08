@@ -8,7 +8,6 @@ toc: true
 draft: false
 ---
 
-
 # 前言
 
 其实在`cobweb`之初就设计了一种编码协议(kproto)，用于内部消息的编码,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护，
@@ -136,4 +135,4 @@ message AddressBook {
 + 指定字段便宜解码（beta）
 
 
-
+{{< adsense-footer>}}
