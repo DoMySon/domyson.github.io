@@ -7,10 +7,12 @@ update:
 
 
 run:
-	make build
+	@for i in `ls ./doc`;do if [ "$i" != ads.txt ];then \
+	rm -rf ./docs/$i; \
+	fi; \
+	done; \
 	
-	
-	@hugo server -d docs
+	@hugo server -d doc
 
 build:
 	@for i in `ls ./docs`;do if [ "$i" != ads.txt ];then \

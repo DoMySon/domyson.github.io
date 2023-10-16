@@ -1247,9 +1247,10 @@ who
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://domyson.github.io/post/readme/</guid>
-      <description>专业 Unity、Golang 划水师，专注于各种花式打杂，会拼写 C、Golang、CSharp、Lua 等单词
-技术栈 Docker、Nginx、Golang、Git、Centos、Markdown、WebHook、hugo
-Github Pages、hugo</description>
+      <description>About me 专业 Unity、Golang 划水师，专注于各种花式打杂，会拼写 C、Golang、CSharp、Lua 等单词
+Deploy Before 2022.5 Docker、Nginx、Golang、Git、Centos、Markdown、WebHook、hugo
+Now! Github Pages+hugo
+Thanks Themes-Style Supported</description>
     </item>
     
   </channel>
