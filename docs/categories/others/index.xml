@@ -1,44 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>others on Treasure</title>
+    <title>others on 满船清梦压星河</title>
     <link>https://domyson.github.io/categories/others/</link>
-    <description>Recent content in others on Treasure</description>
+    <description>Recent content in others on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Mon, 11 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/categories/others/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>消息队列</title>
-      <link>https://domyson.github.io/post/others/mq/</link>
-      <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://domyson.github.io/post/others/mq/</guid>
-      <description>它的本质，就是个转发器，包含发消息、存消息、消费消息的过程
-优势 应用解耦 流量削峰 异步处理 通讯 削峰 当某个系统处理为n时，而此时请求量为 m*n 时，系统可以每次从mq中拉出n个依次处理
-实现一个消息队列 sknt </description>
-    </item>
-    
-    <item>
-      <title>Msys2</title>
-      <link>https://domyson.github.io/post/others/msys2/</link>
-      <pubDate>Thu, 12 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://domyson.github.io/post/others/msys2/</guid>
-      <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;msys2集成了mingw，同时msys2还有一些其他的特性，例如包管理器等。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;msys2可以在windows下搭建一个完美的类linux环境，包括bash、vim、gcc、make等工具都可以通过包管理器来添加和卸载&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;msys2的包管理器是使用的是 &lt;code&gt;pacman&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.msys2.org/&#34;&gt;下载地址&lt;/a&gt;&lt;/p&gt;</description>
-    </item>
-    
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 13 May 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/categories/others/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Protobuf3</title>
       <link>https://domyson.github.io/post/others/protobuf/</link>

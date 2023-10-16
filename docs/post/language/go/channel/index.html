@@ -1,95 +1,217 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>channel // Treasure</title>
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.118.2">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="Treasure" />
-    <meta name="description" content="" />
-    <link rel="stylesheet" href="/css/main.min.3c3c186cd62e563ad6e2f00a89dbee656ab912d1d46f856b5605dd0232521e2a.css" />
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='https://domyson.github.io/css/frameworks.min.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/github.min.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/github-style.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
+    <title>channel - 满船清梦压星河</title>
+    
+    <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
+    
+    <meta name="theme-color" content="#1e2327">
 
     
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="channel"/>
-<meta name="twitter:description" content="
-CSP(communicating sequential processes) 模型由并发执行实体(进程，线程或协程)，和消息通道组成，实体之间通过消息通道发送消息进行通信。和 Actor 模型不同，CSP 模型关注的是消息发送的载体，即通道，而不是发送消息的执行实体。Go 语言的并发模型参考了 CSP 理论，其中执行实体对应的是 goroutine， 消息通道对应的就是 channel。CSP 模型的核心是：不通过共享内存来达到通讯，而是通过通讯来共享内存。
-
-
-channel 提供了一种通信机制，通过它，一个 goroutine 可以与另一 goroutine 发送消息。channel 本身还需关联了一个类型，也就是可以发送数据的类型。可以通过 len() 获取通道当前缓冲数量。 cap() 获取通道最大缓冲。
-"/>
-
-    <meta property="og:title" content="channel" />
-<meta property="og:description" content="
-CSP(communicating sequential processes) 模型由并发执行实体(进程，线程或协程)，和消息通道组成，实体之间通过消息通道发送消息进行通信。和 Actor 模型不同，CSP 模型关注的是消息发送的载体，即通道，而不是发送消息的执行实体。Go 语言的并发模型参考了 CSP 理论，其中执行实体对应的是 goroutine， 消息通道对应的就是 channel。CSP 模型的核心是：不通过共享内存来达到通讯，而是通过通讯来共享内存。
-
-
+    <meta name="description"
+  content=" CSP(communicating sequential processes) 模型由并发执行实体(进程，线程或协程)，和消息通道组成，实体之间通过消息通道发送消息进行通信。和 Actor 模型不同，CSP 模型关注的是消息发送的载体，即通道，而不是发送消息的执行实体。Go 语言的并发模型参考了 CSP 理论，其中执行实体对应的是 goroutine， 消息通道对应的就是 channel。CSP 模型的核心是：不通过共享内存来达到通讯，而是通过通讯来共享内存。
 channel 提供了一种通信机制，通过它，一个 goroutine 可以与另一 goroutine 发送消息。channel 本身还需关联了一个类型，也就是可以发送数据的类型。可以通过 len() 获取通道当前缓冲数量。 cap() 获取通道最大缓冲。
 " />
+<meta name="keywords"
+  content='computer tech' />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://domyson.github.io/post/language/go/channel/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="channel - 满船清梦压星河" />
+<meta name="twitter:description"
+  content=" CSP(communicating sequential processes) 模型由并发执行实体(进程，线程或协程)，和消息通道组成，实体之间通过消息通道发送消息进行通信。和 Actor 模型不同，CSP 模型关注的是消息发送的载体，即通道，而不是发送消息的执行实体。Go 语言的并发模型参考了 CSP 理论，其中执行实体对应的是 goroutine， 消息通道对应的就是 channel。CSP 模型的核心是：不通过共享内存来达到通讯，而是通过通讯来共享内存。
+channel 提供了一种通信机制，通过它，一个 goroutine 可以与另一 goroutine 发送消息。channel 本身还需关联了一个类型，也就是可以发送数据的类型。可以通过 len() 获取通道当前缓冲数量。 cap() 获取通道最大缓冲。
+" />
+<meta name="twitter:site" content="https://domyson.github.io" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image"
+  content="https://domyson.github.io">
+
+
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://domyson.github.io/post/language/go/channel/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-01-20T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-01-20T00:00:00+00:00" />
+<meta property="og:title" content="channel - 满船清梦压星河">
+<meta property="og:description"
+  content=" CSP(communicating sequential processes) 模型由并发执行实体(进程，线程或协程)，和消息通道组成，实体之间通过消息通道发送消息进行通信。和 Actor 模型不同，CSP 模型关注的是消息发送的载体，即通道，而不是发送消息的执行实体。Go 语言的并发模型参考了 CSP 理论，其中执行实体对应的是 goroutine， 消息通道对应的就是 channel。CSP 模型的核心是：不通过共享内存来达到通讯，而是通过通讯来共享内存。
+channel 提供了一种通信机制，通过它，一个 goroutine 可以与另一 goroutine 发送消息。channel 本身还需关联了一个类型，也就是可以发送数据的类型。可以通过 len() 获取通道当前缓冲数量。 cap() 获取通道最大缓冲。
+" />
+<meta property="og:url" content="https://domyson.github.io/post/language/go/channel/" />
+<meta property="og:site_name" content="channel" />
+<meta property="og:image"
+  content="https://domyson.github.io">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2020-01-20 00:00:00 &#43;0000 UTC" />
 
 
-  </head>
-  <body>
-    <header class="app-header">
-      <a href="https://domyson.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Treasure" /></a>
-      <span class="app-header-title">Treasure</span>
-      <nav class="app-header-menu">
-          <a class="app-header-menu-item" href="/">Home</a>
-             - 
-          
-          <a class="app-header-menu-item" href="/tags/">Tags</a>
-             - 
-          
-          <a class="app-header-menu-item" href="/about/">About</a>
-      </nav>
-      <p>无关迟暮,不问翻覆</p>
-      <div class="app-header-social">
-        
-          <a href="https://github.com/domyson" target="_blank" rel="noreferrer noopener me">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
-  <title>Github</title>
-  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-</svg>
-          </a>
-        
-      </div>
-    </header>
-    <main class="app-container">
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class ="post-title">channel</h1>
-      <div class="post-meta">
-        <div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
-  <title>calendar</title>
-  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
-</svg>
-          Jan 20, 2020
-        </div>
-        <div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
-  <title>clock</title>
-  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
-</svg>
-          2 min read
-        </div>
-        <div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
-  <title>tag</title>
-  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
-</svg>
-              <a class="tag" href="https://domyson.github.io/tags/go%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">go源码分析</a>
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+  <div style="position: relative">
+  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+      <a class="Header-link" href="https://domyson.github.io">
+        <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button class="Header-link btn-link js-details-target" type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div style="display: none;" id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+        <div class="position-relative">
+          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+            autocomplete="off">
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+              <input type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q" value="" placeholder="Search" autocomplete="off">
+              <input type="hidden" name="q" value="site:https://domyson.github.io">
+            </label>
+          </form>
         </div>
       </div>
-    </header>
-    <div class="post-content">
-      <blockquote>
+    </div>
+
+    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+      <a class="Header-link " href="https://domyson.github.io">
+        <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+          width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item" style="margin-right: 0;">
+      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+          version="1.1" width="16" height="16">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </header>
+</div>
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io">
+                  <img class=" avatar-user"
+                    src="https://domyson.github.io/images/avatar.png"
+                    width="32" height="32"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://domyson.github.io">Treasure</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://domyson.github.io/post/language/go/channel/">channel</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Mon, 20 Jan 2020 00:00:00 &#43;0000"
+                    class="no-wrap">
+                    Mon, 20 Jan 2020 00:00:00 &#43;0000</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Sat, 07 Oct 2023 21:54:38 &#43;0800"
+                    class="no-wrap">
+                    Sat, 07 Oct 2023 21:54:38 &#43;0800</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      1595 Words
+                    
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                    
+                    <a class="muted-link mr-3" href="/tags/go%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      go源码分析
+                    </a>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><blockquote>
 <p><code>CSP(communicating sequential processes)</code> 模型由并发执行实体(进程，线程或协程)，和消息通道组成，实体之间通过消息通道发送消息进行通信。和 <code>Actor</code> 模型不同，<code>CSP</code> 模型关注的是消息发送的载体，即通道，而不是发送消息的执行实体。Go 语言的并发模型参考了 CSP 理论，其中执行实体对应的是 <code>goroutine，</code> 消息通道对应的就是 <code>channel</code>。<code>CSP</code> 模型的核心是：不通过共享内存来达到通讯，而是通过通讯来共享内存。</p>
 </blockquote>
 <blockquote>
@@ -97,26 +219,26 @@ channel 提供了一种通信机制，通过它，一个 goroutine 可以与另�
 </blockquote>
 <h1 id="源码分析">源码分析</h1>
 <p><code>channel</code> 源码位于 <code>${GOPATH}/runtime/chan.go</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">hchan</span> <span style="color:#66d9ef">struct</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">qcount</span>   <span style="color:#66d9ef">uint</span>           <span style="color:#75715e">// 当前还有多少数据
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">dataqsiz</span> <span style="color:#66d9ef">uint</span>           <span style="color:#75715e">// 初始化时候设置的值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">buf</span>      <span style="color:#a6e22e">unsafe</span>.<span style="color:#a6e22e">Pointer</span> <span style="color:#75715e">// 指向环形缓冲的指针
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">elemsize</span> <span style="color:#66d9ef">uint16</span>         <span style="color:#75715e">// 元素的sizeof
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">closed</span>   <span style="color:#66d9ef">uint32</span>         <span style="color:#75715e">// 关闭标识
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">elemtype</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">_type</span> <span style="color:#75715e">// element type
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">sendx</span>    <span style="color:#66d9ef">uint</span>   <span style="color:#75715e">// 相对于环形缓冲的写指针
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">recvx</span>    <span style="color:#66d9ef">uint</span>   <span style="color:#75715e">// 相对于环形缓冲的读指针
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">recvq</span>    <span style="color:#a6e22e">waitq</span>  <span style="color:#75715e">// 等待接收的groutine
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">sendq</span>    <span style="color:#a6e22e">waitq</span>  <span style="color:#75715e">// 等待发送的groutine
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// lock protects all fields in hchan, as well as several
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// fields in sudogs blocked on this channel.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// Do not change another G&#39;s status while holding this lock
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// (in particular, do not ready a G), as this can deadlock
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// with stack shrinking.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">lock</span> <span style="color:#a6e22e">mutex</span>  <span style="color:#75715e">// 互斥锁
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">hchan</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">qcount</span>   <span class="kt">uint</span>           <span class="c1">// 当前还有多少数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">dataqsiz</span> <span class="kt">uint</span>           <span class="c1">// 初始化时候设置的值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">buf</span>      <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span> <span class="c1">// 指向环形缓冲的指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">elemsize</span> <span class="kt">uint16</span>         <span class="c1">// 元素的sizeof
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">closed</span>   <span class="kt">uint32</span>         <span class="c1">// 关闭标识
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">elemtype</span> <span class="o">*</span><span class="nx">_type</span> <span class="c1">// element type
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">sendx</span>    <span class="kt">uint</span>   <span class="c1">// 相对于环形缓冲的写指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">recvx</span>    <span class="kt">uint</span>   <span class="c1">// 相对于环形缓冲的读指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">recvq</span>    <span class="nx">waitq</span>  <span class="c1">// 等待接收的groutine
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">sendq</span>    <span class="nx">waitq</span>  <span class="c1">// 等待发送的groutine
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// lock protects all fields in hchan, as well as several
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// fields in sudogs blocked on this channel.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// Do not change another G&#39;s status while holding this lock
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// (in particular, do not ready a G), as this can deadlock
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// with stack shrinking.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">lock</span> <span class="nx">mutex</span>  <span class="c1">// 互斥锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
 </span></span></code></pre></div><p><code>channel</code> 用于在不同的 <code>goroutine</code> 中实现数据传递和共享，是一个FIFO的队列，同样也是一个线程安全的结构。</p>
 <ol>
 <li>
@@ -159,31 +281,31 @@ channel 提供了一种通信机制，通过它，一个 goroutine 可以与另�
 <blockquote>
 <p>只能通过 <code>make</code> 创建，缓冲只对于数据未填满写，未空读，如果缓冲满了，那么些写入将阻塞，若过缓冲空了，那么读取将阻塞</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">//无缓冲，数据类型为int的channel
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">ch0</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//缓冲，数据类型为int的channel,只要容量大于0即可
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">ch1</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>,<span style="color:#ae81ff">1</span>)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//无缓冲，数据类型为int的channel
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ch0</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//缓冲，数据类型为int的channel,只要容量大于0即可
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ch1</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 </span></span></code></pre></div></li>
 <li>
 <p>读取写数据</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>,<span style="color:#ae81ff">10</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//通过迭代读取
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">ch</span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//如果channel关闭，那么直接退出循环不出异常，所以 for-range可以检查channel的状态
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    读取，如果通道关闭则返回channel类型的0值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    如果ch没有数据则阻塞
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">x</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ch</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    如果ok为false，代表ch关闭
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">y</span>,<span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ch</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">ch</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//通过迭代读取
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="nx">x</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">ch</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//如果channel关闭，那么直接退出循环不出异常，所以 for-range可以检查channel的状态
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">    读取，如果通道关闭则返回channel类型的0值
+</span></span></span><span class="line"><span class="cl"><span class="cm">    如果ch没有数据则阻塞
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span><span class="line"><span class="cl"><span class="nx">x</span> <span class="o">:=</span> <span class="o">&lt;-</span> <span class="nx">ch</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">    如果ok为false，代表ch关闭
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span><span class="line"><span class="cl"><span class="nx">y</span><span class="p">,</span><span class="nx">ok</span> <span class="o">:=</span> <span class="o">&lt;-</span> <span class="nx">ch</span>
 </span></span></code></pre></div></li>
 <li>
 <p><code>close(channel)</code></p>
@@ -210,17 +332,17 @@ channel 提供了一种通信机制，通过它，一个 goroutine 可以与另�
 </li>
 <li>
 <p><code>select-case</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">//select用于监听 channel 的触发，会造成Go调度器挂起此goroutine
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ch1</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//TODO
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ch2</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//TODO
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">ch1</span> <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//TODO
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">default</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//TODO
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//select用于监听 channel 的触发，会造成Go调度器挂起此goroutine
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">select</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="o">&lt;-</span> <span class="nx">ch1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//TODO
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">case</span> <span class="o">&lt;-</span> <span class="nx">ch2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//TODO
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">case</span> <span class="nx">ch1</span> <span class="o">&lt;-</span> <span class="mi">10</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//TODO
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">default</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//TODO
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
 </span></span></code></pre></div><ul>
 <li>
 <p><code>select</code> 不会在 <code>nil</code> 上等待。</p>
@@ -247,21 +369,72 @@ channel 提供了一种通信机制，通过它，一个 goroutine 可以与另�
 </li>
 <li>
 <p>单向的<code>channel</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">//只写channel 无任何实际意义
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">ch0</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">int</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">//只读channel 只能做一个初始化的容器 无任何实际意义
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">ch1</span> <span style="color:#f92672">:=</span> make(<span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">int</span>)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//只写channel 无任何实际意义
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ch0</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="o">&lt;-</span> <span class="kt">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//只读channel 只能做一个初始化的容器 无任何实际意义
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ch1</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="o">&lt;-</span> <span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span>
 </span></span></code></pre></div></li>
 </ol>
 <h1 id="其它">其它</h1>
-<p><code>Mutex</code> 和 <code>channel</code> 本质都是处理并发竞争问题，但是对于给予特定 <code>Goroutine</code> 的数据，<code>channel</code> 可能更加适合，而对于同一时间任何<code>Goroutine</code>都能访问的数据，<code>Mutex</code>更好,而且<code>Mutex</code>比<code>channel</code>更轻量。</p>
+<p><code>Mutex</code> 和 <code>channel</code> 本质都是处理并发竞争问题，但是对于给予特定 <code>Goroutine</code> 的数据，<code>channel</code> 可能更加适合，而对于同一时间任何<code>Goroutine</code>都能访问的数据，<code>Mutex</code>更好,而且<code>Mutex</code>比<code>channel</code>更轻量。</p></article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="post-footer">
-      
-    </div>
-  </article>
+  </main>
+</div>
+<script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
 
-    </main>
-  </body>
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://domyson.github.io/css/gitalk.css'>
+<script src='https://domyson.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id: eval( null ), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://domyson.github.io">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+    </a>
+    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+      
+      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+
+
+</div>
+</body>
+
+<script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
+
 </html>

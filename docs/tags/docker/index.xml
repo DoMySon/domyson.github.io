@@ -1,61 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>docker on Treasure</title>
+    <title>docker on 满船清梦压星河</title>
     <link>https://domyson.github.io/tags/docker/</link>
-    <description>Recent content in docker on Treasure</description>
+    <description>Recent content in docker on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Thu, 02 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>dockerfile</title>
-      <link>https://domyson.github.io/post/cloud_native/dockerfile/</link>
-      <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://domyson.github.io/post/cloud_native/dockerfile/</guid>
-      <description>Dockerfile Dockerfile 是一个包含用于组合映像的命令的文本文档。可以使用在命令行中调用任何命令。 Docker通过读取Dockerfile中的指令自动生成映像。docker build 命令用于从 Dockerfile构建映像。命令中使用 -f 标志指向文件系统中任何位置的 Dockerfile 文件。
-FROM 指定基础镜像
-FROM &amp;lt;image&amp;gt;:&amp;lt;tag&amp;gt;
-FROM node:10.14.2 # tag为可选项，如果没有指定，默认为latest # 指定基础，FROM必须作为第一个指令，若镜像不存在则会下载，如果不以任何镜像为基础，则写法为：FROM scratch，意味着接下来的指令作为第一层镜像的开始。 MAINTAINER 镜像作者 已过时，用 Label 代替
-MAINTAINER &amp;lt;name&amp;gt;
-#MAINTAINER Treasure LABEL maintainer=Treasure ADD、COPY ADD、COPY目标文件夹若不存在会自动创建。ADD指令包含类似tar的解压功能，而COPY只单纯复制文件，而且路径不能是url。ADD和COPY只能复制文件，若碰到文件夹只会复制其中的文件。dst 只能是目标容器的绝对位置。 所有拷贝到容器中的文件和文件夹权限为 0755，uid和gid为0；如果是一个目录，那么会将该目录下的所 有文件拷贝到目录下，不包括目录；如果是文件且中不使用斜杠结束，则会将视为文件，则内容会写入；如果是文件且中使用斜杠结束，则会文件拷贝到目录下。
-ADD src ... dst
-COPY src ... dst
-ADD ./* /data COPY ./ /data WORKDIR 将会设置 RUN、CMD、ENTRYPOINT指定的工作目录,相当于切换目录至path
-WORKDIR path
-WORKDIR /app #工作目录为 /app WORKDIR gateway #工作目录为 /app/gateway USER 指定运行容器的用户
-USER root LABEL 为镜像指定标签，LABEL会继承基础镜像中的LABEL，如遇到key相同，则会被覆盖。</description>
-    </item>
-    
-    <item>
-      <title>DockerNetwork</title>
-      <link>https://domyson.github.io/post/cloud_native/dockernetwork/</link>
-      <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://domyson.github.io/post/cloud_native/dockernetwork/</guid>
-      <description>Docker Network Docker 在安装时候，默认创建三个网络 bridge（默认）,none,host。
-docker network create --driver [bridge|host|none|container] networkname
-bridge：默认模式，容器使用独立 network Namespace，并连接到docker0虚拟网卡（默认模式）。通过该网桥以及Iptables nat表配置与宿主机通信，此模式会为每一个容器分配Network Namespace、设置IP等，并将一个主机上的容器连接到同一个网桥 docker0 中。
-host：与宿主机共享网络，此时容器没有使用网络的namespace，-p 将不会起任何作用。
-container：新创建的容器和已经存在的一个容器共享一个Network Namespace,新创建的容器不会创建自己的网卡，配置自己的IP，而是和一个指定的容器共享IP、端口范围等。同样，两个容器除了网络方面，其他的如文件系统、进程列表等还是隔离的。两个容器的进程可以通过lo网卡设备通信。
-none：该模式将容器放置在它自己的网络栈中，但是并不进行任何配置。实际上，该模式关闭了容器的网络功能，在以下两种情况下是有用的：容器并不需要网络（例如只需要写磁盘卷的批处理任务）。
-container：与指定的容器共享网络，如果有的话。
-容器连接 通过 docker network ls 查看网络信息。
-运行容器时通过 --network=[networkname] 指定连接的网络（未测试是否可以同时连接多个）。若不指定则默认连接到 bridge 网络。 也可以同过 --net=[networkmode] 指定网络的模式。同时通过 ``。
-&amp;ndash;net=host
-&amp;ndash;net=none
-&amp;ndash;net=bridge
-&amp;ndash;net=container
-Docket 跨主机通讯 自己yy 两个宿主机的容器映射到宿主机的端口，然后通讯。
-overlay </description>
-    </item>
-    
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 12 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Docker</title>
-      <link>https://domyson.github.io/post/cloud_native/docker/</link>
+      <link>https://domyson.github.io/post/docker/</link>
       <pubDate>Tue, 12 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://domyson.github.io/post/cloud_native/docker/</guid>
+      <guid>https://domyson.github.io/post/docker/</guid>
       <description>&lt;h1 id=&#34;什么是docker&#34;&gt;什么是docker&lt;/h1&gt;
 &lt;p&gt;Docker 是一个开源的容器引擎，可以轻松的为任何应用创建一个轻量级的、可移植的、自给自足的容器。开发者和系统管理员在笔记本上编译测试通过的容器可以批量地在生产环境中部署，包括 VMs（虚拟机）、bare metal、OpenStack 集群、云端、数据中心和其他的基础应用平台。容器是完全使用沙箱机制，相互之间不会有任何接口。&lt;/p&gt;
 &lt;h1 id=&#34;有什么优势&#34;&gt;有什么优势&lt;/h1&gt;

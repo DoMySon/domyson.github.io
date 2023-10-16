@@ -9,14 +9,14 @@ update:
 run:
 	make build
 	
-	@hugo server
-
-
+	
+	@hugo server -d docs
 
 build:
-	@for i in `ls ./docs`;do if [ "$i" != .git ];then \
+	@for i in `ls ./docs`;do if [ "$i" != ads.txt ];then \
 	rm -rf ./docs/$i; \
 	fi; \
 	done; \
 
 	@hugo -d docs
+

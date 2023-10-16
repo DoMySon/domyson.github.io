@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>skynet on Treasure</title>
+    <title>skynet on 满船清梦压星河</title>
     <link>https://domyson.github.io/categories/skynet/</link>
-    <description>Recent content in skynet on Treasure</description>
+    <description>Recent content in skynet on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>zh-cn</language>
     <lastBuildDate>Thu, 21 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/categories/skynet/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>allocator</title>
-      <link>https://domyson.github.io/post/sknt/allocator/</link>
+      <link>https://domyson.github.io/post/skynet/allocator/</link>
       <pubDate>Thu, 21 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://domyson.github.io/post/sknt/allocator/</guid>
+      <guid>https://domyson.github.io/post/skynet/allocator/</guid>
       <description>简介 alloctor 模块主要是为了减少GC而开发。现支持两套分配规则
 基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet中它确实有更优秀的性能，因为它直接分配了一块共用内存，所以不会产生任何GC和真实分配, ，但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。
 哪怕内置的Debug模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 Debug 只能定位到存在 memory-leak，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失

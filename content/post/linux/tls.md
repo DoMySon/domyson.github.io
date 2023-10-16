@@ -2,7 +2,7 @@
 title: TLS
 date: 2020-02-09
 tags: ["TLS"]
-categories: ["network"]
+categories: ["net"]
 description: 解决并发场景下的数据竞争问题
 img: https://blog.csdn.net/u011626662/article/details/119025268
 toc: true

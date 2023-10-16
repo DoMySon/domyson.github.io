@@ -1,54 +1,50 @@
 baseURL = "https://domyson.github.io"
-title = "Treasure"
-theme = "m10c"
-paginate = 12
-
-[menu]
-  [[menu.main]]
-    identifier = "home"
-    name = "Home"
-    url = "/"
-    weight = 1
-  [[menu.main]]
-    identifier = "tags"
-    name = "Tags"
-    url = "/tags/"
-    weight = 2
-  [[menu.main]]
-    identifier = "about"
-    name = "About"
-    url = "/about/"
-    weight = 3
+languageCode = "zh-cn"
+title = "满船清梦压星河"
+theme = "github"
+#googleAnalytics = "UA-123456-789"
+pygmentsCodeFences = true
+pygmentsUseClasses = true
 
 [params]
   author = "Treasure"
-  description = "无关迟暮,不问翻覆"
-  menu_item_separator = " - "
-  [[params.social]]
-    icon = "github"
-    name = "Github"
-    url = "https://github.com/domyson"
+  description = "无关迟暮，不问翻覆."
+  github = "domyson"
+#   facebook = "MeiK2333"
+#   twitter = "MeiK2333"1
+#   linkedin = "MeiK2333"
+#   instagram = "MeiK2333"
+  #tumblr = "MeiK2333"
+  email = "cnmlgbbg@gmail.com"
+  url = "https://domyson.github.io"
+  keywords = "computer tech"
+  rss = true
+  lastmod = true
+  userStatusEmoji = "😀"
+  favicon = "/images/avatar.png"
+  location = "China"
+  enableGitalk = true
 
-  # Default theme
-  #[params.style]
-  #  darkestColor = "#242930"
-  #  darkColor = "#353b43"
-  #  lightColor = "#afbac4"
-  #  lightestColor = "#ffffff"
-  #  primaryColor = "#57cc8a"
+#   [params.gitalk]
+#     clientID = "Your client ID" 
+#     clientSecret = "Your client secret" 
+#     repo = "repo"
+#     owner = "MeiK2333"
+#     admin = "MeiK2333"
+#     id = "location.pathname"
+#     labels = "gitalk"
+#     perPage = 15
+#     pagerDirection = "last"
+#     createIssueManually = true
+#     distractionFreeMode = false
 
-  #Green theme
-#   [params.style]
-#    darkestColor = "#315659"
-#    darkColor = "#253031"
-#    lightColor = "#96a879"
-#    lightestColor = "#fff"
-#    primaryColor = "#dad865"
+  [[params.links]]
+    title = "Link"
+    href = "https://github.com/domyson"
+#   [[params.links]]
+#     title = "Link2"
+#     href = "https://meik2333.com"
+#     icon = "https://meik2333.com/images/avatar.png"
 
-  # Red theme
-  #[params.style]
-  #  darkestColor = "#d35050"
-  #  darkColor = "#212121"
-  #  lightColor = "#d6d6d6"
-  #  lightestColor = "#d3d3d3"
-  #  primaryColor = "#ffffff"
+[frontmatter]
+  lastmod = ["lastmod", ":fileModTime", ":default"]

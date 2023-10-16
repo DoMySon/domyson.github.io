@@ -1,99 +1,217 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Go协程的思考 // Treasure</title>
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.118.2">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="Treasure" />
-    <meta name="description" content="" />
-    <link rel="stylesheet" href="/css/main.min.3c3c186cd62e563ad6e2f00a89dbee656ab912d1d46f856b5605dd0232521e2a.css" />
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='https://domyson.github.io/css/frameworks.min.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/github.min.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/github-style.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
+    <title>Go协程的思考 - 满船清梦压星河</title>
+    
+    <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
+    
+    <meta name="theme-color" content="#1e2327">
 
     
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Go协程的思考"/>
-<meta name="twitter:description" content="栈
-
-一个 os 线程会有一个给固定大小的内存块（一般是 2MB），用来存储当前线程中调用或挂起函数的内部变量，固定大小的栈对于复杂和深层次递归是不够的，而 Goroutine 会以一个很小的栈（2KB）开始其生命周期，这个栈会动态伸缩，最大能到达 1GB（32位系统是 250M）
-
-调度方式
-
-os 线程由操作系统内核调用，每过一定时间（毫秒），硬件计时器会中断处理器，并调用一个名为 scheduler 的内建函数，这个函数会挂起当前执行的线程并保存内存中它的寄存器内存，然后检查线程列表并决定下一次执行哪个线程，并从内存中恢复该线程的寄存器信息，恢复该线程的线程并执行，这就是上下文切换，增加了 CPU 的运行周期。而 Go 的 runtime 包含了自身的调度器，和 os 线程不同是，Goroutine 属于用户级线程由语言支持，调度由语言支持，所有开销会减少很多（相比于内核上下文切换）。
-"/>
-
-    <meta property="og:title" content="Go协程的思考" />
-<meta property="og:description" content="栈
-
-一个 os 线程会有一个给固定大小的内存块（一般是 2MB），用来存储当前线程中调用或挂起函数的内部变量，固定大小的栈对于复杂和深层次递归是不够的，而 Goroutine 会以一个很小的栈（2KB）开始其生命周期，这个栈会动态伸缩，最大能到达 1GB（32位系统是 250M）
-
-调度方式
-
-os 线程由操作系统内核调用，每过一定时间（毫秒），硬件计时器会中断处理器，并调用一个名为 scheduler 的内建函数，这个函数会挂起当前执行的线程并保存内存中它的寄存器内存，然后检查线程列表并决定下一次执行哪个线程，并从内存中恢复该线程的寄存器信息，恢复该线程的线程并执行，这就是上下文切换，增加了 CPU 的运行周期。而 Go 的 runtime 包含了自身的调度器，和 os 线程不同是，Goroutine 属于用户级线程由语言支持，调度由语言支持，所有开销会减少很多（相比于内核上下文切换）。
+    <meta name="description"
+  content="栈 一个 os 线程会有一个给固定大小的内存块（一般是 2MB），用来存储当前线程中调用或挂起函数的内部变量，固定大小的栈对于复杂和深层次递归是不够的，而 Goroutine 会以一个很小的栈（2KB）开始其生命周期，这个栈会动态伸缩，最大能到达 1GB（32位系统是 250M）
+调度方式 os 线程由操作系统内核调用，每过一定时间（毫秒），硬件计时器会中断处理器，并调用一个名为 scheduler 的内建函数，这个函数会挂起当前执行的线程并保存内存中它的寄存器内存，然后检查线程列表并决定下一次执行哪个线程，并从内存中恢复该线程的寄存器信息，恢复该线程的线程并执行，这就是上下文切换，增加了 CPU 的运行周期。而 Go 的 runtime 包含了自身的调度器，和 os 线程不同是，Goroutine 属于用户级线程由语言支持，调度由语言支持，所有开销会减少很多（相比于内核上下文切换）。
 " />
+<meta name="keywords"
+  content='computer tech' />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://domyson.github.io/post/language/go/goroutine/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Go协程的思考 - 满船清梦压星河" />
+<meta name="twitter:description"
+  content="栈 一个 os 线程会有一个给固定大小的内存块（一般是 2MB），用来存储当前线程中调用或挂起函数的内部变量，固定大小的栈对于复杂和深层次递归是不够的，而 Goroutine 会以一个很小的栈（2KB）开始其生命周期，这个栈会动态伸缩，最大能到达 1GB（32位系统是 250M）
+调度方式 os 线程由操作系统内核调用，每过一定时间（毫秒），硬件计时器会中断处理器，并调用一个名为 scheduler 的内建函数，这个函数会挂起当前执行的线程并保存内存中它的寄存器内存，然后检查线程列表并决定下一次执行哪个线程，并从内存中恢复该线程的寄存器信息，恢复该线程的线程并执行，这就是上下文切换，增加了 CPU 的运行周期。而 Go 的 runtime 包含了自身的调度器，和 os 线程不同是，Goroutine 属于用户级线程由语言支持，调度由语言支持，所有开销会减少很多（相比于内核上下文切换）。
+" />
+<meta name="twitter:site" content="https://domyson.github.io" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image"
+  content="https://domyson.github.io">
+
+
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://domyson.github.io/post/language/go/goroutine/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-05-12T00:00:00+00:00" />
-<meta property="article:modified_time" content="2019-05-12T00:00:00+00:00" />
+<meta property="og:title" content="Go协程的思考 - 满船清梦压星河">
+<meta property="og:description"
+  content="栈 一个 os 线程会有一个给固定大小的内存块（一般是 2MB），用来存储当前线程中调用或挂起函数的内部变量，固定大小的栈对于复杂和深层次递归是不够的，而 Goroutine 会以一个很小的栈（2KB）开始其生命周期，这个栈会动态伸缩，最大能到达 1GB（32位系统是 250M）
+调度方式 os 线程由操作系统内核调用，每过一定时间（毫秒），硬件计时器会中断处理器，并调用一个名为 scheduler 的内建函数，这个函数会挂起当前执行的线程并保存内存中它的寄存器内存，然后检查线程列表并决定下一次执行哪个线程，并从内存中恢复该线程的寄存器信息，恢复该线程的线程并执行，这就是上下文切换，增加了 CPU 的运行周期。而 Go 的 runtime 包含了自身的调度器，和 os 线程不同是，Goroutine 属于用户级线程由语言支持，调度由语言支持，所有开销会减少很多（相比于内核上下文切换）。
+" />
+<meta property="og:url" content="https://domyson.github.io/post/language/go/goroutine/" />
+<meta property="og:site_name" content="Go协程的思考" />
+<meta property="og:image"
+  content="https://domyson.github.io">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2019-05-12 00:00:00 &#43;0000 UTC" />
 
 
-  </head>
-  <body>
-    <header class="app-header">
-      <a href="https://domyson.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Treasure" /></a>
-      <span class="app-header-title">Treasure</span>
-      <nav class="app-header-menu">
-          <a class="app-header-menu-item" href="/">Home</a>
-             - 
-          
-          <a class="app-header-menu-item" href="/tags/">Tags</a>
-             - 
-          
-          <a class="app-header-menu-item" href="/about/">About</a>
-      </nav>
-      <p>无关迟暮,不问翻覆</p>
-      <div class="app-header-social">
-        
-          <a href="https://github.com/domyson" target="_blank" rel="noreferrer noopener me">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
-  <title>Github</title>
-  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-</svg>
-          </a>
-        
-      </div>
-    </header>
-    <main class="app-container">
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class ="post-title">Go协程的思考</h1>
-      <div class="post-meta">
-        <div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
-  <title>calendar</title>
-  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
-</svg>
-          May 12, 2019
-        </div>
-        <div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
-  <title>clock</title>
-  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
-</svg>
-          2 min read
-        </div>
-        <div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
-  <title>tag</title>
-  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
-</svg>
-              <a class="tag" href="https://domyson.github.io/tags/goroutine/">goroutine</a>
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+  <div style="position: relative">
+  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+      <a class="Header-link" href="https://domyson.github.io">
+        <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button class="Header-link btn-link js-details-target" type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div style="display: none;" id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+        <div class="position-relative">
+          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+            autocomplete="off">
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+              <input type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q" value="" placeholder="Search" autocomplete="off">
+              <input type="hidden" name="q" value="site:https://domyson.github.io">
+            </label>
+          </form>
         </div>
       </div>
-    </header>
-    <div class="post-content">
-      <h1 id="栈">栈</h1>
+    </div>
+
+    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+      <a class="Header-link " href="https://domyson.github.io">
+        <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+          width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item" style="margin-right: 0;">
+      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+          version="1.1" width="16" height="16">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </header>
+</div>
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io">
+                  <img class=" avatar-user"
+                    src="https://domyson.github.io/images/avatar.png"
+                    width="32" height="32"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://domyson.github.io">Treasure</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://domyson.github.io/post/language/go/goroutine/">Go协程的思考</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Sun, 12 May 2019 00:00:00 &#43;0000"
+                    class="no-wrap">
+                    Sun, 12 May 2019 00:00:00 &#43;0000</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Sat, 07 Oct 2023 21:54:38 &#43;0800"
+                    class="no-wrap">
+                    Sat, 07 Oct 2023 21:54:38 &#43;0800</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      2301 Words
+                    
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                    
+                    <a class="muted-link mr-3" href="/tags/goroutine">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      goroutine
+                    </a>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h1 id="栈">栈</h1>
 <blockquote>
 <p>一个 os 线程会有一个给固定大小的内存块（一般是 2MB），用来存储当前线程中调用或挂起函数的内部变量，固定大小的栈对于复杂和深层次递归是不够的，而 Goroutine 会以一个很小的栈（2KB）开始其生命周期，这个栈会动态伸缩，最大能到达 1GB（32位系统是 250M）</p>
 </blockquote>
@@ -189,15 +307,15 @@ os 线程由操作系统内核调用，每过一定时间（毫秒），硬件�
 <blockquote>
 <p>当启动多个 <code>goroutine</code> 时，如果其中一个 <code>goroutine</code> 异常了，并且我们并没有对进行异常处理，那么整个程序都会终止，所以最好每个 <code>goroutine</code> 所运行的函数都做异常处理，异常处理采用 <code>recover</code></p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>(){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">defer</span> <span style="color:#66d9ef">func</span>(){
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> recover();<span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span>{
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//TODO
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//Code...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    panic(<span style="color:#e6db74">&#34;exit&#34;</span>)
-</span></span><span style="display:flex;"><span>}
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">go</span> <span class="kd">func</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">defer</span> <span class="kd">func</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nb">recover</span><span class="p">();</span><span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//TODO
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//Code...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nb">panic</span><span class="p">(</span><span class="s">&#34;exit&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="注意">注意</h3>
 <ol>
 <li>
@@ -227,53 +345,104 @@ os 线程由操作系统内核调用，每过一定时间（毫秒），硬件�
 <p>而关于<code>goroutine</code>的调度问题，除了上述所说，网络底层是通过 <code>i/o multiplex </code>事件来触发调度的,虽然 1.16 之后支持了抢占式调度，但错误的使用并不会提高性能，反而会降低.</p>
 <p>我们通过一组数据来证明它</p>
 <h2 id="1-thread-epoll">1 thread epoll</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>    Test Duration 10.1192694s:
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    1000 connections,fail: 0
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    Delay:    Avg        Max        Stdev
-</span></span><span style="display:flex;"><span>        23.074671ms 226.0378ms  23.074671ms
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    Request/Sec: 17.60K/s
-</span></span><span style="display:flex;"><span>    Written/Sec: 17.18M/s
-</span></span><span style="display:flex;"><span>    Receive/Sec: 17.18M/s
-</span></span><span style="display:flex;"><span>    TotalWritten: 173.89M
-</span></span><span style="display:flex;"><span>    TotalReceive: 173.89M
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">    Test Duration 10.1192694s:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    1000 connections,fail: 0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Delay:    Avg        Max        Stdev
+</span></span><span class="line"><span class="cl">        23.074671ms 226.0378ms  23.074671ms
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Request/Sec: 17.60K/s
+</span></span><span class="line"><span class="cl">    Written/Sec: 17.18M/s
+</span></span><span class="line"><span class="cl">    Receive/Sec: 17.18M/s
+</span></span><span class="line"><span class="cl">    TotalWritten: 173.89M
+</span></span><span class="line"><span class="cl">    TotalReceive: 173.89M
 </span></span></code></pre></div><h2 id="4-thread-epoll">4 thread epoll</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>    Test Duration 10.1532731s:
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    1000 connections,fail: 0
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    Delay:    Avg        Max        Stdev
-</span></span><span style="display:flex;"><span>        14.70811ms 295.5518ms 14.30601ms
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    Request/Sec: 17.16K/s
-</span></span><span style="display:flex;"><span>    Written/Sec: 16.76M/s
-</span></span><span style="display:flex;"><span>    Receive/Sec: 16.76M/s
-</span></span><span style="display:flex;"><span>    TotalWritten: 170.12M
-</span></span><span style="display:flex;"><span>    TotalReceive: 170.12M
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">    Test Duration 10.1532731s:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    1000 connections,fail: 0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Delay:    Avg        Max        Stdev
+</span></span><span class="line"><span class="cl">        14.70811ms 295.5518ms 14.30601ms
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Request/Sec: 17.16K/s
+</span></span><span class="line"><span class="cl">    Written/Sec: 16.76M/s
+</span></span><span class="line"><span class="cl">    Receive/Sec: 16.76M/s
+</span></span><span class="line"><span class="cl">    TotalWritten: 170.12M
+</span></span><span class="line"><span class="cl">    TotalReceive: 170.12M
 </span></span></code></pre></div><h2 id="standard-go">standard go</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>    Test Duration 10.1377697s:
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    1000 connections,fail: 0
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    Delay:    Avg        Max        Stdev
-</span></span><span style="display:flex;"><span>        14.855782ms 276.5472ms14.855782ms
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    Request/Sec: 17.22K/s
-</span></span><span style="display:flex;"><span>    Written/Sec: 16.82M/s
-</span></span><span style="display:flex;"><span>    Receive/Sec: 16.82M/s
-</span></span><span style="display:flex;"><span>    TotalWritten: 170.48M
-</span></span><span style="display:flex;"><span>    TotalReceive: 170.48M
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">    Test Duration 10.1377697s:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    1000 connections,fail: 0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Delay:    Avg        Max        Stdev
+</span></span><span class="line"><span class="cl">        14.855782ms 276.5472ms14.855782ms
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Request/Sec: 17.22K/s
+</span></span><span class="line"><span class="cl">    Written/Sec: 16.82M/s
+</span></span><span class="line"><span class="cl">    Receive/Sec: 16.82M/s
+</span></span><span class="line"><span class="cl">    TotalWritten: 170.48M
+</span></span><span class="line"><span class="cl">    TotalReceive: 170.48M
 </span></span></code></pre></div><p>从吞吐量可以看出，单 <code>epoll</code> 略高于其他方式，但综合数据同步以及内存使用来看，显然单线程 <code>epoll</code> 更适合</p>
 <h1 id="总结">总结</h1>
-<p><code>goroutine</code> 虽然减少了心智负担，但它牺牲了一些性能，所以我个人认为，<code>goroutine</code>更适合成为一个库，而非语言标准。</p>
+<p><code>goroutine</code> 虽然减少了心智负担，但它牺牲了一些性能，所以我个人认为，<code>goroutine</code>更适合成为一个库，而非语言标准。</p></article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="post-footer">
-      
-    </div>
-  </article>
+  </main>
+</div>
+<script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
 
-    </main>
-  </body>
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://domyson.github.io/css/gitalk.css'>
+<script src='https://domyson.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id: eval( null ), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://domyson.github.io">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+    </a>
+    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+      
+      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+
+
+</div>
+</body>
+
+<script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
+
 </html>

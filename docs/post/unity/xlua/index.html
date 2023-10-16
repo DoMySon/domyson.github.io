@@ -1,78 +1,245 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>xLua // Treasure</title>
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.118.2">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="Treasure" />
-    <meta name="description" content="xLua为Unity、 .Net、 Mono等C#环境增加Lua脚本编程的能力，借助xLua，这些Lua代码可以方便的和C#相互调用。" />
-    <link rel="stylesheet" href="/css/main.min.3c3c186cd62e563ad6e2f00a89dbee656ab912d1d46f856b5605dd0232521e2a.css" />
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='https://domyson.github.io/css/frameworks.min.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/github.min.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/github-style.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
+    <title>xLua - 满船清梦压星河</title>
+    
+    <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
+    
+    <meta name="theme-color" content="#1e2327">
 
     
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="xLua"/>
-<meta name="twitter:description" content="xLua为Unity、 .Net、 Mono等C#环境增加Lua脚本编程的能力，借助xLua，这些Lua代码可以方便的和C#相互调用。"/>
+    <meta name="description"
+  content="XLua XLua下载
+配置文档
+FAQ
+标签 [Hotfix] 开启 HOTFIX_ENABLE 宏
+通过热补丁的方式修复代码 xlua.hotfix函数
+[LuaCallCsharp] 一个C#类型加了这个配置，xLua会生成这个类型的适配代码（包括构造该类型实例，访问其成员属性、方法，静态属性、方法），否则将会尝试用性能较低的反射方式来访问。
+一个类型的扩展方法（Extension Methods）加了这配置，也会生成适配代码并追加到被扩展类型的成员方法上。
+xLua只会生成加了该配置的类型，不会自动生成其父类的适配代码 ，当访问子类对象的父类方法，如果该父类加了LuaCallCSharp配置，则执行父类的适配代码，否则会尝试用反射来访问。
+反射访问除了性能不佳之外，在 il2cpp 下还有可能因为代码剪裁而导致无法访问，
+xLua 属性标签 [LuaCallCsharp] 来指明哪些类需要生成代码。
+[LuaCallCsharp] public class A{ } 也可以在一个静态列表中通过标签一起生成
+[LuaCallCSharp] public static List&amp;lt;Type&amp;gt; generate = new List&amp;lt;Type&amp;gt;() { typeof(GameObject), typeof(Dictionary&amp;lt;string, int&amp;gt;), }; 动态列表
+public static List&amp;lt;Type&amp;gt; dynamic { get{ return ( from type in Assembly.Load(&amp;#34;Assmebly-CSharp&amp;#34;).GetTypes() where type.NameSpace == &amp;#34;XYZ&amp;#34; select type).ToList(); } } [ReflectionUse] 一个C#类型类型加了这个配置，xLua会生成link.xml阻止il2cpp的代码剪裁。
+对于扩展方法，必须加上LuaCallCSharp或者ReflectionUse才可以被访问到。
+建议所有要在Lua访问的类型，要么加LuaCallCSharp，要么加上ReflectionUse，这才能够保证在各平台都能正常运行。
+[CSharpCallLua] 如果希望把一个lua函数适配到一个C# delegate（一类是C#侧各种回调：UI事件，delegate参数，比如List:ForEach；另外一类场景是通过 LuaTable的Get函数 指明一个lua函数绑定到一个delegate）。或者把一个lua table适配到一个C# interface，该delegate或者interface需要加上该配置。" />
+<meta name="keywords"
+  content='computer tech' />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://domyson.github.io/post/unity/xlua/" />
 
-    <meta property="og:title" content="xLua" />
-<meta property="og:description" content="xLua为Unity、 .Net、 Mono等C#环境增加Lua脚本编程的能力，借助xLua，这些Lua代码可以方便的和C#相互调用。" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="xLua - 满船清梦压星河" />
+<meta name="twitter:description"
+  content="XLua XLua下载
+配置文档
+FAQ
+标签 [Hotfix] 开启 HOTFIX_ENABLE 宏
+通过热补丁的方式修复代码 xlua.hotfix函数
+[LuaCallCsharp] 一个C#类型加了这个配置，xLua会生成这个类型的适配代码（包括构造该类型实例，访问其成员属性、方法，静态属性、方法），否则将会尝试用性能较低的反射方式来访问。
+一个类型的扩展方法（Extension Methods）加了这配置，也会生成适配代码并追加到被扩展类型的成员方法上。
+xLua只会生成加了该配置的类型，不会自动生成其父类的适配代码 ，当访问子类对象的父类方法，如果该父类加了LuaCallCSharp配置，则执行父类的适配代码，否则会尝试用反射来访问。
+反射访问除了性能不佳之外，在 il2cpp 下还有可能因为代码剪裁而导致无法访问，
+xLua 属性标签 [LuaCallCsharp] 来指明哪些类需要生成代码。
+[LuaCallCsharp] public class A{ } 也可以在一个静态列表中通过标签一起生成
+[LuaCallCSharp] public static List&amp;lt;Type&amp;gt; generate = new List&amp;lt;Type&amp;gt;() { typeof(GameObject), typeof(Dictionary&amp;lt;string, int&amp;gt;), }; 动态列表
+public static List&amp;lt;Type&amp;gt; dynamic { get{ return ( from type in Assembly.Load(&amp;#34;Assmebly-CSharp&amp;#34;).GetTypes() where type.NameSpace == &amp;#34;XYZ&amp;#34; select type).ToList(); } } [ReflectionUse] 一个C#类型类型加了这个配置，xLua会生成link.xml阻止il2cpp的代码剪裁。
+对于扩展方法，必须加上LuaCallCSharp或者ReflectionUse才可以被访问到。
+建议所有要在Lua访问的类型，要么加LuaCallCSharp，要么加上ReflectionUse，这才能够保证在各平台都能正常运行。
+[CSharpCallLua] 如果希望把一个lua函数适配到一个C# delegate（一类是C#侧各种回调：UI事件，delegate参数，比如List:ForEach；另外一类场景是通过 LuaTable的Get函数 指明一个lua函数绑定到一个delegate）。或者把一个lua table适配到一个C# interface，该delegate或者interface需要加上该配置。" />
+<meta name="twitter:site" content="https://domyson.github.io" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image"
+  content="https://domyson.github.io">
+
+
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://domyson.github.io/post/unity/xlua/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-03-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2019-03-05T00:00:00+00:00" />
+<meta property="og:title" content="xLua - 满船清梦压星河">
+<meta property="og:description"
+  content="XLua XLua下载
+配置文档
+FAQ
+标签 [Hotfix] 开启 HOTFIX_ENABLE 宏
+通过热补丁的方式修复代码 xlua.hotfix函数
+[LuaCallCsharp] 一个C#类型加了这个配置，xLua会生成这个类型的适配代码（包括构造该类型实例，访问其成员属性、方法，静态属性、方法），否则将会尝试用性能较低的反射方式来访问。
+一个类型的扩展方法（Extension Methods）加了这配置，也会生成适配代码并追加到被扩展类型的成员方法上。
+xLua只会生成加了该配置的类型，不会自动生成其父类的适配代码 ，当访问子类对象的父类方法，如果该父类加了LuaCallCSharp配置，则执行父类的适配代码，否则会尝试用反射来访问。
+反射访问除了性能不佳之外，在 il2cpp 下还有可能因为代码剪裁而导致无法访问，
+xLua 属性标签 [LuaCallCsharp] 来指明哪些类需要生成代码。
+[LuaCallCsharp] public class A{ } 也可以在一个静态列表中通过标签一起生成
+[LuaCallCSharp] public static List&amp;lt;Type&amp;gt; generate = new List&amp;lt;Type&amp;gt;() { typeof(GameObject), typeof(Dictionary&amp;lt;string, int&amp;gt;), }; 动态列表
+public static List&amp;lt;Type&amp;gt; dynamic { get{ return ( from type in Assembly.Load(&amp;#34;Assmebly-CSharp&amp;#34;).GetTypes() where type.NameSpace == &amp;#34;XYZ&amp;#34; select type).ToList(); } } [ReflectionUse] 一个C#类型类型加了这个配置，xLua会生成link.xml阻止il2cpp的代码剪裁。
+对于扩展方法，必须加上LuaCallCSharp或者ReflectionUse才可以被访问到。
+建议所有要在Lua访问的类型，要么加LuaCallCSharp，要么加上ReflectionUse，这才能够保证在各平台都能正常运行。
+[CSharpCallLua] 如果希望把一个lua函数适配到一个C# delegate（一类是C#侧各种回调：UI事件，delegate参数，比如List:ForEach；另外一类场景是通过 LuaTable的Get函数 指明一个lua函数绑定到一个delegate）。或者把一个lua table适配到一个C# interface，该delegate或者interface需要加上该配置。" />
+<meta property="og:url" content="https://domyson.github.io/post/unity/xlua/" />
+<meta property="og:site_name" content="xLua" />
+<meta property="og:image"
+  content="https://domyson.github.io">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2019-03-05 00:00:00 &#43;0000 UTC" />
 
 
-  </head>
-  <body>
-    <header class="app-header">
-      <a href="https://domyson.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Treasure" /></a>
-      <span class="app-header-title">Treasure</span>
-      <nav class="app-header-menu">
-          <a class="app-header-menu-item" href="/">Home</a>
-             - 
-          
-          <a class="app-header-menu-item" href="/tags/">Tags</a>
-             - 
-          
-          <a class="app-header-menu-item" href="/about/">About</a>
-      </nav>
-      <p>无关迟暮,不问翻覆</p>
-      <div class="app-header-social">
-        
-          <a href="https://github.com/domyson" target="_blank" rel="noreferrer noopener me">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
-  <title>Github</title>
-  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-</svg>
-          </a>
-        
-      </div>
-    </header>
-    <main class="app-container">
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class ="post-title">xLua</h1>
-      <div class="post-meta">
-        <div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
-  <title>calendar</title>
-  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
-</svg>
-          Mar 5, 2019
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+  <div style="position: relative">
+  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+      <a class="Header-link" href="https://domyson.github.io">
+        <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button class="Header-link btn-link js-details-target" type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div style="display: none;" id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+        <div class="position-relative">
+          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+            autocomplete="off">
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+              <input type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q" value="" placeholder="Search" autocomplete="off">
+              <input type="hidden" name="q" value="site:https://domyson.github.io">
+            </label>
+          </form>
         </div>
-        <div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
-  <title>clock</title>
-  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
-</svg>
-          2 min read
+      </div>
+    </div>
+
+    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+      <a class="Header-link " href="https://domyson.github.io">
+        <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+          width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item" style="margin-right: 0;">
+      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+          version="1.1" width="16" height="16">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </header>
+</div>
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io">
+                  <img class=" avatar-user"
+                    src="https://domyson.github.io/images/avatar.png"
+                    width="32" height="32"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://domyson.github.io">Treasure</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://domyson.github.io/post/unity/xlua/">xLua</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Tue, 05 Mar 2019 00:00:00 &#43;0000"
+                    class="no-wrap">
+                    Tue, 05 Mar 2019 00:00:00 &#43;0000</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Sat, 07 Oct 2023 21:54:38 &#43;0800"
+                    class="no-wrap">
+                    Sat, 07 Oct 2023 21:54:38 &#43;0800</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </header>
-    <div class="post-content">
-      <h1 id="xlua">XLua</h1>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      1751 Words
+                    
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h1 id="xlua">XLua</h1>
 <ul>
 <li>
 <p><a href="https://github.com/Tencent/xLua/releases">XLua下载</a></p>
@@ -102,30 +269,30 @@
 <ul>
 <li>
 <p><code>xLua</code> 属性标签 <code>[LuaCallCsharp]</code> 来指明哪些类需要生成代码。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#a6e22e">[LuaCallCsharp]</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>{
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>}
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="na">[LuaCallCsharp]</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">A</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div></li>
 <li>
 <p>也可以在一个静态列表中通过标签一起生成</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#a6e22e">[LuaCallCSharp]</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> List&lt;Type&gt; generate = <span style="color:#66d9ef">new</span> List&lt;Type&gt;()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">typeof</span>(GameObject),
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">typeof</span>(Dictionary&lt;<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">int</span>&gt;),
-</span></span><span style="display:flex;"><span>};
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="na">[LuaCallCSharp]</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">static</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Type</span><span class="p">&gt;</span> <span class="n">generate</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Type</span><span class="p">&gt;()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">typeof</span><span class="p">(</span><span class="n">GameObject</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="k">typeof</span><span class="p">(</span><span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">int</span><span class="p">&gt;),</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></div></li>
 <li>
 <p>动态列表</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> List&lt;Type&gt; <span style="color:#66d9ef">dynamic</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">get</span>{
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ( 
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">from</span> type <span style="color:#66d9ef">in</span> Assembly.Load(<span style="color:#e6db74">&#34;Assmebly-CSharp&#34;</span>).GetTypes() 
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">where</span> type.NameSpace == <span style="color:#e6db74">&#34;XYZ&#34;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">select</span> type).ToList(); 
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">static</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Type</span><span class="p">&gt;</span> <span class="kt">dynamic</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">get</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">from</span> <span class="n">type</span> <span class="k">in</span> <span class="n">Assembly</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="s">&#34;Assmebly-CSharp&#34;</span><span class="p">).</span><span class="n">GetTypes</span><span class="p">()</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">where</span> <span class="n">type</span><span class="p">.</span><span class="n">NameSpace</span> <span class="p">==</span> <span class="s">&#34;XYZ&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">select</span> <span class="n">type</span><span class="p">).</span><span class="n">ToList</span><span class="p">();</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div></li>
 </ul>
 <h2 id="reflectionuse"><code>[ReflectionUse]</code></h2>
@@ -180,18 +347,18 @@
 </li>
 <li>
 <p>委托、事件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Bridge</span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Action OnTrigger;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">event</span> Action OnEvent;
-</span></span><span style="display:flex;"><span>}
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Bridge</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Action</span> <span class="n">OnTrigger</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">event</span> <span class="n">Action</span> <span class="n">OnEvent</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>Lua侧调用</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#75715e">--增加事件和委托</span>
-</span></span><span style="display:flex;"><span>bridge:OnTrigger(<span style="color:#e6db74">&#39;+&#39;</span>,lua_cb)
-</span></span><span style="display:flex;"><span>bridge:OnEvent(<span style="color:#e6db74">&#39;+&#39;</span>,lua_cb)
-</span></span><span style="display:flex;"><span><span style="color:#75715e">--删除事件和委托</span>
-</span></span><span style="display:flex;"><span>bridge:OnTrigger(<span style="color:#e6db74">&#39;-&#39;</span>,lua_cb)
-</span></span><span style="display:flex;"><span>bridge:OnEvent(<span style="color:#e6db74">&#39;-&#39;</span>,lua_cb)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="c1">--增加事件和委托</span>
+</span></span><span class="line"><span class="cl"><span class="n">bridge</span><span class="p">:</span><span class="n">OnTrigger</span><span class="p">(</span><span class="s1">&#39;+&#39;</span><span class="p">,</span><span class="n">lua_cb</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">bridge</span><span class="p">:</span><span class="n">OnEvent</span><span class="p">(</span><span class="s1">&#39;+&#39;</span><span class="p">,</span><span class="n">lua_cb</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">--删除事件和委托</span>
+</span></span><span class="line"><span class="cl"><span class="n">bridge</span><span class="p">:</span><span class="n">OnTrigger</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">lua_cb</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">bridge</span><span class="p">:</span><span class="n">OnEvent</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">lua_cb</span><span class="p">)</span>
 </span></span></code></pre></div></li>
 </ol>
 <h1 id="c侧-api">C#侧 <code>API</code></h1>
@@ -227,40 +394,40 @@
 </li>
 </ol>
 <h1 id="lua协程和csharp协程">Lua协程和CSharp协程</h1>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> Start(){
-</span></span><span style="display:flex;"><span>    StartCoroutine(Co());
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>IEnumerator Co(){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> WaitForSeconds(<span style="color:#ae81ff">3f</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> www = <span style="color:#66d9ef">new</span> WWW(<span style="color:#e6db74">&#34;http://www.baidu.com&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span> <span style="color:#66d9ef">return</span> www;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(www.error!=<span style="color:#66d9ef">null</span>)
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>{
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#66d9ef">local</span> util <span style="color:#f92672">=</span> require <span style="color:#e6db74">&#39;xlua.util&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> yield_return <span style="color:#f92672">=</span> (require <span style="color:#e6db74">&#39;cs_coroutine&#39;</span>).yield_return
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">local</span> co <span style="color:#f92672">=</span> coroutine.create(<span style="color:#66d9ef">function</span>()
-</span></span><span style="display:flex;"><span>    yield_return(CS.UnityEngine.WatiForSeconds(<span style="color:#ae81ff">3</span>))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">local</span> www <span style="color:#f92672">=</span> CS.UnityEngine.WWW(<span style="color:#e6db74">&#39;http://www.baidu.com&#39;</span>)
-</span></span><span style="display:flex;"><span>    yield_return(www)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> www.error <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>         print(www.bytes)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
-</span></span><span style="display:flex;"><span>        print(<span style="color:#960050;background-color:#1e0010">‘</span>error:<span style="color:#960050;background-color:#1e0010">’</span>, www.error)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>assert(coroutine.resume(co))
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">void</span> <span class="n">Start</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">StartCoroutine</span><span class="p">(</span><span class="n">Co</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">IEnumerator</span> <span class="n">Co</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">yield</span> <span class="k">return</span> <span class="k">new</span> <span class="n">WaitForSeconds</span><span class="p">(</span><span class="m">3f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">www</span> <span class="p">=</span> <span class="k">new</span> <span class="n">WWW</span><span class="p">(</span><span class="s">&#34;http://www.baidu.com&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">yield</span> <span class="k">return</span> <span class="n">www</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">www</span><span class="p">.</span><span class="n">error</span><span class="p">!=</span><span class="k">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">util</span> <span class="o">=</span> <span class="n">require</span> <span class="s1">&#39;xlua.util&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">yield_return</span> <span class="o">=</span> <span class="p">(</span><span class="n">require</span> <span class="s1">&#39;cs_coroutine&#39;</span><span class="p">).</span><span class="n">yield_return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">co</span> <span class="o">=</span> <span class="n">coroutine.create</span><span class="p">(</span><span class="kr">function</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">yield_return</span><span class="p">(</span><span class="n">CS.UnityEngine</span><span class="p">.</span><span class="n">WatiForSeconds</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">local</span> <span class="n">www</span> <span class="o">=</span> <span class="n">CS.UnityEngine</span><span class="p">.</span><span class="n">WWW</span><span class="p">(</span><span class="s1">&#39;http://www.baidu.com&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">yield_return</span><span class="p">(</span><span class="n">www</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">if</span> <span class="ow">not</span> <span class="n">www.error</span> <span class="kr">then</span>
+</span></span><span class="line"><span class="cl">         <span class="n">print</span><span class="p">(</span><span class="n">www.bytes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kr">else</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print</span><span class="p">(</span><span class="err">‘</span><span class="n">error</span><span class="p">:</span><span class="err">’</span><span class="p">,</span> <span class="n">www.error</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kr">end</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">assert</span><span class="p">(</span><span class="n">coroutine.resume</span><span class="p">(</span><span class="n">co</span><span class="p">))</span>
 </span></span></code></pre></div><h1 id="xlua-优化">xlua 优化</h1>
 <ul>
 <li>
@@ -280,13 +447,64 @@
 <p>除枚举之外，包含无参构造函数的复杂类型，都会生成lua table到该类型，以及改类型的一维数组的转换代码，这将会优化这个转换的性能，包括更少的gc alloc。</p>
 <h1 id="第三方库集成">第三方库集成</h1>
 <p>待完善</p>
-
+</article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="post-footer">
+  </main>
+</div>
+<script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://domyson.github.io/css/gitalk.css'>
+<script src='https://domyson.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id: eval( null ), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://domyson.github.io">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+    </a>
+    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
       
-    </div>
-  </article>
+      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
 
-    </main>
-  </body>
+
+</div>
+</body>
+
+<script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
+
 </html>

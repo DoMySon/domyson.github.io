@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>sknmpd on Treasure</title>
+    <title>sknmpd on 满船清梦压星河</title>
     <link>https://domyson.github.io/tags/sknmpd/</link>
-    <description>Recent content in sknmpd on Treasure</description>
+    <description>Recent content in sknmpd on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>zh-cn</language>
     <lastBuildDate>Mon, 30 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/tags/sknmpd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>sknmpd</title>
-      <link>https://domyson.github.io/post/sknt/sknmpd/</link>
+      <link>https://domyson.github.io/post/skynet/sknmpd/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://domyson.github.io/post/sknt/sknmpd/</guid>
+      <guid>https://domyson.github.io/post/skynet/sknmpd/</guid>
       <description>简介 sknmpd模块是sknt底层集群模块，它承担了sknt网络节点之间的通讯职能。全名为(simple keenly net managment port daemon)
 架构 sknmpd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来
 sknmpd可以支持任意网络协议，如 tcp,udp 甚至是 unix

@@ -1,19 +1,24 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>redis // Treasure</title>
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.118.2">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="Treasure" />
-    <meta name="description" content="" />
-    <link rel="stylesheet" href="/css/main.min.3c3c186cd62e563ad6e2f00a89dbee656ab912d1d46f856b5605dd0232521e2a.css" />
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='https://domyson.github.io/css/frameworks.min.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/github.min.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/github-style.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
+    <title>redis - 满船清梦压星河</title>
+    
+    <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
+    
+    <meta name="theme-color" content="#1e2327">
 
     
-    <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="redis"/>
-<meta name="twitter:description" content="Redis Remote Dictionary Server,采用 ANSI C 编写的 K-V数据库
+    <meta name="description"
+  content="Redis Remote Dictionary Server,采用 ANSI C 编写的 K-V数据库
 Redis命令
 Redis下载
 类型 string 最大存储值为256mb，底层由SDS(simple dynamic string)实现，优势是访问长度仅需O(1)
@@ -21,35 +26,7 @@ hash
 list 存储有序字符串，最大2^32-1个元素
 set
 同list，但不允许重复
-sorted set 已排序的都字符串集合，但不允许重复 &ndash; 其它
-GEO 地理位置 HyperLogLog 基数统计 Bitsmap bit数组，类似boolean filter redis设计架构 单线程业务，多线程存储，redis6.0引入多线程也仅仅是为了提高解析命令的速度
-虚拟内存
-虚拟内存机制就是暂时把不经常访问的数据(冷数据)从内存交换到磁盘中，从而腾出宝贵的内存空间用于其它需要访问的数据(热数据)。通过VM功能可以实现冷热数据分离，使热数据仍在内存中、冷数据保存到磁盘。这样就可以避免因为内存不足而造成访问速度下降的问题。
-击穿，穿透，雪崩 击穿 某个key在过期点的时候，突然出现大量请求查找这个key
-穿透 访问一个不存在的key的时候
-雪崩 指缓存中数据大批量到过期时间，访问落到db上，造成db压力过大
-持久化机制 RDB RDB持久化，是指在指定的时间间隔内，执行指定次数的写操作，将内存中的数据集快照写入磁盘中，它是Redis默认的持久化方式。执行完操作后，在指定目录下会生成一个dump.rdb文件，Redis 重启的时候，通过加载dump.rdb文件来恢复数据
-分为手动触发和自动触发
-优点 适合大规模的数据恢复场景，如备份，全量复制等
-缺点 没办法做到实时持久化/秒级持久化。
-AOF 采用日志的形式来记录每个写操作，追加到文件中，重启时再重新执行AOF文件中的命令来恢复数据。它主要解决数据持久化的实时性问题
-优点 数据一致性和完整性更高 缺点 内容越多，文件越大，恢复变慢，它需要将所有命令执行一遍
-高可用 主从 类似mysql主从，master负责写，slave负责读
-哨兵 监视其他节点的状态
-集群 Gossip，HashSlot 16384
-View
-分布式锁 setnx setnx nx [expired]"/>
-
-    <meta property="og:title" content="redis" />
-<meta property="og:description" content="Redis Remote Dictionary Server,采用 ANSI C 编写的 K-V数据库
-Redis命令
-Redis下载
-类型 string 最大存储值为256mb，底层由SDS(simple dynamic string)实现，优势是访问长度仅需O(1)
-hash
-list 存储有序字符串，最大2^32-1个元素
-set
-同list，但不允许重复
-sorted set 已排序的都字符串集合，但不允许重复 &ndash; 其它
+sorted set 已排序的都字符串集合，但不允许重复 &amp;ndash; 其它
 GEO 地理位置 HyperLogLog 基数统计 Bitsmap bit数组，类似boolean filter redis设计架构 单线程业务，多线程存储，redis6.0引入多线程也仅仅是为了提高解析命令的速度
 虚拟内存
 虚拟内存机制就是暂时把不经常访问的数据(冷数据)从内存交换到磁盘中，从而腾出宝贵的内存空间用于其它需要访问的数据(热数据)。通过VM功能可以实现冷热数据分离，使热数据仍在内存中、冷数据保存到磁盘。这样就可以避免因为内存不足而造成访问速度下降的问题。
@@ -67,62 +44,232 @@ AOF 采用日志的形式来记录每个写操作，追加到文件中，重启�
 集群 Gossip，HashSlot 16384
 View
 分布式锁 setnx setnx nx [expired]" />
+<meta name="keywords"
+  content='computer tech' />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://domyson.github.io/post/db/redis/redis/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="redis - 满船清梦压星河" />
+<meta name="twitter:description"
+  content="Redis Remote Dictionary Server,采用 ANSI C 编写的 K-V数据库
+Redis命令
+Redis下载
+类型 string 最大存储值为256mb，底层由SDS(simple dynamic string)实现，优势是访问长度仅需O(1)
+hash
+list 存储有序字符串，最大2^32-1个元素
+set
+同list，但不允许重复
+sorted set 已排序的都字符串集合，但不允许重复 &amp;ndash; 其它
+GEO 地理位置 HyperLogLog 基数统计 Bitsmap bit数组，类似boolean filter redis设计架构 单线程业务，多线程存储，redis6.0引入多线程也仅仅是为了提高解析命令的速度
+虚拟内存
+虚拟内存机制就是暂时把不经常访问的数据(冷数据)从内存交换到磁盘中，从而腾出宝贵的内存空间用于其它需要访问的数据(热数据)。通过VM功能可以实现冷热数据分离，使热数据仍在内存中、冷数据保存到磁盘。这样就可以避免因为内存不足而造成访问速度下降的问题。
+击穿，穿透，雪崩 击穿 某个key在过期点的时候，突然出现大量请求查找这个key
+穿透 访问一个不存在的key的时候
+雪崩 指缓存中数据大批量到过期时间，访问落到db上，造成db压力过大
+持久化机制 RDB RDB持久化，是指在指定的时间间隔内，执行指定次数的写操作，将内存中的数据集快照写入磁盘中，它是Redis默认的持久化方式。执行完操作后，在指定目录下会生成一个dump.rdb文件，Redis 重启的时候，通过加载dump.rdb文件来恢复数据
+分为手动触发和自动触发
+优点 适合大规模的数据恢复场景，如备份，全量复制等
+缺点 没办法做到实时持久化/秒级持久化。
+AOF 采用日志的形式来记录每个写操作，追加到文件中，重启时再重新执行AOF文件中的命令来恢复数据。它主要解决数据持久化的实时性问题
+优点 数据一致性和完整性更高 缺点 内容越多，文件越大，恢复变慢，它需要将所有命令执行一遍
+高可用 主从 类似mysql主从，master负责写，slave负责读
+哨兵 监视其他节点的状态
+集群 Gossip，HashSlot 16384
+View
+分布式锁 setnx setnx nx [expired]" />
+<meta name="twitter:site" content="https://domyson.github.io" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image"
+  content="https://domyson.github.io">
+
+
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://domyson.github.io/post/db/redis/redis/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-11-24T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-11-24T00:00:00+00:00" />
+<meta property="og:title" content="redis - 满船清梦压星河">
+<meta property="og:description"
+  content="Redis Remote Dictionary Server,采用 ANSI C 编写的 K-V数据库
+Redis命令
+Redis下载
+类型 string 最大存储值为256mb，底层由SDS(simple dynamic string)实现，优势是访问长度仅需O(1)
+hash
+list 存储有序字符串，最大2^32-1个元素
+set
+同list，但不允许重复
+sorted set 已排序的都字符串集合，但不允许重复 &amp;ndash; 其它
+GEO 地理位置 HyperLogLog 基数统计 Bitsmap bit数组，类似boolean filter redis设计架构 单线程业务，多线程存储，redis6.0引入多线程也仅仅是为了提高解析命令的速度
+虚拟内存
+虚拟内存机制就是暂时把不经常访问的数据(冷数据)从内存交换到磁盘中，从而腾出宝贵的内存空间用于其它需要访问的数据(热数据)。通过VM功能可以实现冷热数据分离，使热数据仍在内存中、冷数据保存到磁盘。这样就可以避免因为内存不足而造成访问速度下降的问题。
+击穿，穿透，雪崩 击穿 某个key在过期点的时候，突然出现大量请求查找这个key
+穿透 访问一个不存在的key的时候
+雪崩 指缓存中数据大批量到过期时间，访问落到db上，造成db压力过大
+持久化机制 RDB RDB持久化，是指在指定的时间间隔内，执行指定次数的写操作，将内存中的数据集快照写入磁盘中，它是Redis默认的持久化方式。执行完操作后，在指定目录下会生成一个dump.rdb文件，Redis 重启的时候，通过加载dump.rdb文件来恢复数据
+分为手动触发和自动触发
+优点 适合大规模的数据恢复场景，如备份，全量复制等
+缺点 没办法做到实时持久化/秒级持久化。
+AOF 采用日志的形式来记录每个写操作，追加到文件中，重启时再重新执行AOF文件中的命令来恢复数据。它主要解决数据持久化的实时性问题
+优点 数据一致性和完整性更高 缺点 内容越多，文件越大，恢复变慢，它需要将所有命令执行一遍
+高可用 主从 类似mysql主从，master负责写，slave负责读
+哨兵 监视其他节点的状态
+集群 Gossip，HashSlot 16384
+View
+分布式锁 setnx setnx nx [expired]" />
+<meta property="og:url" content="https://domyson.github.io/post/db/redis/redis/" />
+<meta property="og:site_name" content="redis" />
+<meta property="og:image"
+  content="https://domyson.github.io">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2022-11-24 00:00:00 &#43;0000 UTC" />
 
 
-  </head>
-  <body>
-    <header class="app-header">
-      <a href="https://domyson.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="Treasure" /></a>
-      <span class="app-header-title">Treasure</span>
-      <nav class="app-header-menu">
-          <a class="app-header-menu-item" href="/">Home</a>
-             - 
-          
-          <a class="app-header-menu-item" href="/tags/">Tags</a>
-             - 
-          
-          <a class="app-header-menu-item" href="/about/">About</a>
-      </nav>
-      <p>无关迟暮,不问翻覆</p>
-      <div class="app-header-social">
-        
-          <a href="https://github.com/domyson" target="_blank" rel="noreferrer noopener me">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
-  <title>Github</title>
-  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-</svg>
-          </a>
-        
-      </div>
-    </header>
-    <main class="app-container">
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class ="post-title">redis</h1>
-      <div class="post-meta">
-        <div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
-  <title>calendar</title>
-  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
-</svg>
-          Nov 24, 2022
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+  <div style="position: relative">
+  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+      <a class="Header-link" href="https://domyson.github.io">
+        <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button class="Header-link btn-link js-details-target" type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div style="display: none;" id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+        <div class="position-relative">
+          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+            autocomplete="off">
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+              <input type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q" value="" placeholder="Search" autocomplete="off">
+              <input type="hidden" name="q" value="site:https://domyson.github.io">
+            </label>
+          </form>
         </div>
-        <div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
-  <title>clock</title>
-  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
-</svg>
-          2 min read
+      </div>
+    </div>
+
+    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+      <a class="Header-link " href="https://domyson.github.io">
+        <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+          width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item" style="margin-right: 0;">
+      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+          version="1.1" width="16" height="16">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </header>
+</div>
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io">
+                  <img class=" avatar-user"
+                    src="https://domyson.github.io/images/avatar.png"
+                    width="32" height="32"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://domyson.github.io">Treasure</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://domyson.github.io/post/db/redis/redis/">redis</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Thu, 24 Nov 2022 00:00:00 &#43;0000"
+                    class="no-wrap">
+                    Thu, 24 Nov 2022 00:00:00 &#43;0000</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Sat, 07 Oct 2023 21:54:38 &#43;0800"
+                    class="no-wrap">
+                    Sat, 07 Oct 2023 21:54:38 &#43;0800</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </header>
-    <div class="post-content">
-      <h1 id="redis">Redis</h1>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      3371 Words
+                    
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h1 id="redis">Redis</h1>
 <blockquote>
 <p>Remote Dictionary Server,采用 ANSI C 编写的 K-V数据库</p>
 </blockquote>
@@ -435,13 +582,64 @@ appendonly on
 </li>
 </ul>
 <p>做二级缓存，A1为原始缓存，A2为拷贝缓存，A1失效时，可以访问A2，A1缓存失效时间设置为短期，A2设置为长期</p>
-
+</article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="post-footer">
+  </main>
+</div>
+<script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://domyson.github.io/css/gitalk.css'>
+<script src='https://domyson.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id: eval( null ), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://domyson.github.io">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+    </a>
+    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
       
-    </div>
-  </article>
+      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
 
-    </main>
-  </body>
+
+</div>
+</body>
+
+<script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
+
 </html>
