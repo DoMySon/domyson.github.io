@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on 满船清梦压星河</title>
-    <link>http://localhost:1313/post/</link>
+    <link>https://domyson.github.io/post/</link>
     <description>Recent content in Posts on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 04 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 04 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>lex</title>
-      <link>http://localhost:1313/post/scriptc/2/</link>
+      <link>https://domyson.github.io/post/scriptc/2/</link>
       <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/scriptc/2/</guid>
+      <guid>https://domyson.github.io/post/scriptc/2/</guid>
       <description>词法分析器 </description>
     </item>
     
     <item>
       <title>scriptc</title>
-      <link>http://localhost:1313/post/scriptc/1/</link>
+      <link>https://domyson.github.io/post/scriptc/1/</link>
       <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/scriptc/1/</guid>
+      <guid>https://domyson.github.io/post/scriptc/1/</guid>
       <description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 skt 写一门dsl，之前是用lua作为服务端的脚本端&lt;/p&gt;
 &lt;p&gt;看过很多源码，&lt;code&gt;python,lua&lt;/code&gt; 等,一直纠结于 stack based or register based。&lt;/p&gt;
@@ -33,29 +33,29 @@
     
     <item>
       <title>datatable</title>
-      <link>http://localhost:1313/post/datatable/</link>
+      <link>https://domyson.github.io/post/datatable/</link>
       <pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/datatable/</guid>
+      <guid>https://domyson.github.io/post/datatable/</guid>
       <description>前言 datatable 使一个转换并加载excel数据表的库，它基于 kproto</description>
     </item>
     
     <item>
       <title>conf</title>
-      <link>http://localhost:1313/post/skynet/conf/</link>
+      <link>https://domyson.github.io/post/skynet/conf/</link>
       <pubDate>Sat, 17 Dec 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/skynet/conf/</guid>
+      <guid>https://domyson.github.io/post/skynet/conf/</guid>
       <description>skynet config 在1.4.0版本之前，类似于skynet，是通过一个lua来作为配置文件启动的，但之后实现了一个高性能的ini解析器来作为配置加载器，好处是可以省略一个类似 launcher 的 LuaState。并且加载速度更快
 example # 修改当前节点的 work directory root = ./example # go插件的搜索路径，特别注意的是它仅仅是将它作为一个服务启动，这本不同于lua plugin_path = ./ # 版本检查选项，若开启它则自动会检查版本是否匹配，版本是通过编译指令设置的。 #version = &amp;#34;1.3.1&amp;#34; # 以后台进程的方式启动 #daemon = &amp;#34;./skynet.pid&amp;#34; # 这个节点不是 sknt 标准选项，需要注意的是 lua模块是一个可编译选项，而不是 sknt自带的 [lua] path=./cop/?.lua; # other go written lua module plugin_path = ./lua_plugin # launch first scritp main = pool # 集群选项 # [sknmpd] # name = &amp;#34;node1&amp;#34; # can use follwing hosts value. &amp;#34;:port ip:port&amp;#34; # cookie= &amp;#34;hello world&amp;#34; # defualt the skynet version.</description>
     </item>
     
     <item>
       <title>redis</title>
-      <link>http://localhost:1313/post/db/redis/redis/</link>
+      <link>https://domyson.github.io/post/db/redis/redis/</link>
       <pubDate>Thu, 24 Nov 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/db/redis/redis/</guid>
+      <guid>https://domyson.github.io/post/db/redis/redis/</guid>
       <description>Redis Remote Dictionary Server,采用 ANSI C 编写的 K-V数据库
 Redis命令
 Redis下载
@@ -86,10 +86,10 @@ View
     
     <item>
       <title>mvcc</title>
-      <link>http://localhost:1313/post/db/mysql/mvcc/</link>
+      <link>https://domyson.github.io/post/db/mysql/mvcc/</link>
       <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/db/mysql/mvcc/</guid>
+      <guid>https://domyson.github.io/post/db/mysql/mvcc/</guid>
       <description>MVCC multi-version concurent control 多版本控制系统，一般用于数据库的并发访问
 MVCC在MySQL InnoDB中的实现主要是为了提高数据库的并发性能，用更好的方式去处理读-写冲突，做到即使有读写冲突时，也能做到不加锁，非阻塞并发读。
 mysql 的 RR级别是通过MVCC多版本并发控制的实现的，它通过管理数据行的多个版本来实现数据库并发控制，通过比较版本号来决定数据是否显示
@@ -105,20 +105,20 @@ update
     
     <item>
       <title>iptables and ipvs</title>
-      <link>http://localhost:1313/post/linux/iptables/</link>
+      <link>https://domyson.github.io/post/linux/iptables/</link>
       <pubDate>Sat, 19 Nov 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/linux/iptables/</guid>
+      <guid>https://domyson.github.io/post/linux/iptables/</guid>
       <description>iptables iptables 基于 netfilter 采用一条条规则链表，时间复杂度为O(n)，最主要的是 iptables 专为防火墙设计
 ipvs ipvs 同样基于 netfilter，但底层采用的是hash表，索引复杂度为O(1)</description>
     </item>
     
     <item>
       <title>Go Memory</title>
-      <link>http://localhost:1313/post/language/go/memory/</link>
+      <link>https://domyson.github.io/post/language/go/memory/</link>
       <pubDate>Fri, 07 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/memory/</guid>
+      <guid>https://domyson.github.io/post/language/go/memory/</guid>
       <description>虚拟内存 虚拟内存屏蔽了RAM和Disk,向进程提供远大于物理内存的内存空间，简单来说就是使用了 memory map 分别映射了RAM和Disk的某个区域
 堆栈 栈的方向向低地址增长，而堆恰好相反
 Vritual memory address | kernel | |-------------------| 0xC00000000 | ---argv,evniron---| | -------stack -----| | ---------↓--------| | ----stack top-----| | | | unallocated | | | heap | | | uninitialized data| | initialized data | | program Code | | | 0x08048000 | | 0x00000000 Tcmalloc 也许同时google出品吧
@@ -136,10 +136,10 @@ PageHeap
     
     <item>
       <title>kproto 编码协议</title>
-      <link>http://localhost:1313/post/kproto/</link>
+      <link>https://domyson.github.io/post/kproto/</link>
       <pubDate>Wed, 21 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/kproto/</guid>
+      <guid>https://domyson.github.io/post/kproto/</guid>
       <description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;其实在&lt;code&gt;cobweb&lt;/code&gt;之初就设计了一种编码协议(kproto)，用于内部消息的编码,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护，
 而后期在研发的时候，发现需要与多种语言交互，显然 &lt;code&gt;json&lt;/code&gt;,&lt;code&gt;xml&lt;/code&gt; 不是一个很好的选择，而 &lt;code&gt;protobuf&lt;/code&gt; 对弱类型语言支持不友好。&lt;/p&gt;</description>
@@ -147,10 +147,10 @@ PageHeap
     
     <item>
       <title>message</title>
-      <link>http://localhost:1313/post/skynet/message/</link>
+      <link>https://domyson.github.io/post/skynet/message/</link>
       <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/skynet/message/</guid>
+      <guid>https://domyson.github.io/post/skynet/message/</guid>
       <description>简介 skynet是基于消息的服务框架，它承担了其中消息的传递。
 服务的消息队列 存在两个版本，一个是基于go channel，另外一个基于无锁缓冲队列，后续有时间会单独解释。
 唯一的区别是 第二种方式需要手动控制调度调度规则，对服务参数的配置有更高的要求，正确的配置,内存以及性能会比 go channel的方式略高
@@ -164,10 +164,10 @@ dead letter 这个很好理解，同erlang 主要是确保数据的一致性，�
     
     <item>
       <title>skynet-go 设计初衷以及特性</title>
-      <link>http://localhost:1313/post/skynet/skynet/</link>
+      <link>https://domyson.github.io/post/skynet/skynet/</link>
       <pubDate>Mon, 20 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/skynet/skynet/</guid>
+      <guid>https://domyson.github.io/post/skynet/skynet/</guid>
       <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;skynet-go&lt;/code&gt; 是一个基于消息和服务的分布式服务框架，采用&lt;code&gt;go&lt;/code&gt;编写，致力于简化开发难度和成本，
 参考了云风的 &lt;a href=&#34;https://github.com/cloudwu/skynet&#34;&gt;skynet&lt;/a&gt; 以及 &lt;code&gt;erlang&lt;/code&gt;的思想。&lt;/p&gt;
@@ -180,10 +180,10 @@ dead letter 这个很好理解，同erlang 主要是确保数据的一致性，�
     
     <item>
       <title>sktpmd</title>
-      <link>http://localhost:1313/post/skynet/sktpmd/</link>
+      <link>https://domyson.github.io/post/skynet/sktpmd/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/skynet/sktpmd/</guid>
+      <guid>https://domyson.github.io/post/skynet/sktpmd/</guid>
       <description>简介 sktpmd模块是skynet底层集群模块，它承担了skynet网络节点之间的通讯职能。全名为(skynet port managment daemon)
 架构 sktpmd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来
 sktpmd可以支持任意网络协议，如 tcp,udp 甚至是 unix
@@ -201,10 +201,10 @@ gossip sktpmd整个发现流程是基于 gossip 算法来发现的,但一些api�
     
     <item>
       <title>timer</title>
-      <link>http://localhost:1313/post/skynet/timer/</link>
+      <link>https://domyson.github.io/post/skynet/timer/</link>
       <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/skynet/timer/</guid>
+      <guid>https://domyson.github.io/post/skynet/timer/</guid>
       <description>简介 timer 模块是 skynet 内置的一个定时模块，使用了小根堆实现。
 apis skynet.sleep(d) 这个函数将会挂起当前协程，在lua和 go中将会有不同的表现，取决于两者底层之间的区别
 skynet.timeout(d,fn) 注册一个到期时间，而之后将会触发这个函数，特别注意，此函数的执行协程同当前调用的协程，简单来说就是并不会造成资源竞争，但是需要注意一下 aba 问题
@@ -218,10 +218,10 @@ QA 为什么不提供循环计时器？
     
     <item>
       <title>version change</title>
-      <link>http://localhost:1313/post/skynet/version/</link>
+      <link>https://domyson.github.io/post/skynet/version/</link>
       <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/skynet/version/</guid>
+      <guid>https://domyson.github.io/post/skynet/version/</guid>
       <description>v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 skynet.send(string,any) 会产生两次搜索的情况 Added skynet-lua 增加 skynet.trace() 用以输出当前堆栈 skynet-lua 增加 check_version() 函数，校验skynet版本 v1.1.2 Fixed 修复了kill函数重入导致越界的问题
 修复http 因为判断发送失败的错误，现在如果发送失败返回404
 Mod skynet.send(dst,...) 现在传入参数可以是大于2个，当等于2，与之前无区别，当大于2则会转为table skynet.send() 现在不返回 boolean，而是返回一个number,为0则认为成功 kill 函数现在会立即退出当前服务 killed 事件不会被传入了 v1.2.0 Mod 取消了事件投递到达服务，会给出一个字符串类型的消息发送这类型，用以区别数据的来源位置以及类型
@@ -232,10 +232,10 @@ v1.2.1 Mod 现在 skynet.warn,skynet.error,skynet.trace,skynet.debug 支持传�
     
     <item>
       <title>allocator</title>
-      <link>http://localhost:1313/post/skynet/allocator/</link>
+      <link>https://domyson.github.io/post/skynet/allocator/</link>
       <pubDate>Thu, 21 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/skynet/allocator/</guid>
+      <guid>https://domyson.github.io/post/skynet/allocator/</guid>
       <description>简介 alloctor 模块主要是为了减少GC而开发。现支持两套分配规则
 基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet中它确实有更优秀的性能，因为它直接分配了一块共用内存，所以不会产生任何GC和真实分配, ，但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。
 哪怕内置的Debug模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 Debug 只能定位到存在 memory-leak，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失
@@ -253,10 +253,10 @@ skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址
     
     <item>
       <title>pid</title>
-      <link>http://localhost:1313/post/skynet/pid/</link>
+      <link>https://domyson.github.io/post/skynet/pid/</link>
       <pubDate>Thu, 21 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/skynet/pid/</guid>
+      <guid>https://domyson.github.io/post/skynet/pid/</guid>
       <description>PID Pid 是当前服务的唯一id，它确保在当前节点以及集群中唯一。
 但重新启动节点之后，它的值可能会发生改变，所以不要尝试保存它，但可以确定的是集群中它依然是唯一的
 作用 表示某一节点的某一的服务的地址，它最终输出是一串 uint64 的值。
@@ -265,19 +265,19 @@ skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址
     
     <item>
       <title>sync.pool</title>
-      <link>http://localhost:1313/post/language/go/sync.pool/</link>
+      <link>https://domyson.github.io/post/language/go/sync.pool/</link>
       <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/sync.pool/</guid>
+      <guid>https://domyson.github.io/post/language/go/sync.pool/</guid>
       <description>结构分析 type Pool struct { noCopy noCopy local unsafe.Pointer // P 本地池，固定尺寸，实际结构 [P]poolLocal，类似 void* 并附加长度构成了一个数组 localSize uintptr // size of the local array victim unsafe.Pointer // local from previous cycle victimSize uintptr // size of victims array New func() any } type poolChain struct{ head *poolChainElt tail *poolChainElt } type poolChainElt struct{ // 一个双向链表 poolDequeue next,prev *poolChainElt } type poolDequeue struct{ headtail uint64 vals []eface } type eface struct{ // 数据的真实内存分配，包括一个类型描述和实际数据 typ,val unsafe.</description>
     </item>
     
     <item>
       <title>sync.Map</title>
-      <link>http://localhost:1313/post/language/go/sync.map/</link>
+      <link>https://domyson.github.io/post/language/go/sync.map/</link>
       <pubDate>Thu, 14 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/sync.map/</guid>
+      <guid>https://domyson.github.io/post/language/go/sync.map/</guid>
       <description>&lt;h1 id=&#34;syncmap-自带的安全-map&#34;&gt;&lt;code&gt;sync.Map&lt;/code&gt; 自带的安全 &lt;code&gt;map&lt;/code&gt;&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;源码位于 &lt;code&gt;${GOPATH}/src/sync/map.go&lt;/code&gt;，值得注意的是&lt;code&gt;sync.Map&lt;/code&gt;是&lt;code&gt;lazy load&lt;/code&gt;,不需要初始化&lt;/p&gt;
@@ -286,10 +286,10 @@ skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址
     
     <item>
       <title>mysql batch update</title>
-      <link>http://localhost:1313/post/db/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/</link>
+      <link>https://domyson.github.io/post/db/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/</link>
       <pubDate>Wed, 13 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/db/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/</guid>
+      <guid>https://domyson.github.io/post/db/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/</guid>
       <description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;最近开发公会功能，需要定时保存一些，如果每次都是以公会为单位的话，相当于n个公会执行了n次&lt;code&gt;UPDATE&lt;/code&gt;操作&lt;/p&gt;
 &lt;h1 id=&#34;实现&#34;&gt;实现&lt;/h1&gt;
@@ -300,10 +300,10 @@ skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址
     
     <item>
       <title>Cgo</title>
-      <link>http://localhost:1313/post/language/go/cgo/</link>
+      <link>https://domyson.github.io/post/language/go/cgo/</link>
       <pubDate>Wed, 06 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/cgo/</guid>
+      <guid>https://domyson.github.io/post/language/go/cgo/</guid>
       <description>cgo 一种go与c交互的技术 开启cgo 要求系统安装C/C++工具链，macos和linux(gcc 自带)，windows(mingw),并确保环境变量CGO_ENAVBLE=on,最后单个源码需要导入 import &amp;quot;C&amp;quot;
 cgo类型映射 C type Cgo type Go type char C.char byte signed char C.schar int8 unsigned char C.uchar uint8 short C.short int16 unsigned short C.ushort uint16 int C.int int32 unsigned int C.uint uint32 long C.long int32 unsigned long C.ulong uint32 long long int C.longlong int64 unsigned long long int C.ulonglong uint64 float C.float float32 double C.double double size_t C.size_t uint 函数指针 go引用c的函数指针比较特别
 官方给出的Example
@@ -312,10 +312,10 @@ cgo类型映射 C type Cgo type Go type char C.char byte signed char C.schar int
     
     <item>
       <title>mysql100问</title>
-      <link>http://localhost:1313/post/db/mysql/mysql100%E9%97%AE/</link>
+      <link>https://domyson.github.io/post/db/mysql/mysql100%E9%97%AE/</link>
       <pubDate>Wed, 06 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/db/mysql/mysql100%E9%97%AE/</guid>
+      <guid>https://domyson.github.io/post/db/mysql/mysql100%E9%97%AE/</guid>
       <description>聚集、非聚集、联合索引 A1: 聚集索引（主键索引）所有ROW都会按照主键索引进行排序
 A2: 非聚集索引即普通索引加上字段
 A3: 几个字段组成的索引
@@ -328,10 +328,10 @@ A7: 索引是通过二叉树来描述的，聚集索引的子叶节点也是数�
     
     <item>
       <title>Go GC分析</title>
-      <link>http://localhost:1313/post/language/go/gc/</link>
+      <link>https://domyson.github.io/post/language/go/gc/</link>
       <pubDate>Sat, 26 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/gc/</guid>
+      <guid>https://domyson.github.io/post/language/go/gc/</guid>
       <description>如何启用GC跟踪 GODEBUG=gctrace=1 go run *.go
 其中 gctrace=1 表示只针对这个进程进行GC追踪
 标记流程 go采用三色标记法，主要是为了提高并发度，这样扫描过程可以拆分为多个阶段，而不用一次扫描全部
@@ -352,10 +352,10 @@ todo https://blog.csdn.net/asd1126163471/article/details/124113816</description>
     
     <item>
       <title>tcp协议</title>
-      <link>http://localhost:1313/post/linux/tcp/</link>
+      <link>https://domyson.github.io/post/linux/tcp/</link>
       <pubDate>Thu, 16 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/linux/tcp/</guid>
+      <guid>https://domyson.github.io/post/linux/tcp/</guid>
       <description>什么是 Tcp 三次握手 tcp client发送连接请求报文，报文首部同步标记位 SYN=1 同时随机序列号 seq=x，此时 tcp client 进入 SYNC-SENT 状态的
 tcp server 若同意连接则确认报文为 ACK=1,SYN=1,ASK=x+1,seq=y 返回给客户端，并进入 SYNC_RCVD 状态
 tcp client 收到回复并确认 ACK 是否为1，seq 是否为 x+1,并返回报文 ACK=1,ASK=y+1,此时双方进入 ESTABLISHED 状态
@@ -372,10 +372,10 @@ ACK应答，超时重传，失序重传，丢弃重复数据，流量控制，�
     
     <item>
       <title>unsafe包</title>
-      <link>http://localhost:1313/post/language/go/unsafe/</link>
+      <link>https://domyson.github.io/post/language/go/unsafe/</link>
       <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/unsafe/</guid>
+      <guid>https://domyson.github.io/post/language/go/unsafe/</guid>
       <description>Golang 默认指针是类型安全的，但它有很多限制。Golang 还有非类型安全的指针，这就是 unsafe 包提供的 unsafe.Pointer。在某些情况下，它会使代码更高效，当然，也更危险。unsafe 包用于 Go 编译器，在编译阶段使用。从名字就可以看出来，它是不安全的，官方并不建议使用。Go 语言类型系统是为了安全和效率设计的，有时，安全会导致效率低下。unsafe 包绕过了 Go 的类型系统，达到直接操作内存的目的，使用它有一定的风险性。但是在某些场景下，使用 unsafe 包提供的函数会提升代码的效率，Go 源码中也是大量使用 unsafe 包。
 unsafe 包 //定义 type ArbitraryType int type Pointer *ArbitraryType //函数 func Sizeof(x AribitraryType) uintptr{} func Offsetof(x AribitraryType) uintptr{} func Alignof(x AribitraryType) uintptr{} 分析 Pointer : 指向任意类型，类似于 C 中的 void*。
 Sizeof : 返回所传类型的大小，指针只返回指针的本身（x64 8byte x86 4byte），而不会返回所指向的内存大小。
@@ -387,10 +387,10 @@ uintptr 可以和 unsafe.</description>
     
     <item>
       <title>性能优化</title>
-      <link>http://localhost:1313/post/unity/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
+      <link>https://domyson.github.io/post/unity/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
       <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/unity/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
+      <guid>https://domyson.github.io/post/unity/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
       <description>音频 短音频使用Wav，长音频使用mp3 纹理 Mipmap mipmap用于减少渲染的带宽压力，但会有额外的内存开销，一般而言UI是建议关闭的，3D模型看情况开启
 Read/Write 纹理尺寸 不同大小的纹理尺寸对内存的占用也是不同，依照项目的实际情况来决定Size
 格式 由于ETC、PVRTC等格式均为有损压缩，因此，当纹理色差范围跨度较大时，均不可避免地造成不同程度的“阶梯”状的色阶问题。因此，很多研发团队使用RGBA32/ARGB32格式来实现更好的效果。但是，这种做法将造成很大的内存占用
@@ -410,10 +410,10 @@ Maximum Allowed Timestep 这里我们需要先知道物理系统本身的特性�
     
     <item>
       <title>assetbundle</title>
-      <link>http://localhost:1313/post/unity/assetbundle/</link>
+      <link>https://domyson.github.io/post/unity/assetbundle/</link>
       <pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/unity/assetbundle/</guid>
+      <guid>https://domyson.github.io/post/unity/assetbundle/</guid>
       <description>Assetbundle 一种包外资源的存储方案，方便更新以及加载
 Manifest 每一个文件夹下都会有一个 Manifest文件，其作用是包含了其下资源的引用关系
 AB管理 资源分类 一般而言我们会根据语言版本进行分类，（如一些有图片文字的资源），然后根据资源的通用性区分是否是共享资源，以减少AB资源冗余，二是根据模块业务来细分。
@@ -433,10 +433,10 @@ public class ABAsset{ public int Ref; public int tick; } public class ABManagmen
     
     <item>
       <title>预处理器</title>
-      <link>http://localhost:1313/post/language/c/preprocessor/</link>
+      <link>https://domyson.github.io/post/language/c/preprocessor/</link>
       <pubDate>Sat, 04 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/c/preprocessor/</guid>
+      <guid>https://domyson.github.io/post/language/c/preprocessor/</guid>
       <description>预处理器 #pragma 用于指示编译器完成一些特定的动作
 #pragma message usermessage
 //example:test.c #include &amp;lt;stdio.h&amp;gt; #define IOS #if defined IOS #pragma message &amp;#34;ready complie ios...&amp;#34; #endif //complie output: note: #pragma message: ready complie ios... #pragma once 确保头文件仅被编译一次
@@ -446,19 +446,19 @@ public class ABAsset{ public int Ref; public int tick; } public class ABManagmen
     
     <item>
       <title>pointer</title>
-      <link>http://localhost:1313/post/language/c/pointer/</link>
+      <link>https://domyson.github.io/post/language/c/pointer/</link>
       <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/c/pointer/</guid>
+      <guid>https://domyson.github.io/post/language/c/pointer/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Go 编译指示</title>
-      <link>http://localhost:1313/post/language/go/pragma/</link>
+      <link>https://domyson.github.io/post/language/go/pragma/</link>
       <pubDate>Sat, 18 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/pragma/</guid>
+      <guid>https://domyson.github.io/post/language/go/pragma/</guid>
       <description>编译指示 在计算机编程中，编译指示(pragma) 是一种语言结构，它指示编译器应该如何处理其输入。指示不是编程语言语法的一部分，因编译器而异。
 Go中的编译指示 //go:pragma func Echo(){} 指示详解 //go:noinline 使函数不内联，内联是在编译期间发生的，将函数调用处替换为被调用函数主体的一种编译器优化手段。
 减少函数调用的开销，提高执行速度。
@@ -471,10 +471,10 @@ Go中的编译指示 //go:pragma func Echo(){} 指示详解 //go:noinline 使函
     
     <item>
       <title>TLS</title>
-      <link>http://localhost:1313/post/linux/tls/</link>
+      <link>https://domyson.github.io/post/linux/tls/</link>
       <pubDate>Sun, 09 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/linux/tls/</guid>
+      <guid>https://domyson.github.io/post/linux/tls/</guid>
       <description>简介 传输层安全性协议（Transport Layer Security），及其前身 SSL3.0 之后安全套接层（Secure Sockets Layer，缩写作SSL）是一种安全协议，目的是为互联网通信提供安全及数据完整性保障。SSL包含记录层（Record Layer）和传输层，记录层协议确定传输层数据的封装格式。传输层安全协议使用X.509认证，之后利用RSA 加密演算来对通信方做身份认证，之后交换对称密钥作为会谈密钥（Session key）。这个会谈密钥是用来将通信两方交换的数据做加密，保证两个应用间通信的保密性和可靠性，使客户与服务器应用之间的通信不被攻击者窃听。
 作用 安全传输层协议（TLS）用于在两个通信应用程序之间提供保密性和数据完整性。
 协议由两层组成： TLS 记录协议（TLS Record）和 TLS 握手协议（TLS Handshake）。
@@ -496,19 +496,19 @@ tls 可以使用对称加密和非对称加密。
     
     <item>
       <title>Go标准命令</title>
-      <link>http://localhost:1313/post/language/go/cmd/</link>
+      <link>https://domyson.github.io/post/language/go/cmd/</link>
       <pubDate>Tue, 28 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/cmd/</guid>
+      <guid>https://domyson.github.io/post/language/go/cmd/</guid>
       <description>&lt;p&gt;Go源码文件包括：命令源码文件、库源码文件和测试源码文件。其中，命令源码文件总应该属于main代码包，且在其中有无参数声明、无结果声明的main函数。单个命令源码文件可以被单独编译，也可以被单独安装&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>channel</title>
-      <link>http://localhost:1313/post/language/go/channel/</link>
+      <link>https://domyson.github.io/post/language/go/channel/</link>
       <pubDate>Mon, 20 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/channel/</guid>
+      <guid>https://domyson.github.io/post/language/go/channel/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;CSP(communicating sequential processes)&lt;/code&gt; 模型由并发执行实体(进程，线程或协程)，和消息通道组成，实体之间通过消息通道发送消息进行通信。和 &lt;code&gt;Actor&lt;/code&gt; 模型不同，&lt;code&gt;CSP&lt;/code&gt; 模型关注的是消息发送的载体，即通道，而不是发送消息的执行实体。Go 语言的并发模型参考了 CSP 理论，其中执行实体对应的是 &lt;code&gt;goroutine，&lt;/code&gt; 消息通道对应的就是 &lt;code&gt;channel&lt;/code&gt;。&lt;code&gt;CSP&lt;/code&gt; 模型的核心是：不通过共享内存来达到通讯，而是通过通讯来共享内存。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -519,10 +519,10 @@ tls 可以使用对称加密和非对称加密。
     
     <item>
       <title>Go Module</title>
-      <link>http://localhost:1313/post/language/go/mod/</link>
+      <link>https://domyson.github.io/post/language/go/mod/</link>
       <pubDate>Sun, 29 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/mod/</guid>
+      <guid>https://domyson.github.io/post/language/go/mod/</guid>
       <description>Module Golang 从1.11版本开始支持官方自带的依赖管理模块。根据项目路径中的 go.mod 文件来建立依赖管理。
 依赖添加 通过 import 自动添加到 go.mod 文件中
 import &amp;#34;github.com/xxx/yyy&amp;#34; 编辑 go.mod 文件
@@ -534,19 +534,19 @@ module xxxgo 1.13.4require(xxxx v0.0.0yyyy v1.1.1) 依赖升级 通过 go �
     
     <item>
       <title>process</title>
-      <link>http://localhost:1313/post/linux/process/</link>
+      <link>https://domyson.github.io/post/linux/process/</link>
       <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/linux/process/</guid>
+      <guid>https://domyson.github.io/post/linux/process/</guid>
       <description>进程状态 TASK_RUNNING TASK_INTERRUPTIBLE TASK_UNINTERRUPTIBLE TASK_TRACED TASK_STOPPED </description>
     </item>
     
     <item>
       <title>Locker</title>
-      <link>http://localhost:1313/post/language/go/lock/</link>
+      <link>https://domyson.github.io/post/language/go/lock/</link>
       <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/lock/</guid>
+      <guid>https://domyson.github.io/post/language/go/lock/</guid>
       <description>sync.Mutex mutex相关的所有事情都是通过sync.Mutex类型的两个方法sync.Lock()和sync.Unlock()函数来完成的，前者用于获取sync.Mutex锁，后者用于释放sync.Mutex锁。sync.Mutex一旦被锁住，其它的Lock()操作就无法再获取它的锁，只有通过Unlock()释放锁之后才能通过Lock()继续获取锁。
 不区分读写锁，只有Lock()与Lock()之间才会导致阻塞的情况
 不与 Goroutine 关联
@@ -563,10 +563,10 @@ sync.RWMutex RWMutex 基于 Mutex,并增加了读、写信号量，增加了获�
     
     <item>
       <title>组合AI</title>
-      <link>http://localhost:1313/post/unity/ai/</link>
+      <link>https://domyson.github.io/post/unity/ai/</link>
       <pubDate>Tue, 10 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/unity/ai/</guid>
+      <guid>https://domyson.github.io/post/unity/ai/</guid>
       <description>什么是AI 一串由外部因素影响行为的实体？
 内部条件分支构建的行为？
 学习并采取对应策略的结果？（Alpa go）
@@ -580,10 +580,10 @@ AI Executor todo</description>
     
     <item>
       <title>Go性能分析</title>
-      <link>http://localhost:1313/post/language/go/pprof/</link>
+      <link>https://domyson.github.io/post/language/go/pprof/</link>
       <pubDate>Fri, 23 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/pprof/</guid>
+      <guid>https://domyson.github.io/post/language/go/pprof/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证。对于单元测试中单元的含义，一般要根据实际情况去判定其具体含义，如 C语言中单元指一个函数,单元就是人为规定的最小的被测功能模块。单元测试是在软件开发过程中要进行的最低级别的测试活动，软件的独立单元将在与程序的其他部分相隔离的情况下进行测试。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -591,10 +591,10 @@ AI Executor todo</description>
     
     <item>
       <title>Protobuf3</title>
-      <link>http://localhost:1313/post/others/protobuf/</link>
+      <link>https://domyson.github.io/post/others/protobuf/</link>
       <pubDate>Mon, 13 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/others/protobuf/</guid>
+      <guid>https://domyson.github.io/post/others/protobuf/</guid>
       <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;Protocol Buffers&lt;/code&gt;，是Google公司开发的一种数据描述语言，类似于XML能够将结构化数据序列化，可用于数据存储、通信协议等方面。本文只介绍 &lt;code&gt;syntax = proto3&lt;/code&gt; 的协议语法。&lt;/p&gt;
 &lt;h1 id=&#34;标准类型对照&#34;&gt;标准类型对照&lt;/h1&gt;
@@ -720,10 +720,10 @@ AI Executor todo</description>
     
     <item>
       <title>Go协程的思考</title>
-      <link>http://localhost:1313/post/language/go/goroutine/</link>
+      <link>https://domyson.github.io/post/language/go/goroutine/</link>
       <pubDate>Sun, 12 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/goroutine/</guid>
+      <guid>https://domyson.github.io/post/language/go/goroutine/</guid>
       <description>&lt;h1 id=&#34;栈&#34;&gt;栈&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;一个 os 线程会有一个给固定大小的内存块（一般是 2MB），用来存储当前线程中调用或挂起函数的内部变量，固定大小的栈对于复杂和深层次递归是不够的，而 Goroutine 会以一个很小的栈（2KB）开始其生命周期，这个栈会动态伸缩，最大能到达 1GB（32位系统是 250M）&lt;/p&gt;
@@ -736,10 +736,10 @@ AI Executor todo</description>
     
     <item>
       <title>Docker</title>
-      <link>http://localhost:1313/post/docker/</link>
+      <link>https://domyson.github.io/post/docker/</link>
       <pubDate>Tue, 12 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/docker/</guid>
+      <guid>https://domyson.github.io/post/docker/</guid>
       <description>&lt;h1 id=&#34;什么是docker&#34;&gt;什么是docker&lt;/h1&gt;
 &lt;p&gt;Docker 是一个开源的容器引擎，可以轻松的为任何应用创建一个轻量级的、可移植的、自给自足的容器。开发者和系统管理员在笔记本上编译测试通过的容器可以批量地在生产环境中部署，包括 VMs（虚拟机）、bare metal、OpenStack 集群、云端、数据中心和其他的基础应用平台。容器是完全使用沙箱机制，相互之间不会有任何接口。&lt;/p&gt;
 &lt;h1 id=&#34;有什么优势&#34;&gt;有什么优势&lt;/h1&gt;
@@ -858,7 +858,7 @@ AI Executor todo</description>
 &lt;h2 id=&#34;制作推送&#34;&gt;制作、推送&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;在指定路径中找到 &lt;a href=&#34;http://localhost:1313/post/Dockerfile&#34;&gt;Dockerfile&lt;/a&gt; 并构建Image, 后面是路径，但路径中必须存在 &lt;code&gt;Dockerfile&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在指定路径中找到 &lt;a href=&#34;https://domyson.github.io/post/Dockerfile&#34;&gt;Dockerfile&lt;/a&gt; 并构建Image, 后面是路径，但路径中必须存在 &lt;code&gt;Dockerfile&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;docker build -t [:namespace]/name:tag Path&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -1001,10 +1001,10 @@ AI Executor todo</description>
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;容器通讯方式&#34;&gt;容器通讯方式&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;http://localhost:1313/2020/01/Docker-Network/&#34;&gt;See DockerNetwork&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://domyson.github.io/2020/01/Docker-Network/&#34;&gt;See DockerNetwork&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;镜像体积优化&#34;&gt;镜像体积优化&lt;/h1&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Docker&lt;/code&gt; 由多个 &lt;code&gt;Layers&lt;/code&gt; 组成（上限是127层）。而 &lt;a href=&#34;http://localhost:1313/2019/03/Dockerfile&#34;&gt;Dockerfile&lt;/a&gt; 每一条指令都会创建一层 &lt;code&gt;Layers&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Docker&lt;/code&gt; 由多个 &lt;code&gt;Layers&lt;/code&gt; 组成（上限是127层）。而 &lt;a href=&#34;https://domyson.github.io/2019/03/Dockerfile&#34;&gt;Dockerfile&lt;/a&gt; 每一条指令都会创建一层 &lt;code&gt;Layers&lt;/code&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;优化基础镜像&#34;&gt;优化基础镜像&lt;/h2&gt;
 &lt;ul&gt;
@@ -1095,10 +1095,10 @@ AI Executor todo</description>
     
     <item>
       <title>Nginx</title>
-      <link>http://localhost:1313/post/others/nginx/</link>
+      <link>https://domyson.github.io/post/others/nginx/</link>
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/others/nginx/</guid>
+      <guid>https://domyson.github.io/post/others/nginx/</guid>
       <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Nginx功能丰富，可作为HTTP服务器，也可作为反向代理服务器，邮件服务器。支持FastCGI、SSL、Virtual Host、URL Rewrite、Gzip等功能。并且支持很多第三方的模块扩展。&lt;/p&gt;
@@ -1123,10 +1123,10 @@ AI Executor todo</description>
     
     <item>
       <title>Markdown</title>
-      <link>http://localhost:1313/post/others/markdown/</link>
+      <link>https://domyson.github.io/post/others/markdown/</link>
       <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/others/markdown/</guid>
+      <guid>https://domyson.github.io/post/others/markdown/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://xianbai.me/learn-md/article/syntax/emphasis.html&#34;&gt;Link&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;目录&#34;&gt;目录&lt;/h1&gt;
 &lt;p&gt;只能跳转标题，如果有同名标题与标题等级无关，匹配最优先的标题&lt;/p&gt;
@@ -1146,10 +1146,10 @@ AI Executor todo</description>
     
     <item>
       <title>xLua</title>
-      <link>http://localhost:1313/post/unity/xlua/</link>
+      <link>https://domyson.github.io/post/unity/xlua/</link>
       <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/unity/xlua/</guid>
+      <guid>https://domyson.github.io/post/unity/xlua/</guid>
       <description>XLua XLua下载
 配置文档
 FAQ
@@ -1170,10 +1170,10 @@ public static List&amp;lt;Type&amp;gt; dynamic { get{ return ( from type in Asse
     
     <item>
       <title>I/O</title>
-      <link>http://localhost:1313/post/linux/io/</link>
+      <link>https://domyson.github.io/post/linux/io/</link>
       <pubDate>Mon, 25 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/linux/io/</guid>
+      <guid>https://domyson.github.io/post/linux/io/</guid>
       <description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -1216,10 +1216,10 @@ public static List&amp;lt;Type&amp;gt; dynamic { get{ return ( from type in Asse
     
     <item>
       <title></title>
-      <link>http://localhost:1313/post/linux/file/</link>
+      <link>https://domyson.github.io/post/linux/file/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/linux/file/</guid>
+      <guid>https://domyson.github.io/post/linux/file/</guid>
       <description>Liunx 文件系统 对于 drwxr-xr-x 4 root root 4096 Nov 28 00:00 hook
 文件类型 符号 描述 d 目录 l 符号链接 s 套接字文件 b 块设备文件 c 字符设备文件 p 命名管道文件 - 普通文件，不属于上述任意一种 权限更换 chmod [who] operator [permission] filename
 who
@@ -1230,10 +1230,10 @@ who
     
     <item>
       <title></title>
-      <link>http://localhost:1313/post/readme/</link>
+      <link>https://domyson.github.io/post/readme/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/readme/</guid>
+      <guid>https://domyson.github.io/post/readme/</guid>
       <description>专业 Unity、Golang 划水师，专注于各种花式打杂，会拼写 C、Golang、CSharp、Lua 等单词
 技术栈 Docker、Nginx、Golang、Git、Centos、Markdown、WebHook、hugo
 Github Pages、hugo</description>

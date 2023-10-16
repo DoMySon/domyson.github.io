@@ -2,27 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>skynet on 满船清梦压星河</title>
-    <link>http://localhost:1313/categories/skynet/</link>
+    <link>https://domyson.github.io/categories/skynet/</link>
     <description>Recent content in skynet on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 17 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/skynet/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/categories/skynet/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>conf</title>
-      <link>http://localhost:1313/post/skynet/conf/</link>
+      <link>https://domyson.github.io/post/skynet/conf/</link>
       <pubDate>Sat, 17 Dec 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/skynet/conf/</guid>
+      <guid>https://domyson.github.io/post/skynet/conf/</guid>
       <description>skynet config 在1.4.0版本之前，类似于skynet，是通过一个lua来作为配置文件启动的，但之后实现了一个高性能的ini解析器来作为配置加载器，好处是可以省略一个类似 launcher 的 LuaState。并且加载速度更快
 example # 修改当前节点的 work directory root = ./example # go插件的搜索路径，特别注意的是它仅仅是将它作为一个服务启动，这本不同于lua plugin_path = ./ # 版本检查选项，若开启它则自动会检查版本是否匹配，版本是通过编译指令设置的。 #version = &amp;#34;1.3.1&amp;#34; # 以后台进程的方式启动 #daemon = &amp;#34;./skynet.pid&amp;#34; # 这个节点不是 sknt 标准选项，需要注意的是 lua模块是一个可编译选项，而不是 sknt自带的 [lua] path=./cop/?.lua; # other go written lua module plugin_path = ./lua_plugin # launch first scritp main = pool # 集群选项 # [sknmpd] # name = &amp;#34;node1&amp;#34; # can use follwing hosts value. &amp;#34;:port ip:port&amp;#34; # cookie= &amp;#34;hello world&amp;#34; # defualt the skynet version.</description>
     </item>
     
     <item>
       <title>message</title>
-      <link>http://localhost:1313/post/skynet/message/</link>
+      <link>https://domyson.github.io/post/skynet/message/</link>
       <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/skynet/message/</guid>
+      <guid>https://domyson.github.io/post/skynet/message/</guid>
       <description>简介 skynet是基于消息的服务框架，它承担了其中消息的传递。
 服务的消息队列 存在两个版本，一个是基于go channel，另外一个基于无锁缓冲队列，后续有时间会单独解释。
 唯一的区别是 第二种方式需要手动控制调度调度规则，对服务参数的配置有更高的要求，正确的配置,内存以及性能会比 go channel的方式略高
@@ -36,10 +36,10 @@ dead letter 这个很好理解，同erlang 主要是确保数据的一致性，�
     
     <item>
       <title>skynet-go 设计初衷以及特性</title>
-      <link>http://localhost:1313/post/skynet/skynet/</link>
+      <link>https://domyson.github.io/post/skynet/skynet/</link>
       <pubDate>Mon, 20 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/skynet/skynet/</guid>
+      <guid>https://domyson.github.io/post/skynet/skynet/</guid>
       <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;skynet-go&lt;/code&gt; 是一个基于消息和服务的分布式服务框架，采用&lt;code&gt;go&lt;/code&gt;编写，致力于简化开发难度和成本，
 参考了云风的 &lt;a href=&#34;https://github.com/cloudwu/skynet&#34;&gt;skynet&lt;/a&gt; 以及 &lt;code&gt;erlang&lt;/code&gt;的思想。&lt;/p&gt;
@@ -52,10 +52,10 @@ dead letter 这个很好理解，同erlang 主要是确保数据的一致性，�
     
     <item>
       <title>sktpmd</title>
-      <link>http://localhost:1313/post/skynet/sktpmd/</link>
+      <link>https://domyson.github.io/post/skynet/sktpmd/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/skynet/sktpmd/</guid>
+      <guid>https://domyson.github.io/post/skynet/sktpmd/</guid>
       <description>简介 sktpmd模块是skynet底层集群模块，它承担了skynet网络节点之间的通讯职能。全名为(skynet port managment daemon)
 架构 sktpmd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来
 sktpmd可以支持任意网络协议，如 tcp,udp 甚至是 unix
@@ -73,10 +73,10 @@ gossip sktpmd整个发现流程是基于 gossip 算法来发现的,但一些api�
     
     <item>
       <title>timer</title>
-      <link>http://localhost:1313/post/skynet/timer/</link>
+      <link>https://domyson.github.io/post/skynet/timer/</link>
       <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/skynet/timer/</guid>
+      <guid>https://domyson.github.io/post/skynet/timer/</guid>
       <description>简介 timer 模块是 skynet 内置的一个定时模块，使用了小根堆实现。
 apis skynet.sleep(d) 这个函数将会挂起当前协程，在lua和 go中将会有不同的表现，取决于两者底层之间的区别
 skynet.timeout(d,fn) 注册一个到期时间，而之后将会触发这个函数，特别注意，此函数的执行协程同当前调用的协程，简单来说就是并不会造成资源竞争，但是需要注意一下 aba 问题
@@ -90,10 +90,10 @@ QA 为什么不提供循环计时器？
     
     <item>
       <title>version change</title>
-      <link>http://localhost:1313/post/skynet/version/</link>
+      <link>https://domyson.github.io/post/skynet/version/</link>
       <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/skynet/version/</guid>
+      <guid>https://domyson.github.io/post/skynet/version/</guid>
       <description>v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 skynet.send(string,any) 会产生两次搜索的情况 Added skynet-lua 增加 skynet.trace() 用以输出当前堆栈 skynet-lua 增加 check_version() 函数，校验skynet版本 v1.1.2 Fixed 修复了kill函数重入导致越界的问题
 修复http 因为判断发送失败的错误，现在如果发送失败返回404
 Mod skynet.send(dst,...) 现在传入参数可以是大于2个，当等于2，与之前无区别，当大于2则会转为table skynet.send() 现在不返回 boolean，而是返回一个number,为0则认为成功 kill 函数现在会立即退出当前服务 killed 事件不会被传入了 v1.2.0 Mod 取消了事件投递到达服务，会给出一个字符串类型的消息发送这类型，用以区别数据的来源位置以及类型
@@ -104,10 +104,10 @@ v1.2.1 Mod 现在 skynet.warn,skynet.error,skynet.trace,skynet.debug 支持传�
     
     <item>
       <title>allocator</title>
-      <link>http://localhost:1313/post/skynet/allocator/</link>
+      <link>https://domyson.github.io/post/skynet/allocator/</link>
       <pubDate>Thu, 21 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/skynet/allocator/</guid>
+      <guid>https://domyson.github.io/post/skynet/allocator/</guid>
       <description>简介 alloctor 模块主要是为了减少GC而开发。现支持两套分配规则
 基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet中它确实有更优秀的性能，因为它直接分配了一块共用内存，所以不会产生任何GC和真实分配, ，但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。
 哪怕内置的Debug模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 Debug 只能定位到存在 memory-leak，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失
@@ -125,10 +125,10 @@ skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址
     
     <item>
       <title>pid</title>
-      <link>http://localhost:1313/post/skynet/pid/</link>
+      <link>https://domyson.github.io/post/skynet/pid/</link>
       <pubDate>Thu, 21 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/skynet/pid/</guid>
+      <guid>https://domyson.github.io/post/skynet/pid/</guid>
       <description>PID Pid 是当前服务的唯一id，它确保在当前节点以及集群中唯一。
 但重新启动节点之后，它的值可能会发生改变，所以不要尝试保存它，但可以确定的是集群中它依然是唯一的
 作用 表示某一节点的某一的服务的地址，它最终输出是一串 uint64 的值。

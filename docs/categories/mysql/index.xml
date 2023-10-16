@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>mysql on 满船清梦压星河</title>
-    <link>http://localhost:1313/categories/mysql/</link>
+    <link>https://domyson.github.io/categories/mysql/</link>
     <description>Recent content in mysql on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 20 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 20 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>mvcc</title>
-      <link>http://localhost:1313/post/db/mysql/mvcc/</link>
+      <link>https://domyson.github.io/post/db/mysql/mvcc/</link>
       <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/db/mysql/mvcc/</guid>
+      <guid>https://domyson.github.io/post/db/mysql/mvcc/</guid>
       <description>MVCC multi-version concurent control 多版本控制系统，一般用于数据库的并发访问
 MVCC在MySQL InnoDB中的实现主要是为了提高数据库的并发性能，用更好的方式去处理读-写冲突，做到即使有读写冲突时，也能做到不加锁，非阻塞并发读。
 mysql 的 RR级别是通过MVCC多版本并发控制的实现的，它通过管理数据行的多个版本来实现数据库并发控制，通过比较版本号来决定数据是否显示
@@ -28,10 +28,10 @@ update
     
     <item>
       <title>mysql batch update</title>
-      <link>http://localhost:1313/post/db/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/</link>
+      <link>https://domyson.github.io/post/db/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/</link>
       <pubDate>Wed, 13 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/db/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/</guid>
+      <guid>https://domyson.github.io/post/db/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/</guid>
       <description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;最近开发公会功能，需要定时保存一些，如果每次都是以公会为单位的话，相当于n个公会执行了n次&lt;code&gt;UPDATE&lt;/code&gt;操作&lt;/p&gt;
 &lt;h1 id=&#34;实现&#34;&gt;实现&lt;/h1&gt;
@@ -42,10 +42,10 @@ update
     
     <item>
       <title>mysql100问</title>
-      <link>http://localhost:1313/post/db/mysql/mysql100%E9%97%AE/</link>
+      <link>https://domyson.github.io/post/db/mysql/mysql100%E9%97%AE/</link>
       <pubDate>Wed, 06 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/db/mysql/mysql100%E9%97%AE/</guid>
+      <guid>https://domyson.github.io/post/db/mysql/mysql100%E9%97%AE/</guid>
       <description>聚集、非聚集、联合索引 A1: 聚集索引（主键索引）所有ROW都会按照主键索引进行排序
 A2: 非聚集索引即普通索引加上字段
 A3: 几个字段组成的索引

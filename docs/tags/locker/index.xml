@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>locker on 满船清梦压星河</title>
-    <link>http://localhost:1313/tags/locker/</link>
+    <link>https://domyson.github.io/tags/locker/</link>
     <description>Recent content in locker on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 11 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/locker/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 11 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/tags/locker/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Locker</title>
-      <link>http://localhost:1313/post/language/go/lock/</link>
+      <link>https://domyson.github.io/post/language/go/lock/</link>
       <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/lock/</guid>
+      <guid>https://domyson.github.io/post/language/go/lock/</guid>
       <description>sync.Mutex mutex相关的所有事情都是通过sync.Mutex类型的两个方法sync.Lock()和sync.Unlock()函数来完成的，前者用于获取sync.Mutex锁，后者用于释放sync.Mutex锁。sync.Mutex一旦被锁住，其它的Lock()操作就无法再获取它的锁，只有通过Unlock()释放锁之后才能通过Lock()继续获取锁。
 不区分读写锁，只有Lock()与Lock()之间才会导致阻塞的情况
 不与 Goroutine 关联

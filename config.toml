@@ -15,7 +15,7 @@ pygmentsUseClasses = true
 #   linkedin = "MeiK2333"
 #   instagram = "MeiK2333"
   #tumblr = "MeiK2333"
-  email = "cnmlgbbg@gmail.com"
+  email = "cnmlgbbg@hotmail.com"
   url = "https://domyson.github.io"
   keywords = "computer tech"
   rss = true
@@ -23,7 +23,7 @@ pygmentsUseClasses = true
   userStatusEmoji = "😀"
   favicon = "/images/avatar.png"
   location = "China"
-  enableGitalk = true
+  #enableGitalk = true
 
 #   [params.gitalk]
 #     clientID = "Your client ID" 

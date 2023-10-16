@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Go on 满船清梦压星河</title>
-    <link>http://localhost:1313/categories/go/</link>
+    <link>https://domyson.github.io/categories/go/</link>
     <description>Recent content in Go on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 07 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 07 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Go Memory</title>
-      <link>http://localhost:1313/post/language/go/memory/</link>
+      <link>https://domyson.github.io/post/language/go/memory/</link>
       <pubDate>Fri, 07 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/memory/</guid>
+      <guid>https://domyson.github.io/post/language/go/memory/</guid>
       <description>虚拟内存 虚拟内存屏蔽了RAM和Disk,向进程提供远大于物理内存的内存空间，简单来说就是使用了 memory map 分别映射了RAM和Disk的某个区域
 堆栈 栈的方向向低地址增长，而堆恰好相反
 Vritual memory address | kernel | |-------------------| 0xC00000000 | ---argv,evniron---| | -------stack -----| | ---------↓--------| | ----stack top-----| | | | unallocated | | | heap | | | uninitialized data| | initialized data | | program Code | | | 0x08048000 | | 0x00000000 Tcmalloc 也许同时google出品吧
@@ -30,19 +30,19 @@ PageHeap
     
     <item>
       <title>sync.pool</title>
-      <link>http://localhost:1313/post/language/go/sync.pool/</link>
+      <link>https://domyson.github.io/post/language/go/sync.pool/</link>
       <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/sync.pool/</guid>
+      <guid>https://domyson.github.io/post/language/go/sync.pool/</guid>
       <description>结构分析 type Pool struct { noCopy noCopy local unsafe.Pointer // P 本地池，固定尺寸，实际结构 [P]poolLocal，类似 void* 并附加长度构成了一个数组 localSize uintptr // size of the local array victim unsafe.Pointer // local from previous cycle victimSize uintptr // size of victims array New func() any } type poolChain struct{ head *poolChainElt tail *poolChainElt } type poolChainElt struct{ // 一个双向链表 poolDequeue next,prev *poolChainElt } type poolDequeue struct{ headtail uint64 vals []eface } type eface struct{ // 数据的真实内存分配，包括一个类型描述和实际数据 typ,val unsafe.</description>
     </item>
     
     <item>
       <title>sync.Map</title>
-      <link>http://localhost:1313/post/language/go/sync.map/</link>
+      <link>https://domyson.github.io/post/language/go/sync.map/</link>
       <pubDate>Thu, 14 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/sync.map/</guid>
+      <guid>https://domyson.github.io/post/language/go/sync.map/</guid>
       <description>&lt;h1 id=&#34;syncmap-自带的安全-map&#34;&gt;&lt;code&gt;sync.Map&lt;/code&gt; 自带的安全 &lt;code&gt;map&lt;/code&gt;&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;源码位于 &lt;code&gt;${GOPATH}/src/sync/map.go&lt;/code&gt;，值得注意的是&lt;code&gt;sync.Map&lt;/code&gt;是&lt;code&gt;lazy load&lt;/code&gt;,不需要初始化&lt;/p&gt;
@@ -51,10 +51,10 @@ PageHeap
     
     <item>
       <title>Cgo</title>
-      <link>http://localhost:1313/post/language/go/cgo/</link>
+      <link>https://domyson.github.io/post/language/go/cgo/</link>
       <pubDate>Wed, 06 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/cgo/</guid>
+      <guid>https://domyson.github.io/post/language/go/cgo/</guid>
       <description>cgo 一种go与c交互的技术 开启cgo 要求系统安装C/C++工具链，macos和linux(gcc 自带)，windows(mingw),并确保环境变量CGO_ENAVBLE=on,最后单个源码需要导入 import &amp;quot;C&amp;quot;
 cgo类型映射 C type Cgo type Go type char C.char byte signed char C.schar int8 unsigned char C.uchar uint8 short C.short int16 unsigned short C.ushort uint16 int C.int int32 unsigned int C.uint uint32 long C.long int32 unsigned long C.ulong uint32 long long int C.longlong int64 unsigned long long int C.ulonglong uint64 float C.float float32 double C.double double size_t C.size_t uint 函数指针 go引用c的函数指针比较特别
 官方给出的Example
@@ -63,10 +63,10 @@ cgo类型映射 C type Cgo type Go type char C.char byte signed char C.schar int
     
     <item>
       <title>Go GC分析</title>
-      <link>http://localhost:1313/post/language/go/gc/</link>
+      <link>https://domyson.github.io/post/language/go/gc/</link>
       <pubDate>Sat, 26 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/gc/</guid>
+      <guid>https://domyson.github.io/post/language/go/gc/</guid>
       <description>如何启用GC跟踪 GODEBUG=gctrace=1 go run *.go
 其中 gctrace=1 表示只针对这个进程进行GC追踪
 标记流程 go采用三色标记法，主要是为了提高并发度，这样扫描过程可以拆分为多个阶段，而不用一次扫描全部
@@ -87,10 +87,10 @@ todo https://blog.csdn.net/asd1126163471/article/details/124113816</description>
     
     <item>
       <title>unsafe包</title>
-      <link>http://localhost:1313/post/language/go/unsafe/</link>
+      <link>https://domyson.github.io/post/language/go/unsafe/</link>
       <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/unsafe/</guid>
+      <guid>https://domyson.github.io/post/language/go/unsafe/</guid>
       <description>Golang 默认指针是类型安全的，但它有很多限制。Golang 还有非类型安全的指针，这就是 unsafe 包提供的 unsafe.Pointer。在某些情况下，它会使代码更高效，当然，也更危险。unsafe 包用于 Go 编译器，在编译阶段使用。从名字就可以看出来，它是不安全的，官方并不建议使用。Go 语言类型系统是为了安全和效率设计的，有时，安全会导致效率低下。unsafe 包绕过了 Go 的类型系统，达到直接操作内存的目的，使用它有一定的风险性。但是在某些场景下，使用 unsafe 包提供的函数会提升代码的效率，Go 源码中也是大量使用 unsafe 包。
 unsafe 包 //定义 type ArbitraryType int type Pointer *ArbitraryType //函数 func Sizeof(x AribitraryType) uintptr{} func Offsetof(x AribitraryType) uintptr{} func Alignof(x AribitraryType) uintptr{} 分析 Pointer : 指向任意类型，类似于 C 中的 void*。
 Sizeof : 返回所传类型的大小，指针只返回指针的本身（x64 8byte x86 4byte），而不会返回所指向的内存大小。
@@ -102,10 +102,10 @@ uintptr 可以和 unsafe.</description>
     
     <item>
       <title>Go 编译指示</title>
-      <link>http://localhost:1313/post/language/go/pragma/</link>
+      <link>https://domyson.github.io/post/language/go/pragma/</link>
       <pubDate>Sat, 18 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/pragma/</guid>
+      <guid>https://domyson.github.io/post/language/go/pragma/</guid>
       <description>编译指示 在计算机编程中，编译指示(pragma) 是一种语言结构，它指示编译器应该如何处理其输入。指示不是编程语言语法的一部分，因编译器而异。
 Go中的编译指示 //go:pragma func Echo(){} 指示详解 //go:noinline 使函数不内联，内联是在编译期间发生的，将函数调用处替换为被调用函数主体的一种编译器优化手段。
 减少函数调用的开销，提高执行速度。
@@ -118,19 +118,19 @@ Go中的编译指示 //go:pragma func Echo(){} 指示详解 //go:noinline 使函
     
     <item>
       <title>Go标准命令</title>
-      <link>http://localhost:1313/post/language/go/cmd/</link>
+      <link>https://domyson.github.io/post/language/go/cmd/</link>
       <pubDate>Tue, 28 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/cmd/</guid>
+      <guid>https://domyson.github.io/post/language/go/cmd/</guid>
       <description>&lt;p&gt;Go源码文件包括：命令源码文件、库源码文件和测试源码文件。其中，命令源码文件总应该属于main代码包，且在其中有无参数声明、无结果声明的main函数。单个命令源码文件可以被单独编译，也可以被单独安装&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>channel</title>
-      <link>http://localhost:1313/post/language/go/channel/</link>
+      <link>https://domyson.github.io/post/language/go/channel/</link>
       <pubDate>Mon, 20 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/channel/</guid>
+      <guid>https://domyson.github.io/post/language/go/channel/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;CSP(communicating sequential processes)&lt;/code&gt; 模型由并发执行实体(进程，线程或协程)，和消息通道组成，实体之间通过消息通道发送消息进行通信。和 &lt;code&gt;Actor&lt;/code&gt; 模型不同，&lt;code&gt;CSP&lt;/code&gt; 模型关注的是消息发送的载体，即通道，而不是发送消息的执行实体。Go 语言的并发模型参考了 CSP 理论，其中执行实体对应的是 &lt;code&gt;goroutine，&lt;/code&gt; 消息通道对应的就是 &lt;code&gt;channel&lt;/code&gt;。&lt;code&gt;CSP&lt;/code&gt; 模型的核心是：不通过共享内存来达到通讯，而是通过通讯来共享内存。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -141,10 +141,10 @@ Go中的编译指示 //go:pragma func Echo(){} 指示详解 //go:noinline 使函
     
     <item>
       <title>Go Module</title>
-      <link>http://localhost:1313/post/language/go/mod/</link>
+      <link>https://domyson.github.io/post/language/go/mod/</link>
       <pubDate>Sun, 29 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/mod/</guid>
+      <guid>https://domyson.github.io/post/language/go/mod/</guid>
       <description>Module Golang 从1.11版本开始支持官方自带的依赖管理模块。根据项目路径中的 go.mod 文件来建立依赖管理。
 依赖添加 通过 import 自动添加到 go.mod 文件中
 import &amp;#34;github.com/xxx/yyy&amp;#34; 编辑 go.mod 文件
@@ -156,10 +156,10 @@ module xxxgo 1.13.4require(xxxx v0.0.0yyyy v1.1.1) 依赖升级 通过 go �
     
     <item>
       <title>Locker</title>
-      <link>http://localhost:1313/post/language/go/lock/</link>
+      <link>https://domyson.github.io/post/language/go/lock/</link>
       <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/lock/</guid>
+      <guid>https://domyson.github.io/post/language/go/lock/</guid>
       <description>sync.Mutex mutex相关的所有事情都是通过sync.Mutex类型的两个方法sync.Lock()和sync.Unlock()函数来完成的，前者用于获取sync.Mutex锁，后者用于释放sync.Mutex锁。sync.Mutex一旦被锁住，其它的Lock()操作就无法再获取它的锁，只有通过Unlock()释放锁之后才能通过Lock()继续获取锁。
 不区分读写锁，只有Lock()与Lock()之间才会导致阻塞的情况
 不与 Goroutine 关联
@@ -176,10 +176,10 @@ sync.RWMutex RWMutex 基于 Mutex,并增加了读、写信号量，增加了获�
     
     <item>
       <title>Go性能分析</title>
-      <link>http://localhost:1313/post/language/go/pprof/</link>
+      <link>https://domyson.github.io/post/language/go/pprof/</link>
       <pubDate>Fri, 23 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/pprof/</guid>
+      <guid>https://domyson.github.io/post/language/go/pprof/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证。对于单元测试中单元的含义，一般要根据实际情况去判定其具体含义，如 C语言中单元指一个函数,单元就是人为规定的最小的被测功能模块。单元测试是在软件开发过程中要进行的最低级别的测试活动，软件的独立单元将在与程序的其他部分相隔离的情况下进行测试。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -187,10 +187,10 @@ sync.RWMutex RWMutex 基于 Mutex,并增加了读、写信号量，增加了获�
     
     <item>
       <title>Go协程的思考</title>
-      <link>http://localhost:1313/post/language/go/goroutine/</link>
+      <link>https://domyson.github.io/post/language/go/goroutine/</link>
       <pubDate>Sun, 12 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/language/go/goroutine/</guid>
+      <guid>https://domyson.github.io/post/language/go/goroutine/</guid>
       <description>&lt;h1 id=&#34;栈&#34;&gt;栈&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;一个 os 线程会有一个给固定大小的内存块（一般是 2MB），用来存储当前线程中调用或挂起函数的内部变量，固定大小的栈对于复杂和深层次递归是不够的，而 Goroutine 会以一个很小的栈（2KB）开始其生命周期，这个栈会动态伸缩，最大能到达 1GB（32位系统是 250M）&lt;/p&gt;

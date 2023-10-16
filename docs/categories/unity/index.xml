@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>unity on 满船清梦压星河</title>
-    <link>http://localhost:1313/categories/unity/</link>
+    <link>https://domyson.github.io/categories/unity/</link>
     <description>Recent content in unity on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 10 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/unity/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 10 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/categories/unity/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>性能优化</title>
-      <link>http://localhost:1313/post/unity/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
+      <link>https://domyson.github.io/post/unity/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
       <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/unity/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
+      <guid>https://domyson.github.io/post/unity/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
       <description>音频 短音频使用Wav，长音频使用mp3 纹理 Mipmap mipmap用于减少渲染的带宽压力，但会有额外的内存开销，一般而言UI是建议关闭的，3D模型看情况开启
 Read/Write 纹理尺寸 不同大小的纹理尺寸对内存的占用也是不同，依照项目的实际情况来决定Size
 格式 由于ETC、PVRTC等格式均为有损压缩，因此，当纹理色差范围跨度较大时，均不可避免地造成不同程度的“阶梯”状的色阶问题。因此，很多研发团队使用RGBA32/ARGB32格式来实现更好的效果。但是，这种做法将造成很大的内存占用
@@ -32,10 +32,10 @@ Maximum Allowed Timestep 这里我们需要先知道物理系统本身的特性�
     
     <item>
       <title>assetbundle</title>
-      <link>http://localhost:1313/post/unity/assetbundle/</link>
+      <link>https://domyson.github.io/post/unity/assetbundle/</link>
       <pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/unity/assetbundle/</guid>
+      <guid>https://domyson.github.io/post/unity/assetbundle/</guid>
       <description>Assetbundle 一种包外资源的存储方案，方便更新以及加载
 Manifest 每一个文件夹下都会有一个 Manifest文件，其作用是包含了其下资源的引用关系
 AB管理 资源分类 一般而言我们会根据语言版本进行分类，（如一些有图片文字的资源），然后根据资源的通用性区分是否是共享资源，以减少AB资源冗余，二是根据模块业务来细分。
@@ -55,10 +55,10 @@ public class ABAsset{ public int Ref; public int tick; } public class ABManagmen
     
     <item>
       <title>组合AI</title>
-      <link>http://localhost:1313/post/unity/ai/</link>
+      <link>https://domyson.github.io/post/unity/ai/</link>
       <pubDate>Tue, 10 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/unity/ai/</guid>
+      <guid>https://domyson.github.io/post/unity/ai/</guid>
       <description>什么是AI 一串由外部因素影响行为的实体？
 内部条件分支构建的行为？
 学习并采取对应策略的结果？（Alpa go）
@@ -72,10 +72,10 @@ AI Executor todo</description>
     
     <item>
       <title>xLua</title>
-      <link>http://localhost:1313/post/unity/xlua/</link>
+      <link>https://domyson.github.io/post/unity/xlua/</link>
       <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/unity/xlua/</guid>
+      <guid>https://domyson.github.io/post/unity/xlua/</guid>
       <description>XLua XLua下载
 配置文档
 FAQ

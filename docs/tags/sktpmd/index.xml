@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>sktpmd on 满船清梦压星河</title>
-    <link>http://localhost:1313/tags/sktpmd/</link>
+    <link>https://domyson.github.io/tags/sktpmd/</link>
     <description>Recent content in sktpmd on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 30 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/sktpmd/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 30 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/tags/sktpmd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>sktpmd</title>
-      <link>http://localhost:1313/post/skynet/sktpmd/</link>
+      <link>https://domyson.github.io/post/skynet/sktpmd/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/skynet/sktpmd/</guid>
+      <guid>https://domyson.github.io/post/skynet/sktpmd/</guid>
       <description>简介 sktpmd模块是skynet底层集群模块，它承担了skynet网络节点之间的通讯职能。全名为(skynet port managment daemon)
 架构 sktpmd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来
 sktpmd可以支持任意网络协议，如 tcp,udp 甚至是 unix

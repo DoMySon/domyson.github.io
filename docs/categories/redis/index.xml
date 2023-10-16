@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>redis on 满船清梦压星河</title>
-    <link>http://localhost:1313/categories/redis/</link>
+    <link>https://domyson.github.io/categories/redis/</link>
     <description>Recent content in redis on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 24 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/redis/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/categories/redis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>redis</title>
-      <link>http://localhost:1313/post/db/redis/redis/</link>
+      <link>https://domyson.github.io/post/db/redis/redis/</link>
       <pubDate>Thu, 24 Nov 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/db/redis/redis/</guid>
+      <guid>https://domyson.github.io/post/db/redis/redis/</guid>
       <description>Redis Remote Dictionary Server,采用 ANSI C 编写的 K-V数据库
 Redis命令
 Redis下载

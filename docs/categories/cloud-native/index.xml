@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>cloud native on 满船清梦压星河</title>
-    <link>http://localhost:1313/categories/cloud-native/</link>
+    <link>https://domyson.github.io/categories/cloud-native/</link>
     <description>Recent content in cloud native on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 12 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/cloud-native/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 12 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/categories/cloud-native/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Docker</title>
-      <link>http://localhost:1313/post/docker/</link>
+      <link>https://domyson.github.io/post/docker/</link>
       <pubDate>Tue, 12 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/docker/</guid>
+      <guid>https://domyson.github.io/post/docker/</guid>
       <description>&lt;h1 id=&#34;什么是docker&#34;&gt;什么是docker&lt;/h1&gt;
 &lt;p&gt;Docker 是一个开源的容器引擎，可以轻松的为任何应用创建一个轻量级的、可移植的、自给自足的容器。开发者和系统管理员在笔记本上编译测试通过的容器可以批量地在生产环境中部署，包括 VMs（虚拟机）、bare metal、OpenStack 集群、云端、数据中心和其他的基础应用平台。容器是完全使用沙箱机制，相互之间不会有任何接口。&lt;/p&gt;
 &lt;h1 id=&#34;有什么优势&#34;&gt;有什么优势&lt;/h1&gt;
@@ -131,7 +131,7 @@
 &lt;h2 id=&#34;制作推送&#34;&gt;制作、推送&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;在指定路径中找到 &lt;a href=&#34;http://localhost:1313/post/Dockerfile&#34;&gt;Dockerfile&lt;/a&gt; 并构建Image, 后面是路径，但路径中必须存在 &lt;code&gt;Dockerfile&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在指定路径中找到 &lt;a href=&#34;https://domyson.github.io/post/Dockerfile&#34;&gt;Dockerfile&lt;/a&gt; 并构建Image, 后面是路径，但路径中必须存在 &lt;code&gt;Dockerfile&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;docker build -t [:namespace]/name:tag Path&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -274,10 +274,10 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;容器通讯方式&#34;&gt;容器通讯方式&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;http://localhost:1313/2020/01/Docker-Network/&#34;&gt;See DockerNetwork&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://domyson.github.io/2020/01/Docker-Network/&#34;&gt;See DockerNetwork&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;镜像体积优化&#34;&gt;镜像体积优化&lt;/h1&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Docker&lt;/code&gt; 由多个 &lt;code&gt;Layers&lt;/code&gt; 组成（上限是127层）。而 &lt;a href=&#34;http://localhost:1313/2019/03/Dockerfile&#34;&gt;Dockerfile&lt;/a&gt; 每一条指令都会创建一层 &lt;code&gt;Layers&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Docker&lt;/code&gt; 由多个 &lt;code&gt;Layers&lt;/code&gt; 组成（上限是127层）。而 &lt;a href=&#34;https://domyson.github.io/2019/03/Dockerfile&#34;&gt;Dockerfile&lt;/a&gt; 每一条指令都会创建一层 &lt;code&gt;Layers&lt;/code&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;优化基础镜像&#34;&gt;优化基础镜像&lt;/h2&gt;
 &lt;ul&gt;
