@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>anywhere on 满船清梦压星河</title>
+    <link>https://domyson.github.io/categories/anywhere/</link>
+    <description>Recent content in anywhere on 满船清梦压星河</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 01 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/categories/anywhere/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>anywhere 客户端框架概述</title>
+      <link>https://domyson.github.io/post/anywhere/1/</link>
+      <pubDate>Sat, 01 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/post/anywhere/1/</guid>
+      <description>概述 Anywhere 是一个基于 Unity 引擎的框架，它设计理论源自于 ECS 当然还没有 Natvie Code 也没有 Brust 编译器。</description>
+    </item>
+    
+  </channel>
+</rss>

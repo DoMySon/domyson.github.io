@@ -10,14 +10,18 @@ draft: false
 
 
 
-# 简介
+# 概述
 
-`skynet-go` 是一个基于消息和服务的分布式服务框架，采用`go`编写，致力于简化开发难度和成本，
-参考了云风的 [skynet](https://github.com/cloudwu/skynet) 以及 `erlang`的思想。
+> `skynet-go` 是一个基于消息和服务的`Actor`分布式服务框架，
+采用`go`编写，致力于简化开发难度和成本。
 
-它是一个年轻的框架，仅仅经历了两款项目的迭代
+它是一个年轻的框架，仅仅经历了两款项目的迭代 现在版本为 `v1.6.0 2023-05-28` 
 - [羽翼军团](https://www.taptap.cn/app/229839) v1.3.0
 - [我在民国淘古玩](https://www.taptap.cn/app/215934) v.1.3.5
+
+至于什么是`Actor`是必要了解的概念，[skynet](https://github.com/cloudwu/skynet) 以及 `erlang` 都是基于这种模式。
+
+与`skynet-c`的区别可见 [diff-skynet](/post/diff)
 
 
 <!--more-->
@@ -46,14 +50,14 @@ draft: false
   4. 支持 `lua` 原因在于 `lua` 是一门简单并且性能很高的脚本语言，能显著降低开发成本
   5. mysql支持，dns支持
   6. 提供`tcp` `udp`,`unix`支持
-  7. 不特别区分远程或者本地调用 `skynet.send`,`skynet.call` 抹平了本地和集群的区别 参见 [sknmpd](/post/skynett/sknmpd)
+  7. 不特别区分远程或者本地调用 `skynet.send`,`skynet.call` 抹平了本地和集群的区别 
   8. 实现的http框架，区别于 `net/http`,仅仅实现部分 `RFC` 标准,兼容此框架
   9. 消息发送默认都是指针，如有需要，可通过一些api来序列化，并使用 `skynett.free` 方法来释放它。
+  10. 无任何lua模块，(除去[拓展模块](/post/thrid)),仅仅一个 `5mb` 左右的执行文件
 
+# [sknmpd](/post/skynet/sktpmd)
 
-# [sknmpd](/post/skynet/sknmpd)
-
-> 在`skynet`中每个节点都是平等的，不存在谁依赖于谁，这也是`cobweb`的设计初衷。所以`skynet` 不支持 master/slave 模式，但可以通过业务代码来实现，而非框架本身。
+> 在`skynet-go`中每个节点都是平等的，不存在谁依赖于谁，这也是`cobweb`的设计初衷。所以`skynet` 不支持 master/slave 模式，但可以通过业务代码来实现，而非框架本身。
 
 
 
@@ -70,3 +74,5 @@ draft: false
 
 `skynet-go`仅需要一个执行文件，大小仅仅`6.8mb`,而运行内存仅仅 `2.4mb`，65535个Lua服务仅占用`1.8GB`,也就是每个 `Lua服务` 仅占用 `28.8kb`,如果是`go`服务那么将会更小
 
+
+{{< adsense-footer>}}
