@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
-    <link rel="stylesheet" href='https://domyson.github.io/css/frameworks.min.css' />
-    <link rel="stylesheet" href='https://domyson.github.io/css/github.min.css' />
-    <link rel="stylesheet" href='https://domyson.github.io/css/github-style.css' />
-    <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
-    <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
-    <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
+    <script type="application/javascript" src='http://localhost:1313/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='http://localhost:1313/css/frameworks.min.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/github.min.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/github-style.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/light.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/dark.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/syntax.css' />
     <title>Docker - 满船清梦压星河</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
@@ -120,7 +120,7 @@ Docker-Compose将所管理的容器分为三层，分别是工程（project）�
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://domyson.github.io/post/docker/" />
+<link rel="canonical" href="http://localhost:1313/post/docker/" />
 
 
 <meta name="twitter:card" content="summary" />
@@ -225,10 +225,10 @@ Docker远程访问 Docker-Compose Docker-Compose （docker编排）是 docker �
 官方文档
 Docker-Compose将所管理的容器分为三层，分别是工程（project），服务（service）以及容器（container）。Docker-Compose运行目录下的所有文件（docker-compose.yml，extends文件或环境变量文件等）组成一个工程，若无特殊指定工程名即为当前目录名。一个工程当中可包含多个服务，每个服务中定义了容器运行的镜像，参数，依赖。一个服务当中可包括多个容器实例，Docker-Compose并没有解决负载均衡的问题，因此需要借助其它工具实现服务发现及负载均衡。
 " />
-<meta name="twitter:site" content="https://domyson.github.io" />
+<meta name="twitter:site" content="http://localhost:1313/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
-  content="https://domyson.github.io">
+  content="http://localhost:1313/">
 
 
 <meta property="og:type" content="article" />
@@ -333,10 +333,10 @@ Docker远程访问 Docker-Compose Docker-Compose （docker编排）是 docker �
 官方文档
 Docker-Compose将所管理的容器分为三层，分别是工程（project），服务（service）以及容器（container）。Docker-Compose运行目录下的所有文件（docker-compose.yml，extends文件或环境变量文件等）组成一个工程，若无特殊指定工程名即为当前目录名。一个工程当中可包含多个服务，每个服务中定义了容器运行的镜像，参数，依赖。一个服务当中可包括多个容器实例，Docker-Compose并没有解决负载均衡的问题，因此需要借助其它工具实现服务发现及负载均衡。
 " />
-<meta property="og:url" content="https://domyson.github.io/post/docker/" />
+<meta property="og:url" content="http://localhost:1313/post/docker/" />
 <meta property="og:site_name" content="Docker" />
 <meta property="og:image"
-  content="https://domyson.github.io">
+  content="http://localhost:1313/">
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
 
@@ -357,7 +357,7 @@ Docker-Compose将所管理的容器分为三层，分别是工程（project）�
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
     <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
-      <a class="Header-link" href="https://domyson.github.io">
+      <a class="Header-link" href="http://localhost:1313/">
         <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
           <path fill-rule="evenodd"
             d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
@@ -387,7 +387,7 @@ Docker-Compose将所管理的容器分为三层，分别是工程（project）�
               <input type="text"
                 class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
                 name="q" value="" placeholder="Search" autocomplete="off">
-              <input type="hidden" name="q" value="site:https://domyson.github.io">
+              <input type="hidden" name="q" value="site:http://localhost:1313/">
             </label>
           </form>
         </div>
@@ -395,7 +395,7 @@ Docker-Compose将所管理的容器分为三层，分别是工程（project）�
     </div>
 
     <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
-      <a class="Header-link " href="https://domyson.github.io">
+      <a class="Header-link " href="http://localhost:1313/">
         <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
           width="32">
           <path fill-rule="evenodd"
@@ -425,17 +425,17 @@ Docker-Compose将所管理的容器分为三层，分别是工程（project）�
           <div class="flex-auto min-width-0 width-fit mr-3">
             <div class="d-flex">
               <div class="d-none d-md-block">
-                <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io">
+                <a class="avatar mr-2 flex-shrink-0" href="http://localhost:1313/">
                   <img class=" avatar-user"
-                    src="https://domyson.github.io/images/avatar.png"
+                    src="http://localhost:1313/images/avatar.png"
                     width="32" height="32"></a>
               </div>
               <div class="d-flex flex-column">
                 <h1 class="break-word f3 text-normal mb-md-0 mb-1">
                   <span class="author">
-                    <a href="https://domyson.github.io">Treasure</a></span><span
+                    <a href="http://localhost:1313/">Treasure</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://domyson.github.io/post/docker/">Docker</a></strong>
+                      href="http://localhost:1313/post/docker/">Docker</a></strong>
                 </h1>
                 <div class="note m-0">
                   Created <relative-time datetime="Tue, 12 Mar 2019 00:00:00 &#43;0000"
@@ -444,9 +444,9 @@ Docker-Compose将所管理的容器分为三层，分别是工程（project）�
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Mon, 16 Oct 2023 22:22:07 &#43;0800"
+                  Modified <relative-time datetime="Tue, 17 Oct 2023 00:49:38 &#43;0800"
                     class="no-wrap">
-                    Mon, 16 Oct 2023 22:22:07 &#43;0800</relative-time>
+                    Tue, 17 Oct 2023 00:49:38 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -1125,7 +1125,19 @@ Docker-Compose将所管理的容器分为三层，分别是工程（project）�
 <h1 id="docket-跨主机通讯">Docket 跨主机通讯</h1>
 <h2 id="自己yy">自己yy</h2>
 <p>两个宿主机的容器映射到宿主机的端口，然后通讯。</p>
-<h2 id="overlay">overlay</h2></article>
+<h2 id="overlay">overlay</h2>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
+     crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7934154300350596"
+     data-ad-slot="3469296166"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></article>
               </div>
             </div>
           </div>
@@ -1134,12 +1146,12 @@ Docker-Compose将所管理的容器分为三层，分别是工程（project）�
     </div>
   </main>
 </div>
-<script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
-<link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
+<script type="application/javascript" src='http://localhost:1313/js/toc.js'></script>
+<link rel="stylesheet" href='http://localhost:1313/css/toc.css' />
 
 <div id="gitalk-container" class="gitalk-container"></div>
-<link rel="stylesheet" href='https://domyson.github.io/css/gitalk.css'>
-<script src='https://domyson.github.io/js/gitalk.min.js'></script>
+<link rel="stylesheet" href='http://localhost:1313/css/gitalk.css'>
+<script src='http://localhost:1313/js/gitalk.min.js'></script>
 <script>
   const gitalk = new Gitalk({
     clientID: '',
@@ -1159,7 +1171,7 @@ Docker-Compose将所管理的容器分为三层，分别是工程（project）�
   <div class="footer container-xl width-full p-responsive">
   <div
     class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
-    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://domyson.github.io">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="http://localhost:1313/">
       <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
         <path fill-rule="evenodd"
           d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
@@ -1180,7 +1192,7 @@ Docker-Compose将所管理的容器分为三层，分别是工程（project）�
 </div>
 </body>
 
-<script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+<script type="application/javascript" src="http://localhost:1313/js/github-style.js"></script>
 
 
 

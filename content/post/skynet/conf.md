@@ -1,7 +1,7 @@
 ---
 title: conf
 date: 2022-12-17
-categories: ['sknt']
+categories: ['skynet']
 description: 
 toc: true
 draft: false
@@ -9,7 +9,7 @@ draft: false
 
 
 
-# sknt配置相关项
+# skynet config
 
 > 在1.4.0版本之前，类似于skynet，是通过一个lua来作为配置文件启动的，但之后实现了一个高性能的ini解析器来作为配置加载器，好处是可以省略一个类似 `launcher` 的 LuaState。并且加载速度更快
 

@@ -131,11 +131,17 @@ message AddressBook {
 > 这里特别注明，`userdata`不支持仅仅是为了兼容节点通讯。因为它本质上一个8byte的整形(x64),而其他物理机或者进程的内存地址是不同的
 
 
+
+# excel 数据表支持 
+> 惰性加载，数据表索引，二进制编码
+
+[datatable](/post/datatable)
+
 # 未来将支持
 
 + `rpc` 定义
 
-+ 指定字段便宜解码（beta）
++ 指定字段偏移解码（beta）
 
 
 {{< adsense-footer>}}

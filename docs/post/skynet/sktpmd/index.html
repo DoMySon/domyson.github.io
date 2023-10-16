@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
-    <link rel="stylesheet" href='https://domyson.github.io/css/frameworks.min.css' />
-    <link rel="stylesheet" href='https://domyson.github.io/css/github.min.css' />
-    <link rel="stylesheet" href='https://domyson.github.io/css/github-style.css' />
-    <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
-    <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
-    <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>sknmpd - 满船清梦压星河</title>
+    <script type="application/javascript" src='http://localhost:1313/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='http://localhost:1313/css/frameworks.min.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/github.min.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/github-style.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/light.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/dark.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/syntax.css' />
+    <title>sktpmd - 满船清梦压星河</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -18,67 +18,67 @@
 
     
     <meta name="description"
-  content="简介 sknmpd模块是sknt底层集群模块，它承担了sknt网络节点之间的通讯职能。全名为(simple keenly net managment port daemon)
-架构 sknmpd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来
-sknmpd可以支持任意网络协议，如 tcp,udp 甚至是 unix
-当然一个好记的节点名称是非常有必要的，所以sknmpd也内置了一套非标准的本地 dns系统
-使用 sknmpd的启动也非常简单，无须任何代码，仅仅只需要在 sknt.toml 中配置一下即可，使用的时候跟节点内通讯无任何区别，但要求参数必须是 []byte 类型，参考 bbuf 如
-sknt.send(&amp;#34;host:port@name&amp;#34;,...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 sknt.send(pid,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
+  content="简介 sktpmd模块是skynet底层集群模块，它承担了skynet网络节点之间的通讯职能。全名为(skynet port managment daemon)
+架构 sktpmd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来
+sktpmd可以支持任意网络协议，如 tcp,udp 甚至是 unix
+当然一个好记的节点名称是非常有必要的，所以sktpmd也内置了一套非标准的本地 dns系统
+使用 sktpmd的启动也非常简单，无须任何代码，仅仅只需要在 skynet.toml 中配置一下即可，使用的时候跟节点内通讯无任何区别，但要求参数必须是 []byte 类型，参考 bbuf 如
+skynet.send(&amp;#34;host:port@name&amp;#34;,...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skynet.send(pid,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
 基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，
 通过配置tun的规则开启多个，则可以实现业务拆分。
 2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&amp;quot;n1.n2.n3@name&amp;quot;)
-服务发现 sknmpd 提供了一套服务发现机制，但其运作原理是不同于 etcd 或者 consul,它本身是一个惰性发现，取决于第一次调用的地址是否正确返回。
+服务发现 sktpmd 提供了一套服务发现机制，但其运作原理是不同于 etcd 或者 consul,它本身是一个惰性发现，取决于第一次调用的地址是否正确返回。
 你不需要知道它是如何运作的，你只需要知道在特定时间内它是有效的即可，那怕其中出了一些意外，无非只是浪费了两次通讯而已。
-gossip sknmpd整个发现流程是基于 gossip 算法来发现的,但一些api依然可以主动触发
+gossip sktpmd整个发现流程是基于 gossip 算法来发现的,但一些api依然可以主动触发
 网络底层 参考 Go协程的思考,在linux下，使用了 epoll。所以尽量部署到 linux 下以发挥更好的性能" />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://domyson.github.io/post/skynet/sknmpd/" />
+<link rel="canonical" href="http://localhost:1313/post/skynet/sktpmd/" />
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="sknmpd - 满船清梦压星河" />
+<meta name="twitter:title" content="sktpmd - 满船清梦压星河" />
 <meta name="twitter:description"
-  content="简介 sknmpd模块是sknt底层集群模块，它承担了sknt网络节点之间的通讯职能。全名为(simple keenly net managment port daemon)
-架构 sknmpd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来
-sknmpd可以支持任意网络协议，如 tcp,udp 甚至是 unix
-当然一个好记的节点名称是非常有必要的，所以sknmpd也内置了一套非标准的本地 dns系统
-使用 sknmpd的启动也非常简单，无须任何代码，仅仅只需要在 sknt.toml 中配置一下即可，使用的时候跟节点内通讯无任何区别，但要求参数必须是 []byte 类型，参考 bbuf 如
-sknt.send(&amp;#34;host:port@name&amp;#34;,...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 sknt.send(pid,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
+  content="简介 sktpmd模块是skynet底层集群模块，它承担了skynet网络节点之间的通讯职能。全名为(skynet port managment daemon)
+架构 sktpmd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来
+sktpmd可以支持任意网络协议，如 tcp,udp 甚至是 unix
+当然一个好记的节点名称是非常有必要的，所以sktpmd也内置了一套非标准的本地 dns系统
+使用 sktpmd的启动也非常简单，无须任何代码，仅仅只需要在 skynet.toml 中配置一下即可，使用的时候跟节点内通讯无任何区别，但要求参数必须是 []byte 类型，参考 bbuf 如
+skynet.send(&amp;#34;host:port@name&amp;#34;,...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skynet.send(pid,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
 基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，
 通过配置tun的规则开启多个，则可以实现业务拆分。
 2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&amp;quot;n1.n2.n3@name&amp;quot;)
-服务发现 sknmpd 提供了一套服务发现机制，但其运作原理是不同于 etcd 或者 consul,它本身是一个惰性发现，取决于第一次调用的地址是否正确返回。
+服务发现 sktpmd 提供了一套服务发现机制，但其运作原理是不同于 etcd 或者 consul,它本身是一个惰性发现，取决于第一次调用的地址是否正确返回。
 你不需要知道它是如何运作的，你只需要知道在特定时间内它是有效的即可，那怕其中出了一些意外，无非只是浪费了两次通讯而已。
-gossip sknmpd整个发现流程是基于 gossip 算法来发现的,但一些api依然可以主动触发
+gossip sktpmd整个发现流程是基于 gossip 算法来发现的,但一些api依然可以主动触发
 网络底层 参考 Go协程的思考,在linux下，使用了 epoll。所以尽量部署到 linux 下以发挥更好的性能" />
-<meta name="twitter:site" content="https://domyson.github.io" />
+<meta name="twitter:site" content="http://localhost:1313/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
-  content="https://domyson.github.io">
+  content="http://localhost:1313/">
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="sknmpd - 满船清梦压星河">
+<meta property="og:title" content="sktpmd - 满船清梦压星河">
 <meta property="og:description"
-  content="简介 sknmpd模块是sknt底层集群模块，它承担了sknt网络节点之间的通讯职能。全名为(simple keenly net managment port daemon)
-架构 sknmpd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来
-sknmpd可以支持任意网络协议，如 tcp,udp 甚至是 unix
-当然一个好记的节点名称是非常有必要的，所以sknmpd也内置了一套非标准的本地 dns系统
-使用 sknmpd的启动也非常简单，无须任何代码，仅仅只需要在 sknt.toml 中配置一下即可，使用的时候跟节点内通讯无任何区别，但要求参数必须是 []byte 类型，参考 bbuf 如
-sknt.send(&amp;#34;host:port@name&amp;#34;,...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 sknt.send(pid,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
+  content="简介 sktpmd模块是skynet底层集群模块，它承担了skynet网络节点之间的通讯职能。全名为(skynet port managment daemon)
+架构 sktpmd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来
+sktpmd可以支持任意网络协议，如 tcp,udp 甚至是 unix
+当然一个好记的节点名称是非常有必要的，所以sktpmd也内置了一套非标准的本地 dns系统
+使用 sktpmd的启动也非常简单，无须任何代码，仅仅只需要在 skynet.toml 中配置一下即可，使用的时候跟节点内通讯无任何区别，但要求参数必须是 []byte 类型，参考 bbuf 如
+skynet.send(&amp;#34;host:port@name&amp;#34;,...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skynet.send(pid,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
 基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，
 通过配置tun的规则开启多个，则可以实现业务拆分。
 2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&amp;quot;n1.n2.n3@name&amp;quot;)
-服务发现 sknmpd 提供了一套服务发现机制，但其运作原理是不同于 etcd 或者 consul,它本身是一个惰性发现，取决于第一次调用的地址是否正确返回。
+服务发现 sktpmd 提供了一套服务发现机制，但其运作原理是不同于 etcd 或者 consul,它本身是一个惰性发现，取决于第一次调用的地址是否正确返回。
 你不需要知道它是如何运作的，你只需要知道在特定时间内它是有效的即可，那怕其中出了一些意外，无非只是浪费了两次通讯而已。
-gossip sknmpd整个发现流程是基于 gossip 算法来发现的,但一些api依然可以主动触发
+gossip sktpmd整个发现流程是基于 gossip 算法来发现的,但一些api依然可以主动触发
 网络底层 参考 Go协程的思考,在linux下，使用了 epoll。所以尽量部署到 linux 下以发挥更好的性能" />
-<meta property="og:url" content="https://domyson.github.io/post/skynet/sknmpd/" />
-<meta property="og:site_name" content="sknmpd" />
+<meta property="og:url" content="http://localhost:1313/post/skynet/sktpmd/" />
+<meta property="og:site_name" content="sktpmd" />
 <meta property="og:image"
-  content="https://domyson.github.io">
+  content="http://localhost:1313/">
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
 
@@ -99,7 +99,7 @@ gossip sknmpd整个发现流程是基于 gossip 算法来发现的,但一些api�
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
     <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
-      <a class="Header-link" href="https://domyson.github.io">
+      <a class="Header-link" href="http://localhost:1313/">
         <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
           <path fill-rule="evenodd"
             d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
@@ -129,7 +129,7 @@ gossip sknmpd整个发现流程是基于 gossip 算法来发现的,但一些api�
               <input type="text"
                 class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
                 name="q" value="" placeholder="Search" autocomplete="off">
-              <input type="hidden" name="q" value="site:https://domyson.github.io">
+              <input type="hidden" name="q" value="site:http://localhost:1313/">
             </label>
           </form>
         </div>
@@ -137,7 +137,7 @@ gossip sknmpd整个发现流程是基于 gossip 算法来发现的,但一些api�
     </div>
 
     <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
-      <a class="Header-link " href="https://domyson.github.io">
+      <a class="Header-link " href="http://localhost:1313/">
         <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
           width="32">
           <path fill-rule="evenodd"
@@ -167,17 +167,17 @@ gossip sknmpd整个发现流程是基于 gossip 算法来发现的,但一些api�
           <div class="flex-auto min-width-0 width-fit mr-3">
             <div class="d-flex">
               <div class="d-none d-md-block">
-                <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io">
+                <a class="avatar mr-2 flex-shrink-0" href="http://localhost:1313/">
                   <img class=" avatar-user"
-                    src="https://domyson.github.io/images/avatar.png"
+                    src="http://localhost:1313/images/avatar.png"
                     width="32" height="32"></a>
               </div>
               <div class="d-flex flex-column">
                 <h1 class="break-word f3 text-normal mb-md-0 mb-1">
                   <span class="author">
-                    <a href="https://domyson.github.io">Treasure</a></span><span
+                    <a href="http://localhost:1313/">Treasure</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://domyson.github.io/post/skynet/sknmpd/">sknmpd</a></strong>
+                      href="http://localhost:1313/post/skynet/sktpmd/">sktpmd</a></strong>
                 </h1>
                 <div class="note m-0">
                   Created <relative-time datetime="Mon, 30 May 2022 00:00:00 &#43;0000"
@@ -186,9 +186,9 @@ gossip sknmpd整个发现流程是基于 gossip 算法来发现的,但一些api�
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sat, 07 Oct 2023 21:54:38 &#43;0800"
+                  Modified <relative-time datetime="Tue, 17 Oct 2023 00:46:10 &#43;0800"
                     class="no-wrap">
-                    Sat, 07 Oct 2023 21:54:38 &#43;0800</relative-time>
+                    Tue, 17 Oct 2023 00:46:10 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -218,20 +218,20 @@ gossip sknmpd整个发现流程是基于 gossip 算法来发现的,但一些api�
                         </div>
                       </div>
                     </details-menu>
-                      706 Words
+                      708 Words
                     
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
                     
                     
-                    <a class="muted-link mr-3" href="/tags/sknmpd">
+                    <a class="muted-link mr-3" href="/tags/sktpmd">
                       <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
                         <path fill-rule="evenodd"
                           d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
                         </path>
                       </svg>
-                      sknmpd
+                      sktpmd
                     </a>
                     
                     
@@ -242,25 +242,25 @@ gossip sknmpd整个发现流程是基于 gossip 算法来发现的,但一些api�
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="简介">简介</h1>
-<p><code>sknmpd</code>模块是<code>sknt</code>底层集群模块，它承担了<code>sknt</code>网络节点之间的通讯职能。全名为(<code>simple keenly net managment port daemon</code>)</p>
+<p><code>sktpmd</code>模块是<code>skynet</code>底层集群模块，它承担了<code>skynet</code>网络节点之间的通讯职能。全名为(<code>skynet port managment daemon</code>)</p>
 <h1 id="架构">架构</h1>
 <ol>
 <li>
-<p><code>sknmpd</code> 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接，
+<p><code>sktpmd</code> 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接，
 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来</p>
 </li>
 <li>
-<p><code>sknmpd</code>可以支持任意网络协议，如 <code>tcp</code>,<code>udp</code> 甚至是 <code>unix</code></p>
+<p><code>sktpmd</code>可以支持任意网络协议，如 <code>tcp</code>,<code>udp</code> 甚至是 <code>unix</code></p>
 </li>
 <li>
-<p>当然一个好记的节点名称是非常有必要的，所以<code>sknmpd</code>也内置了一套非标准的本地 <code>dns</code>系统</p>
+<p>当然一个好记的节点名称是非常有必要的，所以<code>sktpmd</code>也内置了一套非标准的本地 <code>dns</code>系统</p>
 </li>
 </ol>
 <h1 id="使用">使用</h1>
-<p><code>sknmpd</code>的启动也非常简单，无须任何代码，仅仅只需要在 <code>sknt.toml</code> 中配置一下即可，使用的时候跟节点内通讯无任何区别，但要求参数必须是 <code>[]byte</code> 类型，参考 <a href="/post/sknt/bbuf">bbuf</a>
+<p><code>sktpmd</code>的启动也非常简单，无须任何代码，仅仅只需要在 <code>skynet.toml</code> 中配置一下即可，使用的时候跟节点内通讯无任何区别，但要求参数必须是 <code>[]byte</code> 类型，参考 <a href="/post/skynet/bbuf">bbuf</a>
 如</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="n">sknt.send</span><span class="p">(</span><span class="s2">&#34;host:port@name&#34;</span><span class="p">,...)</span> <span class="c1">-- 通过域名或者地址+端口的形式和其他节点进行通讯</span>
-</span></span><span class="line"><span class="cl"><span class="n">sknt.send</span><span class="p">(</span><span class="n">pid</span><span class="p">,...)</span>              <span class="c1">-- 通过pid亦可</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="n">skynet.send</span><span class="p">(</span><span class="s2">&#34;host:port@name&#34;</span><span class="p">,...)</span> <span class="c1">-- 通过域名或者地址+端口的形式和其他节点进行通讯</span>
+</span></span><span class="line"><span class="cl"><span class="n">skynet.send</span><span class="p">(</span><span class="n">pid</span><span class="p">,...)</span>              <span class="c1">-- 通过pid亦可</span>
 </span></span></code></pre></div><h1 id="tunnel"><del>tunnel</del></h1>
 <p>既然节点之间是双向连接，所以连接数量为 <code>f(n) =  n²-n</code>，如果节点过的时候，势必造成 <code>socket fd</code> 消耗殆尽，</p>
 <p>基于这个问题，可以通过内置的<code>tun</code>，来设置代理，这么一来，<code>tun</code>的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 <code>tun</code> 代理是不可见的，</p>
@@ -269,11 +269,11 @@ gossip sknmpd整个发现流程是基于 gossip 算法来发现的,但一些api�
 <p>2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 <code>send(&quot;n1.n2.n3@name&quot;)</code></p>
 </blockquote>
 <h1 id="服务发现">服务发现</h1>
-<p><code>sknmpd</code> 提供了一套服务发现机制，但其运作原理是不同于 <code>etcd</code> 或者 <code>consul</code>,它本身是一个惰性发现，取决于第一次调用的地址是否正确返回。</p>
+<p><code>sktpmd</code> 提供了一套服务发现机制，但其运作原理是不同于 <code>etcd</code> 或者 <code>consul</code>,它本身是一个惰性发现，取决于第一次调用的地址是否正确返回。</p>
 <p>你不需要知道它是如何运作的，你只需要知道在特定时间内它是有效的即可，那怕其中出了一些意外，无非只是浪费了两次通讯而已。</p>
 <h2 id="gossip">gossip</h2>
 <blockquote>
-<p>sknmpd整个发现流程是基于 <code>gossip</code> 算法来发现的,但一些api依然可以主动触发</p>
+<p>sktpmd整个发现流程是基于 <code>gossip</code> 算法来发现的,但一些api依然可以主动触发</p>
 </blockquote>
 <h1 id="网络底层">网络底层</h1>
 <p>参考 <a href="/post/language/go/goroutine">Go协程的思考</a>,在<code>linux</code>下，使用了 <code>epoll</code>。所以尽量部署到 <code>linux</code> 下以发挥更好的性能</p>
@@ -286,12 +286,12 @@ gossip sknmpd整个发现流程是基于 gossip 算法来发现的,但一些api�
     </div>
   </main>
 </div>
-<script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
-<link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
+<script type="application/javascript" src='http://localhost:1313/js/toc.js'></script>
+<link rel="stylesheet" href='http://localhost:1313/css/toc.css' />
 
 <div id="gitalk-container" class="gitalk-container"></div>
-<link rel="stylesheet" href='https://domyson.github.io/css/gitalk.css'>
-<script src='https://domyson.github.io/js/gitalk.min.js'></script>
+<link rel="stylesheet" href='http://localhost:1313/css/gitalk.css'>
+<script src='http://localhost:1313/js/gitalk.min.js'></script>
 <script>
   const gitalk = new Gitalk({
     clientID: '',
@@ -311,7 +311,7 @@ gossip sknmpd整个发现流程是基于 gossip 算法来发现的,但一些api�
   <div class="footer container-xl width-full p-responsive">
   <div
     class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
-    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://domyson.github.io">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="http://localhost:1313/">
       <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
         <path fill-rule="evenodd"
           d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
@@ -332,7 +332,7 @@ gossip sknmpd整个发现流程是基于 gossip 算法来发现的,但一些api�
 </div>
 </body>
 
-<script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+<script type="application/javascript" src="http://localhost:1313/js/github-style.js"></script>
 
 
 

@@ -1,7 +1,7 @@
 ---
 title: pid
 date: 2022-04-21
-categories: ['sknt']
+categories: ['skynet']
 description: 
 toc: true
 draft: false
@@ -20,4 +20,4 @@ draft: false
 
 表示某一节点的某一的服务的地址，它最终输出是一串 uint64 的值。
 
-可以通过 `sknt.send(dst,...)` `sknt.call(ti,dst,...)`来使用它，将消息发送出去
+可以通过 `skynet.send(dst,...)` `skynet.call(ti,dst,...)`来使用它，将消息发送出去

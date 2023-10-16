@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>c on 满船清梦压星河</title>
-    <link>https://domyson.github.io/tags/c/</link>
+    <link>http://localhost:1313/tags/c/</link>
     <description>Recent content in c on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 04 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/tags/c/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 04 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/c/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>预处理器</title>
-      <link>https://domyson.github.io/post/language/c/preprocessor/</link>
+      <link>http://localhost:1313/post/language/c/preprocessor/</link>
       <pubDate>Sat, 04 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://domyson.github.io/post/language/c/preprocessor/</guid>
+      <guid>http://localhost:1313/post/language/c/preprocessor/</guid>
       <description>预处理器 #pragma 用于指示编译器完成一些特定的动作
 #pragma message usermessage
 //example:test.c #include &amp;lt;stdio.h&amp;gt; #define IOS #if defined IOS #pragma message &amp;#34;ready complie ios...&amp;#34; #endif //complie output: note: #pragma message: ready complie ios... #pragma once 确保头文件仅被编译一次

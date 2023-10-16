@@ -1,7 +1,7 @@
 ---
 title: timer
 date: 2022-04-30
-categories: ['sknt']
+categories: ['skynet']
 description: 
 toc: true
 draft: false
@@ -10,13 +10,13 @@ draft: false
 
 # 简介
 
-`timer` 模块是 `sknt` 内置的一个定时模块，使用了小根堆实现。
+`timer` 模块是 `skynet` 内置的一个定时模块，使用了小根堆实现。
 
 # apis
 
-`sknt.sleep(d)` 这个函数将会挂起当前协程，在`lua`和 `go`中将会有不同的表现，取决于两者底层之间的区别
+`skynet.sleep(d)` 这个函数将会挂起当前协程，在`lua`和 `go`中将会有不同的表现，取决于两者底层之间的区别
 
-`sknt.timeout(d,fn)` 注册一个到期时间，而之后将会触发这个函数，特别注意，此函数的执行协程同当前调用的协程，简单来说就是并不会造成资源竞争，但是需要注意一下 `aba` 问题
+`skynet.timeout(d,fn)` 注册一个到期时间，而之后将会触发这个函数，特别注意，此函数的执行协程同当前调用的协程，简单来说就是并不会造成资源竞争，但是需要注意一下 `aba` 问题
 
 
 # QA

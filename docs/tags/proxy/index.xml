@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Proxy on 满船清梦压星河</title>
-    <link>https://domyson.github.io/tags/proxy/</link>
+    <link>http://localhost:1313/tags/proxy/</link>
     <description>Recent content in Proxy on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 09 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/tags/proxy/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 09 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/proxy/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Nginx</title>
-      <link>https://domyson.github.io/post/others/nginx/</link>
+      <link>http://localhost:1313/post/others/nginx/</link>
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://domyson.github.io/post/others/nginx/</guid>
+      <guid>http://localhost:1313/post/others/nginx/</guid>
       <description>&lt;h1 id=&#34;简介&#34;&gt;简介&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Nginx功能丰富，可作为HTTP服务器，也可作为反向代理服务器，邮件服务器。支持FastCGI、SSL、Virtual Host、URL Rewrite、Gzip等功能。并且支持很多第三方的模块扩展。&lt;/p&gt;

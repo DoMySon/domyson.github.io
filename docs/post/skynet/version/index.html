@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
-    <link rel="stylesheet" href='https://domyson.github.io/css/frameworks.min.css' />
-    <link rel="stylesheet" href='https://domyson.github.io/css/github.min.css' />
-    <link rel="stylesheet" href='https://domyson.github.io/css/github-style.css' />
-    <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
-    <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
-    <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
+    <script type="application/javascript" src='http://localhost:1313/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='http://localhost:1313/css/frameworks.min.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/github.min.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/github-style.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/light.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/dark.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/syntax.css' />
     <title>version change - 满船清梦压星河</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
@@ -18,46 +18,46 @@
 
     
     <meta name="description"
-  content="v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 sknt.send(string,any) 会产生两次搜索的情况 Added sknt-lua 增加 sknt.trace() 用以输出当前堆栈 sknt-lua 增加 check_version() 函数，校验sknt版本 v1.1.2 Fixed 修复了kill函数重入导致越界的问题
+  content="v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 skynet.send(string,any) 会产生两次搜索的情况 Added skynet-lua 增加 skynet.trace() 用以输出当前堆栈 skynet-lua 增加 check_version() 函数，校验skynet版本 v1.1.2 Fixed 修复了kill函数重入导致越界的问题
 修复http 因为判断发送失败的错误，现在如果发送失败返回404
-Mod sknt.send(dst,...) 现在传入参数可以是大于2个，当等于2，与之前无区别，当大于2则会转为table sknt.send() 现在不返回 boolean，而是返回一个number,为0则认为成功 kill 函数现在会立即退出当前服务 killed 事件不会被传入了 v1.2.0 Mod 取消了事件投递到达服务，会给出一个字符串类型的消息发送这类型，用以区别数据的来源位置以及类型
-与上述相关的问题，sknt.send(dest,...) 变为了 sknt.send(dest,typ,...) 现第二参数输入你自己的类型，以便于接收者区分，不要和服务同名，那是没有任何意义的 主要是为了确定一种数据的类型，而非一系列服务，本身服务和数据类型并非是一对一的关系
-sknt.start -&amp;gt; sknt.uptime
-v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意类型参数,优化栈分配 Fixed 修复了ucpd 缓冲未释放的问题 Add 增加 sknt.call sknt.reply 是一个组合调用。否则会造成协程被挂起 v1.2.2 Add 增加 bbuf 协议解析，通过 bbuf = require(&amp;quot;sknt.bbuf&amp;quot;) 引用 bbuf errno = bbuf.load(path) 解析文件描述 bytes(userdata),errno = bbuf." />
+Mod skynet.send(dst,...) 现在传入参数可以是大于2个，当等于2，与之前无区别，当大于2则会转为table skynet.send() 现在不返回 boolean，而是返回一个number,为0则认为成功 kill 函数现在会立即退出当前服务 killed 事件不会被传入了 v1.2.0 Mod 取消了事件投递到达服务，会给出一个字符串类型的消息发送这类型，用以区别数据的来源位置以及类型
+与上述相关的问题，skynet.send(dest,...) 变为了 skynet.send(dest,typ,...) 现第二参数输入你自己的类型，以便于接收者区分，不要和服务同名，那是没有任何意义的 主要是为了确定一种数据的类型，而非一系列服务，本身服务和数据类型并非是一对一的关系
+skynet.start -&amp;gt; skynet.uptime
+v1.2.1 Mod 现在 skynet.warn,skynet.error,skynet.trace,skynet.debug 支持传入任意类型参数,优化栈分配 Fixed 修复了ucpd 缓冲未释放的问题 Add 增加 skynet.call skynet.reply 是一个组合调用。否则会造成协程被挂起 v1.2.2 Add 增加 bbuf 协议解析，通过 bbuf = require(&amp;quot;skynet.bbuf&amp;quot;) 引用 bbuf errno = bbuf.load(path) 解析文件描述 bytes(userdata),errno = bbuf." />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://domyson.github.io/post/skynet/version/" />
+<link rel="canonical" href="http://localhost:1313/post/skynet/version/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="version change - 满船清梦压星河" />
 <meta name="twitter:description"
-  content="v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 sknt.send(string,any) 会产生两次搜索的情况 Added sknt-lua 增加 sknt.trace() 用以输出当前堆栈 sknt-lua 增加 check_version() 函数，校验sknt版本 v1.1.2 Fixed 修复了kill函数重入导致越界的问题
+  content="v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 skynet.send(string,any) 会产生两次搜索的情况 Added skynet-lua 增加 skynet.trace() 用以输出当前堆栈 skynet-lua 增加 check_version() 函数，校验skynet版本 v1.1.2 Fixed 修复了kill函数重入导致越界的问题
 修复http 因为判断发送失败的错误，现在如果发送失败返回404
-Mod sknt.send(dst,...) 现在传入参数可以是大于2个，当等于2，与之前无区别，当大于2则会转为table sknt.send() 现在不返回 boolean，而是返回一个number,为0则认为成功 kill 函数现在会立即退出当前服务 killed 事件不会被传入了 v1.2.0 Mod 取消了事件投递到达服务，会给出一个字符串类型的消息发送这类型，用以区别数据的来源位置以及类型
-与上述相关的问题，sknt.send(dest,...) 变为了 sknt.send(dest,typ,...) 现第二参数输入你自己的类型，以便于接收者区分，不要和服务同名，那是没有任何意义的 主要是为了确定一种数据的类型，而非一系列服务，本身服务和数据类型并非是一对一的关系
-sknt.start -&amp;gt; sknt.uptime
-v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意类型参数,优化栈分配 Fixed 修复了ucpd 缓冲未释放的问题 Add 增加 sknt.call sknt.reply 是一个组合调用。否则会造成协程被挂起 v1.2.2 Add 增加 bbuf 协议解析，通过 bbuf = require(&amp;quot;sknt.bbuf&amp;quot;) 引用 bbuf errno = bbuf.load(path) 解析文件描述 bytes(userdata),errno = bbuf." />
-<meta name="twitter:site" content="https://domyson.github.io" />
+Mod skynet.send(dst,...) 现在传入参数可以是大于2个，当等于2，与之前无区别，当大于2则会转为table skynet.send() 现在不返回 boolean，而是返回一个number,为0则认为成功 kill 函数现在会立即退出当前服务 killed 事件不会被传入了 v1.2.0 Mod 取消了事件投递到达服务，会给出一个字符串类型的消息发送这类型，用以区别数据的来源位置以及类型
+与上述相关的问题，skynet.send(dest,...) 变为了 skynet.send(dest,typ,...) 现第二参数输入你自己的类型，以便于接收者区分，不要和服务同名，那是没有任何意义的 主要是为了确定一种数据的类型，而非一系列服务，本身服务和数据类型并非是一对一的关系
+skynet.start -&amp;gt; skynet.uptime
+v1.2.1 Mod 现在 skynet.warn,skynet.error,skynet.trace,skynet.debug 支持传入任意类型参数,优化栈分配 Fixed 修复了ucpd 缓冲未释放的问题 Add 增加 skynet.call skynet.reply 是一个组合调用。否则会造成协程被挂起 v1.2.2 Add 增加 bbuf 协议解析，通过 bbuf = require(&amp;quot;skynet.bbuf&amp;quot;) 引用 bbuf errno = bbuf.load(path) 解析文件描述 bytes(userdata),errno = bbuf." />
+<meta name="twitter:site" content="http://localhost:1313/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
-  content="https://domyson.github.io">
+  content="http://localhost:1313/">
 
 
 <meta property="og:type" content="article" />
 <meta property="og:title" content="version change - 满船清梦压星河">
 <meta property="og:description"
-  content="v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 sknt.send(string,any) 会产生两次搜索的情况 Added sknt-lua 增加 sknt.trace() 用以输出当前堆栈 sknt-lua 增加 check_version() 函数，校验sknt版本 v1.1.2 Fixed 修复了kill函数重入导致越界的问题
+  content="v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 skynet.send(string,any) 会产生两次搜索的情况 Added skynet-lua 增加 skynet.trace() 用以输出当前堆栈 skynet-lua 增加 check_version() 函数，校验skynet版本 v1.1.2 Fixed 修复了kill函数重入导致越界的问题
 修复http 因为判断发送失败的错误，现在如果发送失败返回404
-Mod sknt.send(dst,...) 现在传入参数可以是大于2个，当等于2，与之前无区别，当大于2则会转为table sknt.send() 现在不返回 boolean，而是返回一个number,为0则认为成功 kill 函数现在会立即退出当前服务 killed 事件不会被传入了 v1.2.0 Mod 取消了事件投递到达服务，会给出一个字符串类型的消息发送这类型，用以区别数据的来源位置以及类型
-与上述相关的问题，sknt.send(dest,...) 变为了 sknt.send(dest,typ,...) 现第二参数输入你自己的类型，以便于接收者区分，不要和服务同名，那是没有任何意义的 主要是为了确定一种数据的类型，而非一系列服务，本身服务和数据类型并非是一对一的关系
-sknt.start -&amp;gt; sknt.uptime
-v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意类型参数,优化栈分配 Fixed 修复了ucpd 缓冲未释放的问题 Add 增加 sknt.call sknt.reply 是一个组合调用。否则会造成协程被挂起 v1.2.2 Add 增加 bbuf 协议解析，通过 bbuf = require(&amp;quot;sknt.bbuf&amp;quot;) 引用 bbuf errno = bbuf.load(path) 解析文件描述 bytes(userdata),errno = bbuf." />
-<meta property="og:url" content="https://domyson.github.io/post/skynet/version/" />
+Mod skynet.send(dst,...) 现在传入参数可以是大于2个，当等于2，与之前无区别，当大于2则会转为table skynet.send() 现在不返回 boolean，而是返回一个number,为0则认为成功 kill 函数现在会立即退出当前服务 killed 事件不会被传入了 v1.2.0 Mod 取消了事件投递到达服务，会给出一个字符串类型的消息发送这类型，用以区别数据的来源位置以及类型
+与上述相关的问题，skynet.send(dest,...) 变为了 skynet.send(dest,typ,...) 现第二参数输入你自己的类型，以便于接收者区分，不要和服务同名，那是没有任何意义的 主要是为了确定一种数据的类型，而非一系列服务，本身服务和数据类型并非是一对一的关系
+skynet.start -&amp;gt; skynet.uptime
+v1.2.1 Mod 现在 skynet.warn,skynet.error,skynet.trace,skynet.debug 支持传入任意类型参数,优化栈分配 Fixed 修复了ucpd 缓冲未释放的问题 Add 增加 skynet.call skynet.reply 是一个组合调用。否则会造成协程被挂起 v1.2.2 Add 增加 bbuf 协议解析，通过 bbuf = require(&amp;quot;skynet.bbuf&amp;quot;) 引用 bbuf errno = bbuf.load(path) 解析文件描述 bytes(userdata),errno = bbuf." />
+<meta property="og:url" content="http://localhost:1313/post/skynet/version/" />
 <meta property="og:site_name" content="version change" />
 <meta property="og:image"
-  content="https://domyson.github.io">
+  content="http://localhost:1313/">
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
 
@@ -78,7 +78,7 @@ v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意�
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
     <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
-      <a class="Header-link" href="https://domyson.github.io">
+      <a class="Header-link" href="http://localhost:1313/">
         <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
           <path fill-rule="evenodd"
             d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
@@ -108,7 +108,7 @@ v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意�
               <input type="text"
                 class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
                 name="q" value="" placeholder="Search" autocomplete="off">
-              <input type="hidden" name="q" value="site:https://domyson.github.io">
+              <input type="hidden" name="q" value="site:http://localhost:1313/">
             </label>
           </form>
         </div>
@@ -116,7 +116,7 @@ v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意�
     </div>
 
     <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
-      <a class="Header-link " href="https://domyson.github.io">
+      <a class="Header-link " href="http://localhost:1313/">
         <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
           width="32">
           <path fill-rule="evenodd"
@@ -146,17 +146,17 @@ v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意�
           <div class="flex-auto min-width-0 width-fit mr-3">
             <div class="d-flex">
               <div class="d-none d-md-block">
-                <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io">
+                <a class="avatar mr-2 flex-shrink-0" href="http://localhost:1313/">
                   <img class=" avatar-user"
-                    src="https://domyson.github.io/images/avatar.png"
+                    src="http://localhost:1313/images/avatar.png"
                     width="32" height="32"></a>
               </div>
               <div class="d-flex flex-column">
                 <h1 class="break-word f3 text-normal mb-md-0 mb-1">
                   <span class="author">
-                    <a href="https://domyson.github.io">Treasure</a></span><span
+                    <a href="http://localhost:1313/">Treasure</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://domyson.github.io/post/skynet/version/">version change</a></strong>
+                      href="http://localhost:1313/post/skynet/version/">version change</a></strong>
                 </h1>
                 <div class="note m-0">
                   Created <relative-time datetime="Sat, 30 Apr 2022 00:00:00 &#43;0000"
@@ -165,9 +165,9 @@ v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意�
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sat, 07 Oct 2023 21:54:38 &#43;0800"
+                  Modified <relative-time datetime="Tue, 17 Oct 2023 00:51:19 &#43;0800"
                     class="no-wrap">
-                    Sat, 07 Oct 2023 21:54:38 &#43;0800</relative-time>
+                    Tue, 17 Oct 2023 00:51:19 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -197,7 +197,7 @@ v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意�
                         </div>
                       </div>
                     </details-menu>
-                      673 Words
+                      681 Words
                     
 
                   </div>
@@ -213,12 +213,12 @@ v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意�
 <h2 id="fixed">Fixed</h2>
 <ul>
 <li>修复了<code>http</code>一个原子锁问题，但在高并发下可能会出现失败的情况</li>
-<li>修复了 <code>sknt.send(string,any)</code> 会产生两次搜索的情况</li>
+<li>修复了 <code>skynet.send(string,any)</code> 会产生两次搜索的情况</li>
 </ul>
 <h2 id="added">Added</h2>
 <ul>
-<li>sknt-lua 增加 <code>sknt.trace()</code> 用以输出当前堆栈</li>
-<li>sknt-lua 增加 <code>check_version()</code> 函数，校验sknt版本</li>
+<li>skynet-lua 增加 <code>skynet.trace()</code> 用以输出当前堆栈</li>
+<li>skynet-lua 增加 <code>check_version()</code> 函数，校验skynet版本</li>
 </ul>
 <h1 id="v112">v1.1.2</h1>
 <h2 id="fixed-1">Fixed</h2>
@@ -232,8 +232,8 @@ v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意�
 </ul>
 <h2 id="mod">Mod</h2>
 <ul>
-<li><code>sknt.send(dst,...)</code> 现在传入参数可以是大于2个，当等于2，与之前无区别，当大于2则会转为<code>table</code></li>
-<li><code>sknt.send()</code> 现在不返回 <code>boolean</code>，而是返回一个<code>number</code>,为<code>0</code>则认为成功</li>
+<li><code>skynet.send(dst,...)</code> 现在传入参数可以是大于2个，当等于2，与之前无区别，当大于2则会转为<code>table</code></li>
+<li><code>skynet.send()</code> 现在不返回 <code>boolean</code>，而是返回一个<code>number</code>,为<code>0</code>则认为成功</li>
 <li><code>kill</code> 函数现在会立即退出当前服务</li>
 <li><code>killed</code> 事件不会被传入了</li>
 </ul>
@@ -244,17 +244,17 @@ v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意�
 <p>取消了事件投递到达服务，会给出一个字符串类型的消息发送这类型，用以区别数据的来源位置以及类型</p>
 </li>
 <li>
-<p>与上述相关的问题，<code>sknt.send(dest,...)</code> 变为了 <code>sknt.send(dest,typ,...)</code> 现第二参数输入你自己的类型，以便于接收者区分，不要和服务同名，那是没有任何意义的
+<p>与上述相关的问题，<code>skynet.send(dest,...)</code> 变为了 <code>skynet.send(dest,typ,...)</code> 现第二参数输入你自己的类型，以便于接收者区分，不要和服务同名，那是没有任何意义的
 主要是为了确定一种数据的类型，而非一系列服务，本身服务和数据类型并非是一对一的关系</p>
 </li>
 <li>
-<p><code>sknt.start</code> -&gt; <code>sknt.uptime</code></p>
+<p><code>skynet.start</code> -&gt; <code>skynet.uptime</code></p>
 </li>
 </ul>
 <h1 id="v121">v1.2.1</h1>
 <h2 id="mod-2">Mod</h2>
 <ul>
-<li>现在 <code>sknt.warn</code>,<code>sknt.error</code>,<code>sknt.trace</code>,<code>sknt.debug</code> 支持传入任意类型参数,优化栈分配</li>
+<li>现在 <code>skynet.warn</code>,<code>skynet.error</code>,<code>skynet.trace</code>,<code>skynet.debug</code> 支持传入任意类型参数,优化栈分配</li>
 </ul>
 <h2 id="fixed-2">Fixed</h2>
 <ul>
@@ -262,12 +262,12 @@ v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意�
 </ul>
 <h2 id="add">Add</h2>
 <ul>
-<li>增加 <code>sknt.call</code> <code>sknt.reply</code> 是一个组合调用。否则会造成协程被挂起</li>
+<li>增加 <code>skynet.call</code> <code>skynet.reply</code> 是一个组合调用。否则会造成协程被挂起</li>
 </ul>
 <h1 id="v122">v1.2.2</h1>
 <h2 id="add-1">Add</h2>
 <ul>
-<li>增加 <code>bbuf</code> 协议解析，通过 <code>bbuf = require(&quot;sknt.bbuf&quot;)</code> 引用</li>
+<li>增加 <code>bbuf</code> 协议解析，通过 <code>bbuf = require(&quot;skynet.bbuf&quot;)</code> 引用</li>
 <li><code>bbuf</code>
 <ul>
 <li><code>errno = bbuf.load(path)</code> 解析文件描述</li>
@@ -278,7 +278,7 @@ v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意�
 </ul>
 <h2 id="fixed-3">Fixed</h2>
 <ul>
-<li>修复<code>sknt.call</code> 的一个状态判定问题</li>
+<li>修复<code>skynet.call</code> 的一个状态判定问题</li>
 </ul>
 <h1 id="v123">v1.2.3</h1>
 <h2 id="fixed-4">Fixed</h2>
@@ -287,10 +287,10 @@ v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意�
 <p>修复<code>http</code>的一个判断bug</p>
 </li>
 <li>
-<p>优化<code>skntcmd</code>传输逻辑，以及连接逻辑</p>
+<p>优化<code>skynetcmd</code>传输逻辑，以及连接逻辑</p>
 </li>
 <li>
-<p><code>sknt.call</code>,<code>sknt.send</code> 现在支持远程调用</p>
+<p><code>skynet.call</code>,<code>skynet.send</code> 现在支持远程调用</p>
 </li>
 </ul>
 <h1 id="v124">v1.2.4</h1>
@@ -325,7 +325,7 @@ v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意�
 </ul>
 <h2 id="fixed-6">FIXED</h2>
 <ul>
-<li>修复 <code>sknt.call()</code> 会造成当前虚拟机全部阻塞的bug</li>
+<li>修复 <code>skynet.call()</code> 会造成当前虚拟机全部阻塞的bug</li>
 </ul>
 <h2 id="modify">Modify</h2>
 <ul>
@@ -354,12 +354,12 @@ v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意�
     </div>
   </main>
 </div>
-<script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
-<link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
+<script type="application/javascript" src='http://localhost:1313/js/toc.js'></script>
+<link rel="stylesheet" href='http://localhost:1313/css/toc.css' />
 
 <div id="gitalk-container" class="gitalk-container"></div>
-<link rel="stylesheet" href='https://domyson.github.io/css/gitalk.css'>
-<script src='https://domyson.github.io/js/gitalk.min.js'></script>
+<link rel="stylesheet" href='http://localhost:1313/css/gitalk.css'>
+<script src='http://localhost:1313/js/gitalk.min.js'></script>
 <script>
   const gitalk = new Gitalk({
     clientID: '',
@@ -379,7 +379,7 @@ v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意�
   <div class="footer container-xl width-full p-responsive">
   <div
     class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
-    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://domyson.github.io">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="http://localhost:1313/">
       <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
         <path fill-rule="evenodd"
           d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
@@ -400,7 +400,7 @@ v1.2.1 Mod 现在 sknt.warn,sknt.error,sknt.trace,sknt.debug 支持传入任意�
 </div>
 </body>
 
-<script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+<script type="application/javascript" src="http://localhost:1313/js/github-style.js"></script>
 
 
 
