@@ -3,13 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2023-10-17T00:53:10+08:00</lastmod>
+    <lastmod>2023-10-17T00:56:21+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/post/scriptc/2/</loc>
     <lastmod>2023-10-16T22:37:27+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/post/</loc>
-    <lastmod>2023-10-17T00:53:10+08:00</lastmod>
+    <lastmod>2023-10-17T00:56:21+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/scriptc/</loc>
     <lastmod>2023-10-16T22:40:14+08:00</lastmod>
@@ -18,7 +18,7 @@
     <lastmod>2023-10-16T22:40:14+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2023-10-17T00:53:10+08:00</lastmod>
+    <lastmod>2023-10-17T00:56:21+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/post/datatable/</loc>
     <lastmod>2023-10-17T00:50:42+08:00</lastmod>
@@ -27,7 +27,7 @@
     <lastmod>2023-10-17T00:43:35+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/skynet/</loc>
-    <lastmod>2023-10-17T00:53:10+08:00</lastmod>
+    <lastmod>2023-10-17T00:56:21+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/redis/</loc>
     <lastmod>2023-10-07T21:54:38+08:00</lastmod>
@@ -60,7 +60,7 @@
     <lastmod>2023-10-17T00:44:17+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/post/skynet/skynet/</loc>
-    <lastmod>2023-10-17T00:53:10+08:00</lastmod>
+    <lastmod>2023-10-17T00:56:21+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/sktpmd/</loc>
     <lastmod>2023-10-17T00:46:10+08:00</lastmod>
