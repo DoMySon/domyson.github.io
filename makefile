@@ -8,7 +8,7 @@ update:
 
 run:
 	@for i in `ls ./doc`;do if [ "$i" != ads.txt ];then \
-	rm -rf ./docs/$i; \
+	rm -rf ./doc/$i; \
 	fi; \
 	done; \
 	
