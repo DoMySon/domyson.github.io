@@ -2,7 +2,7 @@ baseURL = "https://domyson.github.io"
 languageCode = "zh-cn"
 title = "满船清梦压星河"
 theme = "github"
-#googleAnalytics = "UA-123456-789"
+googleAnalytics = "G-V23G8H27BQ"
 pygmentsCodeFences = true
 pygmentsUseClasses = true
 

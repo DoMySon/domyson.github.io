@@ -26,7 +26,7 @@ ECT2，ASTC 但需要设备支持 OpenGL ES3.0
 LOD unity内置的一项技术，主要是根据目标离相机的距离来断定使用何种精度的模型，减少顶点数的绘制，但代价就是要牺牲部分内存
 Occlusion culling 遮挡剔除 遮挡剔除是用来消除躲在其他物件后面看不到的物件，这代表资源不会浪费在计算那些看不到的顶点上，进而提升性能
 batching dynamic batching 将一些足够小的网格，在CPU上转换它们的顶点，将许多相似的顶点组合在一起，并一次性绘制它们。 无论静态还是动态合批都要求使用相同的材质，动态合批有以下限制：
-&#43; 如果GameObjects在Transform上包含镜像，则不会对其进行动态合批处理&#43; 使用多个pass的shader不会被动态合批处理&#43; 使用不同的Material实例会导致GameObjects不能一起批处理，即使它们基本相同。&#43; [官方25个不能动批的情况](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FUnity-Technologies%2FBatchBreakingCause)static batching 静态合批是将静态（不移动）GameObjects组合成大网格，然后进行绘制。静态合批使用比较简单，PlayerSettings中开启static batching，然后对需要静态合批物体的Static打钩即可，unity会自动合并被标记为static的对象，前提它们共享相同的材质，并且不移动，被标记为static的物体不能在游戏中移动，旋转或缩放。但是静态批处理需要额外的内存来存储合并的几何体。注意如果多个GameObject在静态批处理之前共享相同的几何体，则会在编辑器或运行时为每个GameObject创建几何体的副本，这会增大内存的开销
+&#43; 如果GameObjects在Transform上包含镜像，则不会对其进行动态合批处理 &#43; 使用多个pass的shader不会被动态合批处理 &#43; 使用不同的Material实例会导致GameObjects不能一起批处理，即使它们基本相同。 &#43; [官方25个不能动批的情况](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FUnity-Technologies%2FBatchBreakingCause) static batching 静态合批是将静态（不移动）GameObjects组合成大网格，然后进行绘制。静态合批使用比较简单，PlayerSettings中开启static batching，然后对需要静态合批物体的Static打钩即可，unity会自动合并被标记为static的对象，前提它们共享相同的材质，并且不移动，被标记为static的物体不能在游戏中移动，旋转或缩放。但是静态批处理需要额外的内存来存储合并的几何体。注意如果多个GameObject在静态批处理之前共享相同的几何体，则会在编辑器或运行时为每个GameObject创建几何体的副本，这会增大内存的开销
 GPU Instancing 使用GPU Instancing可以一次渲染(render)相同网格的多个副本，仅使用少量DrawCalls。在渲染诸如建筑、树木、草等在场景中重复出现的事物时，GPU Instancing很有用。
 每次draw call，GPU Instancing只渲染相同(identical )的网格，但是每个实例(instance)可以有不同的参数(例如，color或scale)，以增加变化(variation)，减少重复的出现。
 GPU Instancing可以减少每个场景draw calls次数。这显著提升了渲染性能。
@@ -50,7 +50,7 @@ ECT2，ASTC 但需要设备支持 OpenGL ES3.0
 LOD unity内置的一项技术，主要是根据目标离相机的距离来断定使用何种精度的模型，减少顶点数的绘制，但代价就是要牺牲部分内存
 Occlusion culling 遮挡剔除 遮挡剔除是用来消除躲在其他物件后面看不到的物件，这代表资源不会浪费在计算那些看不到的顶点上，进而提升性能
 batching dynamic batching 将一些足够小的网格，在CPU上转换它们的顶点，将许多相似的顶点组合在一起，并一次性绘制它们。 无论静态还是动态合批都要求使用相同的材质，动态合批有以下限制：
-&#43; 如果GameObjects在Transform上包含镜像，则不会对其进行动态合批处理&#43; 使用多个pass的shader不会被动态合批处理&#43; 使用不同的Material实例会导致GameObjects不能一起批处理，即使它们基本相同。&#43; [官方25个不能动批的情况](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FUnity-Technologies%2FBatchBreakingCause)static batching 静态合批是将静态（不移动）GameObjects组合成大网格，然后进行绘制。静态合批使用比较简单，PlayerSettings中开启static batching，然后对需要静态合批物体的Static打钩即可，unity会自动合并被标记为static的对象，前提它们共享相同的材质，并且不移动，被标记为static的物体不能在游戏中移动，旋转或缩放。但是静态批处理需要额外的内存来存储合并的几何体。注意如果多个GameObject在静态批处理之前共享相同的几何体，则会在编辑器或运行时为每个GameObject创建几何体的副本，这会增大内存的开销
+&#43; 如果GameObjects在Transform上包含镜像，则不会对其进行动态合批处理 &#43; 使用多个pass的shader不会被动态合批处理 &#43; 使用不同的Material实例会导致GameObjects不能一起批处理，即使它们基本相同。 &#43; [官方25个不能动批的情况](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FUnity-Technologies%2FBatchBreakingCause) static batching 静态合批是将静态（不移动）GameObjects组合成大网格，然后进行绘制。静态合批使用比较简单，PlayerSettings中开启static batching，然后对需要静态合批物体的Static打钩即可，unity会自动合并被标记为static的对象，前提它们共享相同的材质，并且不移动，被标记为static的物体不能在游戏中移动，旋转或缩放。但是静态批处理需要额外的内存来存储合并的几何体。注意如果多个GameObject在静态批处理之前共享相同的几何体，则会在编辑器或运行时为每个GameObject创建几何体的副本，这会增大内存的开销
 GPU Instancing 使用GPU Instancing可以一次渲染(render)相同网格的多个副本，仅使用少量DrawCalls。在渲染诸如建筑、树木、草等在场景中重复出现的事物时，GPU Instancing很有用。
 每次draw call，GPU Instancing只渲染相同(identical )的网格，但是每个实例(instance)可以有不同的参数(例如，color或scale)，以增加变化(variation)，减少重复的出现。
 GPU Instancing可以减少每个场景draw calls次数。这显著提升了渲染性能。
@@ -74,7 +74,7 @@ ECT2，ASTC 但需要设备支持 OpenGL ES3.0
 LOD unity内置的一项技术，主要是根据目标离相机的距离来断定使用何种精度的模型，减少顶点数的绘制，但代价就是要牺牲部分内存
 Occlusion culling 遮挡剔除 遮挡剔除是用来消除躲在其他物件后面看不到的物件，这代表资源不会浪费在计算那些看不到的顶点上，进而提升性能
 batching dynamic batching 将一些足够小的网格，在CPU上转换它们的顶点，将许多相似的顶点组合在一起，并一次性绘制它们。 无论静态还是动态合批都要求使用相同的材质，动态合批有以下限制：
-&#43; 如果GameObjects在Transform上包含镜像，则不会对其进行动态合批处理&#43; 使用多个pass的shader不会被动态合批处理&#43; 使用不同的Material实例会导致GameObjects不能一起批处理，即使它们基本相同。&#43; [官方25个不能动批的情况](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FUnity-Technologies%2FBatchBreakingCause)static batching 静态合批是将静态（不移动）GameObjects组合成大网格，然后进行绘制。静态合批使用比较简单，PlayerSettings中开启static batching，然后对需要静态合批物体的Static打钩即可，unity会自动合并被标记为static的对象，前提它们共享相同的材质，并且不移动，被标记为static的物体不能在游戏中移动，旋转或缩放。但是静态批处理需要额外的内存来存储合并的几何体。注意如果多个GameObject在静态批处理之前共享相同的几何体，则会在编辑器或运行时为每个GameObject创建几何体的副本，这会增大内存的开销
+&#43; 如果GameObjects在Transform上包含镜像，则不会对其进行动态合批处理 &#43; 使用多个pass的shader不会被动态合批处理 &#43; 使用不同的Material实例会导致GameObjects不能一起批处理，即使它们基本相同。 &#43; [官方25个不能动批的情况](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FUnity-Technologies%2FBatchBreakingCause) static batching 静态合批是将静态（不移动）GameObjects组合成大网格，然后进行绘制。静态合批使用比较简单，PlayerSettings中开启static batching，然后对需要静态合批物体的Static打钩即可，unity会自动合并被标记为static的对象，前提它们共享相同的材质，并且不移动，被标记为static的物体不能在游戏中移动，旋转或缩放。但是静态批处理需要额外的内存来存储合并的几何体。注意如果多个GameObject在静态批处理之前共享相同的几何体，则会在编辑器或运行时为每个GameObject创建几何体的副本，这会增大内存的开销
 GPU Instancing 使用GPU Instancing可以一次渲染(render)相同网格的多个副本，仅使用少量DrawCalls。在渲染诸如建筑、树木、草等在场景中重复出现的事物时，GPU Instancing很有用。
 每次draw call，GPU Instancing只渲染相同(identical )的网格，但是每个实例(instance)可以有不同的参数(例如，color或scale)，以增加变化(variation)，减少重复的出现。
 GPU Instancing可以减少每个场景draw calls次数。这显著提升了渲染性能。
@@ -192,9 +192,9 @@ Maximum Allowed Timestep 这里我们需要先知道物理系统本身的特性�
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sat, 07 Oct 2023 21:54:38 &#43;0800"
+                  Modified <relative-time datetime="Tue, 17 Oct 2023 02:51:07 &#43;0000"
                     class="no-wrap">
-                    Sat, 07 Oct 2023 21:54:38 &#43;0800</relative-time>
+                    Tue, 17 Oct 2023 02:51:07 &#43;0000</relative-time>
                   
                 </div>
               </div>
@@ -224,7 +224,7 @@ Maximum Allowed Timestep 这里我们需要先知道物理系统本身的特性�
                         </div>
                       </div>
                     </details-menu>
-                      2312 Words
+                      2311 Words
                     
 
                   </div>
@@ -349,8 +349,10 @@ Maximum Allowed Timestep 这里我们需要先知道物理系统本身的特性�
 </ol>
 <p><a href="https://www.bilibili.com/video/av79798486">浅谈Unity内存管理</a></p>
 <h1 id="提升加载场景速度">提升加载场景速度</h1>
-<p>-
-<code>Application.backgroundLoadingPriority为High</code>
+<ul>
+<li></li>
+</ul>
+<p><code>Application.backgroundLoadingPriority为High</code>
 Application.backgroundLoadingPriority这个API会限制主线程的集成的时间，默认设置是ThreadPriority.BelowNormal，也就是每一帧执行主线程集成的操作耗时不能超过4毫秒，这将会导致每一帧剩余的时间用于等待或者渲染，而这些等待和渲染的时间都是无意义的耗时。如果把这个设置改为ThreadPriority.High，那么每一帧执行主线程集成的操作耗时可以增加到50毫秒，大大减少了所需要的帧数。</p>
 <h1 id="分析工具">分析工具</h1>
 <p>UnityProfiler，UWA</p>

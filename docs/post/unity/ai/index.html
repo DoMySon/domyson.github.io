@@ -174,9 +174,9 @@ AI Executor todo" />
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sat, 07 Oct 2023 21:54:38 &#43;0800"
+                  Modified <relative-time datetime="Tue, 17 Oct 2023 02:51:07 &#43;0000"
                     class="no-wrap">
-                    Sat, 07 Oct 2023 21:54:38 &#43;0800</relative-time>
+                    Tue, 17 Oct 2023 02:51:07 &#43;0000</relative-time>
                   
                 </div>
               </div>
@@ -249,10 +249,10 @@ AI Executor todo" />
 <p>我们人为给它制定约束行为条件，让其结果收敛于某个区间，比如我没给它赋予行走的行为（单元），那么它就不应该存在这种方面的意向倾斜，（它可能会提示需要这种行为，而不是自主产生这种行为），这也是和带学习能力AI的区别，它的计算结果不应该是发散的。</p>
 <h2 id="ai-unit">AI Unit</h2>
 <p>AI单元是对某些行为具体抽象，它是数据（你也可以认为它是ECS中的C），比如行走（AI_WALK），它有一些数据</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">AI_Walk</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">float</span> <span class="n">Speed</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">AI_Walk</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">float</span> <span class="n">Speed</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Vector3</span> <span class="n">Direction</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Vector3</span> <span class="n">Direction</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>这个时候AI实体具备了一个行走的逻辑，朝哪走，走多快由这个单元确定，再比如说跑这个行为，它和走没任何区别，我们仅仅需在必要的时刻改变<code>AI_Walk</code>这个单元的属性值即可。因为它们有共同的数据结构。</p>
 <h2 id="ai-selector">AI Selector</h2>

@@ -195,9 +195,9 @@ public static List&amp;lt;Type&amp;gt; dynamic { get{ return ( from type in Asse
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sat, 07 Oct 2023 21:54:38 &#43;0800"
+                  Modified <relative-time datetime="Tue, 17 Oct 2023 02:51:07 &#43;0000"
                     class="no-wrap">
-                    Sat, 07 Oct 2023 21:54:38 &#43;0800</relative-time>
+                    Tue, 17 Oct 2023 02:51:07 &#43;0000</relative-time>
                   
                 </div>
               </div>
@@ -270,14 +270,14 @@ public static List&amp;lt;Type&amp;gt; dynamic { get{ return ( from type in Asse
 <li>
 <p><code>xLua</code> 属性标签 <code>[LuaCallCsharp]</code> 来指明哪些类需要生成代码。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="na">[LuaCallCsharp]</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">A</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">A</span><span class="p">{</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div></li>
 <li>
 <p>也可以在一个静态列表中通过标签一起生成</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="na">[LuaCallCSharp]</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">static</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Type</span><span class="p">&gt;</span> <span class="n">generate</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Type</span><span class="p">&gt;()</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Type</span><span class="p">&gt;</span> <span class="n">generate</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Type</span><span class="p">&gt;()</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">typeof</span><span class="p">(</span><span class="n">GameObject</span><span class="p">),</span>
 </span></span><span class="line"><span class="cl">    <span class="k">typeof</span><span class="p">(</span><span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">int</span><span class="p">&gt;),</span>
@@ -285,7 +285,7 @@ public static List&amp;lt;Type&amp;gt; dynamic { get{ return ( from type in Asse
 </span></span></code></pre></div></li>
 <li>
 <p>动态列表</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">static</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Type</span><span class="p">&gt;</span> <span class="kt">dynamic</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Type</span><span class="p">&gt;</span> <span class="kt">dynamic</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">get</span><span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span> 
 </span></span><span class="line"><span class="cl">        <span class="k">from</span> <span class="n">type</span> <span class="k">in</span> <span class="n">Assembly</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="s">&#34;Assmebly-CSharp&#34;</span><span class="p">).</span><span class="n">GetTypes</span><span class="p">()</span> 
@@ -347,10 +347,10 @@ public static List&amp;lt;Type&amp;gt; dynamic { get{ return ( from type in Asse
 </li>
 <li>
 <p>委托、事件</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Bridge</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Action</span> <span class="n">OnTrigger</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">Bridge</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Action</span> <span class="n">OnTrigger</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">event</span> <span class="n">Action</span> <span class="n">OnEvent</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">event</span> <span class="n">Action</span> <span class="n">OnEvent</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>Lua侧调用</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="c1">--增加事件和委托</span>
@@ -402,7 +402,7 @@ public static List&amp;lt;Type&amp;gt; dynamic { get{ return ( from type in Asse
 </span></span><span class="line"><span class="cl">    <span class="k">yield</span> <span class="k">return</span> <span class="k">new</span> <span class="n">WaitForSeconds</span><span class="p">(</span><span class="m">3f</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">www</span> <span class="p">=</span> <span class="k">new</span> <span class="n">WWW</span><span class="p">(</span><span class="s">&#34;http://www.baidu.com&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">yield</span> <span class="k">return</span> <span class="n">www</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">www</span><span class="p">.</span><span class="n">error</span><span class="p">!=</span><span class="k">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">www</span><span class="p">.</span><span class="n">error</span><span class="p">!=</span><span class="kc">null</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>

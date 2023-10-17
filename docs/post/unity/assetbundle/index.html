@@ -192,9 +192,9 @@ public class ABAsset{ public int Ref; public int tick; } public class ABManagmen
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sat, 07 Oct 2023 21:54:38 &#43;0800"
+                  Modified <relative-time datetime="Tue, 17 Oct 2023 02:51:07 &#43;0000"
                     class="no-wrap">
-                    Sat, 07 Oct 2023 21:54:38 &#43;0800</relative-time>
+                    Tue, 17 Oct 2023 02:51:07 &#43;0000</relative-time>
                   
                 </div>
               </div>
@@ -270,15 +270,15 @@ public class ABAsset{ public int Ref; public int tick; } public class ABManagmen
 </ul>
 <p>资源卸载一般都为引用计数的方式，但某些情况下可能会出现刚卸载完就需要被再次使用的场景，这个时候做一个对象池维护一定量的内存资源是合理的方式</p>
 <p>其次是资源依赖，如A引用了C，B引用了C，若此时A，B被卸载的时候，C的引用数为0，那么这个时候是否应该卸载C呢？，答案是否定的，也许会存在 D，E,F 同样依赖于C，这个时候最好的做法是将这个资源放入池中，开启循环技术，当到达某个阈值时再释放.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">ABAsset</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">int</span> <span class="n">Ref</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">ABAsset</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">Ref</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">int</span> <span class="n">tick</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">tick</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">ABManagment</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">ABManagment</span><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// per frame or interval call.</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">GC</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">void</span> <span class="n">GC</span><span class="p">(){</span>
 </span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(){</span>
 </span></span><span class="line"><span class="cl">            <span class="p">...</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">ab</span><span class="p">.</span><span class="n">Ref</span> <span class="p">==</span> <span class="m">0</span><span class="p">){</span>
