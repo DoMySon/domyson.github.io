@@ -154,7 +154,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">47</span>
+              <span class="Counter">48</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -441,7 +441,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">47</span>
+      <span class="Counter ">48</span>
     </a>
   </nav>
 </div>
@@ -729,6 +729,50 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://domyson.github.io/post/language/go/goroutine/">Go协程的思考</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="栈">栈</h1>
+<blockquote>
+<p>一个 os 线程会有一个给固定大小的内存块（一般是 2MB），用来存储当前线程中调用或挂起函数的内部变量，固定大小的栈对于复杂和深层次递归是不够的，而 Goroutine 会以一个很小的栈（2KB）开始其生命周期，这个栈会动态伸缩，最大能到达 1GB（32位系统是 250M）</p>
+</blockquote>
+<h1 id="调度方式">调度方式</h1>
+<blockquote>
+<p>os 线程由操作系统内核调用，每过一定时间（毫秒），硬件计时器会中断处理器，并调用一个名为 scheduler 的内建函数，这个函数会挂起当前执行的线程并保存内存中它的寄存器内存，然后检查线程列表并决定下一次执行哪个线程，并从内存中恢复该线程的寄存器信息，恢复该线程的线程并执行，这就是上下文切换，增加了 CPU 的运行周期。而 Go 的 runtime 包含了自身的调度器，和 os 线程不同是，<code>Goroutine</code> 属于用户级线程由语言支持，调度由语言支持，所有开销会减少很多（相比于内核上下文切换）。</p>
+</blockquote>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+              
+              <a class="muted-link mr-3" href="/tags/goroutine">
+                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                  <path fill-rule="evenodd"
+                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                  </path>
+                </svg>
+                goroutine
+              </a>
+              
+              
+
+              Created
+              <relative-time datetime=" Sun, 12 May 2019 00:00:00 &#43;0000" class="no-wrap"
+                title=" Sun, 12 May 2019 00:00:00 &#43;0000">
+                Sun, 12 May 2019 00:00:00 &#43;0000
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1389,10 +1433,11 @@ who
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                About me 专业 Unity、Golang 划水师，专注于各种花式打杂，会拼写 C、Golang、CSharp、Lua 等单词
-Deploy Before 2022.5 Docker、Nginx、Golang、Git、Centos、Markdown、WebHook、hugo
-Now! Github Pages+hugo
-Thanks Themes-Style Supported
+                About me 👋 I love games, I love coding, and I&rsquo;m interested in games, computer principles, and operating systems.
+I often use go,c, csharp,lua to develop some frameworks and tools, and now I am working on arm and rust.
+I developed the service framework skynet-go(based on cgo) and the game framework Anywhere(based on Unity3d).
+I also developed an register base scripting language (scriptc).
+Also wrote a new coding protocol (kproto) which is faster than protobuf-v3.
               </div>
             </div>
 

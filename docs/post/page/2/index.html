@@ -154,7 +154,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">47</span>
+              <span class="Counter">48</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -441,7 +441,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">47</span>
+      <span class="Counter ">48</span>
     </a>
   </nav>
 </div>
@@ -729,6 +729,45 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://domyson.github.io/post/kproto/">kproto 编码协议</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="前言">前言</h1>
+<p>其实在<code>cobweb</code>之初就设计了一种编码协议(kproto)，用于内部消息的编码,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护，
+而后期在研发的时候，发现需要与多种语言交互，显然 <code>json</code>,<code>xml</code> 不是一个很好的选择，而 <code>protobuf</code> 对弱类型语言支持不友好。</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+              
+              <a class="muted-link mr-3" href="/tags/">
+                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                  <path fill-rule="evenodd"
+                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                  </path>
+                </svg>
+                
+              </a>
+              
+              
+
+              Created
+              <relative-time datetime=" Wed, 21 Sep 2022 00:00:00 &#43;0000" class="no-wrap"
+                title=" Wed, 21 Sep 2022 00:00:00 &#43;0000">
+                Wed, 21 Sep 2022 00:00:00 &#43;0000
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1054,37 +1093,6 @@ skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址
               <relative-time datetime=" Thu, 14 Apr 2022 00:00:00 &#43;0000" class="no-wrap"
                 title=" Thu, 14 Apr 2022 00:00:00 &#43;0000">
                 Thu, 14 Apr 2022 00:00:00 &#43;0000
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/db/mysql/%E6%89%B9%E9%87%8F%E6%9B%B4%E6%96%B0/">mysql batch update</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="前言">前言</h1>
-<p>最近开发公会功能，需要定时保存一些，如果每次都是以公会为单位的话，相当于n个公会执行了n次<code>UPDATE</code>操作</p>
-<h1 id="实现">实现</h1>
-<h2 id="简单粗暴update">简单粗暴<code>UPDATE</code></h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">UPDATE</span><span class="w"> </span><span class="n">mytable</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">field1</span><span class="o">=</span><span class="n">val1</span><span class="p">,</span><span class="n">field2</span><span class="o">=</span><span class="n">val2</span><span class="w"> </span><span class="p">[</span><span class="n">WHRER</span><span class="w"> </span><span class="n">CONDITION</span><span class="p">];</span><span class="w">
-</span></span></span></code></pre></div>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 13 Apr 2022 00:00:00 &#43;0000" class="no-wrap"
-                title=" Wed, 13 Apr 2022 00:00:00 &#43;0000">
-                Wed, 13 Apr 2022 00:00:00 &#43;0000
               </relative-time>
             </div>
           </div>

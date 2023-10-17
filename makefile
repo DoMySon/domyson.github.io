@@ -22,3 +22,5 @@ build:
 
 	@hugo -d docs
 
+	@echo -n "google.com, pub-7934154300350596, DIRECT, f08c47fec0942fa0" > ./docs/ads.txt
+

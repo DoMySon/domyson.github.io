@@ -154,7 +154,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">47</span>
+              <span class="Counter">48</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -441,7 +441,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">47</span>
+      <span class="Counter ">48</span>
     </a>
   </nav>
 </div>
@@ -734,6 +734,50 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
+                <a href="https://domyson.github.io/post/language/go/pragma/">Go 编译指示</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                编译指示 在计算机编程中，编译指示(pragma) 是一种语言结构，它指示编译器应该如何处理其输入。指示不是编程语言语法的一部分，因编译器而异。
+Go中的编译指示 //go:pragma func Echo(){} 指示详解 //go:noinline 使函数不内联，内联是在编译期间发生的，将函数调用处替换为被调用函数主体的一种编译器优化手段。
+减少函数调用的开销，提高执行速度。
+复制后的更大函数体为其他编译优化带来可能性，如 过程间优化
+消除分支，并改善空间局部性和指令顺序性，同样可以提高性能。
+代码复制带来的空间增长。
+如果有大量重复代码，反而会降低缓存命中率，尤其对 CPU 缓存是致命的。
+内联 func Max(a, b int) int { if a &gt; b { return a } return b } func F() { const a, b = 100, 20 if Max(a, b) == b { panic(b) } } // `Max` 函数被内联，死码消除之后，`F()` 函数被变成了 `F(){ return }` 内联级别：默认常规内联，-gcflags=-l 禁用内联，-gcflags='-l -l' 二级内联，-gcflags='-l -l -l' 三级内联，-gcflags='-l -l -l -l' 四级内联，级数越大，也许更快，但bug更多
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+              
+              <a class="muted-link mr-3" href="/tags/pragma">
+                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                  <path fill-rule="evenodd"
+                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                  </path>
+                </svg>
+                pragma
+              </a>
+              
+              
+
+              Created
+              <relative-time datetime=" Sat, 18 Apr 2020 00:00:00 &#43;0000" class="no-wrap"
+                title=" Sat, 18 Apr 2020 00:00:00 &#43;0000">
+                Sat, 18 Apr 2020 00:00:00 &#43;0000
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
                 <a href="https://domyson.github.io/post/linux/tls/">TLS</a>
               </h3>
             </div>
@@ -875,10 +919,10 @@ tls 可以使用对称加密和非对称加密。
                 Module Golang 从1.11版本开始支持官方自带的依赖管理模块。根据项目路径中的 go.mod 文件来建立依赖管理。
 依赖添加 通过 import 自动添加到 go.mod 文件中
 import &#34;github.com/xxx/yyy&#34; 编辑 go.mod 文件
-module xxx go 1.13.4 require( xxxx v0.0.0 yyyy v1.1.1 ) 依赖升级 通过 go 命令
+module xxxgo 1.13.4require(xxxx v0.0.0yyyy v1.1.1) 依赖升级 通过 go 命令
 #查看gin的所有版本 go list -m -versions github.com/gin-gonic/gin #输出所有gin的版本 github.com/gin-gonic/gin v1.1.1 v1.1.2 v1.1.3 v1.1.4 v1.3.0 v1.4.0 v1.5.0 #下载所需依赖 go mod tidy 直接编辑 go.mod 文件
 删除未使用依赖项 go mod tidy
-使用本地包 /* go.mod文件 replace boost-go v0.0.1 =&gt; ../boost-go */ 
+使用本地包 /*go.mod文件replace boost-go v0.0.1 =&gt; ../boost-go*/ 
               </div>
             </div>
 
@@ -1204,50 +1248,6 @@ AI Executor todo
               <relative-time datetime=" Mon, 13 May 2019 00:00:00 &#43;0000" class="no-wrap"
                 title=" Mon, 13 May 2019 00:00:00 &#43;0000">
                 Mon, 13 May 2019 00:00:00 &#43;0000
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/language/go/goroutine/">Go协程的思考</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="栈">栈</h1>
-<blockquote>
-<p>一个 os 线程会有一个给固定大小的内存块（一般是 2MB），用来存储当前线程中调用或挂起函数的内部变量，固定大小的栈对于复杂和深层次递归是不够的，而 Goroutine 会以一个很小的栈（2KB）开始其生命周期，这个栈会动态伸缩，最大能到达 1GB（32位系统是 250M）</p>
-</blockquote>
-<h1 id="调度方式">调度方式</h1>
-<blockquote>
-<p>os 线程由操作系统内核调用，每过一定时间（毫秒），硬件计时器会中断处理器，并调用一个名为 scheduler 的内建函数，这个函数会挂起当前执行的线程并保存内存中它的寄存器内存，然后检查线程列表并决定下一次执行哪个线程，并从内存中恢复该线程的寄存器信息，恢复该线程的线程并执行，这就是上下文切换，增加了 CPU 的运行周期。而 Go 的 runtime 包含了自身的调度器，和 os 线程不同是，<code>Goroutine</code> 属于用户级线程由语言支持，调度由语言支持，所有开销会减少很多（相比于内核上下文切换）。</p>
-</blockquote>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-              
-              <a class="muted-link mr-3" href="/tags/goroutine">
-                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-                  <path fill-rule="evenodd"
-                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-                  </path>
-                </svg>
-                goroutine
-              </a>
-              
-              
-
-              Created
-              <relative-time datetime=" Sun, 12 May 2019 00:00:00 &#43;0000" class="no-wrap"
-                title=" Sun, 12 May 2019 00:00:00 &#43;0000">
-                Sun, 12 May 2019 00:00:00 &#43;0000
               </relative-time>
             </div>
           </div>
