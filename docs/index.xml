@@ -422,7 +422,7 @@ ECT2，ASTC 但需要设备支持 OpenGL ES3.0
 LOD unity内置的一项技术，主要是根据目标离相机的距离来断定使用何种精度的模型，减少顶点数的绘制，但代价就是要牺牲部分内存
 Occlusion culling 遮挡剔除 遮挡剔除是用来消除躲在其他物件后面看不到的物件，这代表资源不会浪费在计算那些看不到的顶点上，进而提升性能
 batching dynamic batching 将一些足够小的网格，在CPU上转换它们的顶点，将许多相似的顶点组合在一起，并一次性绘制它们。 无论静态还是动态合批都要求使用相同的材质，动态合批有以下限制：
-+ 如果GameObjects在Transform上包含镜像，则不会对其进行动态合批处理+ 使用多个pass的shader不会被动态合批处理+ 使用不同的Material实例会导致GameObjects不能一起批处理，即使它们基本相同。+ [官方25个不能动批的情况](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FUnity-Technologies%2FBatchBreakingCause)static batching 静态合批是将静态（不移动）GameObjects组合成大网格，然后进行绘制。静态合批使用比较简单，PlayerSettings中开启static batching，然后对需要静态合批物体的Static打钩即可，unity会自动合并被标记为static的对象，前提它们共享相同的材质，并且不移动，被标记为static的物体不能在游戏中移动，旋转或缩放。但是静态批处理需要额外的内存来存储合并的几何体。注意如果多个GameObject在静态批处理之前共享相同的几何体，则会在编辑器或运行时为每个GameObject创建几何体的副本，这会增大内存的开销
++ 如果GameObjects在Transform上包含镜像，则不会对其进行动态合批处理 + 使用多个pass的shader不会被动态合批处理 + 使用不同的Material实例会导致GameObjects不能一起批处理，即使它们基本相同。 + [官方25个不能动批的情况](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FUnity-Technologies%2FBatchBreakingCause) static batching 静态合批是将静态（不移动）GameObjects组合成大网格，然后进行绘制。静态合批使用比较简单，PlayerSettings中开启static batching，然后对需要静态合批物体的Static打钩即可，unity会自动合并被标记为static的对象，前提它们共享相同的材质，并且不移动，被标记为static的物体不能在游戏中移动，旋转或缩放。但是静态批处理需要额外的内存来存储合并的几何体。注意如果多个GameObject在静态批处理之前共享相同的几何体，则会在编辑器或运行时为每个GameObject创建几何体的副本，这会增大内存的开销
 GPU Instancing 使用GPU Instancing可以一次渲染(render)相同网格的多个副本，仅使用少量DrawCalls。在渲染诸如建筑、树木、草等在场景中重复出现的事物时，GPU Instancing很有用。
 每次draw call，GPU Instancing只渲染相同(identical )的网格，但是每个实例(instance)可以有不同的参数(例如，color或scale)，以增加变化(variation)，减少重复的出现。
 GPU Instancing可以减少每个场景draw calls次数。这显著提升了渲染性能。
@@ -549,10 +549,10 @@ tls 可以使用对称加密和非对称加密。
       <description>Module Golang 从1.11版本开始支持官方自带的依赖管理模块。根据项目路径中的 go.mod 文件来建立依赖管理。
 依赖添加 通过 import 自动添加到 go.mod 文件中
 import &amp;#34;github.com/xxx/yyy&amp;#34; 编辑 go.mod 文件
-module xxxgo 1.13.4require(xxxx v0.0.0yyyy v1.1.1) 依赖升级 通过 go 命令
+module xxx go 1.13.4 require( xxxx v0.0.0 yyyy v1.1.1 ) 依赖升级 通过 go 命令
 #查看gin的所有版本 go list -m -versions github.com/gin-gonic/gin #输出所有gin的版本 github.com/gin-gonic/gin v1.1.1 v1.1.2 v1.1.3 v1.1.4 v1.3.0 v1.4.0 v1.5.0 #下载所需依赖 go mod tidy 直接编辑 go.mod 文件
 删除未使用依赖项 go mod tidy
-使用本地包 /*go.mod文件replace boost-go v0.0.1 =&amp;gt; ../boost-go*/ </description>
+使用本地包 /* go.mod文件 replace boost-go v0.0.1 =&amp;gt; ../boost-go */ </description>
     </item>
     
     <item>

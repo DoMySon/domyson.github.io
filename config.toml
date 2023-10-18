@@ -23,20 +23,20 @@ pygmentsUseClasses = true
   userStatusEmoji = "😀"
   favicon = "/images/avatar.png"
   location = "China"
-  #enableGitalk = true
+  enableGitalk = true
 
-#   [params.gitalk]
-#     clientID = "Your client ID" 
-#     clientSecret = "Your client secret" 
-#     repo = "repo"
-#     owner = "MeiK2333"
-#     admin = "MeiK2333"
-#     id = "location.pathname"
-#     labels = "gitalk"
-#     perPage = 15
-#     pagerDirection = "last"
-#     createIssueManually = true
-#     distractionFreeMode = false
+   [params.gitalk]
+     clientID = "d30dd7c2a5d15316e046" 
+     clientSecret = "bf9a096b345b29028eaca439e2e0c70731b5fd1a" 
+     repo = "domyson.github.io"
+    owner = "domyson"
+     admin = "domyson"
+     id = "location.pathname"
+    labels = "gitalk"
+    perPage = 15
+     pagerDirection = "last"
+     createIssueManually = true
+     distractionFreeMode = false
 
   [[params.links]]
     title = "Link"
