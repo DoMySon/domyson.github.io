@@ -164,7 +164,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">48</span>
+              <span class="Counter">50</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -451,7 +451,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">48</span>
+      <span class="Counter ">50</span>
     </a>
   </nav>
 </div>
@@ -744,6 +744,180 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
+                <a href="https://domyson.github.io/post/db/redis/redis/">redis</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                Redis Remote Dictionary Server,采用 ANSI C 编写的 K-V数据库
+Redis命令
+Redis下载
+类型 string 最大存储值为256mb，底层由SDS(simple dynamic string)实现，优势是访问长度仅需O(1)
+hash
+list 存储有序字符串，最大2^32-1个元素
+set
+同list，但不允许重复
+sorted set 已排序的都字符串集合，但不允许重复 &ndash; 其它
+GEO 地理位置 HyperLogLog 基数统计 Bitsmap bit数组，类似boolean filter redis设计架构 单线程业务，多线程存储，redis6.0引入多线程也仅仅是为了提高解析命令的速度
+虚拟内存
+虚拟内存机制就是暂时把不经常访问的数据(冷数据)从内存交换到磁盘中，从而腾出宝贵的内存空间用于其它需要访问的数据(热数据)。通过VM功能可以实现冷热数据分离，使热数据仍在内存中、冷数据保存到磁盘。这样就可以避免因为内存不足而造成访问速度下降的问题。
+击穿，穿透，雪崩 击穿 某个key在过期点的时候，突然出现大量请求查找这个key
+穿透 访问一个不存在的key的时候
+雪崩 指缓存中数据大批量到过期时间，访问落到db上，造成db压力过大
+持久化机制 RDB RDB持久化，是指在指定的时间间隔内，执行指定次数的写操作，将内存中的数据集快照写入磁盘中，它是Redis默认的持久化方式。执行完操作后，在指定目录下会生成一个dump.rdb文件，Redis 重启的时候，通过加载dump.rdb文件来恢复数据
+分为手动触发和自动触发
+优点 适合大规模的数据恢复场景，如备份，全量复制等
+缺点 没办法做到实时持久化/秒级持久化。
+AOF 采用日志的形式来记录每个写操作，追加到文件中，重启时再重新执行AOF文件中的命令来恢复数据。它主要解决数据持久化的实时性问题
+优点 数据一致性和完整性更高 缺点 内容越多，文件越大，恢复变慢，它需要将所有命令执行一遍
+高可用 主从 类似mysql主从，master负责写，slave负责读
+哨兵 监视其他节点的状态
+集群 Gossip，HashSlot 16384
+View
+分布式锁 setnx setnx nx [expired]
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 24 Nov 2022 00:00:00 &#43;0000" class="no-wrap"
+                title=" Thu, 24 Nov 2022 00:00:00 &#43;0000">
+                Thu, 24 Nov 2022 00:00:00 &#43;0000
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://domyson.github.io/post/db/mysql/mvcc/">mvcc</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                MVCC multi-version concurent control 多版本控制系统，一般用于数据库的并发访问
+MVCC在MySQL InnoDB中的实现主要是为了提高数据库的并发性能，用更好的方式去处理读-写冲突，做到即使有读写冲突时，也能做到不加锁，非阻塞并发读。
+mysql 的 RR级别是通过MVCC多版本并发控制的实现的，它通过管理数据行的多个版本来实现数据库并发控制，通过比较版本号来决定数据是否显示
+mvcc在很多情况下避免加锁，大多数都实现了非阻塞读操作，写操作也是锁定必要行，innodb在每行记录后面保存两个隐藏列，分别是创建版本号和删除版本号,每开始一个新的事务系统版本号都会递增，事务开始的时刻的系统版本号 会作为事务的版本号，用以和查询到的每行记录的版本号进行比较，在RR级别下的工作方式：
+select 需要同时满足查版本号早于当前版本的数据行，行的删除版本要么未定义，要么大于当前数据版本号
+insert 为插入的每一行记录保存当前系统版本作为创建版本号
+delete
+update
+当前读 像 select lock in share mode,select for update ,update,insert,delete 都算当前读，即读取的记录都是数据库中最新的版本，读取是还要保证其他并发事务不能修改当前记录，所以会对读数据加锁
+快照读 不加锁的select就是快照读，但前提是隔离基本不是串行级别，否则会退化成当前读
+原理 通过隐藏列
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Sun, 20 Nov 2022 00:00:00 &#43;0000" class="no-wrap"
+                title=" Sun, 20 Nov 2022 00:00:00 &#43;0000">
+                Sun, 20 Nov 2022 00:00:00 &#43;0000
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://domyson.github.io/post/linux/iptables/">iptables and ipvs</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                iptables iptables 基于 netfilter 采用一条条规则链表，时间复杂度为O(n)，最主要的是 iptables 专为防火墙设计
+ipvs ipvs 同样基于 netfilter，但底层采用的是hash表，索引复杂度为O(1)
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+              
+              <a class="muted-link mr-3" href="/tags/">
+                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                  <path fill-rule="evenodd"
+                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                  </path>
+                </svg>
+                
+              </a>
+              
+              
+
+              Created
+              <relative-time datetime=" Sat, 19 Nov 2022 00:00:00 &#43;0000" class="no-wrap"
+                title=" Sat, 19 Nov 2022 00:00:00 &#43;0000">
+                Sat, 19 Nov 2022 00:00:00 &#43;0000
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://domyson.github.io/post/language/go/memory/">Go Memory</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                虚拟内存 虚拟内存屏蔽了RAM和Disk,向进程提供远大于物理内存的内存空间，简单来说就是使用了 memory map 分别映射了RAM和Disk的某个区域
+堆栈 栈的方向向低地址增长，而堆恰好相反
+Vritual memory address | kernel | |-------------------| 0xC00000000 | ---argv,evniron---| | -------stack -----| | ---------↓--------| | ----stack top-----| | | | unallocated | | | heap | | | uninitialized data| | initialized data | | program Code | | | 0x08048000 | | 0x00000000 Tcmalloc 也许同时google出品吧
+Page
+操作系统对内存管理以页为单位，Tcmalloc 也是如此，但其不一定相等，而是倍数关系(x64 Page 为8kb)
+Span
+一组连续的Page称为Span,是Tcmalloc的基本单位
+ThreadCache
+每个线程自身的Cache,包含多个空闲内存块链表，每个单独的链表大小是一致的，方便申请时不需要遍历全局，而且是无锁访问
+CentarlCache
+所有线程共享的空闲内存块，链表数量同 ThreadCache,当ThreadCache不够时会从其申请，但它是需要加锁
+PageHeap
+对堆内存的抽象，也是由若干链表组成，链表保存的是 Span，当 CentarlCache不足时，获取空闲Span然后拆分成若干内存块，并添加到对应大小的链表中以供分配，否则将会放回
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+              
+              <a class="muted-link mr-3" href="/tags/">
+                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                  <path fill-rule="evenodd"
+                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                  </path>
+                </svg>
+                
+              </a>
+              
+              
+
+              Created
+              <relative-time datetime=" Fri, 07 Oct 2022 00:00:00 &#43;0000" class="no-wrap"
+                title=" Fri, 07 Oct 2022 00:00:00 &#43;0000">
+                Fri, 07 Oct 2022 00:00:00 &#43;0000
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
                 <a href="https://domyson.github.io/post/kproto/">kproto 编码协议</a>
               </h3>
             </div>
@@ -789,15 +963,25 @@
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                简介 skynet是基于消息的服务框架，它承担了其中消息的传递。
-服务的消息队列 存在两个版本，一个是基于go channel，另外一个基于无锁缓冲队列，后续有时间会单独解释。
-唯一的区别是 第二种方式需要手动控制调度调度规则，对服务参数的配置有更高的要求，正确的配置,内存以及性能会比 go channel的方式略高
+                简介 skynet-go是基于actor 消息的服务框架，那么我们需要定义一套标准且高效的消息结构
+PID 一个 message 最重要的是消息地址，如果一个消息没有地址的话我们称为 dead-letter。 那么我们通过Pid 标定一个地址类型，
+它表示该服务的唯一id (本质上是一个uint64)的类习惯，它一定能确保在当前节点以及集群中唯一的。
+在服务本身未被关闭的时候，pid一定不会产生变动，但重新启动节点之后，它的值可能会发生改变，因为所有服务默认都是并发启动，除非手动指定了关系(这也是它与skynet的区别)，所以不要尝试保存这个pid
+一旦能确定了一个pid的话，就可以通过 skynet.send(pid,cmd,...) or skynet.call(ti,pid,cmd,...) 将其发送出去了。
+服务的消息队列 Actor 模型最重要的的概念是 mailbox,它代表了一个实体需要处理的队列容器，
+得益于go的简单性，可以使用 channel 来实现，但这种方式的实现性能不高，因为 channel 底层的结构使用的是互斥锁，
+所以我采用了mpsc 实现了无锁队列，性能更优于 channel
 TODO: 吞吐量对比
-消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它消耗服务投递的性能， 如果确实有这种需求，可以发送 struct{}{}
-接收 关键性参数只有三个，session,typ,以及 argument,
-session 主要的作用是用以区分这条消息是否大于0，若为真，则其值就是请求序列号，本节点保证唯一 typ 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义 argument 才是真实的数据，它可以是任意值，特别的，在lua中这个值是会被解构，在跨节点通讯这个值恒为 []byte，当不需要时记得 skynet.free 1.4.0 这个由runtime回收 异步消息 异步消息通过 skynet.send的方式进行投递，它只在乎这个消息有没有正确到达到对点服务，而不关心是否能被对点服务正确处理，返回一个 error
-同步消息 同步消息通过 skynet.call的方式进行投递，它会阻塞当前协程（goroutine 或者是 coroutine），它也返回一个错误，能解除此次阻塞只有两个条件，对点服务skynet.ret 或者达到了指定超时时间， 所以特别在远程通讯的时候要考虑到 i/o 的延时
-dead letter 这个很好理解，同erlang 主要是确保数据的一致性，保证重要的数据不会因为某个服务的意外退出而丢失了这些消息.
+消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 struct{}{}。
+而且消息发送成功只能代表被 mailbox 接受了，不代表会被立即处理，而不会一定处理成功，所以需要正确理解这种方式。
+如果发送失败，那么一定失败，并返回一个错误
+接收 接受回调只包含5个关键参数 context,addr,session,mtype,argument
+context 其实就是创建服务用户指定的结构指针，用于数据传递和状态修改
+session 主要的作用是用以区分这条消息是否是同步请求， 如若大于0，则其值就是请求序列号,只需要通过 skynet.ret(msg) 返回即可
+mtype 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义，可作为rpc消息类型
+argument 才是真实的数据，它可以是任意值，特别的，在lua中这个值是会被解构，在跨节点通讯这个值恒为 []byte，当不需要时记得 skynet.free 1.4.0 这个由底层回收，用户不用关心
+异步消息 异步消息通过 skynet.send的方式进行投递，它只在乎这个消息有没有正确到达到对点服务，而不关心是否能被对点服务正确处理，并返回一个 error
+同步消息 同步消息通过 skynet.
               </div>
             </div>
 
@@ -834,7 +1018,7 @@ dead letter 这个很好理解，同erlang 主要是确保数据的一致性，�
 <li><a href="https://www.taptap.cn/app/215934">我在民国淘古玩</a> v.1.3.5</li>
 </ul>
 <p>至于什么是<code>Actor</code>是必要了解的概念，<a href="https://github.com/cloudwu/skynet">skynet</a> 以及 <code>erlang</code> 都是基于这种模式。</p>
-<p>与<code>skynet-c</code>的区别可见 <a href="/post/diff">diff-skynet</a></p>
+<p>与<code>skynet-c</code>的区别可见(暂未统计) <a href="/post/diff">diff-skynet</a></p>
               </div>
             </div>
 
@@ -861,17 +1045,17 @@ dead letter 这个很好理解，同erlang 主要是确保数据的一致性，�
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
                 简介 sktpmd模块是skynet底层集群模块，它承担了skynet网络节点之间的通讯职能。全名为(skynet port managment daemon)
-架构 sktpmd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来
-sktpmd可以支持任意网络协议，如 tcp,udp 甚至是 unix
-当然一个好记的节点名称是非常有必要的，所以sktpmd也内置了一套非标准的本地 dns系统
-使用 sktpmd的启动也非常简单，无须任何代码，仅仅只需要在 skynet.toml 中配置一下即可，使用的时候跟节点内通讯无任何区别，但要求参数必须是 []byte 类型，参考 bbuf 如
-skynet.send(&#34;host:port@name&#34;,...) -- 通过域名或者地址+端口的形式和其他节点进行通讯 skynet.send(pid,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
+架构 sktpmd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来，1.6.0改变了个行为
+sktpmd可以支持任意网络协议，如 tcp,udp 甚至是 unix，后续规划可能由可靠udp实现，降低集群通讯延时并提供更好的性能，让出进程的 file-descriptor 给业务。
+当然一个好记的节点名称是非常有必要的，所以sktpmd也内置了一套非标准的本地 dns系统，方便名称和地址映射，甚至于你可以实现一套本地dns负载均衡，以达到负载均衡的目的
+使用 sktpmd的启动也非常简单，无须任何代码，仅仅只需要在 skynet.ini 中配置一下即可，使用的时候跟节点内通讯无任何区别。因为我已经作平了本地和节点之间的差异。内部均由kproto进行编码 如
+skynet.send(&#34;host:port@name&#34;,&#34;rpc name&#34;...) -- 通过域名或者地址+端口的形式和其他节点进行通讯 skynet.send(pid, &#34;rpc name&#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
 基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，
 通过配置tun的规则开启多个，则可以实现业务拆分。
 2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&quot;n1.n2.n3@name&quot;)
 服务发现 sktpmd 提供了一套服务发现机制，但其运作原理是不同于 etcd 或者 consul,它本身是一个惰性发现，取决于第一次调用的地址是否正确返回。
 你不需要知道它是如何运作的，你只需要知道在特定时间内它是有效的即可，那怕其中出了一些意外，无非只是浪费了两次通讯而已。
-sktpmd整个发现流程是基于 gossip 算法来发现的,但一些api依然可以主动触发，v1.5.0 这个模块将保留，因为集群模式的逻辑改变了
+sktpmd整个发现流程是基于 gossip 算法来发现的,但一些api依然可以主动触发，v1.6.0 这个模块将保留，因为集群模式的逻辑改变了
 v1.6.0集群建立 v1.5.0 之前大家都是双向链接，但考虑到一个数据服务器，如 dns server,conf server 等，大部分是 request/response 模式，复用连接的收益很大，所以去除之前的一些设计。
 相应的，将会带来一套全新的集群api，等完成之后将会在这补充
 网络底层 参考 Go协程的思考,在linux下，使用了 epoll。所以尽量部署到 linux 下以发挥更好的性能
@@ -911,46 +1095,15 @@ v1.6.0集群建立 v1.5.0 之前大家都是双向链接，但考虑到一个数
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                简介 timer 模块是 skynet 内置的一个定时模块，使用了小根堆实现。
-apis skynet.sleep(d) 这个函数将会挂起当前协程，在lua和 go中将会有不同的表现，取决于两者底层之间的区别
-skynet.timeout(d,fn) 注册一个到期时间，而之后将会触发这个函数，特别注意，此函数的执行协程同当前调用的协程，简单来说就是并不会造成资源竞争，但是需要注意一下 aba 问题
-QA 为什么不提供循环计时器？
+                简介 timer 模块是 skynet-go 全局的一个计时系统，内部数据结构使用了小根堆实现。
+原理 本质上是开启一个单独的协程执行一个计时循环，通过 skynet.timeout(addr,ti,cb) 将调用服务的pid 传入进去，等待以一个特殊的消息指令EV_TIMEOUT 通知到对应服务，所以它会具有一定的延时性，若该服务本身处理时间过长，导致mailbox消息积压过多，那么这个指令将会排队直到被处理，
+需要注意的是，超时消息触发的时间没有问题，而是处理的时候有延时性
+对lua的支持 QA 为什么不提供循环计时器？
 可以使用闭包来实现循环
 为什么不提供取消？
 可以使用标记位来控制逻辑
 为什么使用小根堆
 为了尽可能减少精度丢失，以及内存，简单而言其实是一个topk算法的变种，不需要在一次循环中做完所有事(10ms)
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Sat, 30 Apr 2022 00:00:00 &#43;0000" class="no-wrap"
-                title=" Sat, 30 Apr 2022 00:00:00 &#43;0000">
-                Sat, 30 Apr 2022 00:00:00 &#43;0000
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/skynet/version/">version change</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 skynet.send(string,any) 会产生两次搜索的情况 Added skynet-lua 增加 skynet.trace() 用以输出当前堆栈 skynet-lua 增加 check_version() 函数，校验skynet版本 v1.1.2 Fixed 修复了kill函数重入导致越界的问题
-修复http 因为判断发送失败的错误，现在如果发送失败返回404
-Mod skynet.send(dst,...) 现在传入参数可以是大于2个，当等于2，与之前无区别，当大于2则会转为table skynet.send() 现在不返回 boolean，而是返回一个number,为0则认为成功 kill 函数现在会立即退出当前服务 killed 事件不会被传入了 v1.2.0 Mod 取消了事件投递到达服务，会给出一个字符串类型的消息发送这类型，用以区别数据的来源位置以及类型
-与上述相关的问题，skynet.send(dest,...) 变为了 skynet.send(dest,typ,...) 现第二参数输入你自己的类型，以便于接收者区分，不要和服务同名，那是没有任何意义的 主要是为了确定一种数据的类型，而非一系列服务，本身服务和数据类型并非是一对一的关系
-skynet.start -&gt; skynet.uptime
-v1.2.1 Mod 现在 skynet.warn,skynet.error,skynet.trace,skynet.debug 支持传入任意类型参数,优化栈分配 Fixed 修复了ucpd 缓冲未释放的问题 Add 增加 skynet.call skynet.reply 是一个组合调用。否则会造成协程被挂起 v1.2.2 Add 增加 bbuf 协议解析，通过 bbuf = require(&quot;skynet.bbuf&quot;) 引用 bbuf errno = bbuf.load(path) 解析文件描述 bytes(userdata),errno = bbuf.
               </div>
             </div>
 
@@ -976,15 +1129,12 @@ v1.2.1 Mod 现在 skynet.warn,skynet.error,skynet.trace,skynet.debug 支持传�
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                简介 alloctor 模块主要是为了减少GC而开发。现支持两套分配规则
-基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet中它确实有更优秀的性能，因为它直接分配了一块共用内存，所以不会产生任何GC和真实分配, ，但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。
-哪怕内置的Debug模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 Debug 只能定位到存在 memory-leak，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失
+                简介 手动管理内存永远是最有效率的办法。
+基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向runtime申请内存，将会导致内存占用过高。
+而且内置的Debug模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 Debug 只能定位到存在 memory-leak，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失
 slab-allocator 对业务开发很不友好，最终只是将它保留作为可选项，是否使用取决于业务实际需要，因为它违背了 skynet 的设计初衷。
-如果需要使用可以在编译指令中指明slab
-2020-10-18 阅读sync.Pool源码，看看能不能够和指定的P进行绑定，减少锁
-基于 sync.Pool 的分段内存分配器 将不同size的buffer放入不同的池中，按需进行分配，减少race的开销
-这个方法虽然简单，但是性能是低于 slab-allocator。
-但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是skynet默认使用的策略。
+基于 sync.Pool 的分段内存分配器 将不同size的buffer放入不同的池中，按需进行分配，减少race的开销，这个方法虽然简单，但是性能是低于 slab-allocator。
+但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是skynet默认使用的策略。如果需要使用可以在编译指令中指明slab
 API skynet.alloc(n) 用以分配指定大小的内存块
 skynet.realloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存
 skynet.append(buf,data) 简化了 realloc 和 copy 的操作。
@@ -999,112 +1149,6 @@ skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址
               <relative-time datetime=" Thu, 21 Apr 2022 00:00:00 &#43;0000" class="no-wrap"
                 title=" Thu, 21 Apr 2022 00:00:00 &#43;0000">
                 Thu, 21 Apr 2022 00:00:00 &#43;0000
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/skynet/pid/">pid</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                PID Pid 是当前服务的唯一id，它确保在当前节点以及集群中唯一。
-但重新启动节点之后，它的值可能会发生改变，所以不要尝试保存它，但可以确定的是集群中它依然是唯一的
-作用 表示某一节点的某一的服务的地址，它最终输出是一串 uint64 的值。
-可以通过 skynet.send(dst,...) skynet.call(ti,dst,...)来使用它，将消息发送出去
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Thu, 21 Apr 2022 00:00:00 &#43;0000" class="no-wrap"
-                title=" Thu, 21 Apr 2022 00:00:00 &#43;0000">
-                Thu, 21 Apr 2022 00:00:00 &#43;0000
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/language/go/sync.pool/">sync.pool</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                结构分析 type Pool struct { noCopy noCopy local unsafe.Pointer // P 本地池，固定尺寸，实际结构 [P]poolLocal，类似 void* 并附加长度构成了一个数组 localSize uintptr // size of the local array victim unsafe.Pointer // local from previous cycle victimSize uintptr // size of victims array New func() any } type poolChain struct{ head *poolChainElt tail *poolChainElt } type poolChainElt struct{ // 一个双向链表 poolDequeue next,prev *poolChainElt } type poolDequeue struct{ headtail uint64 vals []eface } type eface struct{ // 数据的真实内存分配，包括一个类型描述和实际数据 typ,val unsafe.
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-              
-              <a class="muted-link mr-3" href="/tags/sync.pool">
-                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-                  <path fill-rule="evenodd"
-                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-                  </path>
-                </svg>
-                sync.pool
-              </a>
-              
-              
-
-              Created
-              <relative-time datetime=" Fri, 15 Apr 2022 00:00:00 &#43;0000" class="no-wrap"
-                title=" Fri, 15 Apr 2022 00:00:00 &#43;0000">
-                Fri, 15 Apr 2022 00:00:00 &#43;0000
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/language/go/sync.map/">sync.Map</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="syncmap-自带的安全-map"><code>sync.Map</code> 自带的安全 <code>map</code></h1>
-<blockquote>
-<p>源码位于 <code>${GOPATH}/src/sync/map.go</code>，值得注意的是<code>sync.Map</code>是<code>lazy load</code>,不需要初始化</p>
-</blockquote>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-              
-              <a class="muted-link mr-3" href="/tags/sync.map">
-                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-                  <path fill-rule="evenodd"
-                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-                  </path>
-                </svg>
-                sync.Map
-              </a>
-              
-              
-
-              Created
-              <relative-time datetime=" Thu, 14 Apr 2022 00:00:00 &#43;0000" class="no-wrap"
-                title=" Thu, 14 Apr 2022 00:00:00 &#43;0000">
-                Thu, 14 Apr 2022 00:00:00 &#43;0000
               </relative-time>
             </div>
           </div>

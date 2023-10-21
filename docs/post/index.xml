@@ -18,27 +18,74 @@ What&amp;rsquo;s makefile? </description>
     </item>
     
     <item>
-      <title>lex</title>
+      <title>Assembly Design</title>
+      <link>https://domyson.github.io/post/scriptc/5/</link>
+      <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/post/scriptc/5/</guid>
+      <description>序 </description>
+    </item>
+    
+    <item>
+      <title>AST 抽象语法树</title>
+      <link>https://domyson.github.io/post/scriptc/3/</link>
+      <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/post/scriptc/3/</guid>
+      <description>序 </description>
+    </item>
+    
+    <item>
+      <title>grammer</title>
       <link>https://domyson.github.io/post/scriptc/2/</link>
       <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
       
       <guid>https://domyson.github.io/post/scriptc/2/</guid>
-      <description>词法分析器 </description>
+      <description>序 </description>
     </item>
     
     <item>
-      <title>scriptc</title>
+      <title>lex</title>
       <link>https://domyson.github.io/post/scriptc/1/</link>
       <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
       
       <guid>https://domyson.github.io/post/scriptc/1/</guid>
-      <description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
-&lt;p&gt;早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 skt 写一门dsl，之前是用lua作为服务端的脚本端&lt;/p&gt;
-&lt;p&gt;看过很多源码，&lt;code&gt;python,lua&lt;/code&gt; 等,一直纠结于 stack based or register based。&lt;/p&gt;
-&lt;p&gt;名字没想好那就叫 &lt;code&gt;scriptc&lt;/code&gt;, 语法是简化版的 &lt;code&gt;c&lt;/code&gt;&lt;/p&gt;
+      <description>序 对于一个源码文件而言，里面的内容只是一个个字符，机器是无法识别的，而词法分析器的作用类似于转义器，将一个个字符拆成若干个有特定意义的词，而这一过程称为词法分析，此时它也不能被机器(或者这个虚拟机)识别
+词法分析器 Token,Keyword,界符，常数，运算符 token 以及 keyword是存在区别的，像token 可以是认为是一个此的描述，如:
+const int sum = 100; typedef struct my_struct{ int a ; unsigned int b; char *c; }; 学过语言的都知道，什么是语言关键字。
+typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解为一个词的代号，而keyword属于被包含关系，typedef,struct,int 它们属于keyword,因为它们是程序内部定义&amp;quot;词&amp;quot;，而my_struct则属于用于定义的，
+像类似于 +,-,*,/ 等都属于运算符
+其中 const int sum = 100; 中的100 则认为是一个常数.
+基本设计 首先我们为一个词定义一些token,如 typedef enum Token { EOF = 0, COMMENT, IDENT, __KEYWORD_BEGIN IF, ELSE, SWITCH, CASE, RETURN, // etc... __KEYWORD_END, __MATH_BEGIN Add, // + Sub, // - Mul, // * Quo, // / Rem, // % And, // &amp;amp; Or, // | __MATH_END }; 可以属于到几个特殊的定义 __XXX_BEING,__XXX_END 这是为了方便后续快速区分这些&amp;quot;词&amp;quot;是属于那些种类</description>
+    </item>
+    
+    <item>
+      <title>Register</title>
+      <link>https://domyson.github.io/post/scriptc/4/</link>
+      <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/post/scriptc/4/</guid>
+      <description>序 </description>
+    </item>
+    
+    <item>
+      <title>scriptc</title>
+      <link>https://domyson.github.io/post/scriptc/0/</link>
+      <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://domyson.github.io/post/scriptc/0/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;这篇文章将会是一个系列，更新会比源码慢，文档写的也不会写的很完全，名字暂定 &lt;code&gt;scriptc&lt;/code&gt;, 语法是简化版的 &lt;code&gt;c&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;设计缘由&#34;&gt;设计缘由&lt;/h1&gt;
+&lt;p&gt;早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 &lt;a href=&#34;https://domyson.github.io/post/skynet/skynet&#34;&gt;skynet-go&lt;/a&gt; 写一门dsl，现在是用lua作为服务的脚本端。&lt;/p&gt;
+&lt;p&gt;尽管它的性能是脚本语言中顶尖的，但是一些隐式写法并不能保证它的预期性能，如混合&lt;code&gt;table&lt;/code&gt;,过多的函数调用栈，字符串操作以及无类型系统。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;这篇文章将会是一个系列，更新会比源码慢，文档写的也不会完全&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+&lt;p&gt;类型系统有利有弊，但我个人的观点是宁愿多出30%的开发时间，而减少70%的bug。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;register-based-和-stack-based&#34;&gt;Register Based 和 Stack Based&lt;/h1&gt;
+&lt;p&gt;如&lt;code&gt;python,ruby,js,java&lt;/code&gt; 属于 &lt;code&gt;Stack Based&lt;/code&gt;, 而&lt;code&gt;lua&lt;/code&gt;则属于&lt;code&gt;Register Based&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;有许多文章都解释了它们之间的区别，一句话概括&lt;code&gt;Register Based&lt;/code&gt; 拥有更好的性能,因为它节省了很多入栈和出栈的操作，相应的它的实现会比&lt;code&gt;Stack Based&lt;/code&gt;复杂很多，而且&lt;code&gt;Register Based&lt;/code&gt;的指令于真实的汇编也很相似，它们的优化手段也是非常多的。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -47,7 +94,10 @@ What&amp;rsquo;s makefile? </description>
       <pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate>
       
       <guid>https://domyson.github.io/post/datatable/</guid>
-      <description>前言 datatable 使一个转换并加载excel数据表的库，它基于 kproto</description>
+      <description>前言 datatable 使一个转换并加载excel数据表的库，它基于 kproto
+原理 在解析原始 excel数据的时候会先生成两中中间数据
+metadata 元数据 它用来描述此数据单元的结构，类型以及尺寸
+values 数据 它以excel 行的形式存储真实数据 （数据表中未注释，并且有效的数据）</description>
     </item>
     
     <item>
@@ -170,15 +220,25 @@ PageHeap
       <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
       
       <guid>https://domyson.github.io/post/skynet/message/</guid>
-      <description>简介 skynet是基于消息的服务框架，它承担了其中消息的传递。
-服务的消息队列 存在两个版本，一个是基于go channel，另外一个基于无锁缓冲队列，后续有时间会单独解释。
-唯一的区别是 第二种方式需要手动控制调度调度规则，对服务参数的配置有更高的要求，正确的配置,内存以及性能会比 go channel的方式略高
+      <description>简介 skynet-go是基于actor 消息的服务框架，那么我们需要定义一套标准且高效的消息结构
+PID 一个 message 最重要的是消息地址，如果一个消息没有地址的话我们称为 dead-letter。 那么我们通过Pid 标定一个地址类型，
+它表示该服务的唯一id (本质上是一个uint64)的类习惯，它一定能确保在当前节点以及集群中唯一的。
+在服务本身未被关闭的时候，pid一定不会产生变动，但重新启动节点之后，它的值可能会发生改变，因为所有服务默认都是并发启动，除非手动指定了关系(这也是它与skynet的区别)，所以不要尝试保存这个pid
+一旦能确定了一个pid的话，就可以通过 skynet.send(pid,cmd,...) or skynet.call(ti,pid,cmd,...) 将其发送出去了。
+服务的消息队列 Actor 模型最重要的的概念是 mailbox,它代表了一个实体需要处理的队列容器，
+得益于go的简单性，可以使用 channel 来实现，但这种方式的实现性能不高，因为 channel 底层的结构使用的是互斥锁，
+所以我采用了mpsc 实现了无锁队列，性能更优于 channel
 TODO: 吞吐量对比
-消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它消耗服务投递的性能， 如果确实有这种需求，可以发送 struct{}{}
-接收 关键性参数只有三个，session,typ,以及 argument,
-session 主要的作用是用以区分这条消息是否大于0，若为真，则其值就是请求序列号，本节点保证唯一 typ 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义 argument 才是真实的数据，它可以是任意值，特别的，在lua中这个值是会被解构，在跨节点通讯这个值恒为 []byte，当不需要时记得 skynet.free 1.4.0 这个由runtime回收 异步消息 异步消息通过 skynet.send的方式进行投递，它只在乎这个消息有没有正确到达到对点服务，而不关心是否能被对点服务正确处理，返回一个 error
-同步消息 同步消息通过 skynet.call的方式进行投递，它会阻塞当前协程（goroutine 或者是 coroutine），它也返回一个错误，能解除此次阻塞只有两个条件，对点服务skynet.ret 或者达到了指定超时时间， 所以特别在远程通讯的时候要考虑到 i/o 的延时
-dead letter 这个很好理解，同erlang 主要是确保数据的一致性，保证重要的数据不会因为某个服务的意外退出而丢失了这些消息.</description>
+消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 struct{}{}。
+而且消息发送成功只能代表被 mailbox 接受了，不代表会被立即处理，而不会一定处理成功，所以需要正确理解这种方式。
+如果发送失败，那么一定失败，并返回一个错误
+接收 接受回调只包含5个关键参数 context,addr,session,mtype,argument
+context 其实就是创建服务用户指定的结构指针，用于数据传递和状态修改
+session 主要的作用是用以区分这条消息是否是同步请求， 如若大于0，则其值就是请求序列号,只需要通过 skynet.ret(msg) 返回即可
+mtype 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义，可作为rpc消息类型
+argument 才是真实的数据，它可以是任意值，特别的，在lua中这个值是会被解构，在跨节点通讯这个值恒为 []byte，当不需要时记得 skynet.free 1.4.0 这个由底层回收，用户不用关心
+异步消息 异步消息通过 skynet.send的方式进行投递，它只在乎这个消息有没有正确到达到对点服务，而不关心是否能被对点服务正确处理，并返回一个 error
+同步消息 同步消息通过 skynet.</description>
     </item>
     
     <item>
@@ -198,7 +258,7 @@ dead letter 这个很好理解，同erlang 主要是确保数据的一致性，�
 &lt;li&gt;&lt;a href=&#34;https://www.taptap.cn/app/215934&#34;&gt;我在民国淘古玩&lt;/a&gt; v.1.3.5&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;至于什么是&lt;code&gt;Actor&lt;/code&gt;是必要了解的概念，&lt;a href=&#34;https://github.com/cloudwu/skynet&#34;&gt;skynet&lt;/a&gt; 以及 &lt;code&gt;erlang&lt;/code&gt; 都是基于这种模式。&lt;/p&gt;
-&lt;p&gt;与&lt;code&gt;skynet-c&lt;/code&gt;的区别可见 &lt;a href=&#34;https://domyson.github.io/post/diff&#34;&gt;diff-skynet&lt;/a&gt;&lt;/p&gt;</description>
+&lt;p&gt;与&lt;code&gt;skynet-c&lt;/code&gt;的区别可见(暂未统计) &lt;a href=&#34;https://domyson.github.io/post/diff&#34;&gt;diff-skynet&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -208,17 +268,17 @@ dead letter 这个很好理解，同erlang 主要是确保数据的一致性，�
       
       <guid>https://domyson.github.io/post/skynet/sktpmd/</guid>
       <description>简介 sktpmd模块是skynet底层集群模块，它承担了skynet网络节点之间的通讯职能。全名为(skynet port managment daemon)
-架构 sktpmd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来
-sktpmd可以支持任意网络协议，如 tcp,udp 甚至是 unix
-当然一个好记的节点名称是非常有必要的，所以sktpmd也内置了一套非标准的本地 dns系统
-使用 sktpmd的启动也非常简单，无须任何代码，仅仅只需要在 skynet.toml 中配置一下即可，使用的时候跟节点内通讯无任何区别，但要求参数必须是 []byte 类型，参考 bbuf 如
-skynet.send(&amp;#34;host:port@name&amp;#34;,...) -- 通过域名或者地址+端口的形式和其他节点进行通讯 skynet.send(pid,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
+架构 sktpmd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来，1.6.0改变了个行为
+sktpmd可以支持任意网络协议，如 tcp,udp 甚至是 unix，后续规划可能由可靠udp实现，降低集群通讯延时并提供更好的性能，让出进程的 file-descriptor 给业务。
+当然一个好记的节点名称是非常有必要的，所以sktpmd也内置了一套非标准的本地 dns系统，方便名称和地址映射，甚至于你可以实现一套本地dns负载均衡，以达到负载均衡的目的
+使用 sktpmd的启动也非常简单，无须任何代码，仅仅只需要在 skynet.ini 中配置一下即可，使用的时候跟节点内通讯无任何区别。因为我已经作平了本地和节点之间的差异。内部均由kproto进行编码 如
+skynet.send(&amp;#34;host:port@name&amp;#34;,&amp;#34;rpc name&amp;#34;...) -- 通过域名或者地址+端口的形式和其他节点进行通讯 skynet.send(pid, &amp;#34;rpc name&amp;#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
 基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，
 通过配置tun的规则开启多个，则可以实现业务拆分。
 2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&amp;quot;n1.n2.n3@name&amp;quot;)
 服务发现 sktpmd 提供了一套服务发现机制，但其运作原理是不同于 etcd 或者 consul,它本身是一个惰性发现，取决于第一次调用的地址是否正确返回。
 你不需要知道它是如何运作的，你只需要知道在特定时间内它是有效的即可，那怕其中出了一些意外，无非只是浪费了两次通讯而已。
-sktpmd整个发现流程是基于 gossip 算法来发现的,但一些api依然可以主动触发，v1.5.0 这个模块将保留，因为集群模式的逻辑改变了
+sktpmd整个发现流程是基于 gossip 算法来发现的,但一些api依然可以主动触发，v1.6.0 这个模块将保留，因为集群模式的逻辑改变了
 v1.6.0集群建立 v1.5.0 之前大家都是双向链接，但考虑到一个数据服务器，如 dns server,conf server 等，大部分是 request/response 模式，复用连接的收益很大，所以去除之前的一些设计。
 相应的，将会带来一套全新的集群api，等完成之后将会在这补充
 网络底层 参考 Go协程的思考,在linux下，使用了 epoll。所以尽量部署到 linux 下以发挥更好的性能</description>
@@ -230,10 +290,10 @@ v1.6.0集群建立 v1.5.0 之前大家都是双向链接，但考虑到一个数
       <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
       
       <guid>https://domyson.github.io/post/skynet/timer/</guid>
-      <description>简介 timer 模块是 skynet 内置的一个定时模块，使用了小根堆实现。
-apis skynet.sleep(d) 这个函数将会挂起当前协程，在lua和 go中将会有不同的表现，取决于两者底层之间的区别
-skynet.timeout(d,fn) 注册一个到期时间，而之后将会触发这个函数，特别注意，此函数的执行协程同当前调用的协程，简单来说就是并不会造成资源竞争，但是需要注意一下 aba 问题
-QA 为什么不提供循环计时器？
+      <description>简介 timer 模块是 skynet-go 全局的一个计时系统，内部数据结构使用了小根堆实现。
+原理 本质上是开启一个单独的协程执行一个计时循环，通过 skynet.timeout(addr,ti,cb) 将调用服务的pid 传入进去，等待以一个特殊的消息指令EV_TIMEOUT 通知到对应服务，所以它会具有一定的延时性，若该服务本身处理时间过长，导致mailbox消息积压过多，那么这个指令将会排队直到被处理，
+需要注意的是，超时消息触发的时间没有问题，而是处理的时候有延时性
+对lua的支持 QA 为什么不提供循环计时器？
 可以使用闭包来实现循环
 为什么不提供取消？
 可以使用标记位来控制逻辑
@@ -242,50 +302,21 @@ QA 为什么不提供循环计时器？
     </item>
     
     <item>
-      <title>version change</title>
-      <link>https://domyson.github.io/post/skynet/version/</link>
-      <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://domyson.github.io/post/skynet/version/</guid>
-      <description>v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 skynet.send(string,any) 会产生两次搜索的情况 Added skynet-lua 增加 skynet.trace() 用以输出当前堆栈 skynet-lua 增加 check_version() 函数，校验skynet版本 v1.1.2 Fixed 修复了kill函数重入导致越界的问题
-修复http 因为判断发送失败的错误，现在如果发送失败返回404
-Mod skynet.send(dst,...) 现在传入参数可以是大于2个，当等于2，与之前无区别，当大于2则会转为table skynet.send() 现在不返回 boolean，而是返回一个number,为0则认为成功 kill 函数现在会立即退出当前服务 killed 事件不会被传入了 v1.2.0 Mod 取消了事件投递到达服务，会给出一个字符串类型的消息发送这类型，用以区别数据的来源位置以及类型
-与上述相关的问题，skynet.send(dest,...) 变为了 skynet.send(dest,typ,...) 现第二参数输入你自己的类型，以便于接收者区分，不要和服务同名，那是没有任何意义的 主要是为了确定一种数据的类型，而非一系列服务，本身服务和数据类型并非是一对一的关系
-skynet.start -&amp;gt; skynet.uptime
-v1.2.1 Mod 现在 skynet.warn,skynet.error,skynet.trace,skynet.debug 支持传入任意类型参数,优化栈分配 Fixed 修复了ucpd 缓冲未释放的问题 Add 增加 skynet.call skynet.reply 是一个组合调用。否则会造成协程被挂起 v1.2.2 Add 增加 bbuf 协议解析，通过 bbuf = require(&amp;quot;skynet.bbuf&amp;quot;) 引用 bbuf errno = bbuf.load(path) 解析文件描述 bytes(userdata),errno = bbuf.</description>
-    </item>
-    
-    <item>
       <title>allocator</title>
       <link>https://domyson.github.io/post/skynet/allocator/</link>
       <pubDate>Thu, 21 Apr 2022 00:00:00 +0000</pubDate>
       
       <guid>https://domyson.github.io/post/skynet/allocator/</guid>
-      <description>简介 alloctor 模块主要是为了减少GC而开发。现支持两套分配规则
-基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet中它确实有更优秀的性能，因为它直接分配了一块共用内存，所以不会产生任何GC和真实分配, ，但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。
-哪怕内置的Debug模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 Debug 只能定位到存在 memory-leak，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失
+      <description>简介 手动管理内存永远是最有效率的办法。
+基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向runtime申请内存，将会导致内存占用过高。
+而且内置的Debug模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 Debug 只能定位到存在 memory-leak，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失
 slab-allocator 对业务开发很不友好，最终只是将它保留作为可选项，是否使用取决于业务实际需要，因为它违背了 skynet 的设计初衷。
-如果需要使用可以在编译指令中指明slab
-2020-10-18 阅读sync.Pool源码，看看能不能够和指定的P进行绑定，减少锁
-基于 sync.Pool 的分段内存分配器 将不同size的buffer放入不同的池中，按需进行分配，减少race的开销
-这个方法虽然简单，但是性能是低于 slab-allocator。
-但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是skynet默认使用的策略。
+基于 sync.Pool 的分段内存分配器 将不同size的buffer放入不同的池中，按需进行分配，减少race的开销，这个方法虽然简单，但是性能是低于 slab-allocator。
+但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是skynet默认使用的策略。如果需要使用可以在编译指令中指明slab
 API skynet.alloc(n) 用以分配指定大小的内存块
 skynet.realloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存
 skynet.append(buf,data) 简化了 realloc 和 copy 的操作。
 skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址是否属于当前段</description>
-    </item>
-    
-    <item>
-      <title>pid</title>
-      <link>https://domyson.github.io/post/skynet/pid/</link>
-      <pubDate>Thu, 21 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://domyson.github.io/post/skynet/pid/</guid>
-      <description>PID Pid 是当前服务的唯一id，它确保在当前节点以及集群中唯一。
-但重新启动节点之后，它的值可能会发生改变，所以不要尝试保存它，但可以确定的是集群中它依然是唯一的
-作用 表示某一节点的某一的服务的地址，它最终输出是一串 uint64 的值。
-可以通过 skynet.send(dst,...) skynet.call(ti,dst,...)来使用它，将消息发送出去</description>
     </item>
     
     <item>
@@ -424,7 +455,7 @@ ECT2，ASTC 但需要设备支持 OpenGL ES3.0
 LOD unity内置的一项技术，主要是根据目标离相机的距离来断定使用何种精度的模型，减少顶点数的绘制，但代价就是要牺牲部分内存
 Occlusion culling 遮挡剔除 遮挡剔除是用来消除躲在其他物件后面看不到的物件，这代表资源不会浪费在计算那些看不到的顶点上，进而提升性能
 batching dynamic batching 将一些足够小的网格，在CPU上转换它们的顶点，将许多相似的顶点组合在一起，并一次性绘制它们。 无论静态还是动态合批都要求使用相同的材质，动态合批有以下限制：
-+ 如果GameObjects在Transform上包含镜像，则不会对其进行动态合批处理 + 使用多个pass的shader不会被动态合批处理 + 使用不同的Material实例会导致GameObjects不能一起批处理，即使它们基本相同。 + [官方25个不能动批的情况](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FUnity-Technologies%2FBatchBreakingCause) static batching 静态合批是将静态（不移动）GameObjects组合成大网格，然后进行绘制。静态合批使用比较简单，PlayerSettings中开启static batching，然后对需要静态合批物体的Static打钩即可，unity会自动合并被标记为static的对象，前提它们共享相同的材质，并且不移动，被标记为static的物体不能在游戏中移动，旋转或缩放。但是静态批处理需要额外的内存来存储合并的几何体。注意如果多个GameObject在静态批处理之前共享相同的几何体，则会在编辑器或运行时为每个GameObject创建几何体的副本，这会增大内存的开销
++ 如果GameObjects在Transform上包含镜像，则不会对其进行动态合批处理+ 使用多个pass的shader不会被动态合批处理+ 使用不同的Material实例会导致GameObjects不能一起批处理，即使它们基本相同。+ [官方25个不能动批的情况](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FUnity-Technologies%2FBatchBreakingCause)static batching 静态合批是将静态（不移动）GameObjects组合成大网格，然后进行绘制。静态合批使用比较简单，PlayerSettings中开启static batching，然后对需要静态合批物体的Static打钩即可，unity会自动合并被标记为static的对象，前提它们共享相同的材质，并且不移动，被标记为static的物体不能在游戏中移动，旋转或缩放。但是静态批处理需要额外的内存来存储合并的几何体。注意如果多个GameObject在静态批处理之前共享相同的几何体，则会在编辑器或运行时为每个GameObject创建几何体的副本，这会增大内存的开销
 GPU Instancing 使用GPU Instancing可以一次渲染(render)相同网格的多个副本，仅使用少量DrawCalls。在渲染诸如建筑、树木、草等在场景中重复出现的事物时，GPU Instancing很有用。
 每次draw call，GPU Instancing只渲染相同(identical )的网格，但是每个实例(instance)可以有不同的参数(例如，color或scale)，以增加变化(variation)，减少重复的出现。
 GPU Instancing可以减少每个场景draw calls次数。这显著提升了渲染性能。
@@ -551,10 +582,10 @@ tls 可以使用对称加密和非对称加密。
       <description>Module Golang 从1.11版本开始支持官方自带的依赖管理模块。根据项目路径中的 go.mod 文件来建立依赖管理。
 依赖添加 通过 import 自动添加到 go.mod 文件中
 import &amp;#34;github.com/xxx/yyy&amp;#34; 编辑 go.mod 文件
-module xxx go 1.13.4 require( xxxx v0.0.0 yyyy v1.1.1 ) 依赖升级 通过 go 命令
+module xxxgo 1.13.4require(xxxx v0.0.0yyyy v1.1.1) 依赖升级 通过 go 命令
 #查看gin的所有版本 go list -m -versions github.com/gin-gonic/gin #输出所有gin的版本 github.com/gin-gonic/gin v1.1.1 v1.1.2 v1.1.3 v1.1.4 v1.3.0 v1.4.0 v1.5.0 #下载所需依赖 go mod tidy 直接编辑 go.mod 文件
 删除未使用依赖项 go mod tidy
-使用本地包 /* go.mod文件 replace boost-go v0.0.1 =&amp;gt; ../boost-go */ </description>
+使用本地包 /*go.mod文件replace boost-go v0.0.1 =&amp;gt; ../boost-go*/ </description>
     </item>
     
     <item>

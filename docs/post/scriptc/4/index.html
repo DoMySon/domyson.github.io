@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>version change - 满船清梦压星河</title>
+    <title>Register - 满船清梦压星河</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -18,27 +18,17 @@
 
     
     <meta name="description"
-  content="v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 skynet.send(string,any) 会产生两次搜索的情况 Added skynet-lua 增加 skynet.trace() 用以输出当前堆栈 skynet-lua 增加 check_version() 函数，校验skynet版本 v1.1.2 Fixed 修复了kill函数重入导致越界的问题
-修复http 因为判断发送失败的错误，现在如果发送失败返回404
-Mod skynet.send(dst,...) 现在传入参数可以是大于2个，当等于2，与之前无区别，当大于2则会转为table skynet.send() 现在不返回 boolean，而是返回一个number,为0则认为成功 kill 函数现在会立即退出当前服务 killed 事件不会被传入了 v1.2.0 Mod 取消了事件投递到达服务，会给出一个字符串类型的消息发送这类型，用以区别数据的来源位置以及类型
-与上述相关的问题，skynet.send(dest,...) 变为了 skynet.send(dest,typ,...) 现第二参数输入你自己的类型，以便于接收者区分，不要和服务同名，那是没有任何意义的 主要是为了确定一种数据的类型，而非一系列服务，本身服务和数据类型并非是一对一的关系
-skynet.start -&amp;gt; skynet.uptime
-v1.2.1 Mod 现在 skynet.warn,skynet.error,skynet.trace,skynet.debug 支持传入任意类型参数,优化栈分配 Fixed 修复了ucpd 缓冲未释放的问题 Add 增加 skynet.call skynet.reply 是一个组合调用。否则会造成协程被挂起 v1.2.2 Add 增加 bbuf 协议解析，通过 bbuf = require(&amp;quot;skynet.bbuf&amp;quot;) 引用 bbuf errno = bbuf.load(path) 解析文件描述 bytes(userdata),errno = bbuf." />
+  content="序 " />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://domyson.github.io/post/skynet/version/" />
+<link rel="canonical" href="https://domyson.github.io/post/scriptc/4/" />
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="version change - 满船清梦压星河" />
+<meta name="twitter:title" content="Register - 满船清梦压星河" />
 <meta name="twitter:description"
-  content="v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 skynet.send(string,any) 会产生两次搜索的情况 Added skynet-lua 增加 skynet.trace() 用以输出当前堆栈 skynet-lua 增加 check_version() 函数，校验skynet版本 v1.1.2 Fixed 修复了kill函数重入导致越界的问题
-修复http 因为判断发送失败的错误，现在如果发送失败返回404
-Mod skynet.send(dst,...) 现在传入参数可以是大于2个，当等于2，与之前无区别，当大于2则会转为table skynet.send() 现在不返回 boolean，而是返回一个number,为0则认为成功 kill 函数现在会立即退出当前服务 killed 事件不会被传入了 v1.2.0 Mod 取消了事件投递到达服务，会给出一个字符串类型的消息发送这类型，用以区别数据的来源位置以及类型
-与上述相关的问题，skynet.send(dest,...) 变为了 skynet.send(dest,typ,...) 现第二参数输入你自己的类型，以便于接收者区分，不要和服务同名，那是没有任何意义的 主要是为了确定一种数据的类型，而非一系列服务，本身服务和数据类型并非是一对一的关系
-skynet.start -&amp;gt; skynet.uptime
-v1.2.1 Mod 现在 skynet.warn,skynet.error,skynet.trace,skynet.debug 支持传入任意类型参数,优化栈分配 Fixed 修复了ucpd 缓冲未释放的问题 Add 增加 skynet.call skynet.reply 是一个组合调用。否则会造成协程被挂起 v1.2.2 Add 增加 bbuf 协议解析，通过 bbuf = require(&amp;quot;skynet.bbuf&amp;quot;) 引用 bbuf errno = bbuf.load(path) 解析文件描述 bytes(userdata),errno = bbuf." />
+  content="序 " />
 <meta name="twitter:site" content="https://domyson.github.io" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -46,22 +36,17 @@ v1.2.1 Mod 现在 skynet.warn,skynet.error,skynet.trace,skynet.debug 支持传�
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="version change - 满船清梦压星河">
+<meta property="og:title" content="Register - 满船清梦压星河">
 <meta property="og:description"
-  content="v1.1.1 Fixed 修复了http一个原子锁问题，但在高并发下可能会出现失败的情况 修复了 skynet.send(string,any) 会产生两次搜索的情况 Added skynet-lua 增加 skynet.trace() 用以输出当前堆栈 skynet-lua 增加 check_version() 函数，校验skynet版本 v1.1.2 Fixed 修复了kill函数重入导致越界的问题
-修复http 因为判断发送失败的错误，现在如果发送失败返回404
-Mod skynet.send(dst,...) 现在传入参数可以是大于2个，当等于2，与之前无区别，当大于2则会转为table skynet.send() 现在不返回 boolean，而是返回一个number,为0则认为成功 kill 函数现在会立即退出当前服务 killed 事件不会被传入了 v1.2.0 Mod 取消了事件投递到达服务，会给出一个字符串类型的消息发送这类型，用以区别数据的来源位置以及类型
-与上述相关的问题，skynet.send(dest,...) 变为了 skynet.send(dest,typ,...) 现第二参数输入你自己的类型，以便于接收者区分，不要和服务同名，那是没有任何意义的 主要是为了确定一种数据的类型，而非一系列服务，本身服务和数据类型并非是一对一的关系
-skynet.start -&amp;gt; skynet.uptime
-v1.2.1 Mod 现在 skynet.warn,skynet.error,skynet.trace,skynet.debug 支持传入任意类型参数,优化栈分配 Fixed 修复了ucpd 缓冲未释放的问题 Add 增加 skynet.call skynet.reply 是一个组合调用。否则会造成协程被挂起 v1.2.2 Add 增加 bbuf 协议解析，通过 bbuf = require(&amp;quot;skynet.bbuf&amp;quot;) 引用 bbuf errno = bbuf.load(path) 解析文件描述 bytes(userdata),errno = bbuf." />
-<meta property="og:url" content="https://domyson.github.io/post/skynet/version/" />
-<meta property="og:site_name" content="version change" />
+  content="序 " />
+<meta property="og:url" content="https://domyson.github.io/post/scriptc/4/" />
+<meta property="og:site_name" content="Register" />
 <meta property="og:image"
   content="https://domyson.github.io">
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
 
-<meta property="article:published_time" content="2022-04-30 00:00:00 &#43;0000 UTC" />
+<meta property="article:published_time" content="2023-10-04 00:00:00 &#43;0000 UTC" />
 
 
 
@@ -166,18 +151,18 @@ v1.2.1 Mod 现在 skynet.warn,skynet.error,skynet.trace,skynet.debug 支持传�
                   <span class="author">
                     <a href="https://domyson.github.io">Treasure</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://domyson.github.io/post/skynet/version/">version change</a></strong>
+                      href="https://domyson.github.io/post/scriptc/4/">Register</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Sat, 30 Apr 2022 00:00:00 &#43;0000"
+                  Created <relative-time datetime="Wed, 04 Oct 2023 00:00:00 &#43;0000"
                     class="no-wrap">
-                    Sat, 30 Apr 2022 00:00:00 &#43;0000</relative-time>
+                    Wed, 04 Oct 2023 00:00:00 &#43;0000</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 18 Oct 2023 11:19:03 &#43;0000"
+                  Modified <relative-time datetime="Tue, 24 Oct 2023 21:38:12 &#43;0800"
                     class="no-wrap">
-                    Wed, 18 Oct 2023 11:19:03 &#43;0000</relative-time>
+                    Tue, 24 Oct 2023 21:38:12 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -207,11 +192,22 @@ v1.2.1 Mod 现在 skynet.warn,skynet.error,skynet.trace,skynet.debug 支持传�
                         </div>
                       </div>
                     </details-menu>
-                      681 Words
+                      1 Words
                     
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
+                    
+                    
+                    <a class="muted-link mr-3" href="/tags/">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      
+                    </a>
+                    
                     
                   </div>
                 </div>
@@ -219,142 +215,7 @@ v1.2.1 Mod 现在 skynet.warn,skynet.error,skynet.trace,skynet.debug 支持传�
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><h1 id="v111">v1.1.1</h1>
-<h2 id="fixed">Fixed</h2>
-<ul>
-<li>修复了<code>http</code>一个原子锁问题，但在高并发下可能会出现失败的情况</li>
-<li>修复了 <code>skynet.send(string,any)</code> 会产生两次搜索的情况</li>
-</ul>
-<h2 id="added">Added</h2>
-<ul>
-<li>skynet-lua 增加 <code>skynet.trace()</code> 用以输出当前堆栈</li>
-<li>skynet-lua 增加 <code>check_version()</code> 函数，校验skynet版本</li>
-</ul>
-<h1 id="v112">v1.1.2</h1>
-<h2 id="fixed-1">Fixed</h2>
-<ul>
-<li>
-<p>修复了<code>kill</code>函数重入导致越界的问题</p>
-</li>
-<li>
-<p>修复<code>http</code> 因为判断发送失败的错误，现在如果发送失败返回404</p>
-</li>
-</ul>
-<h2 id="mod">Mod</h2>
-<ul>
-<li><code>skynet.send(dst,...)</code> 现在传入参数可以是大于2个，当等于2，与之前无区别，当大于2则会转为<code>table</code></li>
-<li><code>skynet.send()</code> 现在不返回 <code>boolean</code>，而是返回一个<code>number</code>,为<code>0</code>则认为成功</li>
-<li><code>kill</code> 函数现在会立即退出当前服务</li>
-<li><code>killed</code> 事件不会被传入了</li>
-</ul>
-<h1 id="v120">v1.2.0</h1>
-<h2 id="mod-1">Mod</h2>
-<ul>
-<li>
-<p>取消了事件投递到达服务，会给出一个字符串类型的消息发送这类型，用以区别数据的来源位置以及类型</p>
-</li>
-<li>
-<p>与上述相关的问题，<code>skynet.send(dest,...)</code> 变为了 <code>skynet.send(dest,typ,...)</code> 现第二参数输入你自己的类型，以便于接收者区分，不要和服务同名，那是没有任何意义的
-主要是为了确定一种数据的类型，而非一系列服务，本身服务和数据类型并非是一对一的关系</p>
-</li>
-<li>
-<p><code>skynet.start</code> -&gt; <code>skynet.uptime</code></p>
-</li>
-</ul>
-<h1 id="v121">v1.2.1</h1>
-<h2 id="mod-2">Mod</h2>
-<ul>
-<li>现在 <code>skynet.warn</code>,<code>skynet.error</code>,<code>skynet.trace</code>,<code>skynet.debug</code> 支持传入任意类型参数,优化栈分配</li>
-</ul>
-<h2 id="fixed-2">Fixed</h2>
-<ul>
-<li>修复了<code>ucpd</code> 缓冲未释放的问题</li>
-</ul>
-<h2 id="add">Add</h2>
-<ul>
-<li>增加 <code>skynet.call</code> <code>skynet.reply</code> 是一个组合调用。否则会造成协程被挂起</li>
-</ul>
-<h1 id="v122">v1.2.2</h1>
-<h2 id="add-1">Add</h2>
-<ul>
-<li>增加 <code>bbuf</code> 协议解析，通过 <code>bbuf = require(&quot;skynet.bbuf&quot;)</code> 引用</li>
-<li><code>bbuf</code>
-<ul>
-<li><code>errno = bbuf.load(path)</code> 解析文件描述</li>
-<li><code>bytes(userdata),errno = bbuf.marshal(string,tab)</code> 按指定文件编码<code>table</code></li>
-<li><code>errno = bbuf.unmarshal(string,bytes(userdata),tab)</code> 按指定文件解码 <code>bytes</code> 解码为 <code>table</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="fixed-3">Fixed</h2>
-<ul>
-<li>修复<code>skynet.call</code> 的一个状态判定问题</li>
-</ul>
-<h1 id="v123">v1.2.3</h1>
-<h2 id="fixed-4">Fixed</h2>
-<ul>
-<li>
-<p>修复<code>http</code>的一个判断bug</p>
-</li>
-<li>
-<p>优化<code>skynetcmd</code>传输逻辑，以及连接逻辑</p>
-</li>
-<li>
-<p><code>skynet.call</code>,<code>skynet.send</code> 现在支持远程调用</p>
-</li>
-</ul>
-<h1 id="v124">v1.2.4</h1>
-<h2 id="fixed-5">Fixed</h2>
-<ul>
-<li>
-<p>集群减少了每条连接 <code>64byte</code> 的额外分配</p>
-</li>
-<li>
-<p>缩减了调用方法深度</p>
-</li>
-<li>
-<p>减少了类型断言的次数</p>
-</li>
-</ul>
-<p>#v1.3.1</p>
-<p>todo</p>
-<p>#1.3.6</p>
-<p>todo</p>
-<h1 id="140">1.4.0</h1>
-<h2 id="add-2">ADD</h2>
-<ul>
-<li>
-<p>ini 解析器</p>
-</li>
-<li>
-<p>lua协程池</p>
-</li>
-<li>
-<p>lua-socket beta版本</p>
-</li>
-</ul>
-<h2 id="fixed-6">FIXED</h2>
-<ul>
-<li>修复 <code>skynet.call()</code> 会造成当前虚拟机全部阻塞的bug</li>
-</ul>
-<h2 id="modify">Modify</h2>
-<ul>
-<li>
-<p>自动对消息类型分类</p>
-</li>
-<li>
-<p>重构http</p>
-</li>
-</ul>
-<h2 id="remove">Remove</h2>
-<ul>
-<li>
-<p>删除 Alive(pid)</p>
-</li>
-<li>
-<p>删除 <code>check_version()</code></p>
-</li>
-</ul>
+                <article class="markdown-body entry-content container-lg"><h1 id="序">序</h1>
 </article>
               </div>
             </div>

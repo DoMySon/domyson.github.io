@@ -18,10 +18,10 @@
 
     
     <meta name="description"
-  content="简介 timer 模块是 skynet 内置的一个定时模块，使用了小根堆实现。
-apis skynet.sleep(d) 这个函数将会挂起当前协程，在lua和 go中将会有不同的表现，取决于两者底层之间的区别
-skynet.timeout(d,fn) 注册一个到期时间，而之后将会触发这个函数，特别注意，此函数的执行协程同当前调用的协程，简单来说就是并不会造成资源竞争，但是需要注意一下 aba 问题
-QA 为什么不提供循环计时器？
+  content="简介 timer 模块是 skynet-go 全局的一个计时系统，内部数据结构使用了小根堆实现。
+原理 本质上是开启一个单独的协程执行一个计时循环，通过 skynet.timeout(addr,ti,cb) 将调用服务的pid 传入进去，等待以一个特殊的消息指令EV_TIMEOUT 通知到对应服务，所以它会具有一定的延时性，若该服务本身处理时间过长，导致mailbox消息积压过多，那么这个指令将会排队直到被处理，
+需要注意的是，超时消息触发的时间没有问题，而是处理的时候有延时性
+对lua的支持 QA 为什么不提供循环计时器？
 可以使用闭包来实现循环
 为什么不提供取消？
 可以使用标记位来控制逻辑
@@ -36,10 +36,10 @@ QA 为什么不提供循环计时器？
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="timer - 满船清梦压星河" />
 <meta name="twitter:description"
-  content="简介 timer 模块是 skynet 内置的一个定时模块，使用了小根堆实现。
-apis skynet.sleep(d) 这个函数将会挂起当前协程，在lua和 go中将会有不同的表现，取决于两者底层之间的区别
-skynet.timeout(d,fn) 注册一个到期时间，而之后将会触发这个函数，特别注意，此函数的执行协程同当前调用的协程，简单来说就是并不会造成资源竞争，但是需要注意一下 aba 问题
-QA 为什么不提供循环计时器？
+  content="简介 timer 模块是 skynet-go 全局的一个计时系统，内部数据结构使用了小根堆实现。
+原理 本质上是开启一个单独的协程执行一个计时循环，通过 skynet.timeout(addr,ti,cb) 将调用服务的pid 传入进去，等待以一个特殊的消息指令EV_TIMEOUT 通知到对应服务，所以它会具有一定的延时性，若该服务本身处理时间过长，导致mailbox消息积压过多，那么这个指令将会排队直到被处理，
+需要注意的是，超时消息触发的时间没有问题，而是处理的时候有延时性
+对lua的支持 QA 为什么不提供循环计时器？
 可以使用闭包来实现循环
 为什么不提供取消？
 可以使用标记位来控制逻辑
@@ -54,10 +54,10 @@ QA 为什么不提供循环计时器？
 <meta property="og:type" content="article" />
 <meta property="og:title" content="timer - 满船清梦压星河">
 <meta property="og:description"
-  content="简介 timer 模块是 skynet 内置的一个定时模块，使用了小根堆实现。
-apis skynet.sleep(d) 这个函数将会挂起当前协程，在lua和 go中将会有不同的表现，取决于两者底层之间的区别
-skynet.timeout(d,fn) 注册一个到期时间，而之后将会触发这个函数，特别注意，此函数的执行协程同当前调用的协程，简单来说就是并不会造成资源竞争，但是需要注意一下 aba 问题
-QA 为什么不提供循环计时器？
+  content="简介 timer 模块是 skynet-go 全局的一个计时系统，内部数据结构使用了小根堆实现。
+原理 本质上是开启一个单独的协程执行一个计时循环，通过 skynet.timeout(addr,ti,cb) 将调用服务的pid 传入进去，等待以一个特殊的消息指令EV_TIMEOUT 通知到对应服务，所以它会具有一定的延时性，若该服务本身处理时间过长，导致mailbox消息积压过多，那么这个指令将会排队直到被处理，
+需要注意的是，超时消息触发的时间没有问题，而是处理的时候有延时性
+对lua的支持 QA 为什么不提供循环计时器？
 可以使用闭包来实现循环
 为什么不提供取消？
 可以使用标记位来控制逻辑
@@ -184,9 +184,9 @@ QA 为什么不提供循环计时器？
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 18 Oct 2023 11:19:03 &#43;0000"
+                  Modified <relative-time datetime="Tue, 24 Oct 2023 20:51:33 &#43;0800"
                     class="no-wrap">
-                    Wed, 18 Oct 2023 11:19:03 &#43;0000</relative-time>
+                    Tue, 24 Oct 2023 20:51:33 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -216,7 +216,7 @@ QA 为什么不提供循环计时器？
                         </div>
                       </div>
                     </details-menu>
-                      250 Words
+                      309 Words
                     
 
                   </div>
@@ -229,10 +229,13 @@ QA 为什么不提供循环计时器？
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="简介">简介</h1>
-<p><code>timer</code> 模块是 <code>skynet</code> 内置的一个定时模块，使用了小根堆实现。</p>
-<h1 id="apis">apis</h1>
-<p><code>skynet.sleep(d)</code> 这个函数将会挂起当前协程，在<code>lua</code>和 <code>go</code>中将会有不同的表现，取决于两者底层之间的区别</p>
-<p><code>skynet.timeout(d,fn)</code> 注册一个到期时间，而之后将会触发这个函数，特别注意，此函数的执行协程同当前调用的协程，简单来说就是并不会造成资源竞争，但是需要注意一下 <code>aba</code> 问题</p>
+<p><code>timer</code> 模块是 <code>skynet-go</code> 全局的一个计时系统，内部数据结构使用了小根堆实现。</p>
+<h1 id="原理">原理</h1>
+<p>本质上是开启一个单独的协程执行一个计时循环，通过 <code>skynet.timeout(addr,ti,cb)</code> 将调用服务的<code>pid</code> 传入进去，等待以一个特殊的消息指令<code>EV_TIMEOUT</code> 通知到对应服务，所以它会具有一定的延时性，若该服务本身处理时间过长，导致<code>mailbox</code>消息积压过多，那么这个指令将会排队直到被处理，</p>
+<blockquote>
+<p>需要注意的是，超时消息触发的时间没有问题，而是处理的时候有延时性</p>
+</blockquote>
+<h2 id="对lua的支持">对lua的支持</h2>
 <h1 id="qa">QA</h1>
 <ol>
 <li>

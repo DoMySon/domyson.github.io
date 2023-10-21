@@ -165,7 +165,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">48</span>
+              <span class="Counter">50</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -452,7 +452,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">48</span>
+      <span class="Counter ">50</span>
     </a>
   </nav>
 </div>
@@ -557,20 +557,25 @@
                       d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
                     </path>
                   </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://domyson.github.io/post/scriptc/1/">
+                  <a class="text-bold flex-auto min-width-0" href="https://domyson.github.io/post/scriptc/0/">
                     <span class="repo" title="scriptc">scriptc</span>
                   </a>
                 </div>
 
 
                 <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <h1 id="前言">前言</h1>
-<p>早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 skt 写一门dsl，之前是用lua作为服务端的脚本端</p>
-<p>看过很多源码，<code>python,lua</code> 等,一直纠结于 stack based or register based。</p>
-<p>名字没想好那就叫 <code>scriptc</code>, 语法是简化版的 <code>c</code></p>
-<blockquote>
-<p>这篇文章将会是一个系列，更新会比源码慢，文档写的也不会完全</p>
+                  <blockquote>
+<p>这篇文章将会是一个系列，更新会比源码慢，文档写的也不会写的很完全，名字暂定 <code>scriptc</code>, 语法是简化版的 <code>c</code></p>
 </blockquote>
+<h1 id="设计缘由">设计缘由</h1>
+<p>早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 <a href="/post/skynet/skynet">skynet-go</a> 写一门dsl，现在是用lua作为服务的脚本端。</p>
+<p>尽管它的性能是脚本语言中顶尖的，但是一些隐式写法并不能保证它的预期性能，如混合<code>table</code>,过多的函数调用栈，字符串操作以及无类型系统。</p>
+<blockquote>
+<p>类型系统有利有弊，但我个人的观点是宁愿多出30%的开发时间，而减少70%的bug。</p>
+</blockquote>
+<h1 id="register-based-和-stack-based">Register Based 和 Stack Based</h1>
+<p>如<code>python,ruby,js,java</code> 属于 <code>Stack Based</code>, 而<code>lua</code>则属于<code>Register Based</code>.</p>
+<p>有许多文章都解释了它们之间的区别，一句话概括<code>Register Based</code> 拥有更好的性能,因为它节省了很多入栈和出栈的操作，相应的它的实现会比<code>Stack Based</code>复杂很多，而且<code>Register Based</code>的指令于真实的汇编也很相似，它们的优化手段也是非常多的。</p>
                 </div>
 
                 <p class="mb-0 f6 text-gray">
@@ -700,7 +705,7 @@
 <li><a href="https://www.taptap.cn/app/215934">我在民国淘古玩</a> v.1.3.5</li>
 </ul>
 <p>至于什么是<code>Actor</code>是必要了解的概念，<a href="https://github.com/cloudwu/skynet">skynet</a> 以及 <code>erlang</code> 都是基于这种模式。</p>
-<p>与<code>skynet-c</code>的区别可见 <a href="/post/diff">diff-skynet</a></p>
+<p>与<code>skynet-c</code>的区别可见(暂未统计) <a href="/post/diff">diff-skynet</a></p>
                 </div>
 
                 <p class="mb-0 f6 text-gray">
@@ -723,14 +728,38 @@
 },
 
 {
-  "title": "lex",
+  "title": "Assembly%20Design",
+  "link": "https://domyson.github.io/post/scriptc/5/",
+  "publishDate": "2023-10-04%2000:00:00"
+},
+
+{
+  "title": "AST%20%e6%8a%bd%e8%b1%a1%e8%af%ad%e6%b3%95%e6%a0%91",
+  "link": "https://domyson.github.io/post/scriptc/3/",
+  "publishDate": "2023-10-04%2000:00:00"
+},
+
+{
+  "title": "grammer",
   "link": "https://domyson.github.io/post/scriptc/2/",
   "publishDate": "2023-10-04%2000:00:00"
 },
 
 {
-  "title": "scriptc",
+  "title": "lex",
   "link": "https://domyson.github.io/post/scriptc/1/",
+  "publishDate": "2023-10-04%2000:00:00"
+},
+
+{
+  "title": "Register",
+  "link": "https://domyson.github.io/post/scriptc/4/",
+  "publishDate": "2023-10-04%2000:00:00"
+},
+
+{
+  "title": "scriptc",
+  "link": "https://domyson.github.io/post/scriptc/0/",
   "publishDate": "2023-10-04%2000:00:00"
 },
 
@@ -807,20 +836,8 @@
 },
 
 {
-  "title": "version%20change",
-  "link": "https://domyson.github.io/post/skynet/version/",
-  "publishDate": "2022-04-30%2000:00:00"
-},
-
-{
   "title": "allocator",
   "link": "https://domyson.github.io/post/skynet/allocator/",
-  "publishDate": "2022-04-21%2000:00:00"
-},
-
-{
-  "title": "pid",
-  "link": "https://domyson.github.io/post/skynet/pid/",
   "publishDate": "2022-04-21%2000:00:00"
 },
 

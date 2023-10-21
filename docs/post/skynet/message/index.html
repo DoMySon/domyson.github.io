@@ -18,15 +18,25 @@
 
     
     <meta name="description"
-  content="简介 skynet是基于消息的服务框架，它承担了其中消息的传递。
-服务的消息队列 存在两个版本，一个是基于go channel，另外一个基于无锁缓冲队列，后续有时间会单独解释。
-唯一的区别是 第二种方式需要手动控制调度调度规则，对服务参数的配置有更高的要求，正确的配置,内存以及性能会比 go channel的方式略高
+  content="简介 skynet-go是基于actor 消息的服务框架，那么我们需要定义一套标准且高效的消息结构
+PID 一个 message 最重要的是消息地址，如果一个消息没有地址的话我们称为 dead-letter。 那么我们通过Pid 标定一个地址类型，
+它表示该服务的唯一id (本质上是一个uint64)的类习惯，它一定能确保在当前节点以及集群中唯一的。
+在服务本身未被关闭的时候，pid一定不会产生变动，但重新启动节点之后，它的值可能会发生改变，因为所有服务默认都是并发启动，除非手动指定了关系(这也是它与skynet的区别)，所以不要尝试保存这个pid
+一旦能确定了一个pid的话，就可以通过 skynet.send(pid,cmd,...) or skynet.call(ti,pid,cmd,...) 将其发送出去了。
+服务的消息队列 Actor 模型最重要的的概念是 mailbox,它代表了一个实体需要处理的队列容器，
+得益于go的简单性，可以使用 channel 来实现，但这种方式的实现性能不高，因为 channel 底层的结构使用的是互斥锁，
+所以我采用了mpsc 实现了无锁队列，性能更优于 channel
 TODO: 吞吐量对比
-消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它消耗服务投递的性能， 如果确实有这种需求，可以发送 struct{}{}
-接收 关键性参数只有三个，session,typ,以及 argument,
-session 主要的作用是用以区分这条消息是否大于0，若为真，则其值就是请求序列号，本节点保证唯一 typ 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义 argument 才是真实的数据，它可以是任意值，特别的，在lua中这个值是会被解构，在跨节点通讯这个值恒为 []byte，当不需要时记得 skynet.free 1.4.0 这个由runtime回收 异步消息 异步消息通过 skynet.send的方式进行投递，它只在乎这个消息有没有正确到达到对点服务，而不关心是否能被对点服务正确处理，返回一个 error
-同步消息 同步消息通过 skynet.call的方式进行投递，它会阻塞当前协程（goroutine 或者是 coroutine），它也返回一个错误，能解除此次阻塞只有两个条件，对点服务skynet.ret 或者达到了指定超时时间， 所以特别在远程通讯的时候要考虑到 i/o 的延时
-dead letter 这个很好理解，同erlang 主要是确保数据的一致性，保证重要的数据不会因为某个服务的意外退出而丢失了这些消息." />
+消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 struct{}{}。
+而且消息发送成功只能代表被 mailbox 接受了，不代表会被立即处理，而不会一定处理成功，所以需要正确理解这种方式。
+如果发送失败，那么一定失败，并返回一个错误
+接收 接受回调只包含5个关键参数 context,addr,session,mtype,argument
+context 其实就是创建服务用户指定的结构指针，用于数据传递和状态修改
+session 主要的作用是用以区分这条消息是否是同步请求， 如若大于0，则其值就是请求序列号,只需要通过 skynet.ret(msg) 返回即可
+mtype 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义，可作为rpc消息类型
+argument 才是真实的数据，它可以是任意值，特别的，在lua中这个值是会被解构，在跨节点通讯这个值恒为 []byte，当不需要时记得 skynet.free 1.4.0 这个由底层回收，用户不用关心
+异步消息 异步消息通过 skynet.send的方式进行投递，它只在乎这个消息有没有正确到达到对点服务，而不关心是否能被对点服务正确处理，并返回一个 error
+同步消息 同步消息通过 skynet." />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
@@ -36,15 +46,25 @@ dead letter 这个很好理解，同erlang 主要是确保数据的一致性，�
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="message - 满船清梦压星河" />
 <meta name="twitter:description"
-  content="简介 skynet是基于消息的服务框架，它承担了其中消息的传递。
-服务的消息队列 存在两个版本，一个是基于go channel，另外一个基于无锁缓冲队列，后续有时间会单独解释。
-唯一的区别是 第二种方式需要手动控制调度调度规则，对服务参数的配置有更高的要求，正确的配置,内存以及性能会比 go channel的方式略高
+  content="简介 skynet-go是基于actor 消息的服务框架，那么我们需要定义一套标准且高效的消息结构
+PID 一个 message 最重要的是消息地址，如果一个消息没有地址的话我们称为 dead-letter。 那么我们通过Pid 标定一个地址类型，
+它表示该服务的唯一id (本质上是一个uint64)的类习惯，它一定能确保在当前节点以及集群中唯一的。
+在服务本身未被关闭的时候，pid一定不会产生变动，但重新启动节点之后，它的值可能会发生改变，因为所有服务默认都是并发启动，除非手动指定了关系(这也是它与skynet的区别)，所以不要尝试保存这个pid
+一旦能确定了一个pid的话，就可以通过 skynet.send(pid,cmd,...) or skynet.call(ti,pid,cmd,...) 将其发送出去了。
+服务的消息队列 Actor 模型最重要的的概念是 mailbox,它代表了一个实体需要处理的队列容器，
+得益于go的简单性，可以使用 channel 来实现，但这种方式的实现性能不高，因为 channel 底层的结构使用的是互斥锁，
+所以我采用了mpsc 实现了无锁队列，性能更优于 channel
 TODO: 吞吐量对比
-消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它消耗服务投递的性能， 如果确实有这种需求，可以发送 struct{}{}
-接收 关键性参数只有三个，session,typ,以及 argument,
-session 主要的作用是用以区分这条消息是否大于0，若为真，则其值就是请求序列号，本节点保证唯一 typ 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义 argument 才是真实的数据，它可以是任意值，特别的，在lua中这个值是会被解构，在跨节点通讯这个值恒为 []byte，当不需要时记得 skynet.free 1.4.0 这个由runtime回收 异步消息 异步消息通过 skynet.send的方式进行投递，它只在乎这个消息有没有正确到达到对点服务，而不关心是否能被对点服务正确处理，返回一个 error
-同步消息 同步消息通过 skynet.call的方式进行投递，它会阻塞当前协程（goroutine 或者是 coroutine），它也返回一个错误，能解除此次阻塞只有两个条件，对点服务skynet.ret 或者达到了指定超时时间， 所以特别在远程通讯的时候要考虑到 i/o 的延时
-dead letter 这个很好理解，同erlang 主要是确保数据的一致性，保证重要的数据不会因为某个服务的意外退出而丢失了这些消息." />
+消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 struct{}{}。
+而且消息发送成功只能代表被 mailbox 接受了，不代表会被立即处理，而不会一定处理成功，所以需要正确理解这种方式。
+如果发送失败，那么一定失败，并返回一个错误
+接收 接受回调只包含5个关键参数 context,addr,session,mtype,argument
+context 其实就是创建服务用户指定的结构指针，用于数据传递和状态修改
+session 主要的作用是用以区分这条消息是否是同步请求， 如若大于0，则其值就是请求序列号,只需要通过 skynet.ret(msg) 返回即可
+mtype 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义，可作为rpc消息类型
+argument 才是真实的数据，它可以是任意值，特别的，在lua中这个值是会被解构，在跨节点通讯这个值恒为 []byte，当不需要时记得 skynet.free 1.4.0 这个由底层回收，用户不用关心
+异步消息 异步消息通过 skynet.send的方式进行投递，它只在乎这个消息有没有正确到达到对点服务，而不关心是否能被对点服务正确处理，并返回一个 error
+同步消息 同步消息通过 skynet." />
 <meta name="twitter:site" content="https://domyson.github.io" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -54,15 +74,25 @@ dead letter 这个很好理解，同erlang 主要是确保数据的一致性，�
 <meta property="og:type" content="article" />
 <meta property="og:title" content="message - 满船清梦压星河">
 <meta property="og:description"
-  content="简介 skynet是基于消息的服务框架，它承担了其中消息的传递。
-服务的消息队列 存在两个版本，一个是基于go channel，另外一个基于无锁缓冲队列，后续有时间会单独解释。
-唯一的区别是 第二种方式需要手动控制调度调度规则，对服务参数的配置有更高的要求，正确的配置,内存以及性能会比 go channel的方式略高
+  content="简介 skynet-go是基于actor 消息的服务框架，那么我们需要定义一套标准且高效的消息结构
+PID 一个 message 最重要的是消息地址，如果一个消息没有地址的话我们称为 dead-letter。 那么我们通过Pid 标定一个地址类型，
+它表示该服务的唯一id (本质上是一个uint64)的类习惯，它一定能确保在当前节点以及集群中唯一的。
+在服务本身未被关闭的时候，pid一定不会产生变动，但重新启动节点之后，它的值可能会发生改变，因为所有服务默认都是并发启动，除非手动指定了关系(这也是它与skynet的区别)，所以不要尝试保存这个pid
+一旦能确定了一个pid的话，就可以通过 skynet.send(pid,cmd,...) or skynet.call(ti,pid,cmd,...) 将其发送出去了。
+服务的消息队列 Actor 模型最重要的的概念是 mailbox,它代表了一个实体需要处理的队列容器，
+得益于go的简单性，可以使用 channel 来实现，但这种方式的实现性能不高，因为 channel 底层的结构使用的是互斥锁，
+所以我采用了mpsc 实现了无锁队列，性能更优于 channel
 TODO: 吞吐量对比
-消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它消耗服务投递的性能， 如果确实有这种需求，可以发送 struct{}{}
-接收 关键性参数只有三个，session,typ,以及 argument,
-session 主要的作用是用以区分这条消息是否大于0，若为真，则其值就是请求序列号，本节点保证唯一 typ 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义 argument 才是真实的数据，它可以是任意值，特别的，在lua中这个值是会被解构，在跨节点通讯这个值恒为 []byte，当不需要时记得 skynet.free 1.4.0 这个由runtime回收 异步消息 异步消息通过 skynet.send的方式进行投递，它只在乎这个消息有没有正确到达到对点服务，而不关心是否能被对点服务正确处理，返回一个 error
-同步消息 同步消息通过 skynet.call的方式进行投递，它会阻塞当前协程（goroutine 或者是 coroutine），它也返回一个错误，能解除此次阻塞只有两个条件，对点服务skynet.ret 或者达到了指定超时时间， 所以特别在远程通讯的时候要考虑到 i/o 的延时
-dead letter 这个很好理解，同erlang 主要是确保数据的一致性，保证重要的数据不会因为某个服务的意外退出而丢失了这些消息." />
+消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 struct{}{}。
+而且消息发送成功只能代表被 mailbox 接受了，不代表会被立即处理，而不会一定处理成功，所以需要正确理解这种方式。
+如果发送失败，那么一定失败，并返回一个错误
+接收 接受回调只包含5个关键参数 context,addr,session,mtype,argument
+context 其实就是创建服务用户指定的结构指针，用于数据传递和状态修改
+session 主要的作用是用以区分这条消息是否是同步请求， 如若大于0，则其值就是请求序列号,只需要通过 skynet.ret(msg) 返回即可
+mtype 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义，可作为rpc消息类型
+argument 才是真实的数据，它可以是任意值，特别的，在lua中这个值是会被解构，在跨节点通讯这个值恒为 []byte，当不需要时记得 skynet.free 1.4.0 这个由底层回收，用户不用关心
+异步消息 异步消息通过 skynet.send的方式进行投递，它只在乎这个消息有没有正确到达到对点服务，而不关心是否能被对点服务正确处理，并返回一个 error
+同步消息 同步消息通过 skynet." />
 <meta property="og:url" content="https://domyson.github.io/post/skynet/message/" />
 <meta property="og:site_name" content="message" />
 <meta property="og:image"
@@ -184,9 +214,9 @@ dead letter 这个很好理解，同erlang 主要是确保数据的一致性，�
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 18 Oct 2023 11:19:03 &#43;0000"
+                  Modified <relative-time datetime="Tue, 24 Oct 2023 20:49:58 &#43;0800"
                     class="no-wrap">
-                    Wed, 18 Oct 2023 11:19:03 &#43;0000</relative-time>
+                    Tue, 24 Oct 2023 20:49:58 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -216,7 +246,7 @@ dead letter 这个很好理解，同erlang 主要是确保数据的一致性，�
                         </div>
                       </div>
                     </details-menu>
-                      683 Words
+                      1066 Words
                     
 
                   </div>
@@ -229,31 +259,50 @@ dead letter 这个很好理解，同erlang 主要是确保数据的一致性，�
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="简介">简介</h1>
-<p><code>skynet</code>是基于消息的服务框架，它承担了其中消息的传递。</p>
-<h1 id="服务的消息队列">服务的消息队列</h1>
-<p>存在两个版本，一个是基于go channel，另外一个基于无锁缓冲队列，后续有时间会单独解释。</p>
-<p>唯一的区别是 第二种方式需要手动控制调度调度规则，对服务参数的配置有更高的要求，正确的配置,内存以及性能会比 <code>go channel</code>的方式略高</p>
+<p><code>skynet-go</code>是基于<code>actor</code> 消息的服务框架，那么我们需要定义一套标准且高效的消息结构</p>
+<h2 id="pid">PID</h2>
+<p>一个 <code>message</code> 最重要的是消息地址，如果一个消息没有地址的话我们称为 <code>dead-letter</code>。 那么我们通过<code>Pid</code> 标定一个地址类型，</p>
+<p>它表示该服务的唯一id (本质上是一个<code>uint64</code>)的类习惯，它一定能确保在当前节点以及集群中唯一的。</p>
+<p>在服务本身未被关闭的时候，<code>pid</code>一定不会产生变动，但重新启动节点之后，它的值可能会发生改变，因为所有服务默认都是并发启动，除非手动指定了关系(这也是它与<code>skynet</code>的区别)，所以不要尝试保存这个<code>pid</code></p>
+<p>一旦能确定了一个<code>pid</code>的话，就可以通过 <code>skynet.send(pid,cmd,...) or skynet.call(ti,pid,cmd,...)</code> 将其发送出去了。</p>
+<h2 id="服务的消息队列">服务的消息队列</h2>
+<p><code>Actor</code> 模型最重要的的概念是 <code>mailbox</code>,它代表了一个实体需要处理的队列容器，</p>
+<p>得益于<code>go</code>的简单性，可以使用 <code>channel</code> 来实现，但这种方式的实现性能不高，因为 <code>channel</code> 底层的结构使用的是互斥锁，</p>
+<p>所以我采用了<code>mpsc</code> 实现了无锁队列，性能更优于 <code>channel</code></p>
 <p>TODO: 吞吐量对比</p>
 <h1 id="消息的接受和发送">消息的接受和发送</h1>
 <ul>
 <li>发送</li>
 </ul>
-<p>用户不需要构建这个结构体，仅仅需要指定 <code>destination</code> 以及需要发送的数据，而且 <code>skynet</code> 消息投递被设计成不允许发送 <code>nil</code> 因为这是无任何意义的，相反它消耗服务投递的性能，
-如果确实有这种需求，可以发送 <code>struct{}{}</code></p>
+<p>用户不需要构建这个结构体，仅仅需要指定 <code>destination</code> 以及需要发送的数据，而且 <code>skynet</code> 消息投递被设计成不允许发送 <code>nil</code> 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 <code>struct{}{}</code>。</p>
+<p>而且消息发送成功只能代表被 <code>mailbox</code> 接受了，不代表会被立即处理，而不会一定处理成功，所以需要正确理解这种方式。</p>
+<p>如果发送失败，那么一定失败，并返回一个错误</p>
 <ul>
 <li>接收</li>
 </ul>
-<p>关键性参数只有三个，<code>session</code>,<code>typ</code>,以及 <code>argument</code>,</p>
+<p>接受回调只包含<code>5</code>个关键参数 <code>context</code>,<code>addr</code>,<code>session</code>,<code>mtype</code>,<code>argument</code></p>
 <ul>
-<li><code>session</code> 主要的作用是用以区分这条消息是否大于0，若为真，则其值就是请求序列号，本节点保证唯一</li>
-<li><code>typ</code> 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义</li>
-<li><code>argument</code> 才是真实的数据，它可以是任意值，特别的，在<code>lua</code>中这个值是会被解构，在跨节点通讯这个值恒为 <code>[]byte</code>，<del>当不需要时记得 skynet.free</del>  1.4.0 这个由runtime回收</li>
+<li>
+<p><code>context</code> 其实就是创建服务用户指定的结构指针，用于数据传递和状态修改</p>
+</li>
+<li>
+<p><code>session</code> 主要的作用是用以区分这条消息是否是同步请求， 如若大于0，则其值就是请求序列号,只需要通过 <code>skynet.ret(msg)</code> 返回即可</p>
+</li>
+<li>
+<p><code>mtype</code> 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义，可作为<code>rpc</code>消息类型</p>
+</li>
+<li>
+<p><code>argument</code> 才是真实的数据，它可以是任意值，特别的，在<code>lua</code>中这个值是会被解构，在跨节点通讯这个值恒为 <code>[]byte</code>，<del>当不需要时记得 skynet.free</del>  1.4.0 这个由底层回收，用户不用关心</p>
+</li>
 </ul>
 <h1 id="异步消息">异步消息</h1>
-<p>异步消息通过 <code>skynet.send</code>的方式进行投递，它只在乎这个消息有没有正确到达到对点服务，而不关心是否能被对点服务正确处理，返回一个 <code>error</code></p>
+<p>异步消息通过 <code>skynet.send</code>的方式进行投递，它只在乎这个消息有没有正确到达到对点服务，而不关心是否能被对点服务正确处理，并返回一个 <code>error</code></p>
 <h1 id="同步消息">同步消息</h1>
-<p>同步消息通过 <code>skynet.call</code>的方式进行投递，它会阻塞当前协程（goroutine 或者是 coroutine），它也返回一个错误，能解除此次阻塞只有两个条件，对点服务<code>skynet.ret</code> 或者达到了指定超时时间，
-所以特别在远程通讯的时候要考虑到 i/o 的延时</p>
+<p>同步消息通过 <code>skynet.call</code>的方式进行投递，它会阻塞当前<code>coroutine</code>，它也返回一个错误，能解除此次阻塞只有两个条件，对点服务<code>skynet.ret</code> 或者达到了指定超时时间，</p>
+<blockquote>
+<p>超时一定需要大于<code>10ms</code>,这是内置的最小精度</p>
+</blockquote>
+<p>所以特别在远程通讯的时候要考虑到 i/o 的延时</p>
 <h1 id="dead-letter">dead letter</h1>
 <p>这个很好理解，同<code>erlang</code> 主要是确保数据的一致性，保证重要的数据不会因为某个服务的意外退出而丢失了这些消息.</p>
 </article>
