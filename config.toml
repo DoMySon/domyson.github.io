@@ -2,7 +2,7 @@ baseURL = "https://domyson.github.io"
 languageCode = "zh-cn"
 title = "满船清梦压星河"
 theme = "github"
-googleAnalytics = "G-V23G8H27BQ"
+GoogleAnalytics = "G-V23G8H27BQ"
 pygmentsCodeFences = true
 pygmentsUseClasses = true
 
@@ -23,6 +23,9 @@ pygmentsUseClasses = true
   userStatusEmoji = "😀"
   favicon = "/images/avatar.png"
   location = "China"
+
+  GtmId="G-V23G8H27BQ"
+
   #enableGitalk = true
 
    #[params.gitalk]
