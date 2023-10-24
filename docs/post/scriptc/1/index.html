@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>scriptc - 满船清梦压星河</title>
+    <title>lex - 满船清梦压星河</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -18,11 +18,13 @@
 
     
     <meta name="description"
-  content="前言 早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 skt 写一门dsl，之前是用lua作为服务端的脚本端
-看过很多源码，python,lua 等,一直纠结于 stack based or register based。
-名字没想好那就叫 scriptc, 语法是简化版的 c
-这篇文章将会是一个系列，更新会比源码慢，文档写的也不会完全
-" />
+  content="序 对于一个源码文件而言，里面的内容只是一个个字符，机器是无法识别的，而词法分析器的作用类似于转义器，将一个个字符拆成若干个有特定意义的词，而这一过程称为词法分析，此时它也不能被机器(或者这个虚拟机)识别
+词法分析器 Token,Keyword,界符，常数，运算符 token 以及 keyword是存在区别的，像token 可以是认为是一个此的描述，如:
+const int sum = 100; typedef struct my_struct{ int a ; unsigned int b; char *c; }; 学过语言的都知道，什么是语言关键字。
+typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解为一个词的代号，而keyword属于被包含关系，typedef,struct,int 它们属于keyword,因为它们是程序内部定义&amp;quot;词&amp;quot;，而my_struct则属于用于定义的，
+像类似于 &#43;,-,*,/ 等都属于运算符
+其中 const int sum = 100; 中的100 则认为是一个常数.
+基本设计 首先我们为一个词定义一些token,如 typedef enum Token { EOF = 0, COMMENT, IDENT, __KEYWORD_BEGIN IF, ELSE, SWITCH, CASE, RETURN, // etc... __KEYWORD_END, __MATH_BEGIN Add, // &#43; Sub, // - Mul, // * Quo, // / Rem, // % And, // &amp;amp; Or, // | __MATH_END }; 可以属于到几个特殊的定义 __XXX_BEING,__XXX_END 这是为了方便后续快速区分这些&amp;quot;词&amp;quot;是属于那些种类" />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
@@ -30,13 +32,15 @@
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="scriptc - 满船清梦压星河" />
+<meta name="twitter:title" content="lex - 满船清梦压星河" />
 <meta name="twitter:description"
-  content="前言 早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 skt 写一门dsl，之前是用lua作为服务端的脚本端
-看过很多源码，python,lua 等,一直纠结于 stack based or register based。
-名字没想好那就叫 scriptc, 语法是简化版的 c
-这篇文章将会是一个系列，更新会比源码慢，文档写的也不会完全
-" />
+  content="序 对于一个源码文件而言，里面的内容只是一个个字符，机器是无法识别的，而词法分析器的作用类似于转义器，将一个个字符拆成若干个有特定意义的词，而这一过程称为词法分析，此时它也不能被机器(或者这个虚拟机)识别
+词法分析器 Token,Keyword,界符，常数，运算符 token 以及 keyword是存在区别的，像token 可以是认为是一个此的描述，如:
+const int sum = 100; typedef struct my_struct{ int a ; unsigned int b; char *c; }; 学过语言的都知道，什么是语言关键字。
+typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解为一个词的代号，而keyword属于被包含关系，typedef,struct,int 它们属于keyword,因为它们是程序内部定义&amp;quot;词&amp;quot;，而my_struct则属于用于定义的，
+像类似于 &#43;,-,*,/ 等都属于运算符
+其中 const int sum = 100; 中的100 则认为是一个常数.
+基本设计 首先我们为一个词定义一些token,如 typedef enum Token { EOF = 0, COMMENT, IDENT, __KEYWORD_BEGIN IF, ELSE, SWITCH, CASE, RETURN, // etc... __KEYWORD_END, __MATH_BEGIN Add, // &#43; Sub, // - Mul, // * Quo, // / Rem, // % And, // &amp;amp; Or, // | __MATH_END }; 可以属于到几个特殊的定义 __XXX_BEING,__XXX_END 这是为了方便后续快速区分这些&amp;quot;词&amp;quot;是属于那些种类" />
 <meta name="twitter:site" content="https://domyson.github.io" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -44,15 +48,17 @@
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="scriptc - 满船清梦压星河">
+<meta property="og:title" content="lex - 满船清梦压星河">
 <meta property="og:description"
-  content="前言 早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 skt 写一门dsl，之前是用lua作为服务端的脚本端
-看过很多源码，python,lua 等,一直纠结于 stack based or register based。
-名字没想好那就叫 scriptc, 语法是简化版的 c
-这篇文章将会是一个系列，更新会比源码慢，文档写的也不会完全
-" />
+  content="序 对于一个源码文件而言，里面的内容只是一个个字符，机器是无法识别的，而词法分析器的作用类似于转义器，将一个个字符拆成若干个有特定意义的词，而这一过程称为词法分析，此时它也不能被机器(或者这个虚拟机)识别
+词法分析器 Token,Keyword,界符，常数，运算符 token 以及 keyword是存在区别的，像token 可以是认为是一个此的描述，如:
+const int sum = 100; typedef struct my_struct{ int a ; unsigned int b; char *c; }; 学过语言的都知道，什么是语言关键字。
+typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解为一个词的代号，而keyword属于被包含关系，typedef,struct,int 它们属于keyword,因为它们是程序内部定义&amp;quot;词&amp;quot;，而my_struct则属于用于定义的，
+像类似于 &#43;,-,*,/ 等都属于运算符
+其中 const int sum = 100; 中的100 则认为是一个常数.
+基本设计 首先我们为一个词定义一些token,如 typedef enum Token { EOF = 0, COMMENT, IDENT, __KEYWORD_BEGIN IF, ELSE, SWITCH, CASE, RETURN, // etc... __KEYWORD_END, __MATH_BEGIN Add, // &#43; Sub, // - Mul, // * Quo, // / Rem, // % And, // &amp;amp; Or, // | __MATH_END }; 可以属于到几个特殊的定义 __XXX_BEING,__XXX_END 这是为了方便后续快速区分这些&amp;quot;词&amp;quot;是属于那些种类" />
 <meta property="og:url" content="https://domyson.github.io/post/scriptc/1/" />
-<meta property="og:site_name" content="scriptc" />
+<meta property="og:site_name" content="lex" />
 <meta property="og:image"
   content="https://domyson.github.io">
 <meta property="og:image:width" content="2048">
@@ -163,7 +169,7 @@
                   <span class="author">
                     <a href="https://domyson.github.io">Treasure</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://domyson.github.io/post/scriptc/1/">scriptc</a></strong>
+                      href="https://domyson.github.io/post/scriptc/1/">lex</a></strong>
                 </h1>
                 <div class="note m-0">
                   Created <relative-time datetime="Wed, 04 Oct 2023 00:00:00 &#43;0000"
@@ -172,9 +178,9 @@
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 18 Oct 2023 11:19:03 &#43;0000"
+                  Modified <relative-time datetime="Tue, 24 Oct 2023 21:39:16 &#43;0800"
                     class="no-wrap">
-                    Wed, 18 Oct 2023 11:19:03 &#43;0000</relative-time>
+                    Tue, 24 Oct 2023 21:39:16 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -204,7 +210,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      204 Words
+                      893 Words
                     
 
                   </div>
@@ -227,28 +233,122 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><h1 id="前言">前言</h1>
-<p>早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 skt 写一门dsl，之前是用lua作为服务端的脚本端</p>
-<p>看过很多源码，<code>python,lua</code> 等,一直纠结于 stack based or register based。</p>
-<p>名字没想好那就叫 <code>scriptc</code>, 语法是简化版的 <code>c</code></p>
-<blockquote>
-<p>这篇文章将会是一个系列，更新会比源码慢，文档写的也不会完全</p>
+                <article class="markdown-body entry-content container-lg"><h1 id="序">序</h1>
+<p>对于一个源码文件而言，里面的内容只是一个个字符，机器是无法识别的，而词法分析器的作用类似于转义器，将一个个字符拆成若干个有特定意义的词，而这一过程称为词法分析，此时它也不能被机器(或者这个虚拟机)识别</p>
+<h1 id="词法分析器">词法分析器</h1>
+<h2 id="tokenkeyword界符常数运算符">Token,Keyword,界符，常数，运算符</h2>
+<p><code>token</code> 以及 <code>keyword</code>是存在区别的，像<code>token</code> 可以是认为是一个此的描述，如:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">typedef</span> <span class="k">struct</span> <span class="n">my_struct</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">a</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">char</span> <span class="o">*</span><span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span></code></pre></div><blockquote>
+<p>学过语言的都知道，什么是语言关键字。</p>
 </blockquote>
-<h1 id="目标">目标</h1>
-<ul>
+<p><code>typedef</code>,<code>struct</code>,<code>int</code>,<code>my_struct</code> 等都可以认为是一个<code>token</code>,可以简单理解为一个词的代号，而<code>keyword</code>属于被包含关系，<code>typedef</code>,<code>struct</code>,<code>int</code> 它们属于<code>keyword</code>,因为它们是程序内部定义&quot;词&quot;，而<code>my_struct</code>则属于用于定义的，</p>
+<p>像类似于 <code>+,-,*,/</code> 等都属于运算符</p>
+<p>其中 <code>const int sum = 100; </code> 中的<code>100</code> 则认为是一个常数.</p>
+<h2 id="基本设计">基本设计</h2>
+<ol>
+<li>首先我们为一个词定义一些<code>token</code>,如</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">enum</span> <span class="n">Token</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">EOF</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">COMMENT</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">IDENT</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">__KEYWORD_BEGIN</span>
+</span></span><span class="line"><span class="cl">    <span class="n">IF</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ELSE</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SWITCH</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">CASE</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RETURN</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// etc...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">__KEYWORD_END</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">__MATH_BEGIN</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Add</span><span class="p">,</span>          <span class="c1">// +
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">Sub</span><span class="p">,</span>          <span class="c1">// -
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">Mul</span><span class="p">,</span>          <span class="c1">// *
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">Quo</span><span class="p">,</span>          <span class="c1">// /
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">Rem</span><span class="p">,</span>          <span class="c1">// %
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">And</span><span class="p">,</span>          <span class="c1">// &amp;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">Or</span><span class="p">,</span>           <span class="c1">// |
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">__MATH_END</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>可以属于到几个特殊的定义 <code>__XXX_BEING,__XXX_END</code> 这是为了方便后续快速区分这些&quot;词&quot;是属于那些种类</p>
+<ol start="2">
 <li>
-<p>强类型脚本语言</p>
+<p>其次我们需要定义一个辅助函数，如上所述 <code>const int sum = 100</code>; 而这<code>100</code>解析出来应该是个数字而不是一个字符串</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">is_dight</span><span class="p">(</span><span class="kt">char</span> <span class="n">c</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="sc">&#39;0&#39;</span><span class="o">&lt;=</span><span class="n">c</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">&lt;=</span><span class="sc">&#39;9&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>这一步只处理了一个字符，而后续只需要一直扫描直到不能满足条件为止，如出现一个字母，那么可以认为语法错误，扫描到<code>;</code>则认为是结束了</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">is_letter</span><span class="p">(</span><span class="kt">char</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="sc">&#39;a&#39;</span> <span class="o">&lt;=</span><span class="n">c</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">&lt;=</span><span class="sc">&#39;z&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="sc">&#39;A&#39;</span> <span class="o">&lt;=</span><span class="n">c</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">&lt;=</span><span class="sc">&#39;Z&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>这个函数专门处理一些关键字，和<code>identity</code></p>
+<blockquote>
+<p>辅助函数只能处理当前字符，那么如何知道是否满足某个条件，如变量只允许下划线和字母开头，答案就是状态机，类似于一个临时缓冲，将扫描到的字符放入其中方便做检测，而实际开发中其实只需要记录两次偏移的位置就可以拿到这段字符了</p>
+</blockquote>
 </li>
-<li>
-<p>支持单线程对称协程，也仅为单线程</p>
-</li>
-<li>
-<p>支持宿主语言交互</p>
-</li>
-<li>
-<p>register based</p>
-</li>
-</ul></article>
+</ol>
+<h2 id="分析器的分析流程">分析器的分析流程</h2>
+<p>分析器其实就是按照一个个遍历的方式将这串文本拆成一个个的<code>token</code>的过程</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">lex</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">size</span><span class="p">;</span> <span class="c1">// sizeof the buf length
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">offset</span><span class="p">;</span> <span class="c1">// current read offset
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">line</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buf</span><span class="p">[];</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">token</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Token</span> <span class="n">__token</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">line</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">lex_next</span><span class="p">(</span><span class="n">lex</span> <span class="o">*</span><span class="n">l</span><span class="p">,</span><span class="n">token</span> <span class="o">*</span><span class="n">tk</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">l</span><span class="o">-&gt;</span><span class="n">offset</span> <span class="o">&lt;</span> <span class="n">l</span> <span class="o">-&gt;</span><span class="n">size</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// lex_skipwhitespace()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">switch</span> <span class="p">(</span><span class="n">l</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">[</span><span class="n">l</span><span class="o">-&gt;</span><span class="n">offset</span><span class="p">]){</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="sc">&#39;/&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">l</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">[</span><span class="n">l</span><span class="o">-&gt;</span><span class="n">offset</span> <span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;/&#39;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">// lex_skipcomment()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">tk</span><span class="o">-&gt;</span><span class="n">__token</span> <span class="o">=</span> <span class="n">COMMENT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">// maybe is math div
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// etc ... switch
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>至此，词法分析器的大致原理已经分析完毕了，后续可以参考 <code>AST</code> 以及 语法分析器<code>Grammar</code></p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
+     crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7934154300350596"
+     data-ad-slot="3469296166"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</article>
               </div>
             </div>
           </div>
