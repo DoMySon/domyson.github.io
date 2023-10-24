@@ -22,8 +22,6 @@
 设计缘由 早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 skynet-go 写一门dsl，现在是用lua作为服务的脚本端。
 尽管它的性能是脚本语言中顶尖的，但是一些隐式写法并不能保证它的预期性能，如混合table,过多的函数调用栈，字符串操作以及无类型系统。
 类型系统有利有弊，但我个人的观点是宁愿多出30%的开发时间，而减少70%的bug。
-Register Based 和 Stack Based 如python,ruby,js,java 属于 Stack Based, 而lua则属于Register Based.
-有许多文章都解释了它们之间的区别，一句话概括Register Based 拥有更好的性能,因为它节省了很多入栈和出栈的操作，相应的它的实现会比Stack Based复杂很多，而且Register Based的指令于真实的汇编也很相似，它们的优化手段也是非常多的。
 " />
 <meta name="keywords"
   content='computer tech' />
@@ -38,8 +36,6 @@ Register Based 和 Stack Based 如python,ruby,js,java 属于 Stack Based, 而lua
 设计缘由 早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 skynet-go 写一门dsl，现在是用lua作为服务的脚本端。
 尽管它的性能是脚本语言中顶尖的，但是一些隐式写法并不能保证它的预期性能，如混合table,过多的函数调用栈，字符串操作以及无类型系统。
 类型系统有利有弊，但我个人的观点是宁愿多出30%的开发时间，而减少70%的bug。
-Register Based 和 Stack Based 如python,ruby,js,java 属于 Stack Based, 而lua则属于Register Based.
-有许多文章都解释了它们之间的区别，一句话概括Register Based 拥有更好的性能,因为它节省了很多入栈和出栈的操作，相应的它的实现会比Stack Based复杂很多，而且Register Based的指令于真实的汇编也很相似，它们的优化手段也是非常多的。
 " />
 <meta name="twitter:site" content="https://domyson.github.io" />
 <meta name="twitter:creator" content="" />
@@ -54,8 +50,6 @@ Register Based 和 Stack Based 如python,ruby,js,java 属于 Stack Based, 而lua
 设计缘由 早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 skynet-go 写一门dsl，现在是用lua作为服务的脚本端。
 尽管它的性能是脚本语言中顶尖的，但是一些隐式写法并不能保证它的预期性能，如混合table,过多的函数调用栈，字符串操作以及无类型系统。
 类型系统有利有弊，但我个人的观点是宁愿多出30%的开发时间，而减少70%的bug。
-Register Based 和 Stack Based 如python,ruby,js,java 属于 Stack Based, 而lua则属于Register Based.
-有许多文章都解释了它们之间的区别，一句话概括Register Based 拥有更好的性能,因为它节省了很多入栈和出栈的操作，相应的它的实现会比Stack Based复杂很多，而且Register Based的指令于真实的汇编也很相似，它们的优化手段也是非常多的。
 " />
 <meta property="og:url" content="https://domyson.github.io/post/scriptc/0/" />
 <meta property="og:site_name" content="scriptc" />
@@ -178,9 +172,9 @@ Register Based 和 Stack Based 如python,ruby,js,java 属于 Stack Based, 而lua
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Tue, 24 Oct 2023 21:50:17 &#43;0800"
+                  Modified <relative-time datetime="Wed, 25 Oct 2023 01:05:51 &#43;0800"
                     class="no-wrap">
-                    Tue, 24 Oct 2023 21:50:17 &#43;0800</relative-time>
+                    Wed, 25 Oct 2023 01:05:51 &#43;0800</relative-time>
                   
                 </div>
               </div>

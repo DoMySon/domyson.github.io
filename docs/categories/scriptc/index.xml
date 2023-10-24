@@ -72,10 +72,7 @@ typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解
 &lt;p&gt;尽管它的性能是脚本语言中顶尖的，但是一些隐式写法并不能保证它的预期性能，如混合&lt;code&gt;table&lt;/code&gt;,过多的函数调用栈，字符串操作以及无类型系统。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;类型系统有利有弊，但我个人的观点是宁愿多出30%的开发时间，而减少70%的bug。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&#34;register-based-和-stack-based&#34;&gt;Register Based 和 Stack Based&lt;/h1&gt;
-&lt;p&gt;如&lt;code&gt;python,ruby,js,java&lt;/code&gt; 属于 &lt;code&gt;Stack Based&lt;/code&gt;, 而&lt;code&gt;lua&lt;/code&gt;则属于&lt;code&gt;Register Based&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;有许多文章都解释了它们之间的区别，一句话概括&lt;code&gt;Register Based&lt;/code&gt; 拥有更好的性能,因为它节省了很多入栈和出栈的操作，相应的它的实现会比&lt;code&gt;Stack Based&lt;/code&gt;复杂很多，而且&lt;code&gt;Register Based&lt;/code&gt;的指令于真实的汇编也很相似，它们的优化手段也是非常多的。&lt;/p&gt;</description>
+&lt;/blockquote&gt;</description>
     </item>
     
   </channel>

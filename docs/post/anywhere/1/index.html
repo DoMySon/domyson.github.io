@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>anywhere 客户端框架概述 - 满船清梦压星河</title>
+    <title>ECS - 满船清梦压星河</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -18,7 +18,14 @@
 
     
     <meta name="description"
-  content="概述 Anywhere 是一个基于 Unity 引擎的框架，它设计理论源自于 ECS 当然还没有 Natvie Code 也没有 Brust 编译器。" />
+  content="序 需要注意的是ECS并非是unity的ECS，而是一种编程思想
+架构 Component 要理解 Anywhere Component 是一非常重要的点，它类似于 ECS中的 S,但它除了调度其下所有 Enity之外，也会负责调用其创建的子 Component，其第一个由框架创建的 RootComponent 是所有 Component的父节点，也是超级Root节点
+Controller Controller 需要注意的是它是基于内嵌编程思想的设计，用于提供外部 Hooker 修改 Component 或者是Entity 的默认行为逻辑
+Enity 在Anywhere中所有可见实体都可以认为是一个Entity,一小部分不可见全局的也可以算作 Entity
+Static 如其名，代表全局的辅助类.
+流程 这里的流程分为两个内容，一个是Anywhere运行的流程，一个具体实现的流程 Component
+运行流程
+流程 Component" />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
@@ -26,9 +33,16 @@
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="anywhere 客户端框架概述 - 满船清梦压星河" />
+<meta name="twitter:title" content="ECS - 满船清梦压星河" />
 <meta name="twitter:description"
-  content="概述 Anywhere 是一个基于 Unity 引擎的框架，它设计理论源自于 ECS 当然还没有 Natvie Code 也没有 Brust 编译器。" />
+  content="序 需要注意的是ECS并非是unity的ECS，而是一种编程思想
+架构 Component 要理解 Anywhere Component 是一非常重要的点，它类似于 ECS中的 S,但它除了调度其下所有 Enity之外，也会负责调用其创建的子 Component，其第一个由框架创建的 RootComponent 是所有 Component的父节点，也是超级Root节点
+Controller Controller 需要注意的是它是基于内嵌编程思想的设计，用于提供外部 Hooker 修改 Component 或者是Entity 的默认行为逻辑
+Enity 在Anywhere中所有可见实体都可以认为是一个Entity,一小部分不可见全局的也可以算作 Entity
+Static 如其名，代表全局的辅助类.
+流程 这里的流程分为两个内容，一个是Anywhere运行的流程，一个具体实现的流程 Component
+运行流程
+流程 Component" />
 <meta name="twitter:site" content="https://domyson.github.io" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -36,11 +50,18 @@
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="anywhere 客户端框架概述 - 满船清梦压星河">
+<meta property="og:title" content="ECS - 满船清梦压星河">
 <meta property="og:description"
-  content="概述 Anywhere 是一个基于 Unity 引擎的框架，它设计理论源自于 ECS 当然还没有 Natvie Code 也没有 Brust 编译器。" />
+  content="序 需要注意的是ECS并非是unity的ECS，而是一种编程思想
+架构 Component 要理解 Anywhere Component 是一非常重要的点，它类似于 ECS中的 S,但它除了调度其下所有 Enity之外，也会负责调用其创建的子 Component，其第一个由框架创建的 RootComponent 是所有 Component的父节点，也是超级Root节点
+Controller Controller 需要注意的是它是基于内嵌编程思想的设计，用于提供外部 Hooker 修改 Component 或者是Entity 的默认行为逻辑
+Enity 在Anywhere中所有可见实体都可以认为是一个Entity,一小部分不可见全局的也可以算作 Entity
+Static 如其名，代表全局的辅助类.
+流程 这里的流程分为两个内容，一个是Anywhere运行的流程，一个具体实现的流程 Component
+运行流程
+流程 Component" />
 <meta property="og:url" content="https://domyson.github.io/post/anywhere/1/" />
-<meta property="og:site_name" content="anywhere 客户端框架概述" />
+<meta property="og:site_name" content="ECS" />
 <meta property="og:image"
   content="https://domyson.github.io">
 <meta property="og:image:width" content="2048">
@@ -151,7 +172,7 @@
                   <span class="author">
                     <a href="https://domyson.github.io">Treasure</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://domyson.github.io/post/anywhere/1/">anywhere 客户端框架概述</a></strong>
+                      href="https://domyson.github.io/post/anywhere/1/">ECS</a></strong>
                 </h1>
                 <div class="note m-0">
                   Created <relative-time datetime="Sat, 01 Apr 2023 00:00:00 &#43;0000"
@@ -160,9 +181,9 @@
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Tue, 17 Oct 2023 01:32:42 &#43;0800"
+                  Modified <relative-time datetime="Wed, 25 Oct 2023 01:06:13 &#43;0800"
                     class="no-wrap">
-                    Tue, 17 Oct 2023 01:32:42 &#43;0800</relative-time>
+                    Wed, 25 Oct 2023 01:06:13 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -192,7 +213,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      39 Words
+                      294 Words
                     
 
                   </div>
@@ -215,8 +236,29 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><h1 id="概述">概述</h1>
-<p><code>Anywhere</code> 是一个基于 Unity 引擎的框架，它设计理论源自于 <code>ECS</code> 当然还没有 <code>Natvie Code</code> 也没有 <code>Brust</code> 编译器。</p>
+                <article class="markdown-body entry-content container-lg"><h1 id="序">序</h1>
+<p>需要注意的是ECS并非是unity的ECS，而是一种编程思想</p>
+<h1 id="架构">架构</h1>
+<h2 id="component">Component</h2>
+<p>要理解 Anywhere Component 是一非常重要的点，它类似于 ECS中的 S,但它除了调度其下所有 Enity之外，也会负责调用其创建的子 Component，其第一个由框架创建的 RootComponent 是所有 Component的父节点，也是超级Root节点</p>
+<h2 id="controller">Controller</h2>
+<p>Controller 需要注意的是它是基于内嵌编程思想的设计，用于提供外部 Hooker 修改 Component 或者是Entity 的默认行为逻辑</p>
+<h2 id="enity">Enity</h2>
+<p>在Anywhere中所有可见实体都可以认为是一个<code>Entity</code>,一小部分不可见全局的也可以算作 Entity</p>
+<h2 id="static">Static</h2>
+<p>如其名，代表全局的辅助类.</p>
+<h1 id="流程">流程</h1>
+<blockquote>
+<p>这里的流程分为两个内容，一个是Anywhere运行的流程，一个具体实现的流程 Component</p>
+</blockquote>
+<ul>
+<li>
+<p>运行流程</p>
+</li>
+<li>
+<p>流程 Component</p>
+</li>
+</ul>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
      crossorigin="anonymous"></script>
 
