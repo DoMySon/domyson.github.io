@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='https://domyson.github.io/css/frameworks.min.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/github.min.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/github-style.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
+    <title>anywhere 客户端框架概述 - 满船清梦压星河</title>
+    
+    <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
+    
+    <meta name="theme-color" content="#1e2327">
+
+    
+    <meta name="description"
+  content="序 Anywhere 是一个基于 Unity 引擎的游戏框架，它被设计成无感知框架的框架（没有打错，事实上我也无法找出一个抽象的词语来形容这套抽象的框架），脱离 Unity 本身的编码方式，致力于采用无框架化开发的方式，内部提供了一个ECS的上层抽象来开发它，但事实上你并不一定需要使用ECS，你也可以使用RMS、Datatable、Network等模块来开发你的游戏，这些模块都是可以单独使用的，并且可以和ECS模块进行无缝结合。你也可以自己实现想MVCC，或者是MVC的模块，只要符合Anywhere的规范，就可以和Anywhere框架进行无缝结合。
+" />
+<meta name="keywords"
+  content='computer tech' />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://domyson.github.io/post/anywhere/0/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="anywhere 客户端框架概述 - 满船清梦压星河" />
+<meta name="twitter:description"
+  content="序 Anywhere 是一个基于 Unity 引擎的游戏框架，它被设计成无感知框架的框架（没有打错，事实上我也无法找出一个抽象的词语来形容这套抽象的框架），脱离 Unity 本身的编码方式，致力于采用无框架化开发的方式，内部提供了一个ECS的上层抽象来开发它，但事实上你并不一定需要使用ECS，你也可以使用RMS、Datatable、Network等模块来开发你的游戏，这些模块都是可以单独使用的，并且可以和ECS模块进行无缝结合。你也可以自己实现想MVCC，或者是MVC的模块，只要符合Anywhere的规范，就可以和Anywhere框架进行无缝结合。
+" />
+<meta name="twitter:site" content="https://domyson.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image"
+  content="https://domyson.github.io/">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="anywhere 客户端框架概述 - 满船清梦压星河">
+<meta property="og:description"
+  content="序 Anywhere 是一个基于 Unity 引擎的游戏框架，它被设计成无感知框架的框架（没有打错，事实上我也无法找出一个抽象的词语来形容这套抽象的框架），脱离 Unity 本身的编码方式，致力于采用无框架化开发的方式，内部提供了一个ECS的上层抽象来开发它，但事实上你并不一定需要使用ECS，你也可以使用RMS、Datatable、Network等模块来开发你的游戏，这些模块都是可以单独使用的，并且可以和ECS模块进行无缝结合。你也可以自己实现想MVCC，或者是MVC的模块，只要符合Anywhere的规范，就可以和Anywhere框架进行无缝结合。
+" />
+<meta property="og:url" content="https://domyson.github.io/post/anywhere/0/" />
+<meta property="og:site_name" content="anywhere 客户端框架概述" />
+<meta property="og:image"
+  content="https://domyson.github.io/">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2023-04-01 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V23G8H27BQ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-V23G8H27BQ');
+  
+</script>
+
+</head>
+
+<body>
+  <div style="position: relative">
+  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+      <a class="Header-link" href="https://domyson.github.io/">
+        <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button class="Header-link btn-link js-details-target" type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div style="display: none;" id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+        <div class="position-relative">
+          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+            autocomplete="off">
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+              <input type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q" value="" placeholder="Search" autocomplete="off">
+              <input type="hidden" name="q" value="site:https://domyson.github.io/">
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+      <a class="Header-link " href="https://domyson.github.io/">
+        <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+          width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item" style="margin-right: 0;">
+      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+          version="1.1" width="16" height="16">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </header>
+</div>
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io/">
+                  <img class=" avatar-user"
+                    src="https://domyson.github.io/images/avatar.png"
+                    width="32" height="32"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://domyson.github.io/">Treasure</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://domyson.github.io/post/anywhere/0/">anywhere 客户端框架概述</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Sat, 01 Apr 2023 00:00:00 &#43;0000"
+                    class="no-wrap">
+                    Sat, 01 Apr 2023 00:00:00 &#43;0000</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Tue, 26 Mar 2024 22:04:53 &#43;0800"
+                    class="no-wrap">
+                    Tue, 26 Mar 2024 22:04:53 &#43;0800</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      1740 Words
+                    
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                    
+                    <a class="muted-link mr-3" href="/tags/">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      
+                    </a>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h1 id="序">序</h1>
+<p><code>Anywhere</code> 是一个基于 Unity 引擎的游戏框架，它被设计成无感知框架的框架（没有打错，事实上我也无法找出一个抽象的词语来形容这套抽象的框架），脱离 Unity 本身的编码方式，致力于采用无框架化开发的方式，内部提供了一个<code>ECS</code>的上层抽象来开发它，但事实上你并不一定需要使用<code>ECS</code>，你也可以使用<code>RMS</code>、<code>Datatable</code>、<code>Network</code>等模块来开发你的游戏，这些模块都是可以单独使用的，并且可以和<code>ECS</code>模块进行无缝结合。你也可以自己实现想<code>MVCC</code>，或者是<code>MVC</code>的模块，只要符合<code>Anywhere</code>的规范，就可以和<code>Anywhere</code>框架进行无缝结合。</p>
+<h1 id="设计目标">设计目标</h1>
+<ol>
+<li>
+<p>无框架化，它之所有不提供是为了更好的设计出不同品类的游戏，而我在近10年的游戏开发生涯中，我始终觉得框架的约束即使最大的约束，因为业务的多样性和非明确性的特点，一般游戏后期的一些奇奇怪怪的需求总是会迫使你绕过框架的约束从而形成屎山code，所以我希望<code>Anywhere</code>框架本身可以尽可能的简单，让开发者可以自由的去选择框架的约束。</p>
+</li>
+<li>
+<p>模块化，<code>Anywhere</code>的一大特色，以像<code>C library</code>的方式来组织模块，让模块之间可以互相调用，并且可以互相替换，让开发者可以自由的去选择模块的约束。选择何种内置模块，或者是自定义模块由开发者决定，这也是 <code>Anywhere</code> 唯一的约束，你的模块可以是框架，也可以是<code>Library</code>。</p>
+</li>
+<li>
+<p>简单化，<code>Anywhere</code> 本身只提最必要的一些基础组件，你可以重新实现，而并非是必要的，主打就是一个随意，像它的名字一样。</p>
+</li>
+<li>
+<p>自由化，游戏开发是自由的，是创造性的，<code>Anywhere</code> 不会约束你干什么，你只需要关注你的想法，怎么做取决于你的点子。</p>
+</li>
+<li>
+<p>去屎山，<code>Anywhere</code>尽可能提供一种自由规定来让业务不容易形成屎山，避免屎上填粪的代码出现</p>
+</li>
+</ol>
+<h1 id="成果">成果</h1>
+<blockquote>
+<p>我使用最初版本的<code>Anywhere</code>开发过三款独立项目，一款Roguelike，一款塔防，一款农场经营，这三款项目都使用了<code>Anywhere</code>框架，完成大部分核心内容只花费了一个月不到的时间，从中也调整过需要设计上的变动，是为了更好的适应游戏开发。计划是这三款项目的将会上架<code>Steam</code>，但受限于美术资源，可能近期不会花费太多时间进行开发，但不妨碍<code>Anywhere</code>框架的持续完善。</p>
+</blockquote>
+<h1 id="架构概念">架构概念</h1>
+<h2 id="component">Component</h2>
+<p><code>Component</code> 则认为是一个种类功能的具体实现，它用于执行游戏运行中的实际逻辑，不要和<code>ECS</code>中的<code>Component</code>混淆，
+它可以拥有数据，也可以拥有逻辑，它是一个完成特定逻辑的实现抽象，如<code>TimeComponent</code>，<code>NetComponent</code>,<code>AIComponent</code>等，它定义了某一个特定功能的实际实现并定义了一组指定约束。</p>
+<h2 id="controller">Controller</h2>
+<p><code>Controller</code> 需要注意的是它是基于内嵌编程思想的设计，用于定制<code>Component</code> 或者是<code>Lib</code> 的默认行为逻辑, 它可以动态开关，动态修改，它被设计成一个方法集，尽量不要带有任何数据对象，当然也可以带，不带的好处是为了复用用一个<code>Controller</code> 的时候，可以避免数据对象被重复创建，而带来的性能消耗。它在<code>Runtime</code>时根据不同的策略而产生不同的效果。如同下面文章中的<code>AIComponent</code>，对于同一种AI行为，它不需要关注AI实体是谁，而是关注其行为，它定义了AI的行为，而AI实体是它的实现。</p>
+<h2 id="lib">Lib</h2>
+<p><code>Lib</code>在某种程度的定义上跟 <code>Controller</code>重合，但<code>Lib</code>最大不同是它总是一个具体实现，在被需要的时候加载进入<code>Component</code>中，而<code>Controlller</code> 是尽量不要带有数据对象。像后续章节中提到的<code>Datatable</code>，<code>RMS</code>,<code>ECS</code> 等都是<code>Lib</code>。它们提供了一组明确的规范方式，让开发者可以自由的去选择其约束和组合。</p>
+<h2 id="flow">Flow</h2>
+<p>游戏流程一个游戏运行的逻辑方向，总不能像CPU的乱序发射，对于玩法而言，它可以存在不确定性，但对于整个游戏底层运行逻辑无外乎 <code>进入-&gt;开始-&gt;更新-&gt;游戏循环-&gt;结束</code> 这类逻辑，<code>Anywhere</code>将其实现为了流程，它定义了游戏运行的逻辑方向，而<code>Component</code> 则定义了游戏运行在某个时间点的具体逻辑。当然，它也是可选的，为何设计它呢？在三款Demo中通过<code>Component</code>实现是非常冗余的事情，抽丝剥茧时候才有了它。它的目的是为了方便游戏开发，让游戏开发人员可以专注于游戏玩法逻辑，而不用去关心游戏底层运行逻辑。</p>
+<h1 id="目录">目录</h1>
+<p><a href="/post/anywhere/1">ECS</a></p>
+<p><a href="/post/anywhere/2">RMS</a></p>
+<p><a href="/post/anywhere/3">Datatable</a></p>
+<p><a href="/post/anywhere/4">NetComponent</a></p>
+<p><a href="/post/anywhere/5">UIComponent</a></p>
+<p><a href="/post/anywhere/6">Lib</a></p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
+     crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7934154300350596"
+     data-ad-slot="3469296166"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://domyson.github.io/">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+    </a>
+    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+      
+      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+
+
+</div>
+</body>
+
+<script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
+
+</html>

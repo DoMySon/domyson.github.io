@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>anywhere 客户端框架概述 - 满船清梦压星河</title>
+    <title>ECS - 满船清梦压星河</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -18,7 +18,11 @@
 
     
     <meta name="description"
-  content="概述 Anywhere 是一个基于 Unity 引擎的框架，它设计理论源自于 ECS 当然还没有 Natvie Code 也没有 Brust 编译器。" />
+  content="序 这篇文章仅仅是介绍如何使用Anywhere 集成 ECS 框架，ECS并非必须的，甚至可以无框架化，就像我们第一次做Demo的时候一样，不要迷信框架，发挥自己的想象力去开发一个好玩的游戏才是最重要的，需要注意的是，本篇ECS并非是unity的ECS，它没有burst，也没有job system，而是一种设计思想。
+它在设计上完全不需要理会Anywhere的约束。
+架构 System System 用于描述一个实体的行为，比如MovementSystem，AnimationSystem等，System 之间可以相互组合，比如MovementSystem和AnimationSystem组合在一起，就是一个CharacterController
+Component Component 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character
+Enity Entity 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，" />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
@@ -26,23 +30,31 @@
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="anywhere 客户端框架概述 - 满船清梦压星河" />
+<meta name="twitter:title" content="ECS - 满船清梦压星河" />
 <meta name="twitter:description"
-  content="概述 Anywhere 是一个基于 Unity 引擎的框架，它设计理论源自于 ECS 当然还没有 Natvie Code 也没有 Brust 编译器。" />
-<meta name="twitter:site" content="https://domyson.github.io" />
+  content="序 这篇文章仅仅是介绍如何使用Anywhere 集成 ECS 框架，ECS并非必须的，甚至可以无框架化，就像我们第一次做Demo的时候一样，不要迷信框架，发挥自己的想象力去开发一个好玩的游戏才是最重要的，需要注意的是，本篇ECS并非是unity的ECS，它没有burst，也没有job system，而是一种设计思想。
+它在设计上完全不需要理会Anywhere的约束。
+架构 System System 用于描述一个实体的行为，比如MovementSystem，AnimationSystem等，System 之间可以相互组合，比如MovementSystem和AnimationSystem组合在一起，就是一个CharacterController
+Component Component 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character
+Enity Entity 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，" />
+<meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
-  content="https://domyson.github.io">
+  content="https://domyson.github.io/">
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="anywhere 客户端框架概述 - 满船清梦压星河">
+<meta property="og:title" content="ECS - 满船清梦压星河">
 <meta property="og:description"
-  content="概述 Anywhere 是一个基于 Unity 引擎的框架，它设计理论源自于 ECS 当然还没有 Natvie Code 也没有 Brust 编译器。" />
+  content="序 这篇文章仅仅是介绍如何使用Anywhere 集成 ECS 框架，ECS并非必须的，甚至可以无框架化，就像我们第一次做Demo的时候一样，不要迷信框架，发挥自己的想象力去开发一个好玩的游戏才是最重要的，需要注意的是，本篇ECS并非是unity的ECS，它没有burst，也没有job system，而是一种设计思想。
+它在设计上完全不需要理会Anywhere的约束。
+架构 System System 用于描述一个实体的行为，比如MovementSystem，AnimationSystem等，System 之间可以相互组合，比如MovementSystem和AnimationSystem组合在一起，就是一个CharacterController
+Component Component 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character
+Enity Entity 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，" />
 <meta property="og:url" content="https://domyson.github.io/post/anywhere/1/" />
-<meta property="og:site_name" content="anywhere 客户端框架概述" />
+<meta property="og:site_name" content="ECS" />
 <meta property="og:image"
-  content="https://domyson.github.io">
+  content="https://domyson.github.io/">
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
 
@@ -73,7 +85,7 @@
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
     <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
-      <a class="Header-link" href="https://domyson.github.io">
+      <a class="Header-link" href="https://domyson.github.io/">
         <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
           <path fill-rule="evenodd"
             d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
@@ -103,7 +115,7 @@
               <input type="text"
                 class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
                 name="q" value="" placeholder="Search" autocomplete="off">
-              <input type="hidden" name="q" value="site:https://domyson.github.io">
+              <input type="hidden" name="q" value="site:https://domyson.github.io/">
             </label>
           </form>
         </div>
@@ -111,7 +123,7 @@
     </div>
 
     <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
-      <a class="Header-link " href="https://domyson.github.io">
+      <a class="Header-link " href="https://domyson.github.io/">
         <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
           width="32">
           <path fill-rule="evenodd"
@@ -141,7 +153,7 @@
           <div class="flex-auto min-width-0 width-fit mr-3">
             <div class="d-flex">
               <div class="d-none d-md-block">
-                <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io">
+                <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io/">
                   <img class=" avatar-user"
                     src="https://domyson.github.io/images/avatar.png"
                     width="32" height="32"></a>
@@ -149,9 +161,9 @@
               <div class="d-flex flex-column">
                 <h1 class="break-word f3 text-normal mb-md-0 mb-1">
                   <span class="author">
-                    <a href="https://domyson.github.io">Treasure</a></span><span
+                    <a href="https://domyson.github.io/">Treasure</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://domyson.github.io/post/anywhere/1/">anywhere 客户端框架概述</a></strong>
+                      href="https://domyson.github.io/post/anywhere/1/">ECS</a></strong>
                 </h1>
                 <div class="note m-0">
                   Created <relative-time datetime="Sat, 01 Apr 2023 00:00:00 &#43;0000"
@@ -160,9 +172,9 @@
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Tue, 17 Oct 2023 01:32:42 &#43;0800"
+                  Modified <relative-time datetime="Tue, 26 Mar 2024 21:28:18 &#43;0800"
                     class="no-wrap">
-                    Tue, 17 Oct 2023 01:32:42 &#43;0800</relative-time>
+                    Tue, 26 Mar 2024 21:28:18 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -192,7 +204,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      39 Words
+                      677 Words
                     
 
                   </div>
@@ -215,8 +227,16 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><h1 id="概述">概述</h1>
-<p><code>Anywhere</code> 是一个基于 Unity 引擎的框架，它设计理论源自于 <code>ECS</code> 当然还没有 <code>Natvie Code</code> 也没有 <code>Brust</code> 编译器。</p>
+                <article class="markdown-body entry-content container-lg"><h1 id="序">序</h1>
+<p>这篇文章仅仅是介绍如何使用<code>Anywhere</code> 集成 <code>ECS</code> 框架，<code>ECS</code>并非必须的，甚至可以无框架化，就像我们第一次做<code>Demo</code>的时候一样，不要迷信框架，发挥自己的想象力去开发一个好玩的游戏才是最重要的，需要注意的是，本篇<code>ECS</code>并非是unity的ECS，它没有<code>burst</code>，也没有<code>job system</code>，而是一种设计思想。</p>
+<p>它在设计上完全不需要理会<code>Anywhere</code>的约束。</p>
+<h1 id="架构">架构</h1>
+<h2 id="system">System</h2>
+<p>System 用于描述一个实体的行为，比如<code>MovementSystem</code>，<code>AnimationSystem</code>等，System 之间可以相互组合，比如<code>MovementSystem</code>和<code>AnimationSystem</code>组合在一起，就是一个<code>CharacterController</code></p>
+<h2 id="component">Component</h2>
+<p>Component 用于描述一个实体的状态，比如<code>Transform</code>，<code>Rigidbody</code>，<code>Animator</code>等,Component 之间可以相互组合，比如<code>Rigidbody</code>和<code>Animator</code>组合在一起，就是一个<code>Character</code>，Component 之间可以相互组合，比如<code>Rigidbody</code>和<code>Animator</code>组合在一起，就是一个<code>Character</code>,Component 之间可以相互组合，比如<code>Rigidbody</code>和<code>Animator</code>组合在一起，就是一个<code>Character</code></p>
+<h2 id="enity">Enity</h2>
+<p>Entity 用于描述一个实体的状态，比如<code>Transform</code>，<code>Rigidbody</code>，<code>Animator</code>等,Entity 之间可以相互组合，比如<code>Rigidbody</code>和<code>Animator</code>组合在一起，就是一个<code>Character</code>，Entity 之间可以相互组合，比如<code>Rigidbody</code>和<code>Animator</code>组合在一起，就是一个<code>Character</code>，</p>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
      crossorigin="anonymous"></script>
 
@@ -245,7 +265,7 @@
   <div class="footer container-xl width-full p-responsive">
   <div
     class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
-    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://domyson.github.io">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://domyson.github.io/">
       <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
         <path fill-rule="evenodd"
           d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">

@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>anywhere on 满船清梦压星河</title>
+    <title>Anywhere on 满船清梦压星河</title>
     <link>https://domyson.github.io/categories/anywhere/</link>
-    <description>Recent content in anywhere on 满船清梦压星河</description>
+    <description>Recent content in Anywhere on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 01 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/categories/anywhere/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Mar 2024 22:09:32 +0800</lastBuildDate>
+    <atom:link href="https://domyson.github.io/categories/anywhere/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Addressable</title>
+      <link>https://domyson.github.io/post/anywhere/2/</link>
+      <pubDate>Sat, 01 Apr 2023 00:00:00 +0000</pubDate>
+      <guid>https://domyson.github.io/post/anywhere/2/</guid>
+      <description>简介 RMS 是一个全自动化 Assetbundle 资源管理系统，它内部使用RC的方式来管理资源的引用，但不需要手动显示释放,它通过拦截资源终结器的方式，来达到释放的目的，比手动安全性更高。它仅仅提供了两组接口LoadAsset LoadAssetAsync，LoadAsset 同步加载，LoadAssetAsync 异步加载。并提供了本地虚拟化的方式加载，在编辑器模式下不会真正的构建AssetBundle包，提供开发效率。&#xA;对于打包而言，无需关注AssetBundle包的构建，只需关注资源本身，它内部会自动构建AssetBundle包，并自动进行AssetBundle包的冗余清理。&#xA;Feature 自动化打包&#xA;自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。做到对上层完全无感。&#xA;自动化引用计数 通过 RC算法，监控资源的引用，来自动释放资源。无轮询资源引用，更好的性能，做到对上层完全无感。&#xA;自动化冗余剔除 对于分包模式而言这个是无作用的，但是一些特定的模式下，会自动进行冗余清理，对于Combine，Group 模式，它会自动剔除冗余的资源。&#xA;Profile资源使用分析 运行时记录资源的使用情况。用于线上实时分析。&#xA;多种模式支持&#xA;Static: 无需热更&#xA;Updateable： 可热更模式，仅需要配置远程资源地址即可&#xA;Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放&#xA;Mix: 混合模式，包括上述所有模式，仅需标记即可&#xA;标签模式 为了更好的匹配Anywhere,只需要在对应的Component 指定标记即可自动管理资源，无需任何逻辑 （开发中）</description>
+    </item>
     <item>
       <title>anywhere 客户端框架概述</title>
+      <link>https://domyson.github.io/post/anywhere/0/</link>
+      <pubDate>Sat, 01 Apr 2023 00:00:00 +0000</pubDate>
+      <guid>https://domyson.github.io/post/anywhere/0/</guid>
+      <description>&lt;h1 id=&#34;序&#34;&gt;序&lt;/h1&gt;&#xA;&lt;p&gt;&lt;code&gt;Anywhere&lt;/code&gt; 是一个基于 Unity 引擎的游戏框架，它被设计成无感知框架的框架（没有打错，事实上我也无法找出一个抽象的词语来形容这套抽象的框架），脱离 Unity 本身的编码方式，致力于采用无框架化开发的方式，内部提供了一个&lt;code&gt;ECS&lt;/code&gt;的上层抽象来开发它，但事实上你并不一定需要使用&lt;code&gt;ECS&lt;/code&gt;，你也可以使用&lt;code&gt;RMS&lt;/code&gt;、&lt;code&gt;Datatable&lt;/code&gt;、&lt;code&gt;Network&lt;/code&gt;等模块来开发你的游戏，这些模块都是可以单独使用的，并且可以和&lt;code&gt;ECS&lt;/code&gt;模块进行无缝结合。你也可以自己实现想&lt;code&gt;MVCC&lt;/code&gt;，或者是&lt;code&gt;MVC&lt;/code&gt;的模块，只要符合&lt;code&gt;Anywhere&lt;/code&gt;的规范，就可以和&lt;code&gt;Anywhere&lt;/code&gt;框架进行无缝结合。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>datatable</title>
+      <link>https://domyson.github.io/post/anywhere/3/</link>
+      <pubDate>Sat, 01 Apr 2023 00:00:00 +0000</pubDate>
+      <guid>https://domyson.github.io/post/anywhere/3/</guid>
+      <description>简介 Datatable 是一个基于 kpb 编码的配置文件管理系统,它定义了一个配置文件的数据结构，并提供了相应的API来操作和访问配置文件。&#xA;内部通过kbp 编码器来实现序列化和反序列化，不使用任何反射和脚本生成，通过Datatable类的主键来索引数据，</description>
+    </item>
+    <item>
+      <title>ECS</title>
       <link>https://domyson.github.io/post/anywhere/1/</link>
       <pubDate>Sat, 01 Apr 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://domyson.github.io/post/anywhere/1/</guid>
-      <description>概述 Anywhere 是一个基于 Unity 引擎的框架，它设计理论源自于 ECS 当然还没有 Natvie Code 也没有 Brust 编译器。</description>
+      <description>序 这篇文章仅仅是介绍如何使用Anywhere 集成 ECS 框架，ECS并非必须的，甚至可以无框架化，就像我们第一次做Demo的时候一样，不要迷信框架，发挥自己的想象力去开发一个好玩的游戏才是最重要的，需要注意的是，本篇ECS并非是unity的ECS，它没有burst，也没有job system，而是一种设计思想。&#xA;它在设计上完全不需要理会Anywhere的约束。&#xA;架构 System System 用于描述一个实体的行为，比如MovementSystem，AnimationSystem等，System 之间可以相互组合，比如MovementSystem和AnimationSystem组合在一起，就是一个CharacterController&#xA;Component Component 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character&#xA;Enity Entity 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，</description>
     </item>
-    
   </channel>
 </rss>

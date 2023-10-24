@@ -6,114 +6,91 @@
     <description>Recent content in Categories on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 04 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://domyson.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Mar 2024 23:06:47 +0800</lastBuildDate>
+    <atom:link href="https://domyson.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>scriptc</title>
-      <link>https://domyson.github.io/categories/scriptc/</link>
+      <title>Typelang</title>
+      <link>https://domyson.github.io/categories/typelang/</link>
       <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://domyson.github.io/categories/scriptc/</guid>
+      <guid>https://domyson.github.io/categories/typelang/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>anywhere</title>
+      <title>Anywhere</title>
       <link>https://domyson.github.io/categories/anywhere/</link>
       <pubDate>Sat, 01 Apr 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://domyson.github.io/categories/anywhere/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>skynet</title>
+      <title>Skynet</title>
       <link>https://domyson.github.io/categories/skynet/</link>
       <pubDate>Sat, 17 Dec 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://domyson.github.io/categories/skynet/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>redis</title>
+      <title>Redis</title>
       <link>https://domyson.github.io/categories/redis/</link>
       <pubDate>Thu, 24 Nov 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://domyson.github.io/categories/redis/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>mysql</title>
+      <title>Mysql</title>
       <link>https://domyson.github.io/categories/mysql/</link>
       <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://domyson.github.io/categories/mysql/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>linux</title>
+      <title>Linux</title>
       <link>https://domyson.github.io/categories/linux/</link>
       <pubDate>Sat, 19 Nov 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://domyson.github.io/categories/linux/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Go</title>
       <link>https://domyson.github.io/categories/go/</link>
       <pubDate>Fri, 07 Oct 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://domyson.github.io/categories/go/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>unity</title>
+      <title>Unity</title>
       <link>https://domyson.github.io/categories/unity/</link>
       <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://domyson.github.io/categories/unity/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>c</title>
+      <title>C</title>
       <link>https://domyson.github.io/categories/c/</link>
       <pubDate>Sat, 04 Jul 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://domyson.github.io/categories/c/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>net</title>
+      <title>Net</title>
       <link>https://domyson.github.io/categories/net/</link>
       <pubDate>Sun, 09 Feb 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://domyson.github.io/categories/net/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>others</title>
+      <title>Others</title>
       <link>https://domyson.github.io/categories/others/</link>
       <pubDate>Mon, 13 May 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://domyson.github.io/categories/others/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>cloud native</title>
+      <title>Cloud Native</title>
       <link>https://domyson.github.io/categories/cloud-native/</link>
       <pubDate>Tue, 12 Mar 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://domyson.github.io/categories/cloud-native/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>
