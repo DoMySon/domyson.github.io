@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>scriptc - 满船清梦压星河</title>
+    <title>Bytecode - 满船清梦压星河</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -18,43 +18,31 @@
 
     
     <meta name="description"
-  content=" 这篇文章将会是一个系列，更新会比源码慢，文档写的也不会写的很完全，名字暂定 scriptc, 语法是简化版的 c
-设计缘由 早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 skynet-go 写一门dsl，现在是用lua作为服务的脚本端。
-尽管它的性能是脚本语言中顶尖的，但是一些隐式写法并不能保证它的预期性能，如混合table,过多的函数调用栈，字符串操作以及无类型系统。
-类型系统有利有弊，但我个人的观点是宁愿多出30%的开发时间，而减少70%的bug。
-" />
+  content="序 " />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://domyson.github.io/post/scriptc/0/" />
+<link rel="canonical" href="https://domyson.github.io/post/typelang/5/" />
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="scriptc - 满船清梦压星河" />
+<meta name="twitter:title" content="Bytecode - 满船清梦压星河" />
 <meta name="twitter:description"
-  content=" 这篇文章将会是一个系列，更新会比源码慢，文档写的也不会写的很完全，名字暂定 scriptc, 语法是简化版的 c
-设计缘由 早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 skynet-go 写一门dsl，现在是用lua作为服务的脚本端。
-尽管它的性能是脚本语言中顶尖的，但是一些隐式写法并不能保证它的预期性能，如混合table,过多的函数调用栈，字符串操作以及无类型系统。
-类型系统有利有弊，但我个人的观点是宁愿多出30%的开发时间，而减少70%的bug。
-" />
-<meta name="twitter:site" content="https://domyson.github.io" />
+  content="序 " />
+<meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
-  content="https://domyson.github.io">
+  content="https://domyson.github.io/">
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="scriptc - 满船清梦压星河">
+<meta property="og:title" content="Bytecode - 满船清梦压星河">
 <meta property="og:description"
-  content=" 这篇文章将会是一个系列，更新会比源码慢，文档写的也不会写的很完全，名字暂定 scriptc, 语法是简化版的 c
-设计缘由 早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 skynet-go 写一门dsl，现在是用lua作为服务的脚本端。
-尽管它的性能是脚本语言中顶尖的，但是一些隐式写法并不能保证它的预期性能，如混合table,过多的函数调用栈，字符串操作以及无类型系统。
-类型系统有利有弊，但我个人的观点是宁愿多出30%的开发时间，而减少70%的bug。
-" />
-<meta property="og:url" content="https://domyson.github.io/post/scriptc/0/" />
-<meta property="og:site_name" content="scriptc" />
+  content="序 " />
+<meta property="og:url" content="https://domyson.github.io/post/typelang/5/" />
+<meta property="og:site_name" content="Bytecode" />
 <meta property="og:image"
-  content="https://domyson.github.io">
+  content="https://domyson.github.io/">
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
 
@@ -85,7 +73,7 @@
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
     <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
-      <a class="Header-link" href="https://domyson.github.io">
+      <a class="Header-link" href="https://domyson.github.io/">
         <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
           <path fill-rule="evenodd"
             d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
@@ -115,7 +103,7 @@
               <input type="text"
                 class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
                 name="q" value="" placeholder="Search" autocomplete="off">
-              <input type="hidden" name="q" value="site:https://domyson.github.io">
+              <input type="hidden" name="q" value="site:https://domyson.github.io/">
             </label>
           </form>
         </div>
@@ -123,7 +111,7 @@
     </div>
 
     <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
-      <a class="Header-link " href="https://domyson.github.io">
+      <a class="Header-link " href="https://domyson.github.io/">
         <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
           width="32">
           <path fill-rule="evenodd"
@@ -153,7 +141,7 @@
           <div class="flex-auto min-width-0 width-fit mr-3">
             <div class="d-flex">
               <div class="d-none d-md-block">
-                <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io">
+                <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io/">
                   <img class=" avatar-user"
                     src="https://domyson.github.io/images/avatar.png"
                     width="32" height="32"></a>
@@ -161,9 +149,9 @@
               <div class="d-flex flex-column">
                 <h1 class="break-word f3 text-normal mb-md-0 mb-1">
                   <span class="author">
-                    <a href="https://domyson.github.io">Treasure</a></span><span
+                    <a href="https://domyson.github.io/">Treasure</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://domyson.github.io/post/scriptc/0/">scriptc</a></strong>
+                      href="https://domyson.github.io/post/typelang/5/">Bytecode</a></strong>
                 </h1>
                 <div class="note m-0">
                   Created <relative-time datetime="Wed, 04 Oct 2023 00:00:00 &#43;0000"
@@ -172,9 +160,9 @@
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 25 Oct 2023 01:05:51 &#43;0800"
+                  Modified <relative-time datetime="Tue, 26 Mar 2024 21:33:44 &#43;0800"
                     class="no-wrap">
-                    Wed, 25 Oct 2023 01:05:51 &#43;0800</relative-time>
+                    Tue, 26 Mar 2024 21:33:44 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -204,7 +192,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      503 Words
+                      1 Words
                     
 
                   </div>
@@ -227,66 +215,8 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><blockquote>
-<p>这篇文章将会是一个系列，更新会比源码慢，文档写的也不会写的很完全，名字暂定 <code>scriptc</code>, 语法是简化版的 <code>c</code></p>
-</blockquote>
-<h1 id="设计缘由">设计缘由</h1>
-<p>早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 <a href="/post/skynet/skynet">skynet-go</a> 写一门dsl，现在是用lua作为服务的脚本端。</p>
-<p>尽管它的性能是脚本语言中顶尖的，但是一些隐式写法并不能保证它的预期性能，如混合<code>table</code>,过多的函数调用栈，字符串操作以及无类型系统。</p>
-<blockquote>
-<p>类型系统有利有弊，但我个人的观点是宁愿多出30%的开发时间，而减少70%的bug。</p>
-</blockquote>
-<h1 id="register-based-和-stack-based">Register Based 和 Stack Based</h1>
-<p>如<code>python,ruby,js,java</code> 属于 <code>Stack Based</code>, 而<code>lua</code>则属于<code>Register Based</code>.</p>
-<p>有许多文章都解释了它们之间的区别，一句话概括<code>Register Based</code> 拥有更好的性能,因为它节省了很多入栈和出栈的操作，相应的它的实现会比<code>Stack Based</code>复杂很多，而且<code>Register Based</code>的指令于真实的汇编也很相似，它们的优化手段也是非常多的。</p>
-<h1 id="目标">目标</h1>
-<ul>
-<li>
-<p>强类型脚本语言</p>
-</li>
-<li>
-<p>支持单线程对称协程，也仅为单线程</p>
-</li>
-<li>
-<p>支持宿主语言交互</p>
-</li>
-<li>
-<p>register based</p>
-</li>
-<li>
-<p>通用伪汇编指令设计</p>
-</li>
-</ul>
-<h1 id="目录">目录</h1>
-<ol>
-<li>
-<p><a href="/post/scriptc/1">词法分析器(Lexer)</a></p>
-</li>
-<li>
-<p><a href="/post/scriptc/2">语法分析器(Grammar)</a></p>
-</li>
-<li>
-<p><a href="/post/scriptc/3">抽象语法树(AST)</a></p>
-</li>
-<li>
-<p><a href="/post/scriptc/4">RegisterBased</a></p>
-</li>
-<li>
-<p><a href="/post/scriptc/5">伪汇编指令设计</a></p>
-</li>
-</ol>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
-     crossorigin="anonymous"></script>
-
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7934154300350596"
-     data-ad-slot="3469296166"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script></article>
+                <article class="markdown-body entry-content container-lg"><h1 id="序">序</h1>
+</article>
               </div>
             </div>
           </div>
@@ -302,7 +232,7 @@
   <div class="footer container-xl width-full p-responsive">
   <div
     class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
-    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://domyson.github.io">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://domyson.github.io/">
       <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
         <path fill-rule="evenodd"
           d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">

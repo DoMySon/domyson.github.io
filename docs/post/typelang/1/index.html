@@ -28,7 +28,7 @@ typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://domyson.github.io/post/scriptc/1/" />
+<link rel="canonical" href="https://domyson.github.io/post/typelang/1/" />
 
 
 <meta name="twitter:card" content="summary" />
@@ -41,10 +41,10 @@ typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解
 像类似于 &#43;,-,*,/ 等都属于运算符
 其中 const int sum = 100; 中的100 则认为是一个常数.
 基本设计 首先我们为一个词定义一些token,如 typedef enum Token { EOF = 0, COMMENT, IDENT, __KEYWORD_BEGIN IF, ELSE, SWITCH, CASE, RETURN, // etc... __KEYWORD_END, __MATH_BEGIN Add, // &#43; Sub, // - Mul, // * Quo, // / Rem, // % And, // &amp;amp; Or, // | __MATH_END }; 可以属于到几个特殊的定义 __XXX_BEING,__XXX_END 这是为了方便后续快速区分这些&amp;quot;词&amp;quot;是属于那些种类" />
-<meta name="twitter:site" content="https://domyson.github.io" />
+<meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
-  content="https://domyson.github.io">
+  content="https://domyson.github.io/">
 
 
 <meta property="og:type" content="article" />
@@ -57,10 +57,10 @@ typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解
 像类似于 &#43;,-,*,/ 等都属于运算符
 其中 const int sum = 100; 中的100 则认为是一个常数.
 基本设计 首先我们为一个词定义一些token,如 typedef enum Token { EOF = 0, COMMENT, IDENT, __KEYWORD_BEGIN IF, ELSE, SWITCH, CASE, RETURN, // etc... __KEYWORD_END, __MATH_BEGIN Add, // &#43; Sub, // - Mul, // * Quo, // / Rem, // % And, // &amp;amp; Or, // | __MATH_END }; 可以属于到几个特殊的定义 __XXX_BEING,__XXX_END 这是为了方便后续快速区分这些&amp;quot;词&amp;quot;是属于那些种类" />
-<meta property="og:url" content="https://domyson.github.io/post/scriptc/1/" />
+<meta property="og:url" content="https://domyson.github.io/post/typelang/1/" />
 <meta property="og:site_name" content="lex" />
 <meta property="og:image"
-  content="https://domyson.github.io">
+  content="https://domyson.github.io/">
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
 
@@ -91,7 +91,7 @@ typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
     <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
-      <a class="Header-link" href="https://domyson.github.io">
+      <a class="Header-link" href="https://domyson.github.io/">
         <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
           <path fill-rule="evenodd"
             d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
@@ -121,7 +121,7 @@ typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解
               <input type="text"
                 class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
                 name="q" value="" placeholder="Search" autocomplete="off">
-              <input type="hidden" name="q" value="site:https://domyson.github.io">
+              <input type="hidden" name="q" value="site:https://domyson.github.io/">
             </label>
           </form>
         </div>
@@ -129,7 +129,7 @@ typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解
     </div>
 
     <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
-      <a class="Header-link " href="https://domyson.github.io">
+      <a class="Header-link " href="https://domyson.github.io/">
         <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
           width="32">
           <path fill-rule="evenodd"
@@ -159,7 +159,7 @@ typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解
           <div class="flex-auto min-width-0 width-fit mr-3">
             <div class="d-flex">
               <div class="d-none d-md-block">
-                <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io">
+                <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io/">
                   <img class=" avatar-user"
                     src="https://domyson.github.io/images/avatar.png"
                     width="32" height="32"></a>
@@ -167,9 +167,9 @@ typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解
               <div class="d-flex flex-column">
                 <h1 class="break-word f3 text-normal mb-md-0 mb-1">
                   <span class="author">
-                    <a href="https://domyson.github.io">Treasure</a></span><span
+                    <a href="https://domyson.github.io/">Treasure</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://domyson.github.io/post/scriptc/1/">lex</a></strong>
+                      href="https://domyson.github.io/post/typelang/1/">lex</a></strong>
                 </h1>
                 <div class="note m-0">
                   Created <relative-time datetime="Wed, 04 Oct 2023 00:00:00 &#43;0000"
@@ -178,9 +178,9 @@ typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Tue, 24 Oct 2023 21:39:16 &#43;0800"
+                  Modified <relative-time datetime="Tue, 26 Mar 2024 23:06:47 &#43;0800"
                     class="no-wrap">
-                    Tue, 24 Oct 2023 21:39:16 &#43;0800</relative-time>
+                    Tue, 26 Mar 2024 23:06:47 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -210,7 +210,7 @@ typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解
                         </div>
                       </div>
                     </details-menu>
-                      893 Words
+                      1598 Words
                     
 
                   </div>
@@ -308,7 +308,7 @@ typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>
 </span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">line</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buf</span><span class="p">[];</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
@@ -336,7 +336,51 @@ typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>至此，词法分析器的大致原理已经分析完毕了，后续可以参考 <code>AST</code> 以及 语法分析器<code>Grammar</code></p>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
+<h1 id="优化">优化</h1>
+<p>emmm&hellip; 本身而言这个可以段可以不写，如果你能看到这，你可以接触更高阶的知识。作为一个由追求的程序员，优化是必须的，去tm的后续优化，哥写代码就是要一边写一边优化 :)</p>
+<ol>
+<li>
+<p>I/O 读取优化
+通常而言，对于不大的文件，我们直接读取全部内容到内存中，然后进行处理，但是这样会存在一个问题，就是如果文件过大，那么内存会爆，所以需要进行优化，将文件内容分段读取，然后进行处理，这样可以避免一次性读取过多内容，从而避免内存溢出，以及过多的内存碎片。
+如上述改为<code>lex</code>结构改为固定缓冲，如 <code>char buf[512]</code> 并增加一个<code>offset</code>偏移量和文件编译指针，对于后续其它文件而言都可以复用这个结构。</p>
+</li>
+<li>
+<p>扫描优化
+机器不同于人脑，人脑可以可以同时处理多个字符输入，但对于计算机而言，只能一个一个处理，我们可以定义一些非二义性的关键字和词组，如<code>\\</code> 我们可以立刻判断这是注释，直接 <code>goto</code> 到对应的 <code>label</code>,而不是逐个字符判断。直接人为处理</p>
+</li>
+<li>
+<p>伪共享优化
+CPU在读取数据时，是以一个缓存行为单位读取的（64byte），假设这个缓存行中有两个long类型的变量a、b，当一个线程A读取a，并修改a，线程A在未写回缓存之前，另一个线程B读取了b，读取的这个b所在的缓存是无效的（前面说的缓存失效），本来是为了提高性能是使用的缓存，现在为了提高命中率，反而被拖慢了，这就是传说中的伪共享。最简单的方式就是以一个缓存行为单位读取，这样就不会存在伪共享问题了。从上述可知 <code>sizeof(lex)== 24</code> 我们只需要填充 <code>char byte[40]</code> 让它一次能填满缓冲行即可。</p>
+<p>更多的可以查看 <a href="https://blog.csdn.net/xiaowenmu1/article/details/89705740">MESI协议</a></p>
+</li>
+</ol>
+<p>上述优化完毕的测试结果，对于以下脚本仅需 <code>1.216ns</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">   <span class="c1">// this is a comment
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">   <span class="n">int32</span> <span class="n">a</span>  <span class="c1">// this is back comment
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">   <span class="n">int32</span> <span class="n">b</span><span class="o">=</span><span class="mi">33</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="n">float32</span> <span class="n">c</span> <span class="o">=</span> <span class="mf">3.14</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="n">int32</span> <span class="n">a1</span> <span class="o">=</span> <span class="mi">0</span><span class="n">b0101</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="n">int32</span> <span class="n">a2</span> <span class="o">=</span> <span class="mh">0x123456789abcdef</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="n">int32</span> <span class="n">a3</span> <span class="o">=</span> <span class="mo">012323</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="kt">bool</span> <span class="n">d</span> <span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="kt">bool</span> <span class="n">c</span> <span class="o">=</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="n">function</span> <span class="nf">fib</span><span class="p">(</span><span class="n">int32</span> <span class="n">n</span><span class="p">)</span> <span class="n">int32</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">       <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">           <span class="k">return</span> <span class="n">n</span>
+</span></span><span class="line"><span class="cl">       <span class="p">}</span>
+</span></span><span class="line"><span class="cl">       <span class="k">return</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="p">}</span>
+</span></span><span class="line"><span class="cl">   <span class="nf">fib</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</span></span></code></pre></div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
      crossorigin="anonymous"></script>
 
 <ins class="adsbygoogle"
@@ -364,7 +408,7 @@ typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解
   <div class="footer container-xl width-full p-responsive">
   <div
     class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
-    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://domyson.github.io">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://domyson.github.io/">
       <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
         <path fill-rule="evenodd"
           d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">

@@ -14,6 +14,8 @@ run:
 	
 	@hugo server -d doc
 
+	@rm -r ./doc
+
 build:
 	@for i in `ls ./docs`;do if [ "$i" != ads.txt ];then \
 	rm -rf ./docs/$i; \
