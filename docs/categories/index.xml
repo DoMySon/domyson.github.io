@@ -6,7 +6,7 @@
     <description>Recent content in Categories on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 28 Mar 2024 12:50:32 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 29 Mar 2024 01:03:35 +0800</lastBuildDate>
     <atom:link href="https://domyson.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Typelang</title>
@@ -20,27 +20,6 @@
       <link>https://domyson.github.io/categories/anywhere/</link>
       <pubDate>Sat, 01 Apr 2023 00:00:00 +0000</pubDate>
       <guid>https://domyson.github.io/categories/anywhere/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Skynet</title>
-      <link>https://domyson.github.io/categories/skynet/</link>
-      <pubDate>Sat, 17 Dec 2022 00:00:00 +0000</pubDate>
-      <guid>https://domyson.github.io/categories/skynet/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Redis</title>
-      <link>https://domyson.github.io/categories/redis/</link>
-      <pubDate>Thu, 24 Nov 2022 00:00:00 +0000</pubDate>
-      <guid>https://domyson.github.io/categories/redis/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Mysql</title>
-      <link>https://domyson.github.io/categories/mysql/</link>
-      <pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate>
-      <guid>https://domyson.github.io/categories/mysql/</guid>
       <description></description>
     </item>
     <item>
@@ -58,10 +37,17 @@
       <description></description>
     </item>
     <item>
-      <title>Unity</title>
-      <link>https://domyson.github.io/categories/unity/</link>
-      <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
-      <guid>https://domyson.github.io/categories/unity/</guid>
+      <title>Skynet</title>
+      <link>https://domyson.github.io/categories/skynet/</link>
+      <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
+      <guid>https://domyson.github.io/categories/skynet/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mysql</title>
+      <link>https://domyson.github.io/categories/mysql/</link>
+      <pubDate>Wed, 06 Apr 2022 00:00:00 +0000</pubDate>
+      <guid>https://domyson.github.io/categories/mysql/</guid>
       <description></description>
     </item>
     <item>

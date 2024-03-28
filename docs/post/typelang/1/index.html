@@ -19,12 +19,7 @@
     
     <meta name="description"
   content="序 对于一个源码文件而言，里面的内容只是一个个字符，机器是无法识别的，而词法分析器的作用类似于转义器，将一个个字符拆成若干个有特定意义的词，而这一过程称为词法分析，此时它也不能被机器(或者这个虚拟机)识别
-词法分析器 Token,Keyword,界符，常数，运算符 token 以及 keyword是存在区别的，像token 可以是认为是一个此的描述，如:
-const int sum = 100; typedef struct my_struct{ int a ; unsigned int b; char *c; }; 学过语言的都知道，什么是语言关键字。
-typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解为一个词的代号，而keyword属于被包含关系，typedef,struct,int 它们属于keyword,因为它们是程序内部定义&amp;quot;词&amp;quot;，而my_struct则属于用于定义的，
-像类似于 &#43;,-,*,/ 等都属于运算符
-其中 const int sum = 100; 中的100 则认为是一个常数.
-基本设计 首先我们为一个词定义一些token,如 typedef enum Token { EOF = 0, COMMENT, IDENT, __KEYWORD_BEGIN IF, ELSE, SWITCH, CASE, RETURN, // etc... __KEYWORD_END, __MATH_BEGIN Add, // &#43; Sub, // - Mul, // * Quo, // / Rem, // % And, // &amp;amp; Or, // | __MATH_END }; 可以属于到几个特殊的定义 __XXX_BEING,__XXX_END 这是为了方便后续快速区分这些&amp;quot;词&amp;quot;是属于那些种类" />
+" />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
@@ -35,12 +30,7 @@ typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解
 <meta name="twitter:title" content="lex - 满船清梦压星河" />
 <meta name="twitter:description"
   content="序 对于一个源码文件而言，里面的内容只是一个个字符，机器是无法识别的，而词法分析器的作用类似于转义器，将一个个字符拆成若干个有特定意义的词，而这一过程称为词法分析，此时它也不能被机器(或者这个虚拟机)识别
-词法分析器 Token,Keyword,界符，常数，运算符 token 以及 keyword是存在区别的，像token 可以是认为是一个此的描述，如:
-const int sum = 100; typedef struct my_struct{ int a ; unsigned int b; char *c; }; 学过语言的都知道，什么是语言关键字。
-typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解为一个词的代号，而keyword属于被包含关系，typedef,struct,int 它们属于keyword,因为它们是程序内部定义&amp;quot;词&amp;quot;，而my_struct则属于用于定义的，
-像类似于 &#43;,-,*,/ 等都属于运算符
-其中 const int sum = 100; 中的100 则认为是一个常数.
-基本设计 首先我们为一个词定义一些token,如 typedef enum Token { EOF = 0, COMMENT, IDENT, __KEYWORD_BEGIN IF, ELSE, SWITCH, CASE, RETURN, // etc... __KEYWORD_END, __MATH_BEGIN Add, // &#43; Sub, // - Mul, // * Quo, // / Rem, // % And, // &amp;amp; Or, // | __MATH_END }; 可以属于到几个特殊的定义 __XXX_BEING,__XXX_END 这是为了方便后续快速区分这些&amp;quot;词&amp;quot;是属于那些种类" />
+" />
 <meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -51,12 +41,7 @@ typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解
 <meta property="og:title" content="lex - 满船清梦压星河">
 <meta property="og:description"
   content="序 对于一个源码文件而言，里面的内容只是一个个字符，机器是无法识别的，而词法分析器的作用类似于转义器，将一个个字符拆成若干个有特定意义的词，而这一过程称为词法分析，此时它也不能被机器(或者这个虚拟机)识别
-词法分析器 Token,Keyword,界符，常数，运算符 token 以及 keyword是存在区别的，像token 可以是认为是一个此的描述，如:
-const int sum = 100; typedef struct my_struct{ int a ; unsigned int b; char *c; }; 学过语言的都知道，什么是语言关键字。
-typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解为一个词的代号，而keyword属于被包含关系，typedef,struct,int 它们属于keyword,因为它们是程序内部定义&amp;quot;词&amp;quot;，而my_struct则属于用于定义的，
-像类似于 &#43;,-,*,/ 等都属于运算符
-其中 const int sum = 100; 中的100 则认为是一个常数.
-基本设计 首先我们为一个词定义一些token,如 typedef enum Token { EOF = 0, COMMENT, IDENT, __KEYWORD_BEGIN IF, ELSE, SWITCH, CASE, RETURN, // etc... __KEYWORD_END, __MATH_BEGIN Add, // &#43; Sub, // - Mul, // * Quo, // / Rem, // % And, // &amp;amp; Or, // | __MATH_END }; 可以属于到几个特殊的定义 __XXX_BEING,__XXX_END 这是为了方便后续快速区分这些&amp;quot;词&amp;quot;是属于那些种类" />
+" />
 <meta property="og:url" content="https://domyson.github.io/post/typelang/1/" />
 <meta property="og:site_name" content="lex" />
 <meta property="og:image"
@@ -178,9 +163,9 @@ typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Thu, 28 Mar 2024 03:25:35 &#43;0000"
+                  Modified <relative-time datetime="Thu, 28 Mar 2024 21:49:46 &#43;0800"
                     class="no-wrap">
-                    Thu, 28 Mar 2024 03:25:35 &#43;0000</relative-time>
+                    Thu, 28 Mar 2024 21:49:46 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -391,8 +376,7 @@ CPU在读取数据时，是以一个缓存行为单位读取的（64byte），�
      data-full-width-responsive="true"></ins>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</article>
+</script></article>
               </div>
             </div>
           </div>

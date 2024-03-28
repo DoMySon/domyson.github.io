@@ -6,7 +6,7 @@
     <description>Recent content in Typelang on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 28 Mar 2024 03:25:35 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 28 Mar 2024 21:49:46 +0800</lastBuildDate>
     <atom:link href="https://domyson.github.io/categories/typelang/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AST 抽象语法树</title>
@@ -34,7 +34,7 @@
       <link>https://domyson.github.io/post/typelang/1/</link>
       <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
       <guid>https://domyson.github.io/post/typelang/1/</guid>
-      <description>序 对于一个源码文件而言，里面的内容只是一个个字符，机器是无法识别的，而词法分析器的作用类似于转义器，将一个个字符拆成若干个有特定意义的词，而这一过程称为词法分析，此时它也不能被机器(或者这个虚拟机)识别&#xA;词法分析器 Token,Keyword,界符，常数，运算符 token 以及 keyword是存在区别的，像token 可以是认为是一个此的描述，如:&#xA;const int sum = 100; typedef struct my_struct{ int a ; unsigned int b; char *c; }; 学过语言的都知道，什么是语言关键字。&#xA;typedef,struct,int,my_struct 等都可以认为是一个token,可以简单理解为一个词的代号，而keyword属于被包含关系，typedef,struct,int 它们属于keyword,因为它们是程序内部定义&amp;quot;词&amp;quot;，而my_struct则属于用于定义的，&#xA;像类似于 +,-,*,/ 等都属于运算符&#xA;其中 const int sum = 100; 中的100 则认为是一个常数.&#xA;基本设计 首先我们为一个词定义一些token,如 typedef enum Token { EOF = 0, COMMENT, IDENT, __KEYWORD_BEGIN IF, ELSE, SWITCH, CASE, RETURN, // etc... __KEYWORD_END, __MATH_BEGIN Add, // + Sub, // - Mul, // * Quo, // / Rem, // % And, // &amp;amp; Or, // | __MATH_END }; 可以属于到几个特殊的定义 __XXX_BEING,__XXX_END 这是为了方便后续快速区分这些&amp;quot;词&amp;quot;是属于那些种类</description>
+      <description>&lt;h1 id=&#34;序&#34;&gt;序&lt;/h1&gt;&#xA;&lt;p&gt;对于一个源码文件而言，里面的内容只是一个个字符，机器是无法识别的，而词法分析器的作用类似于转义器，将一个个字符拆成若干个有特定意义的词，而这一过程称为词法分析，此时它也不能被机器(或者这个虚拟机)识别&lt;/p&gt;</description>
     </item>
     <item>
       <title>Register</title>
