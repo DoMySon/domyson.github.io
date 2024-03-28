@@ -744,55 +744,6 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/anywhere/2/">Addressable</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                简介 RMS 是一个全自动化 Assetbundle 资源管理系统，它内部使用RC的方式来管理资源的引用，但不需要手动显示释放,它通过拦截资源终结器的方式，来达到释放的目的，比手动安全性更高。它仅仅提供了两组接口LoadAsset LoadAssetAsync，LoadAsset 同步加载，LoadAssetAsync 异步加载。并提供了本地虚拟化的方式加载，在编辑器模式下不会真正的构建AssetBundle包，提供开发效率。
-对于打包而言，无需关注AssetBundle包的构建，只需关注资源本身，它内部会自动构建AssetBundle包，并自动进行AssetBundle包的冗余清理。
-Feature 自动化打包
-自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。做到对上层完全无感。
-自动化引用计数 通过 RC算法，监控资源的引用，来自动释放资源。无轮询资源引用，更好的性能，做到对上层完全无感。
-自动化冗余剔除 对于分包模式而言这个是无作用的，但是一些特定的模式下，会自动进行冗余清理，对于Combine，Group 模式，它会自动剔除冗余的资源。
-Profile资源使用分析 运行时记录资源的使用情况。用于线上实时分析。
-多种模式支持
-Static: 无需热更
-Updateable： 可热更模式，仅需要配置远程资源地址即可
-Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放
-Mix: 混合模式，包括上述所有模式，仅需标记即可
-标签模式 为了更好的匹配Anywhere,只需要在对应的Component 指定标记即可自动管理资源，无需任何逻辑 （开发中）
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-              
-              <a class="muted-link mr-3" href="/tags/">
-                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-                  <path fill-rule="evenodd"
-                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-                  </path>
-                </svg>
-                
-              </a>
-              
-              
-
-              Created
-              <relative-time datetime=" Sat, 01 Apr 2023 00:00:00 &#43;0000" class="no-wrap"
-                title=" Sat, 01 Apr 2023 00:00:00 &#43;0000">
-                Sat, 01 Apr 2023 00:00:00 &#43;0000
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
                 <a href="https://domyson.github.io/post/anywhere/0/">anywhere 客户端框架概述</a>
               </h3>
             </div>
@@ -876,10 +827,60 @@ Mix: 混合模式，包括上述所有模式，仅需标记即可
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
                 序 这篇文章仅仅是介绍如何使用Anywhere 集成 ECS 框架，ECS并非必须的，甚至可以无框架化，就像我们第一次做Demo的时候一样，不要迷信框架，发挥自己的想象力去开发一个好玩的游戏才是最重要的，需要注意的是，本篇ECS并非是unity的ECS，它没有burst，也没有job system，而是一种设计思想。
-它在设计上完全不需要理会Anywhere的约束。
+本编会按照ECS的定义手动实现一个ECS框架
 架构 System System 用于描述一个实体的行为，比如MovementSystem，AnimationSystem等，System 之间可以相互组合，比如MovementSystem和AnimationSystem组合在一起，就是一个CharacterController
 Component Component 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character
 Enity Entity 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+              
+              <a class="muted-link mr-3" href="/tags/">
+                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                  <path fill-rule="evenodd"
+                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                  </path>
+                </svg>
+                
+              </a>
+              
+              
+
+              Created
+              <relative-time datetime=" Sat, 01 Apr 2023 00:00:00 &#43;0000" class="no-wrap"
+                title=" Sat, 01 Apr 2023 00:00:00 &#43;0000">
+                Sat, 01 Apr 2023 00:00:00 &#43;0000
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://domyson.github.io/post/anywhere/2/">RMS</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                简介 RMS 是一个全自动化 Assetbundle 资源管理系统，它内部使用RC的方式来管理资源的引用，但不需要手动显示释放,它通过拦截资源终结器的方式，来达到释放的目的，比手动安全性更高。它仅仅提供了两组接口LoadAsset LoadAssetAsync，LoadAsset 同步加载，LoadAssetAsync 异步加载。并提供了本地虚拟化的方式加载，在编辑器模式下不会真正的构建AssetBundle包，提供开发效率。
+Feature 自动化打包
+自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。做到对上层完全无感。
+自动化引用计数 通过 RC算法，监控资源的引用，来自动释放资源。无轮询资源引用，更好的性能，做到对上层完全无感。
+自动化冗余剔除 对于分包模式而言这个是无作用的，对于Combine，Group 模式，它会自动剔除冗余的资源。
+Profile资源使用分析 运行时记录资源的使用情况。用于线上实时分析。
+多种模式支持
+Static: 无需热更
+Updateable： 可热更模式，仅需要配置远程资源地址即可
+Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放
+Mix: 混合模式，包括上述所有模式，仅需标记即可
+标签模式 为了更好的匹配Anywhere,只需要在对应的Component 指定标记即可自动管理资源，无需任何逻辑 （开发中）
+后续计划 现阶段RMS是依赖于Assetbundle 后续会抽象出一层 Virtual File System 以提供自定义流提供更多可操作性和安全性。
+RMS现在可以说是完全不能脱离Unity独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步在Unity中只需要手动实现一个Adaptor即可。
               </div>
             </div>
 

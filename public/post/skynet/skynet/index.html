@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='https://domyson.github.io/css/frameworks.min.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/github.min.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/github-style.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
+    <title>skynet-go 设计初衷以及特性 - 满船清梦压星河</title>
+    
+    <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
+    
+    <meta name="theme-color" content="#1e2327">
+
+    
+    <meta name="description"
+  content="概述 skynet-go 是一个基于消息和服务的Actor分布式服务框架， 采用go编写，致力于简化开发难度和成本。
+它是一个年轻的框架，仅仅经历了两款项目的迭代 现在版本为 v1.6.0 2023-05-28
+羽翼军团 v1.3.0 我在民国淘古玩 v.1.3.5 至于什么是Actor是必要了解的概念，skynet 以及 erlang 都是基于这种模式。
+与skynet-c的区别可见(暂未统计) diff-skynet
+" />
+<meta name="keywords"
+  content='computer tech' />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://domyson.github.io/post/skynet/skynet/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="skynet-go 设计初衷以及特性 - 满船清梦压星河" />
+<meta name="twitter:description"
+  content="概述 skynet-go 是一个基于消息和服务的Actor分布式服务框架， 采用go编写，致力于简化开发难度和成本。
+它是一个年轻的框架，仅仅经历了两款项目的迭代 现在版本为 v1.6.0 2023-05-28
+羽翼军团 v1.3.0 我在民国淘古玩 v.1.3.5 至于什么是Actor是必要了解的概念，skynet 以及 erlang 都是基于这种模式。
+与skynet-c的区别可见(暂未统计) diff-skynet
+" />
+<meta name="twitter:site" content="https://domyson.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image"
+  content="https://domyson.github.io/">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="skynet-go 设计初衷以及特性 - 满船清梦压星河">
+<meta property="og:description"
+  content="概述 skynet-go 是一个基于消息和服务的Actor分布式服务框架， 采用go编写，致力于简化开发难度和成本。
+它是一个年轻的框架，仅仅经历了两款项目的迭代 现在版本为 v1.6.0 2023-05-28
+羽翼军团 v1.3.0 我在民国淘古玩 v.1.3.5 至于什么是Actor是必要了解的概念，skynet 以及 erlang 都是基于这种模式。
+与skynet-c的区别可见(暂未统计) diff-skynet
+" />
+<meta property="og:url" content="https://domyson.github.io/post/skynet/skynet/" />
+<meta property="og:site_name" content="skynet-go 设计初衷以及特性" />
+<meta property="og:image"
+  content="https://domyson.github.io/">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2022-06-20 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V23G8H27BQ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-V23G8H27BQ');
+  
+</script>
+
+</head>
+
+<body>
+  <div style="position: relative">
+  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+      <a class="Header-link" href="https://domyson.github.io/">
+        <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button class="Header-link btn-link js-details-target" type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div style="display: none;" id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+        <div class="position-relative">
+          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+            autocomplete="off">
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+              <input type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q" value="" placeholder="Search" autocomplete="off">
+              <input type="hidden" name="q" value="site:https://domyson.github.io/">
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+      <a class="Header-link " href="https://domyson.github.io/">
+        <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+          width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item" style="margin-right: 0;">
+      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+          version="1.1" width="16" height="16">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </header>
+</div>
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io/">
+                  <img class=" avatar-user"
+                    src="https://domyson.github.io/images/avatar.png"
+                    width="32" height="32"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://domyson.github.io/">Treasure</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://domyson.github.io/post/skynet/skynet/">skynet-go 设计初衷以及特性</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Mon, 20 Jun 2022 00:00:00 &#43;0000"
+                    class="no-wrap">
+                    Mon, 20 Jun 2022 00:00:00 &#43;0000</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Thu, 28 Mar 2024 03:25:35 &#43;0000"
+                    class="no-wrap">
+                    Thu, 28 Mar 2024 03:25:35 &#43;0000</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      1035 Words
+                    
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h1 id="概述">概述</h1>
+<blockquote>
+<p><code>skynet-go</code> 是一个基于消息和服务的<code>Actor</code>分布式服务框架，
+采用<code>go</code>编写，致力于简化开发难度和成本。</p>
+</blockquote>
+<p>它是一个年轻的框架，仅仅经历了两款项目的迭代 现在版本为 <code>v1.6.0 2023-05-28</code></p>
+<ul>
+<li><a href="https://www.taptap.cn/app/229839">羽翼军团</a> v1.3.0</li>
+<li><a href="https://www.taptap.cn/app/215934">我在民国淘古玩</a> v.1.3.5</li>
+</ul>
+<p>至于什么是<code>Actor</code>是必要了解的概念，<a href="https://github.com/cloudwu/skynet">skynet</a> 以及 <code>erlang</code> 都是基于这种模式。</p>
+<p>与<code>skynet-c</code>的区别可见(暂未统计) <a href="/post/diff">diff-skynet</a></p>
+<h1 id="设计概述">设计概述</h1>
+<ul>
+<li>
+<p>过往的工作中曾经开发了一个<code>cobweb</code>的分布式服务器框架（基于<code>golang</code>,<code>c</code>）,但是在实际开发过程中代码难以维护以及更新，主要是每次都需要跨平台进行编译，特别是<code>cgo</code> 往往需要指定平台的系统库,而且一些不规范的使用方式造成无法充分发挥多核的优势，可以参见 <code>关于Go协程的思考</code> 虽然1.16 支持抢占式，但错误的使用方式依然造成了cpu过高的问题。</p>
+</li>
+<li>
+<p>再者，服务器过多的 <code>goroutine</code> 被创建，极大浪费了内存以及cpu。我不希望滥用协程，其代价比预估的要高。</p>
+</li>
+<li>
+<p>由于以上目的，重写了<code>cobweb</code> 的底层，底层对用户不再透明。而是通过脚本语言导出来提供支持</p>
+</li>
+<li>
+<p>这里强调一点，<code>skynet-go</code> 设计类似于 <code>skynet</code>，但极大部分全由底层语言实现，而<code>Lua</code>更像是一个命令，也类似现在规则引擎的概念，这也是和 <code>skynet</code> 最大的区别，它没有任何多余的<code>Lua</code> 代码。甚至于它也提供其它脚本语言的接口，<code>可参见 [scriptc](/post/scriptc/1)</code></p>
+</li>
+</ul>
+<h1 id="特性">特性</h1>
+<ol>
+<li>支持纯<code>Lua</code>编码， 原因在于 <code>lua</code> 是一门简单并且性能很高的脚本语言，能显著降低开发成本，而且<code>skynet-go</code>本身提供了丰富的接口</li>
+</ol>
+<p><code>pure go</code>或者<code>cgo</code>也同样支持,而且性能会更好</p>
+<p>后续会替换新的脚本语言 <a href="/post/scriptc/1">scriptc</a></p>
+<ol start="2">
+<li>mysql,redis,mongo dbserver 支持</li>
+</ol>
+<p>值得注意的是这些库都是作为第三方写的，跟主库关联不大，一般需要编译时指定，特别是<code>Lstate</code>的版本要求一致</p>
+<ol start="3">
+<li>
+<p>提供<code>tcp</code> <code>udp</code>,<code>unix</code>支持</p>
+</li>
+<li>
+<p>内置集群组件 <a href="/post/skynet/sktpmd">sktpmd</a>,做平了本地和远程的调用界限</p>
+</li>
+<li>
+<p>重新实现的http框架，区别于 <code>net/http</code>,仅仅实现部分 <code>RFC</code> 标准,兼容此框架的网络库，提供更好的性能</p>
+</li>
+<li>
+<p>隐藏的数据编码，对业务不透明，基与比<code>protobuf-v3</code> 更快的编码 <a href="/post/kproto">kproto</a></p>
+</li>
+<li>
+<p>无任何lua模块,仅有一个执行文件和一个配置文件</p>
+</li>
+</ol>
+<h1 id="架构">架构</h1>
+<ul>
+<li>
+<p><code>skynet-go</code> 是函数式以及低抽象的架构,纯函数式主要是受 <code>c</code> 的影响。纯函数也更贴合职责单一的原则,而低抽象是因为<code>go interface</code> 并非零成本抽象，它有一定的性能代价。所以整个<code>skynet</code> 只有一个接口 <code>Freeable</code> 用以标记需要自动释放的对象。</p>
+</li>
+<li>
+<p><code>skynet-go</code>仅需要一个执行文件，大小仅仅<code>5.78mb</code>,默认运行内存仅仅 <code>2.2mb</code>，</p>
+</li>
+<li>
+<p><code>65535 Lua</code>服务仅占用<code>1.8GB</code>,也就是每个 <code>Lua服务</code> 仅占用 <code>28.8kb</code></p>
+</li>
+<li>
+<p><code>65535 pure go</code>服务仅占用<code>120mb</code>,每个<code>pure go</code>服务仅占用 <code>1.9kb</code></p>
+</li>
+</ul>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
+     crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7934154300350596"
+     data-ad-slot="3469296166"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://domyson.github.io/">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+    </a>
+    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+      
+      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+
+
+</div>
+</body>
+
+<script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
+
+</html>

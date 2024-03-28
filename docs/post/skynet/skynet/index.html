@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>skynet-go 设计初衷以及特性 - 满船清梦压星河</title>
+    <title>skynet 设计初衷以及特性 - 满船清梦压星河</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -18,10 +18,9 @@
 
     
     <meta name="description"
-  content="概述 skynet-go 是一个基于消息和服务的Actor分布式服务框架， 采用go编写，致力于简化开发难度和成本。
+  content="概述 skynet 是一个基于消息和服务的Actor分布式服务框架， 采用go编写，致力于简化开发难度和成本。
 它是一个年轻的框架，仅仅经历了两款项目的迭代 现在版本为 v1.6.0 2023-05-28
 羽翼军团 v1.3.0 我在民国淘古玩 v.1.3.5 至于什么是Actor是必要了解的概念，skynet 以及 erlang 都是基于这种模式。
-与skynet-c的区别可见(暂未统计) diff-skynet
 " />
 <meta name="keywords"
   content='computer tech' />
@@ -30,12 +29,11 @@
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="skynet-go 设计初衷以及特性 - 满船清梦压星河" />
+<meta name="twitter:title" content="skynet 设计初衷以及特性 - 满船清梦压星河" />
 <meta name="twitter:description"
-  content="概述 skynet-go 是一个基于消息和服务的Actor分布式服务框架， 采用go编写，致力于简化开发难度和成本。
+  content="概述 skynet 是一个基于消息和服务的Actor分布式服务框架， 采用go编写，致力于简化开发难度和成本。
 它是一个年轻的框架，仅仅经历了两款项目的迭代 现在版本为 v1.6.0 2023-05-28
 羽翼军团 v1.3.0 我在民国淘古玩 v.1.3.5 至于什么是Actor是必要了解的概念，skynet 以及 erlang 都是基于这种模式。
-与skynet-c的区别可见(暂未统计) diff-skynet
 " />
 <meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -44,15 +42,14 @@
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="skynet-go 设计初衷以及特性 - 满船清梦压星河">
+<meta property="og:title" content="skynet 设计初衷以及特性 - 满船清梦压星河">
 <meta property="og:description"
-  content="概述 skynet-go 是一个基于消息和服务的Actor分布式服务框架， 采用go编写，致力于简化开发难度和成本。
+  content="概述 skynet 是一个基于消息和服务的Actor分布式服务框架， 采用go编写，致力于简化开发难度和成本。
 它是一个年轻的框架，仅仅经历了两款项目的迭代 现在版本为 v1.6.0 2023-05-28
 羽翼军团 v1.3.0 我在民国淘古玩 v.1.3.5 至于什么是Actor是必要了解的概念，skynet 以及 erlang 都是基于这种模式。
-与skynet-c的区别可见(暂未统计) diff-skynet
 " />
 <meta property="og:url" content="https://domyson.github.io/post/skynet/skynet/" />
-<meta property="og:site_name" content="skynet-go 设计初衷以及特性" />
+<meta property="og:site_name" content="skynet 设计初衷以及特性" />
 <meta property="og:image"
   content="https://domyson.github.io/">
 <meta property="og:image:width" content="2048">
@@ -163,7 +160,7 @@
                   <span class="author">
                     <a href="https://domyson.github.io/">Treasure</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://domyson.github.io/post/skynet/skynet/">skynet-go 设计初衷以及特性</a></strong>
+                      href="https://domyson.github.io/post/skynet/skynet/">skynet 设计初衷以及特性</a></strong>
                 </h1>
                 <div class="note m-0">
                   Created <relative-time datetime="Mon, 20 Jun 2022 00:00:00 &#43;0000"
@@ -172,9 +169,9 @@
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Tue, 24 Oct 2023 20:52:51 &#43;0800"
+                  Modified <relative-time datetime="Thu, 28 Mar 2024 12:50:32 &#43;0000"
                     class="no-wrap">
-                    Tue, 24 Oct 2023 20:52:51 &#43;0800</relative-time>
+                    Thu, 28 Mar 2024 12:50:32 &#43;0000</relative-time>
                   
                 </div>
               </div>
@@ -204,7 +201,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      1035 Words
+                      1237 Words
                     
 
                   </div>
@@ -218,7 +215,7 @@
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="概述">概述</h1>
 <blockquote>
-<p><code>skynet-go</code> 是一个基于消息和服务的<code>Actor</code>分布式服务框架，
+<p><code>skynet</code> 是一个基于消息和服务的<code>Actor</code>分布式服务框架，
 采用<code>go</code>编写，致力于简化开发难度和成本。</p>
 </blockquote>
 <p>它是一个年轻的框架，仅仅经历了两款项目的迭代 现在版本为 <code>v1.6.0 2023-05-28</code></p>
@@ -227,8 +224,7 @@
 <li><a href="https://www.taptap.cn/app/215934">我在民国淘古玩</a> v.1.3.5</li>
 </ul>
 <p>至于什么是<code>Actor</code>是必要了解的概念，<a href="https://github.com/cloudwu/skynet">skynet</a> 以及 <code>erlang</code> 都是基于这种模式。</p>
-<p>与<code>skynet-c</code>的区别可见(暂未统计) <a href="/post/diff">diff-skynet</a></p>
-<h1 id="设计概述">设计概述</h1>
+<h1 id="设计目的">设计目的</h1>
 <ul>
 <li>
 <p>过往的工作中曾经开发了一个<code>cobweb</code>的分布式服务器框架（基于<code>golang</code>,<code>c</code>）,但是在实际开发过程中代码难以维护以及更新，主要是每次都需要跨平台进行编译，特别是<code>cgo</code> 往往需要指定平台的系统库,而且一些不规范的使用方式造成无法充分发挥多核的优势，可以参见 <code>关于Go协程的思考</code> 虽然1.16 支持抢占式，但错误的使用方式依然造成了cpu过高的问题。</p>
@@ -240,22 +236,27 @@
 <p>由于以上目的，重写了<code>cobweb</code> 的底层，底层对用户不再透明。而是通过脚本语言导出来提供支持</p>
 </li>
 <li>
-<p>这里强调一点，<code>skynet-go</code> 设计类似于 <code>skynet</code>，但极大部分全由底层语言实现，而<code>Lua</code>更像是一个命令，也类似现在规则引擎的概念，这也是和 <code>skynet</code> 最大的区别，它没有任何多余的<code>Lua</code> 代码。甚至于它也提供其它脚本语言的接口，<code>可参见 [scriptc](/post/scriptc/1)</code></p>
+<p>在2024/03我重新用C实现了一版以提供更好的性能和更底层的控制</p>
+</li>
+<li>
+<p>包括后续的<a href="/post/typelang/1">DSL</a></p>
 </li>
 </ul>
+<h2 id="processor">Processor</h2>
+<p>一个伪线程的逻辑处理器概念，它分为独占和负载两种模式，独占<code>Processor</code>是为了更好的处理实时性更高的业务，它不会被其他任务抢占<code>Processor</code>,而负载<code>Processor</code>又可分为两种运行态，均匀的处理业务以及从其他<code>Processor</code>上偷窃任务，尽量保证<code>Processor</code>不会过于闲置，除此之外，负载<code>Processor</code>可随着任务的变动而增加（不会超过最大设定值），特别的当某个任务陷入”死循环”或者是超出设定运行阈值的时候会重新创建一个<code>Processor</code>，并让之前的挂起（在C版本中将会被强制关闭）。</p>
 <h1 id="特性">特性</h1>
 <ol>
-<li>支持纯<code>Lua</code>编码， 原因在于 <code>lua</code> 是一门简单并且性能很高的脚本语言，能显著降低开发成本，而且<code>skynet-go</code>本身提供了丰富的接口</li>
+<li>支持纯<code>Lua</code>编码， 原因在于 <code>lua</code> 是一门简单并且性能很高的脚本语言，能显著降低开发成本，而且<code>skynet</code>本身提供了丰富的接口</li>
 </ol>
 <p><code>pure go</code>或者<code>cgo</code>也同样支持,而且性能会更好</p>
-<p>后续会替换新的脚本语言 <a href="/post/scriptc/1">scriptc</a></p>
+<p>后续会替换新的脚本语言 <a href="/post/typelang/1">typelang</a></p>
 <ol start="2">
-<li>mysql,redis,mongo dbserver 支持</li>
-</ol>
-<p>值得注意的是这些库都是作为第三方写的，跟主库关联不大，一般需要编译时指定，特别是<code>Lstate</code>的版本要求一致</p>
-<ol start="3">
 <li>
-<p>提供<code>tcp</code> <code>udp</code>,<code>unix</code>支持</p>
+<p>mysql,redis,mongo dbserver 支持
+值得注意的是这些库都是作为插件实现，跟主库关联不大，需要编译时指定</p>
+</li>
+<li>
+<p>网络支持（http,tcp,udp,raw socket）</p>
 </li>
 <li>
 <p>内置集群组件 <a href="/post/skynet/sktpmd">sktpmd</a>,做平了本地和远程的调用界限</p>
@@ -269,20 +270,26 @@
 <li>
 <p>无任何lua模块,仅有一个执行文件和一个配置文件</p>
 </li>
+<li>
+<p>超快的性能，完全摒弃<code>interface{}</code>以及各种抽象，采用<code>Pointer</code>的方式创建数据（仅底层，业务层无须关心）</p>
+</li>
 </ol>
 <h1 id="架构">架构</h1>
 <ul>
 <li>
-<p><code>skynet-go</code> 是函数式以及低抽象的架构,纯函数式主要是受 <code>c</code> 的影响。纯函数也更贴合职责单一的原则,而低抽象是因为<code>go interface</code> 并非零成本抽象，它有一定的性能代价。所以整个<code>skynet</code> 只有一个接口 <code>Freeable</code> 用以标记需要自动释放的对象。</p>
+<p><code>skynet</code> 是函数式以及低抽象的架构,纯函数式主要是受 <code>c</code> 的影响。纯函数也更贴合职责单一的原则,而低抽象是因为<code>go interface</code> 并非零成本抽象，它有一定的性能代价。所以整个<code>skynet</code> 没有任何接口定义</p>
 </li>
 <li>
-<p><code>skynet-go</code>仅需要一个执行文件，大小仅仅<code>5.78mb</code>,默认运行内存仅仅 <code>2.2mb</code>，</p>
+<p><code>skynet</code>仅需要一个执行文件，大小仅仅<code>5.78mb</code>,默认运行内存仅仅 <code>2.2mb</code>，</p>
 </li>
 <li>
 <p><code>65535 Lua</code>服务仅占用<code>1.8GB</code>,也就是每个 <code>Lua服务</code> 仅占用 <code>28.8kb</code></p>
 </li>
 <li>
-<p><code>65535 pure go</code>服务仅占用<code>120mb</code>,每个<code>pure go</code>服务仅占用 <code>1.9kb</code></p>
+<p><code>65535 纯go</code>服务仅占用<code>120mb</code>,每个<code>pure go</code>服务仅占用 <code>1.9kb</code></p>
+</li>
+<li>
+<p>纯C版本持续开发中。。。</p>
 </li>
 </ul>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
