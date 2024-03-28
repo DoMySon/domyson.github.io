@@ -19,7 +19,7 @@
     
     <meta name="description"
   content="序 这篇文章仅仅是介绍如何使用Anywhere 集成 ECS 框架，ECS并非必须的，甚至可以无框架化，就像我们第一次做Demo的时候一样，不要迷信框架，发挥自己的想象力去开发一个好玩的游戏才是最重要的，需要注意的是，本篇ECS并非是unity的ECS，它没有burst，也没有job system，而是一种设计思想。
-它在设计上完全不需要理会Anywhere的约束。
+本编会按照ECS的定义手动实现一个ECS框架
 架构 System System 用于描述一个实体的行为，比如MovementSystem，AnimationSystem等，System 之间可以相互组合，比如MovementSystem和AnimationSystem组合在一起，就是一个CharacterController
 Component Component 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character
 Enity Entity 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，" />
@@ -33,7 +33,7 @@ Enity Entity 用于描述一个实体的状态，比如Transform，Rigidbody，A
 <meta name="twitter:title" content="ECS - 满船清梦压星河" />
 <meta name="twitter:description"
   content="序 这篇文章仅仅是介绍如何使用Anywhere 集成 ECS 框架，ECS并非必须的，甚至可以无框架化，就像我们第一次做Demo的时候一样，不要迷信框架，发挥自己的想象力去开发一个好玩的游戏才是最重要的，需要注意的是，本篇ECS并非是unity的ECS，它没有burst，也没有job system，而是一种设计思想。
-它在设计上完全不需要理会Anywhere的约束。
+本编会按照ECS的定义手动实现一个ECS框架
 架构 System System 用于描述一个实体的行为，比如MovementSystem，AnimationSystem等，System 之间可以相互组合，比如MovementSystem和AnimationSystem组合在一起，就是一个CharacterController
 Component Component 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character
 Enity Entity 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，" />
@@ -47,7 +47,7 @@ Enity Entity 用于描述一个实体的状态，比如Transform，Rigidbody，A
 <meta property="og:title" content="ECS - 满船清梦压星河">
 <meta property="og:description"
   content="序 这篇文章仅仅是介绍如何使用Anywhere 集成 ECS 框架，ECS并非必须的，甚至可以无框架化，就像我们第一次做Demo的时候一样，不要迷信框架，发挥自己的想象力去开发一个好玩的游戏才是最重要的，需要注意的是，本篇ECS并非是unity的ECS，它没有burst，也没有job system，而是一种设计思想。
-它在设计上完全不需要理会Anywhere的约束。
+本编会按照ECS的定义手动实现一个ECS框架
 架构 System System 用于描述一个实体的行为，比如MovementSystem，AnimationSystem等，System 之间可以相互组合，比如MovementSystem和AnimationSystem组合在一起，就是一个CharacterController
 Component Component 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character
 Enity Entity 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，" />
@@ -172,9 +172,9 @@ Enity Entity 用于描述一个实体的状态，比如Transform，Rigidbody，A
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Tue, 26 Mar 2024 21:28:18 &#43;0800"
+                  Modified <relative-time datetime="Thu, 28 Mar 2024 07:30:12 &#43;0000"
                     class="no-wrap">
-                    Tue, 26 Mar 2024 21:28:18 &#43;0800</relative-time>
+                    Thu, 28 Mar 2024 07:30:12 &#43;0000</relative-time>
                   
                 </div>
               </div>
@@ -204,7 +204,7 @@ Enity Entity 用于描述一个实体的状态，比如Transform，Rigidbody，A
                         </div>
                       </div>
                     </details-menu>
-                      677 Words
+                      675 Words
                     
 
                   </div>
@@ -229,7 +229,7 @@ Enity Entity 用于描述一个实体的状态，比如Transform，Rigidbody，A
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="序">序</h1>
 <p>这篇文章仅仅是介绍如何使用<code>Anywhere</code> 集成 <code>ECS</code> 框架，<code>ECS</code>并非必须的，甚至可以无框架化，就像我们第一次做<code>Demo</code>的时候一样，不要迷信框架，发挥自己的想象力去开发一个好玩的游戏才是最重要的，需要注意的是，本篇<code>ECS</code>并非是unity的ECS，它没有<code>burst</code>，也没有<code>job system</code>，而是一种设计思想。</p>
-<p>它在设计上完全不需要理会<code>Anywhere</code>的约束。</p>
+<p>本编会按照<code>ECS</code>的定义手动实现一个<code>ECS</code>框架</p>
 <h1 id="架构">架构</h1>
 <h2 id="system">System</h2>
 <p>System 用于描述一个实体的行为，比如<code>MovementSystem</code>，<code>AnimationSystem</code>等，System 之间可以相互组合，比如<code>MovementSystem</code>和<code>AnimationSystem</code>组合在一起，就是一个<code>CharacterController</code></p>

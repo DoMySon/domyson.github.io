@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>Addressable - 满船清梦压星河</title>
+    <title>RMS - 满船清梦压星河</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -19,18 +19,19 @@
     
     <meta name="description"
   content="简介 RMS 是一个全自动化 Assetbundle 资源管理系统，它内部使用RC的方式来管理资源的引用，但不需要手动显示释放,它通过拦截资源终结器的方式，来达到释放的目的，比手动安全性更高。它仅仅提供了两组接口LoadAsset LoadAssetAsync，LoadAsset 同步加载，LoadAssetAsync 异步加载。并提供了本地虚拟化的方式加载，在编辑器模式下不会真正的构建AssetBundle包，提供开发效率。
-对于打包而言，无需关注AssetBundle包的构建，只需关注资源本身，它内部会自动构建AssetBundle包，并自动进行AssetBundle包的冗余清理。
 Feature 自动化打包
 自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。做到对上层完全无感。
 自动化引用计数 通过 RC算法，监控资源的引用，来自动释放资源。无轮询资源引用，更好的性能，做到对上层完全无感。
-自动化冗余剔除 对于分包模式而言这个是无作用的，但是一些特定的模式下，会自动进行冗余清理，对于Combine，Group 模式，它会自动剔除冗余的资源。
+自动化冗余剔除 对于分包模式而言这个是无作用的，对于Combine，Group 模式，它会自动剔除冗余的资源。
 Profile资源使用分析 运行时记录资源的使用情况。用于线上实时分析。
 多种模式支持
 Static: 无需热更
 Updateable： 可热更模式，仅需要配置远程资源地址即可
 Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放
 Mix: 混合模式，包括上述所有模式，仅需标记即可
-标签模式 为了更好的匹配Anywhere,只需要在对应的Component 指定标记即可自动管理资源，无需任何逻辑 （开发中）" />
+标签模式 为了更好的匹配Anywhere,只需要在对应的Component 指定标记即可自动管理资源，无需任何逻辑 （开发中）
+后续计划 现阶段RMS是依赖于Assetbundle 后续会抽象出一层 Virtual File System 以提供自定义流提供更多可操作性和安全性。
+RMS现在可以说是完全不能脱离Unity独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步在Unity中只需要手动实现一个Adaptor即可。" />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
@@ -38,21 +39,22 @@ Mix: 混合模式，包括上述所有模式，仅需标记即可
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Addressable - 满船清梦压星河" />
+<meta name="twitter:title" content="RMS - 满船清梦压星河" />
 <meta name="twitter:description"
   content="简介 RMS 是一个全自动化 Assetbundle 资源管理系统，它内部使用RC的方式来管理资源的引用，但不需要手动显示释放,它通过拦截资源终结器的方式，来达到释放的目的，比手动安全性更高。它仅仅提供了两组接口LoadAsset LoadAssetAsync，LoadAsset 同步加载，LoadAssetAsync 异步加载。并提供了本地虚拟化的方式加载，在编辑器模式下不会真正的构建AssetBundle包，提供开发效率。
-对于打包而言，无需关注AssetBundle包的构建，只需关注资源本身，它内部会自动构建AssetBundle包，并自动进行AssetBundle包的冗余清理。
 Feature 自动化打包
 自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。做到对上层完全无感。
 自动化引用计数 通过 RC算法，监控资源的引用，来自动释放资源。无轮询资源引用，更好的性能，做到对上层完全无感。
-自动化冗余剔除 对于分包模式而言这个是无作用的，但是一些特定的模式下，会自动进行冗余清理，对于Combine，Group 模式，它会自动剔除冗余的资源。
+自动化冗余剔除 对于分包模式而言这个是无作用的，对于Combine，Group 模式，它会自动剔除冗余的资源。
 Profile资源使用分析 运行时记录资源的使用情况。用于线上实时分析。
 多种模式支持
 Static: 无需热更
 Updateable： 可热更模式，仅需要配置远程资源地址即可
 Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放
 Mix: 混合模式，包括上述所有模式，仅需标记即可
-标签模式 为了更好的匹配Anywhere,只需要在对应的Component 指定标记即可自动管理资源，无需任何逻辑 （开发中）" />
+标签模式 为了更好的匹配Anywhere,只需要在对应的Component 指定标记即可自动管理资源，无需任何逻辑 （开发中）
+后续计划 现阶段RMS是依赖于Assetbundle 后续会抽象出一层 Virtual File System 以提供自定义流提供更多可操作性和安全性。
+RMS现在可以说是完全不能脱离Unity独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步在Unity中只需要手动实现一个Adaptor即可。" />
 <meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -60,23 +62,24 @@ Mix: 混合模式，包括上述所有模式，仅需标记即可
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="Addressable - 满船清梦压星河">
+<meta property="og:title" content="RMS - 满船清梦压星河">
 <meta property="og:description"
   content="简介 RMS 是一个全自动化 Assetbundle 资源管理系统，它内部使用RC的方式来管理资源的引用，但不需要手动显示释放,它通过拦截资源终结器的方式，来达到释放的目的，比手动安全性更高。它仅仅提供了两组接口LoadAsset LoadAssetAsync，LoadAsset 同步加载，LoadAssetAsync 异步加载。并提供了本地虚拟化的方式加载，在编辑器模式下不会真正的构建AssetBundle包，提供开发效率。
-对于打包而言，无需关注AssetBundle包的构建，只需关注资源本身，它内部会自动构建AssetBundle包，并自动进行AssetBundle包的冗余清理。
 Feature 自动化打包
 自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。做到对上层完全无感。
 自动化引用计数 通过 RC算法，监控资源的引用，来自动释放资源。无轮询资源引用，更好的性能，做到对上层完全无感。
-自动化冗余剔除 对于分包模式而言这个是无作用的，但是一些特定的模式下，会自动进行冗余清理，对于Combine，Group 模式，它会自动剔除冗余的资源。
+自动化冗余剔除 对于分包模式而言这个是无作用的，对于Combine，Group 模式，它会自动剔除冗余的资源。
 Profile资源使用分析 运行时记录资源的使用情况。用于线上实时分析。
 多种模式支持
 Static: 无需热更
 Updateable： 可热更模式，仅需要配置远程资源地址即可
 Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放
 Mix: 混合模式，包括上述所有模式，仅需标记即可
-标签模式 为了更好的匹配Anywhere,只需要在对应的Component 指定标记即可自动管理资源，无需任何逻辑 （开发中）" />
+标签模式 为了更好的匹配Anywhere,只需要在对应的Component 指定标记即可自动管理资源，无需任何逻辑 （开发中）
+后续计划 现阶段RMS是依赖于Assetbundle 后续会抽象出一层 Virtual File System 以提供自定义流提供更多可操作性和安全性。
+RMS现在可以说是完全不能脱离Unity独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步在Unity中只需要手动实现一个Adaptor即可。" />
 <meta property="og:url" content="https://domyson.github.io/post/anywhere/2/" />
-<meta property="og:site_name" content="Addressable" />
+<meta property="og:site_name" content="RMS" />
 <meta property="og:image"
   content="https://domyson.github.io/">
 <meta property="og:image:width" content="2048">
@@ -187,7 +190,7 @@ Mix: 混合模式，包括上述所有模式，仅需标记即可
                   <span class="author">
                     <a href="https://domyson.github.io/">Treasure</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://domyson.github.io/post/anywhere/2/">Addressable</a></strong>
+                      href="https://domyson.github.io/post/anywhere/2/">RMS</a></strong>
                 </h1>
                 <div class="note m-0">
                   Created <relative-time datetime="Sat, 01 Apr 2023 00:00:00 &#43;0000"
@@ -196,9 +199,9 @@ Mix: 混合模式，包括上述所有模式，仅需标记即可
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Tue, 26 Mar 2024 22:05:58 &#43;0800"
+                  Modified <relative-time datetime="Thu, 28 Mar 2024 07:36:53 &#43;0000"
                     class="no-wrap">
-                    Tue, 26 Mar 2024 22:05:58 &#43;0800</relative-time>
+                    Thu, 28 Mar 2024 07:36:53 &#43;0000</relative-time>
                   
                 </div>
               </div>
@@ -228,7 +231,7 @@ Mix: 混合模式，包括上述所有模式，仅需标记即可
                         </div>
                       </div>
                     </details-menu>
-                      700 Words
+                      742 Words
                     
 
                   </div>
@@ -252,14 +255,7 @@ Mix: 混合模式，包括上述所有模式，仅需标记即可
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="简介">简介</h1>
-<ol>
-<li>
 <p><code>RMS</code> 是一个全自动化 Assetbundle 资源管理系统，它内部使用<code>RC</code>的方式来管理资源的引用，但不需要手动显示释放,它通过拦截资源终结器的方式，来达到释放的目的，比手动安全性更高。它仅仅提供了两组接口<code>LoadAsset</code>  <code>LoadAssetAsync</code>，<code>LoadAsset</code> 同步加载，<code>LoadAssetAsync</code> 异步加载。并提供了本地虚拟化的方式加载，在编辑器模式下不会真正的构建<code>AssetBundle</code>包，提供开发效率。</p>
-</li>
-<li>
-<p>对于打包而言，无需关注<code>AssetBundle</code>包的构建，只需关注资源本身，它内部会自动构建<code>AssetBundle</code>包，并自动进行<code>AssetBundle</code>包的冗余清理。</p>
-</li>
-</ol>
 <h1 id="feature">Feature</h1>
 <ol>
 <li>
@@ -275,7 +271,7 @@ Mix: 混合模式，包括上述所有模式，仅需标记即可
 </li>
 <li>
 <p>自动化冗余剔除
-对于分包模式而言这个是无作用的，但是一些特定的模式下，会自动进行冗余清理，对于<code>Combine</code>，<code>Group</code> 模式，它会自动剔除冗余的资源。</p>
+对于分包模式而言这个是无作用的，对于<code>Combine</code>，<code>Group</code> 模式，它会自动剔除冗余的资源。</p>
 </li>
 <li>
 <p>Profile资源使用分析
@@ -303,6 +299,9 @@ Mix: 混合模式，包括上述所有模式，仅需标记即可
 为了更好的匹配<code>Anywhere</code>,只需要在对应的<code>Component</code> 指定标记即可自动管理资源，无需任何逻辑 （开发中）</p>
 </li>
 </ol>
+<h1 id="后续计划">后续计划</h1>
+<p>现阶段<code>RMS</code>是依赖于<code>Assetbundle</code> 后续会抽象出一层 <code>Virtual File System</code> 以提供自定义流提供更多可操作性和安全性。</p>
+<p><code>RMS</code>现在可以说是完全不能脱离<code>Unity</code>独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步在<code>Unity</code>中只需要手动实现一个<code>Adaptor</code>即可。</p>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
      crossorigin="anonymous"></script>
 
