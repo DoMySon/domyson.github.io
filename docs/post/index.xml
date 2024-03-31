@@ -6,13 +6,13 @@
     <description>Recent content in Posts on 满船清梦压星河</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 29 Mar 2024 01:03:35 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 31 Mar 2024 23:42:25 +0800</lastBuildDate>
     <atom:link href="https://domyson.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AIComponent</title>
-      <link>https://domyson.github.io/post/anywhere/7/</link>
+      <link>https://domyson.github.io/post/anywhere/6/</link>
       <pubDate>Sun, 10 Dec 2023 00:00:00 +0000</pubDate>
-      <guid>https://domyson.github.io/post/anywhere/7/</guid>
+      <guid>https://domyson.github.io/post/anywhere/6/</guid>
       <description>AIComponent </description>
     </item>
     <item>
@@ -72,25 +72,18 @@
       <description>&lt;h1 id=&#34;序&#34;&gt;序&lt;/h1&gt;&#xA;&lt;p&gt;&lt;code&gt;Anywhere&lt;/code&gt; 是一个基于 Unity 引擎的游戏框架，它被设计成无感知框架的框架（没有打错，事实上我也无法找出一个抽象的词语来形容这套抽象的框架），脱离 Unity 本身的编码方式，致力于采用无框架化开发的方式，内部提供了一个&lt;code&gt;ECS&lt;/code&gt;的上层抽象来开发它，但事实上你并不一定需要使用&lt;code&gt;ECS&lt;/code&gt;，你也可以使用&lt;code&gt;RMS&lt;/code&gt;、&lt;code&gt;Datatable&lt;/code&gt;、&lt;code&gt;Network&lt;/code&gt;等模块来开发你的游戏，这些模块都是可以单独使用的，并且可以和&lt;code&gt;ECS&lt;/code&gt;模块进行无缝结合。你也可以自己实现想&lt;code&gt;MVCC&lt;/code&gt;，或者是&lt;code&gt;MVC&lt;/code&gt;的模块，只要符合&lt;code&gt;Anywhere&lt;/code&gt;的规范，就可以和&lt;code&gt;Anywhere&lt;/code&gt;框架进行无缝结合。&lt;/p&gt;</description>
     </item>
     <item>
-      <title>datatable</title>
-      <link>https://domyson.github.io/post/anywhere/3/</link>
-      <pubDate>Sat, 01 Apr 2023 00:00:00 +0000</pubDate>
-      <guid>https://domyson.github.io/post/anywhere/3/</guid>
-      <description>简介 Datatable 是一个基于 kpb 编码的配置文件管理系统,它定义了一个配置文件的数据结构，并提供了相应的API来操作和访问配置文件。&#xA;内部通过kbp 编码器来实现序列化和反序列化，不使用任何反射和脚本生成，通过Datatable类的主键来索引数据，</description>
-    </item>
-    <item>
       <title>ECS</title>
       <link>https://domyson.github.io/post/anywhere/1/</link>
       <pubDate>Sat, 01 Apr 2023 00:00:00 +0000</pubDate>
       <guid>https://domyson.github.io/post/anywhere/1/</guid>
-      <description>序 这篇文章仅仅是介绍如何使用Anywhere 集成 ECS 框架，ECS并非必须的，甚至可以无框架化，就像我们第一次做Demo的时候一样，不要迷信框架，发挥自己的想象力去开发一个好玩的游戏才是最重要的，需要注意的是，本篇ECS并非是unity的ECS，它没有burst，也没有job system，而是一种设计思想。&#xA;本编会按照ECS的定义手动实现一个ECS框架&#xA;架构 System System 用于描述一个实体的行为，比如MovementSystem，AnimationSystem等，System 之间可以相互组合，比如MovementSystem和AnimationSystem组合在一起，就是一个CharacterController&#xA;Component Component 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character&#xA;Enity Entity 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，</description>
+      <description>序 这篇文章仅仅是介绍如何使用Anywhere 集成 ECS 框架，ECS并非必须的，甚至可以无框架化，就像我们第一次做Demo的时候一样，不要迷信框架，发挥自己的想象力去开发一个好玩的游戏才是最重要的，需要注意的是，本篇ECS并非是unity的ECS，它没有burst，也没有job system，而是一种设计思想。&#xA;本编会按照ECS的定义手动实现一个ECS框架&#xA;架构 System System 用于描述一个实体的行为，比如MovementSystem，AnimationSystem等，System 之间可以相互组合，比如MovementSystem和AnimationSystem组合在一起，就是一个CharacterController&#xA;Component Component 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character&#xA;Enity Entity 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，&#xA;Chunk Archetype </description>
     </item>
     <item>
       <title>RMS</title>
       <link>https://domyson.github.io/post/anywhere/2/</link>
       <pubDate>Sat, 01 Apr 2023 00:00:00 +0000</pubDate>
       <guid>https://domyson.github.io/post/anywhere/2/</guid>
-      <description>简介 RMS 是一个全自动化 Assetbundle 资源管理系统，它内部使用RC的方式来管理资源的引用，但不需要手动显示释放,它通过拦截资源终结器的方式，来达到释放的目的，比手动安全性更高。它仅仅提供了两组接口LoadAsset LoadAssetAsync，LoadAsset 同步加载，LoadAssetAsync 异步加载。并提供了本地虚拟化的方式加载，在编辑器模式下不会真正的构建AssetBundle包，提供开发效率。&#xA;Feature 自动化打包&#xA;自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。做到对上层完全无感。&#xA;自动化引用计数 通过 RC算法，监控资源的引用，来自动释放资源。无轮询资源引用，更好的性能，做到对上层完全无感。&#xA;自动化冗余剔除 对于分包模式而言这个是无作用的，对于Combine，Group 模式，它会自动剔除冗余的资源。&#xA;Profile资源使用分析 运行时记录资源的使用情况。用于线上实时分析。&#xA;多种模式支持&#xA;Static: 无需热更&#xA;Updateable： 可热更模式，仅需要配置远程资源地址即可&#xA;Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放&#xA;Mix: 混合模式，包括上述所有模式，仅需标记即可&#xA;标签模式 为了更好的匹配Anywhere,只需要在对应的Component 指定标记即可自动管理资源，无需任何逻辑 （开发中）&#xA;后续计划 现阶段RMS是依赖于Assetbundle 后续会抽象出一层 Virtual File System 以提供自定义流提供更多可操作性和安全性。&#xA;RMS现在可以说是完全不能脱离Unity独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步在Unity中只需要手动实现一个Adaptor即可。</description>
+      <description>简介 RMS 是一个全自动化 Assetbundle 资源管理系统,基于Lib FileSystem实现 ，它内部使用RC的方式来管理资源的引用，但不需要手动显示释放,它通过拦截资源终结器的方式，来达到释放的目的，比手动安全性更高。&#xA;它仅仅提供了两组接口LoadAsset LoadAssetAsync，LoadAsset 同步加载，LoadAssetAsync 异步加载。并提供了本地虚拟化的方式加载，在编辑器模式下不会真正的构建AssetBundle包，提供开发效率。&#xA;无感知远程Patch, 基于FileSystem实现了远程资源映射，母包+补丁包的增量更新方式，可以在任何时机调用。&#xA;Feature 自动化打包&#xA;自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。做到对上层完全无感。&#xA;自动化引用计数 通过 RC+ 终结器，监控资源的引用，来自动释放资源。无轮询检查资源的引用计数，提供更好的性能，做到对上层完全无感。也没有手动释放接口，提高安全性。&#xA;自动化冗余剔除 在构建的时候自动收集冗余资源，放入Public Package中，以减少流量损耗&#xA;Profile资源使用分析 运行时记录资源的统计。需要ProfileComponent 用于线上实时分析。&#xA;自定义流处理，方便后续自定义AssetBundle解析。&#xA;多种模式支持&#xA;Static: 无需热更&#xA;Updateable： 可热更模式，仅需要配置远程资源地址即可&#xA;Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放&#xA;标签模式 为了更好的匹配Anywhere的设计思想,只需要在对应的逻辑上指定标记即可，而无需任何逻辑 （开发中）&#xA;后续计划 现阶段RMS是依赖于Assetbundle 后续会抽象出一层 Virtual File System 以提供自定义流提供更多可操作性和安全性。&#xA;RMS现在可以说是完全不能脱离Unity独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步在Unity中只需要手动实现一个Adaptor即可。</description>
     </item>
     <item>
       <title>redis</title>
@@ -139,14 +132,7 @@
       <link>https://domyson.github.io/post/skynet/3/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       <guid>https://domyson.github.io/post/skynet/3/</guid>
-      <description>简介 sktpmd模块是skynet底层集群模块，它承担了skynet网络节点之间的通讯职能。全名为(skynet port managment daemon)&#xA;架构 sktpmd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来，1.6.0改变了个行为&#xA;sktpmd可以支持任意网络协议，如 tcp,udp 甚至是 unix，后续规划可能由可靠udp实现，降低集群通讯延时并提供更好的性能，让出进程的 file-descriptor 给业务。&#xA;当然一个好记的节点名称是非常有必要的，所以sktpmd也内置了一套非标准的本地 dns系统，方便名称和地址映射，甚至于你可以实现一套本地dns负载均衡，以达到负载均衡的目的&#xA;使用 sktpmd的启动也非常简单，无须任何代码，仅仅只需要在 skynet.ini 中配置一下即可，使用的时候跟节点内通讯无任何区别。因为我已经作平了本地和节点之间的差异。内部均由kproto进行编码 如&#xA;skynet.send(&amp;#34;host:port@name&amp;#34;,&amp;#34;rpc name&amp;#34;...) -- 通过域名或者地址+端口的形式和其他节点进行通讯 skynet.send(pid, &amp;#34;rpc name&amp;#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，&#xA;基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，&#xA;通过配置tun的规则开启多个，则可以实现业务拆分。&#xA;2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&amp;quot;n1.n2.n3@name&amp;quot;)&#xA;服务发现 sktpmd 提供了一套服务发现机制，但其运作原理是不同于 etcd 或者 consul,它本身是一个惰性发现，取决于第一次调用的地址是否正确返回。&#xA;你不需要知道它是如何运作的，你只需要知道在特定时间内它是有效的即可，那怕其中出了一些意外，无非只是浪费了两次通讯而已。&#xA;sktpmd整个发现流程是基于 gossip 算法来发现的,但一些api依然可以主动触发，v1.6.0 这个模块将保留，因为集群模式的逻辑改变了&#xA;v1.6.0集群建立 v1.5.0 之前大家都是双向链接，但考虑到一个数据服务器，如 dns server,conf server 等，大部分是 request/response 模式，复用连接的收益很大，所以去除之前的一些设计。&#xA;相应的，将会带来一套全新的集群api，等完成之后将会在这补充&#xA;网络底层 参考 Go协程的思考,在linux下，使用了 epoll。所以尽量部署到 linux 下以发挥更好的性能</description>
-    </item>
-    <item>
-      <title>socket</title>
-      <link>https://domyson.github.io/post/skynet/4/</link>
-      <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>https://domyson.github.io/post/skynet/4/</guid>
-      <description>简介 timer 模块是 skynet-go 全局的一个计时系统，内部数据结构使用了小根堆实现。&#xA;原理 本质上是开启一个单独的协程执行一个计时循环，通过 skynet.timeout(addr,ti,cb) 将调用服务的pid 传入进去，等待以一个特殊的消息指令EV_TIMEOUT 通知到对应服务，所以它会具有一定的延时性，若该服务本身处理时间过长，导致mailbox消息积压过多，那么这个指令将会排队直到被处理，&#xA;需要注意的是，超时消息触发的时间没有问题，而是处理的时候有延时性&#xA;对lua的支持 QA 为什么不提供循环计时器？&#xA;可以使用闭包来实现循环&#xA;为什么不提供取消？&#xA;可以使用标记位来控制逻辑&#xA;为什么使用小根堆&#xA;为了尽可能减少精度丢失，以及内存，简单而言其实是一个topk算法的变种，不需要在一次循环中做完所有事(10ms)</description>
+      <description>简介 sktpmd模块是skynet底层集群模块，它承担了skynet网络节点之间的通讯职能。全名为(skynet port managment daemon)&#xA;架构 sktpmd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来，1.6.0改变了个行为，对于像存在类似缓存，或者数据中心的业务而言的单向节点而言，只需要一条连接即可，节省资源。&#xA;sktpmd现在支持原始的tcp,udp,unix协议，后续规划可能由reliable udp实现，降低集群通讯延时并提供更好的性能和时延性。&#xA;远程命名服务，通过内置命令生成唯一的Name，通过Name来与其他节点通讯是友好的。&#xA;使用 启动也非常简单，无须任何代码，仅仅只需要在 conf.conf 中配置一下即可，使用的时候跟节点内通讯无任何区别。因为我已经作平了本地和节点之间的差异。&#xA;内部均由kproto进行编码,提供更快的序列化方式。&#xA;example call&#xA;skynet.send(&amp;#34;host:port@name&amp;#34;,&amp;#34;rpc&amp;#34;...) -- 通过域名或者地址+端口的形式和其他节点进行通讯 skynet.send(&amp;#34;alias&amp;#34;,&amp;#34;rpc&amp;#34;,...) -- 通过别名 skynet.send(pid, &amp;#34;rpc&amp;#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，&#xA;基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，&#xA;通过配置tun的规则开启多个，则可以实现业务拆分。&#xA;2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&amp;quot;n1.n2.n3@name&amp;quot;)&#xA;服务发现 sktpmd 提供了一套服务发现机制，但其运作原理是不同于 etcd 或者 consul,它本身是一个惰性发现，它不需要一个中心服维持它们的关系。&#xA;sktpmd整个发现流程是基于 gossip 算法来发现的,但一些api依然可以主动触发，v1.6.0 这个模块将保留，因为集群模式的逻辑改变了&#xA;v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一个数据服务器，如 dns server,conf server 等，大部分是 request/response 模式，复用连接的收益很大，所以去除之前的一些设计。&#xA;相应的，将会带来一套全新的集群api，等完成之后将会在这补充&#xA;网络底层 参考 Go协程的思考,在linux下，使用了 epoll。所以尽量部署到 linux 下以发挥更好的性能</description>
     </item>
     <item>
       <title>zmalloc</title>

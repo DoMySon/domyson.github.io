@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>zmalloc - 满船清梦压星河</title>
+    <title>AIComponent - 满船清梦压星河</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -18,35 +18,17 @@
 
     
     <meta name="description"
-  content="简介 无论是对于C版本还是Go版本的skynet而言，一个高效的内存分配器可以提高内存的使用效率，这里效率无论是对于内存碎片亦或是GC而言，都是一种更高效的手段
-基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向runtime申请内存，将会导致内存占用过高。
-而且内置的Debug模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 Debug 只能定位到存在 memory-leak，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失
-slab-allocator 对业务开发很不友好，最终只是将它保留作为可选项，是否使用取决于业务实际需要，因为它违背了 skynet 的设计初衷。
-基于 sync.Pool 的分段内存分配器 将不同size的buffer放入不同的池中，按需进行分配，减少race的开销，这个方法虽然简单，但是性能是低于 slab-allocator。
-但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是skynet默认使用的策略。如果需要使用可以在编译指令中指明slab
-API skynet.alloc(n) 用以分配指定大小的内存块
-skynet.realloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存
-skynet.append(buf,data) 简化了 realloc 和 copy 的操作。
-skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址是否属于当前段" />
+  content="AIComponent " />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://domyson.github.io/post/skynet/5/" />
+<link rel="canonical" href="https://domyson.github.io/post/anywhere/6/" />
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="zmalloc - 满船清梦压星河" />
+<meta name="twitter:title" content="AIComponent - 满船清梦压星河" />
 <meta name="twitter:description"
-  content="简介 无论是对于C版本还是Go版本的skynet而言，一个高效的内存分配器可以提高内存的使用效率，这里效率无论是对于内存碎片亦或是GC而言，都是一种更高效的手段
-基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向runtime申请内存，将会导致内存占用过高。
-而且内置的Debug模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 Debug 只能定位到存在 memory-leak，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失
-slab-allocator 对业务开发很不友好，最终只是将它保留作为可选项，是否使用取决于业务实际需要，因为它违背了 skynet 的设计初衷。
-基于 sync.Pool 的分段内存分配器 将不同size的buffer放入不同的池中，按需进行分配，减少race的开销，这个方法虽然简单，但是性能是低于 slab-allocator。
-但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是skynet默认使用的策略。如果需要使用可以在编译指令中指明slab
-API skynet.alloc(n) 用以分配指定大小的内存块
-skynet.realloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存
-skynet.append(buf,data) 简化了 realloc 和 copy 的操作。
-skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址是否属于当前段" />
+  content="AIComponent " />
 <meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -54,26 +36,17 @@ skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="zmalloc - 满船清梦压星河">
+<meta property="og:title" content="AIComponent - 满船清梦压星河">
 <meta property="og:description"
-  content="简介 无论是对于C版本还是Go版本的skynet而言，一个高效的内存分配器可以提高内存的使用效率，这里效率无论是对于内存碎片亦或是GC而言，都是一种更高效的手段
-基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向runtime申请内存，将会导致内存占用过高。
-而且内置的Debug模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 Debug 只能定位到存在 memory-leak，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失
-slab-allocator 对业务开发很不友好，最终只是将它保留作为可选项，是否使用取决于业务实际需要，因为它违背了 skynet 的设计初衷。
-基于 sync.Pool 的分段内存分配器 将不同size的buffer放入不同的池中，按需进行分配，减少race的开销，这个方法虽然简单，但是性能是低于 slab-allocator。
-但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是skynet默认使用的策略。如果需要使用可以在编译指令中指明slab
-API skynet.alloc(n) 用以分配指定大小的内存块
-skynet.realloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存
-skynet.append(buf,data) 简化了 realloc 和 copy 的操作。
-skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址是否属于当前段" />
-<meta property="og:url" content="https://domyson.github.io/post/skynet/5/" />
-<meta property="og:site_name" content="zmalloc" />
+  content="AIComponent " />
+<meta property="og:url" content="https://domyson.github.io/post/anywhere/6/" />
+<meta property="og:site_name" content="AIComponent" />
 <meta property="og:image"
   content="https://domyson.github.io/">
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
 
-<meta property="article:published_time" content="2022-04-21 00:00:00 &#43;0000 UTC" />
+<meta property="article:published_time" content="2023-12-10 00:00:00 &#43;0000 UTC" />
 
 
 
@@ -159,19 +132,19 @@ skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址
                   </span>
                   <span class="path-divider">/</span>
                   <strong class="css-truncate css-truncate-target mr-1" style="max-width: 410px">
-                    <a href="https://domyson.github.io/post/skynet/5/">zmalloc</a>
+                    <a href="https://domyson.github.io/post/anywhere/6/">AIComponent</a>
                   </strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Thu, 21 Apr 2022 00:00:00 &#43;0000"
+                  Created <relative-time datetime="Sun, 10 Dec 2023 00:00:00 &#43;0000"
                     class="no-wrap">
-                    Thu, 21 Apr 2022 00:00:00 &#43;0000</relative-time>
+                    Sun, 10 Dec 2023 00:00:00 &#43;0000</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Thu, 28 Mar 2024 21:42:40 &#43;0800"
+                  Modified <relative-time datetime="Fri, 29 Mar 2024 01:03:17 &#43;0800"
                     class="no-wrap">
-                    Thu, 28 Mar 2024 21:42:40 &#43;0800</relative-time>
+                    Fri, 29 Mar 2024 01:03:17 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -201,11 +174,22 @@ skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址
                         </div>
                       </div>
                     </details-menu>
-                      634 Words
+                      1 Words
                     
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
+                    
+                    
+                    <a class="muted-link mr-3" href="/tags/">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      
+                    </a>
+                    
                     
                   </div>
                 </div>
@@ -213,44 +197,7 @@ skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><h1 id="简介">简介</h1>
-<p>无论是对于C版本还是Go版本的<code>skynet</code>而言，一个高效的内存分配器可以提高内存的使用效率，这里效率无论是对于内存碎片亦或是GC而言，都是一种更高效的手段</p>
-<h1 id="基于-slab-算法的分段内存分配器">基于 <code>SLAB</code> 算法的分段内存分配器</h1>
-<p><code>SLAB</code> 最开始是阅读 <code>linux</code> 源码学习的算法，在<code>skynet</code>中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向<code>runtime</code>申请内存，将会导致内存占用过高。</p>
-<p>而且内置的<code>Debug</code>模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 <code>Debug</code> 只能定位到存在 <code>memory-leak</code>，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失</p>
-<blockquote>
-<p><code>slab-allocator</code> 对业务开发很不友好，最终只是将它保留作为可选项，是否使用取决于业务实际需要，因为它违背了 <code>skynet</code> 的设计初衷。</p>
-</blockquote>
-<h1 id="基于-syncpool-的分段内存分配器">基于 <code>sync.Pool</code> 的分段内存分配器</h1>
-<p>将不同size的buffer放入不同的池中，按需进行分配，减少race的开销，这个方法虽然简单，但是性能是低于 <code>slab-allocator</code>。</p>
-<p>但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是<code>skynet</code>默认使用的策略。如果需要使用可以在编译指令中指明<code>slab</code></p>
-<h1 id="api">API</h1>
-<ul>
-<li>
-<p><code>skynet.alloc(n)</code> 用以分配指定大小的内存块</p>
-</li>
-<li>
-<p><code>skynet.realloc(buf,n)</code> realloc函数会先检查buf，确保是否需要重新分配内存</p>
-</li>
-<li>
-<p><code>skynet.append(buf,data)</code> 简化了 <code>realloc</code> 和 <code>copy</code> 的操作。</p>
-</li>
-<li>
-<p><code>skynet.free(buf)</code> 释放一段内存,对于<code>slab</code> 而言，它会检查buf的地址是否属于当前段</p>
-</li>
-</ul>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
-     crossorigin="anonymous"></script>
-
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7934154300350596"
-     data-ad-slot="3469296166"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+                <article class="markdown-body entry-content container-lg"><h1 id="aicomponent">AIComponent</h1>
 </article>
               </div>
             </div>
