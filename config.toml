@@ -1,6 +1,6 @@
 baseURL = "https://domyson.github.io"
 languageCode = "zh-cn"
-title = "满船清梦压星河"
+title = "朝花夕拾"
 theme = "github-style"
 GoogleAnalytics = "G-V23G8H27BQ"
 pygmentsCodeFences = true
@@ -48,6 +48,8 @@ href = "https://github.com/domyson"
 #     title = "Link2"
 #     href = "https://meik2333.com"
 #     icon = "https://meik2333.com/images/avatar.png"
+
+# https://mephisto.cc/zh-tw/tech/hugo-adsense/
 
 [frontmatter]
 lastmod = ["lastmod", ":fileModTime", ":default"]

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>RMS - 满船清梦压星河</title>
+    <title>Resource - 朝花夕拾</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -18,22 +18,20 @@
 
     
     <meta name="description"
-  content="简介 RMS 是一个全自动化 Assetbundle 资源管理系统,基于Lib FileSystem实现 ，它内部使用RC的方式来管理资源的引用，但不需要手动显示释放,它通过拦截资源终结器的方式，来达到释放的目的，比手动安全性更高。
-它仅仅提供了两组接口LoadAsset LoadAssetAsync，LoadAsset 同步加载，LoadAssetAsync 异步加载。并提供了本地虚拟化的方式加载，在编辑器模式下不会真正的构建AssetBundle包，提供开发效率。
-无感知远程Patch, 基于FileSystem实现了远程资源映射，母包&#43;补丁包的增量更新方式，可以在任何时机调用。
-Feature 自动化打包
-自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。做到对上层完全无感。
-自动化引用计数 通过 RC&#43; 终结器，监控资源的引用，来自动释放资源。无轮询检查资源的引用计数，提供更好的性能，做到对上层完全无感。也没有手动释放接口，提高安全性。
-自动化冗余剔除 在构建的时候自动收集冗余资源，放入Public Package中，以减少流量损耗
-Profile资源使用分析 运行时记录资源的统计。需要ProfileComponent 用于线上实时分析。
-自定义流处理，方便后续自定义AssetBundle解析。
+  content="简介 Resource 是一个全自动化，且简单易用的资源管理系统,继承于GameComponet实现 ，它内部使用RC的方式来管理资源的引用，且不需要手动显示释放,而是通过拦截finalizer的方式，来达到释放的目的，比手动安全性更高，也更易用。
+它仅提供了两组接口资源加载接口LoadAsset LoadAssetAsync，。并提供了虚拟化的方式加载，在编辑器模式下不会真正的构建AssetBundle包，从而提供开发效率。
+Resource也包括流场景构建，可以将整个场景都作为热更新资源。
+Feature 自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。做到对上层完全无感。
+自动化引用计数 通过 RC&#43; finalizer，监控资源的引用，来自动释放资源。且无需轮询检查资源的引用计数，提供更好的性能，做到对上层完全无感。也没有手动释放接口，提高安全性和易用性
+自动化冗余剔除 在构建的时候自动收集冗余资源，如像A-&amp;gt;(C,D) B-&amp;gt;(C) 此时(A,D)将会作为一个的bundle，而C则会单独作为一个bundle
+Profile资源使用分析，用以在运行时统计各个资源的引用和加载数
+自定义流处理，支持加密等自定义操作
 多种模式支持
-Static: 无需热更
-Updateable： 可热更模式，仅需要配置远程资源地址即可
-Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放
-标签模式 为了更好的匹配Anywhere的设计思想,只需要在对应的逻辑上指定标记即可，而无需任何逻辑 （开发中）
-后续计划 现阶段RMS是依赖于Assetbundle 后续会抽象出一层 Virtual File System 以提供自定义流提供更多可操作性和安全性。
-RMS现在可以说是完全不能脱离Unity独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步在Unity中只需要手动实现一个Adaptor即可。" />
+Builtin: 内建资源，默认将资源插入母包中。
+Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放，防止被反编译资源
+无感知资源更新 一般出现资源更新的时候，都是先下载到本地，然后再通过加载本地资源的方式实现， 现由FS映射的远程目录，通过分流的方式，可以实现一边从远程直接读取，并copy另外一部分流到本地磁盘，减少重新读盘的情况。 对于下载过程对于玩家而言完全无感，其本身下载速度是可以被控制，当前并没有暴露此接口（因为带宽值是动态变化的，无法根据不同的条件找到一个合理值），只是需要设定一个百分率阈值，内部自动计算下载速度尽可能保证达到预期值。
+后续计划 现阶段Resource是依赖于Assetbundle 后续会抽象出一层 FS 以提供自定义流提供更多可操作性和安全性。 已实现
+Resource现在可以说是完全不能脱离Unity独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步时只需要在Unity中需要手动实现一个Adaptor即可。" />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
@@ -41,24 +39,22 @@ RMS现在可以说是完全不能脱离Unity独立运行，这不是一个好的
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="RMS - 满船清梦压星河" />
+<meta name="twitter:title" content="Resource - 朝花夕拾" />
 <meta name="twitter:description"
-  content="简介 RMS 是一个全自动化 Assetbundle 资源管理系统,基于Lib FileSystem实现 ，它内部使用RC的方式来管理资源的引用，但不需要手动显示释放,它通过拦截资源终结器的方式，来达到释放的目的，比手动安全性更高。
-它仅仅提供了两组接口LoadAsset LoadAssetAsync，LoadAsset 同步加载，LoadAssetAsync 异步加载。并提供了本地虚拟化的方式加载，在编辑器模式下不会真正的构建AssetBundle包，提供开发效率。
-无感知远程Patch, 基于FileSystem实现了远程资源映射，母包&#43;补丁包的增量更新方式，可以在任何时机调用。
-Feature 自动化打包
-自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。做到对上层完全无感。
-自动化引用计数 通过 RC&#43; 终结器，监控资源的引用，来自动释放资源。无轮询检查资源的引用计数，提供更好的性能，做到对上层完全无感。也没有手动释放接口，提高安全性。
-自动化冗余剔除 在构建的时候自动收集冗余资源，放入Public Package中，以减少流量损耗
-Profile资源使用分析 运行时记录资源的统计。需要ProfileComponent 用于线上实时分析。
-自定义流处理，方便后续自定义AssetBundle解析。
+  content="简介 Resource 是一个全自动化，且简单易用的资源管理系统,继承于GameComponet实现 ，它内部使用RC的方式来管理资源的引用，且不需要手动显示释放,而是通过拦截finalizer的方式，来达到释放的目的，比手动安全性更高，也更易用。
+它仅提供了两组接口资源加载接口LoadAsset LoadAssetAsync，。并提供了虚拟化的方式加载，在编辑器模式下不会真正的构建AssetBundle包，从而提供开发效率。
+Resource也包括流场景构建，可以将整个场景都作为热更新资源。
+Feature 自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。做到对上层完全无感。
+自动化引用计数 通过 RC&#43; finalizer，监控资源的引用，来自动释放资源。且无需轮询检查资源的引用计数，提供更好的性能，做到对上层完全无感。也没有手动释放接口，提高安全性和易用性
+自动化冗余剔除 在构建的时候自动收集冗余资源，如像A-&amp;gt;(C,D) B-&amp;gt;(C) 此时(A,D)将会作为一个的bundle，而C则会单独作为一个bundle
+Profile资源使用分析，用以在运行时统计各个资源的引用和加载数
+自定义流处理，支持加密等自定义操作
 多种模式支持
-Static: 无需热更
-Updateable： 可热更模式，仅需要配置远程资源地址即可
-Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放
-标签模式 为了更好的匹配Anywhere的设计思想,只需要在对应的逻辑上指定标记即可，而无需任何逻辑 （开发中）
-后续计划 现阶段RMS是依赖于Assetbundle 后续会抽象出一层 Virtual File System 以提供自定义流提供更多可操作性和安全性。
-RMS现在可以说是完全不能脱离Unity独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步在Unity中只需要手动实现一个Adaptor即可。" />
+Builtin: 内建资源，默认将资源插入母包中。
+Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放，防止被反编译资源
+无感知资源更新 一般出现资源更新的时候，都是先下载到本地，然后再通过加载本地资源的方式实现， 现由FS映射的远程目录，通过分流的方式，可以实现一边从远程直接读取，并copy另外一部分流到本地磁盘，减少重新读盘的情况。 对于下载过程对于玩家而言完全无感，其本身下载速度是可以被控制，当前并没有暴露此接口（因为带宽值是动态变化的，无法根据不同的条件找到一个合理值），只是需要设定一个百分率阈值，内部自动计算下载速度尽可能保证达到预期值。
+后续计划 现阶段Resource是依赖于Assetbundle 后续会抽象出一层 FS 以提供自定义流提供更多可操作性和安全性。 已实现
+Resource现在可以说是完全不能脱离Unity独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步时只需要在Unity中需要手动实现一个Adaptor即可。" />
 <meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -66,26 +62,24 @@ RMS现在可以说是完全不能脱离Unity独立运行，这不是一个好的
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="RMS - 满船清梦压星河">
+<meta property="og:title" content="Resource - 朝花夕拾">
 <meta property="og:description"
-  content="简介 RMS 是一个全自动化 Assetbundle 资源管理系统,基于Lib FileSystem实现 ，它内部使用RC的方式来管理资源的引用，但不需要手动显示释放,它通过拦截资源终结器的方式，来达到释放的目的，比手动安全性更高。
-它仅仅提供了两组接口LoadAsset LoadAssetAsync，LoadAsset 同步加载，LoadAssetAsync 异步加载。并提供了本地虚拟化的方式加载，在编辑器模式下不会真正的构建AssetBundle包，提供开发效率。
-无感知远程Patch, 基于FileSystem实现了远程资源映射，母包&#43;补丁包的增量更新方式，可以在任何时机调用。
-Feature 自动化打包
-自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。做到对上层完全无感。
-自动化引用计数 通过 RC&#43; 终结器，监控资源的引用，来自动释放资源。无轮询检查资源的引用计数，提供更好的性能，做到对上层完全无感。也没有手动释放接口，提高安全性。
-自动化冗余剔除 在构建的时候自动收集冗余资源，放入Public Package中，以减少流量损耗
-Profile资源使用分析 运行时记录资源的统计。需要ProfileComponent 用于线上实时分析。
-自定义流处理，方便后续自定义AssetBundle解析。
+  content="简介 Resource 是一个全自动化，且简单易用的资源管理系统,继承于GameComponet实现 ，它内部使用RC的方式来管理资源的引用，且不需要手动显示释放,而是通过拦截finalizer的方式，来达到释放的目的，比手动安全性更高，也更易用。
+它仅提供了两组接口资源加载接口LoadAsset LoadAssetAsync，。并提供了虚拟化的方式加载，在编辑器模式下不会真正的构建AssetBundle包，从而提供开发效率。
+Resource也包括流场景构建，可以将整个场景都作为热更新资源。
+Feature 自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。做到对上层完全无感。
+自动化引用计数 通过 RC&#43; finalizer，监控资源的引用，来自动释放资源。且无需轮询检查资源的引用计数，提供更好的性能，做到对上层完全无感。也没有手动释放接口，提高安全性和易用性
+自动化冗余剔除 在构建的时候自动收集冗余资源，如像A-&amp;gt;(C,D) B-&amp;gt;(C) 此时(A,D)将会作为一个的bundle，而C则会单独作为一个bundle
+Profile资源使用分析，用以在运行时统计各个资源的引用和加载数
+自定义流处理，支持加密等自定义操作
 多种模式支持
-Static: 无需热更
-Updateable： 可热更模式，仅需要配置远程资源地址即可
-Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放
-标签模式 为了更好的匹配Anywhere的设计思想,只需要在对应的逻辑上指定标记即可，而无需任何逻辑 （开发中）
-后续计划 现阶段RMS是依赖于Assetbundle 后续会抽象出一层 Virtual File System 以提供自定义流提供更多可操作性和安全性。
-RMS现在可以说是完全不能脱离Unity独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步在Unity中只需要手动实现一个Adaptor即可。" />
+Builtin: 内建资源，默认将资源插入母包中。
+Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放，防止被反编译资源
+无感知资源更新 一般出现资源更新的时候，都是先下载到本地，然后再通过加载本地资源的方式实现， 现由FS映射的远程目录，通过分流的方式，可以实现一边从远程直接读取，并copy另外一部分流到本地磁盘，减少重新读盘的情况。 对于下载过程对于玩家而言完全无感，其本身下载速度是可以被控制，当前并没有暴露此接口（因为带宽值是动态变化的，无法根据不同的条件找到一个合理值），只是需要设定一个百分率阈值，内部自动计算下载速度尽可能保证达到预期值。
+后续计划 现阶段Resource是依赖于Assetbundle 后续会抽象出一层 FS 以提供自定义流提供更多可操作性和安全性。 已实现
+Resource现在可以说是完全不能脱离Unity独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步时只需要在Unity中需要手动实现一个Adaptor即可。" />
 <meta property="og:url" content="https://domyson.github.io/post/anywhere/2/" />
-<meta property="og:site_name" content="RMS" />
+<meta property="og:site_name" content="Resource" />
 <meta property="og:image"
   content="https://domyson.github.io/">
 <meta property="og:image:width" content="2048">
@@ -177,7 +171,7 @@ RMS现在可以说是完全不能脱离Unity独立运行，这不是一个好的
                   </span>
                   <span class="path-divider">/</span>
                   <strong class="css-truncate css-truncate-target mr-1" style="max-width: 410px">
-                    <a href="https://domyson.github.io/post/anywhere/2/">RMS</a>
+                    <a href="https://domyson.github.io/post/anywhere/2/">Resource</a>
                   </strong>
                 </h1>
                 <div class="note m-0">
@@ -187,9 +181,9 @@ RMS现在可以说是完全不能脱离Unity独立运行，这不是一个好的
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Mon, 01 Apr 2024 12:33:05 &#43;0000"
+                  Modified <relative-time datetime="Thu, 23 May 2024 22:40:56 &#43;0800"
                     class="no-wrap">
-                    Mon, 01 Apr 2024 12:33:05 &#43;0000</relative-time>
+                    Thu, 23 May 2024 22:40:56 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -219,7 +213,7 @@ RMS现在可以说是完全不能脱离Unity独立运行，这不是一个好的
                         </div>
                       </div>
                     </details-menu>
-                      850 Words
+                      983 Words
                     
 
                   </div>
@@ -243,63 +237,49 @@ RMS现在可以说是完全不能脱离Unity独立运行，这不是一个好的
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="简介">简介</h1>
-<ul>
-<li>
-<p><code>RMS</code> 是一个全自动化 Assetbundle 资源管理系统,基于<code>Lib FileSystem</code>实现 ，它内部使用<code>RC</code>的方式来管理资源的引用，但不需要手动显示释放,它通过拦截资源终结器的方式，来达到释放的目的，比手动安全性更高。</p>
-</li>
-<li>
-<p>它仅仅提供了两组接口<code>LoadAsset</code>  <code>LoadAssetAsync</code>，<code>LoadAsset</code> 同步加载，<code>LoadAssetAsync</code> 异步加载。并提供了本地虚拟化的方式加载，在编辑器模式下不会真正的构建<code>AssetBundle</code>包，提供开发效率。</p>
-</li>
-<li>
-<p>无感知远程Patch, 基于<code>FileSystem</code>实现了远程资源映射，母包+补丁包的增量更新方式，可以在任何时机调用。</p>
-</li>
-</ul>
+<p><code>Resource</code> 是一个全自动化，且简单易用的资源管理系统,继承于<code>GameComponet</code>实现 ，它内部使用<code>RC</code>的方式来管理资源的引用，且不需要手动显示释放,而是通过拦截finalizer的方式，来达到释放的目的，比手动安全性更高，也更易用。</p>
+<p>它仅提供了两组接口资源加载接口<code>LoadAsset</code>  <code>LoadAssetAsync</code>，。并提供了虚拟化的方式加载，在编辑器模式下不会真正的构建<code>AssetBundle</code>包，从而提供开发效率。</p>
+<p><code>Resource</code>也包括流场景构建，可以将整个场景都作为热更新资源。</p>
 <h1 id="feature">Feature</h1>
 <ol>
-<li>
-<p>自动化打包</p>
-</li>
 <li>
 <p>自动化检测文件变动
 通过<code>Radix</code>算法，监控资源变动，来自动构建<code>manifest</code>。上层只需要关注资源本身，无需关注<code>AssetBundle</code>包的构建。做到对上层完全无感。</p>
 </li>
 <li>
 <p>自动化引用计数
-通过 <code>RC</code>+ 终结器，监控资源的引用，来自动释放资源。无轮询检查资源的引用计数，提供更好的性能，做到对上层完全无感。也没有手动释放接口，提高安全性。</p>
+通过 <code>RC</code>+ finalizer，监控资源的引用，来自动释放资源。且无需轮询检查资源的引用计数，提供更好的性能，做到对上层完全无感。也没有手动释放接口，提高安全性和易用性</p>
 </li>
 <li>
 <p>自动化冗余剔除
-在构建的时候自动收集冗余资源，放入<code>Public Package</code>中，以减少流量损耗</p>
+在构建的时候自动收集冗余资源，如像A-&gt;(C,D) B-&gt;(C) 此时(A,D)将会作为一个的bundle，而C则会单独作为一个bundle</p>
 </li>
 <li>
-<p>Profile资源使用分析
-运行时记录资源的统计。需要<code>ProfileComponent</code> 用于线上实时分析。</p>
+<p>Profile资源使用分析，用以在运行时统计各个资源的引用和加载数</p>
 </li>
 <li>
-<p>自定义流处理，方便后续自定义<code>AssetBundle</code>解析。</p>
+<p>自定义流处理，支持加密等自定义操作</p>
 </li>
 <li>
 <p>多种模式支持</p>
 <ol>
 <li>
-<p>Static: 无需热更</p>
+<p>Builtin: 内建资源，默认将资源插入母包中。</p>
 </li>
 <li>
-<p>Updateable： 可热更模式，仅需要配置远程资源地址即可</p>
-</li>
-<li>
-<p>Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放</p>
+<p>Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放，防止被反编译资源</p>
 </li>
 </ol>
 </li>
 <li>
-<p>标签模式
-为了更好的匹配<code>Anywhere</code>的设计思想,只需要在对应的逻辑上指定标记即可，而无需任何逻辑 （开发中）</p>
+<p>无感知资源更新
+一般出现资源更新的时候，都是先下载到本地，然后再通过加载本地资源的方式实现， 现由<code>FS</code>映射的远程目录，通过分流的方式，可以实现一边从远程直接读取，并copy另外一部分流到本地磁盘，减少重新读盘的情况。
+对于下载过程对于玩家而言完全无感，其本身下载速度是可以被控制，当前并没有暴露此接口（因为带宽值是动态变化的，无法根据不同的条件找到一个合理值），只是需要设定一个百分率阈值，内部自动计算下载速度尽可能保证达到预期值。</p>
 </li>
 </ol>
 <h1 id="后续计划">后续计划</h1>
-<p>现阶段<code>RMS</code>是依赖于<code>Assetbundle</code> 后续会抽象出一层 <code>Virtual File System</code> 以提供自定义流提供更多可操作性和安全性。</p>
-<p><code>RMS</code>现在可以说是完全不能脱离<code>Unity</code>独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步在<code>Unity</code>中只需要手动实现一个<code>Adaptor</code>即可。</p>
+<p><del>现阶段<code>Resource</code>是依赖于<code>Assetbundle</code> 后续会抽象出一层 <code>FS</code> 以提供自定义流提供更多可操作性和安全性。</del> 已实现</p>
+<p><code>Resource</code>现在可以说是完全不能脱离<code>Unity</code>独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步时只需要在<code>Unity</code>中需要手动实现一个<code>Adaptor</code>即可。</p>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
      crossorigin="anonymous"></script>
 

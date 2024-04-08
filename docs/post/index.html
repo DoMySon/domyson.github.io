@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>Posts - 满船清梦压星河</title>
+    <title>Posts - 朝花夕拾</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -26,7 +26,7 @@
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Posts - 满船清梦压星河" />
+<meta name="twitter:title" content="Posts - 朝花夕拾" />
 <meta name="twitter:description"
   content="" />
 <meta name="twitter:site" content="https://domyson.github.io/" />
@@ -36,7 +36,7 @@
 
 
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Posts - 满船清梦压星河">
+<meta property="og:title" content="Posts - 朝花夕拾">
 <meta property="og:description"
   content="" />
 <meta property="og:url" content="https://domyson.github.io/post/" />
@@ -49,7 +49,7 @@
 
 
 
-<link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="满船清梦压星河" />
+<link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="朝花夕拾" />
 
 
 
@@ -143,7 +143,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">45</span>
+              <span class="Counter">46</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -430,7 +430,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">45</span>
+      <span class="Counter ">46</span>
     </a>
   </nav>
 </div>
@@ -724,43 +724,6 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/anywhere/6/">AIComponent</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                AIComponent 
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-              
-              <a class="muted-link mr-3" href="/tags/">
-                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-                  <path fill-rule="evenodd"
-                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-                  </path>
-                </svg>
-                
-              </a>
-              
-              
-
-              Created
-              <relative-time datetime=" Sun, 10 Dec 2023 00:00:00 &#43;0000" class="no-wrap"
-                title=" Sun, 10 Dec 2023 00:00:00 &#43;0000">
-                Sun, 10 Dec 2023 00:00:00 &#43;0000
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
                 <a href="https://domyson.github.io/post/makefile/">makefile</a>
               </h3>
             </div>
@@ -1037,7 +1000,85 @@ What&rsquo;s makefile?
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
                 <h1 id="序">序</h1>
-<p><code>Anywhere</code> 是一个基于 Unity 引擎的游戏框架，它被设计成无感知框架的框架（没有打错，事实上我也无法找出一个抽象的词语来形容这套抽象的框架），脱离 Unity 本身的编码方式，致力于采用无框架化开发的方式，内部提供了一个<code>ECS</code>的上层抽象来开发它，但事实上你并不一定需要使用<code>ECS</code>，你也可以使用<code>RMS</code>、<code>Datatable</code>、<code>Network</code>等模块来开发你的游戏，这些模块都是可以单独使用的，并且可以和<code>ECS</code>模块进行无缝结合。你也可以自己实现想<code>MVCC</code>，或者是<code>MVC</code>的模块，只要符合<code>Anywhere</code>的规范，就可以和<code>Anywhere</code>框架进行无缝结合。</p>
+<p><code>Anywhere</code> 是一个基于 Unity 引擎的<code>GamePlay</code>框架，脱离 <code>Monobehaviour</code> 开发，致力简化开发流程。内部提供了一个<code>伪ECS</code>的上层抽象来开发它，但事实上你并不一定需要使用这个<code>ECS</code>，你也可以使用自定义的上层，比如自己实现像<code>MVCC</code>，或者是<code>MVC</code>的上层封装。让开发聚焦在游戏玩法而非一些底层架构上。Anywhere有两重含义，一可以实现任意类型的游戏，二可以在任意地方调动，而非需要定义一个字段保存访问索引。</p>
+<blockquote>
+<p>Anywhere的一些设计思想不算是纯粹的<code>OOP</code>，它有ECS的概念，也有<code>type embedding</code>的概念，而且设计概念大部分是参考面过过程和内嵌的设计思想，所以理解曲线会比较困难</p>
+</blockquote>
+<h1 id="设计目标">设计目标</h1>
+<ol>
+<li>
+<p>无框架化，它之所有不提供是为了更好的设计出不同品类的游戏，而我在近10年的游戏开发生涯中，我始终觉得框架的约束即使最大的约束，因为业务的多样性和非明确性的特点，一般游戏后期的一些奇奇怪怪的需求总是会迫使你绕过框架的约束从而形成屎山code，所以我希望<code>Anywhere</code>框架本身可以尽可能的简单，让开发者可以自由的去选择框架的约束。你可使用<code>Anywhere</code>的一部分，或者全部，甚至是都不需要。</p>
+</li>
+<li>
+<p>无<code>MonoBehaviour</code>编程设计，解除引擎原始的约束，更自由的编程方式，像之前开发游戏，一个角色身上可能挂在各式各样的组件，一旦后期业务变动很容易出现引用丢失或者维护起来更为困难，而且一些特殊的时候可能还需要设置一下脚本的执行顺序，给维护带来巨大的不便（如我之前所呆的项目各种口口相传的细节规范，让开发痛不欲生）</p>
+</li>
+<li>
+<p>模块化，<code>Anywhere</code>的一大特色，以像<code>C library</code>的方式来组织模块，让模块之间可以互相调用，并且可以互相替换，让开发者可以自由的去选择模块的约束。选择何种内置模块，或者是自定义模块由开发者决定，这也是使用 <code>Anywhere</code> 唯一的约束，你的模块可以是框架，也可以是<code>Module</code>。</p>
+</li>
+<li>
+<p>简单化，<code>Anywhere</code> 本身只提最必要的一些基础组件，你可以重新实现，而并非是必要的，就是这么随意，就像它的名字一样。</p>
+</li>
+<li>
+<p>自由化，游戏开发是自由的，是创造性的，<code>Anywhere</code> 不会约束你干什么，你只需要关注你的想法，怎么做取决于你的点子。</p>
+</li>
+<li>
+<p>去屎山，一旦使用<code>Anywhere</code>的<code>Module</code>约束，那么它一定是强类型约束，这么做的目的是让业务不容易形成屎山，避免屎上添粪的情况出现（我所在的一些项目就是这样，后期持续性优化，由于业务量巨大，实难以支撑）</p>
+</li>
+<li>
+<p>非文档约束性组件控制器绑定，面向对象的模式必然导致代码变得复杂，因使用内嵌代替<code>OOP</code>，但显然C#做不到，需要额外的封装，但过于麻烦不符合<code>Anywhere</code>的设计哲学，故通过静态泛型约束实现。</p>
+</li>
+<li>
+<p>无任何反射调度，提高代码的运行速度。</p>
+</li>
+<li>
+<p><code>Hybrid</code>集成（todo）</p>
+</li>
+</ol>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+              
+              <a class="muted-link mr-3" href="/tags/">
+                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                  <path fill-rule="evenodd"
+                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                  </path>
+                </svg>
+                
+              </a>
+              
+              
+
+              Created
+              <relative-time datetime=" Sat, 01 Apr 2023 00:00:00 &#43;0000" class="no-wrap"
+                title=" Sat, 01 Apr 2023 00:00:00 &#43;0000">
+                Sat, 01 Apr 2023 00:00:00 &#43;0000
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://domyson.github.io/post/anywhere/3/">datatable</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                简介 DatatableModule 是一个基于 kpb 编码的配置文件管理系统,它定义了一个配置文件的数据结构，并提供了相应的API来操作和访问配置文件。在Anywhere中它是一个GameComponent。它包含了一个代码生成器，和数据解析器和编码器。
+数据表的加载只有4(2)个接口 LoadDatatable&lt;T&gt;(bool lazy) GetRow&lt;T&gt;(int row) 以及一套同作用的异步接口，前者获取一整张表，后者获取某表的某一行数据，即对应的数据结构体。
+Datatable 静默行为是 Lazy load 对于同一张数据表，它只会根据需要读取指定行然后才缓存，而不是一次性读取所有表格。
+Feature lazy load,它不会加载表格的所有数据，而是按照需要动态一部分一部分的加载，直到全部加载完毕。
+DatatableModule 加载接口提供同步和异步两种模式，也可以加载远程资源，依赖于 Resource
+DatatableModule 提供代码和数据生成的编辑器，无需关注实现逻辑。
+多种类型数据支持 bool,int,float,string,binary,int*,float*,string*,满足绝大部分场景 （2024/05/23）增加了定长数据的支持，减少内存消耗。
+基于kproto编码协议，极小的二进制文件，以及极快的编解码速度。
+栈内存映射，大部分情况下不需要开辟堆空间，节省一部分堆内存的分配，减少Mono Reserved的分配。
               </div>
             </div>
 
@@ -1075,7 +1116,7 @@ What&rsquo;s makefile?
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
                 序 这篇文章仅仅是介绍如何使用Anywhere 集成 ECS 框架，ECS并非必须的，甚至可以无框架化，就像我们第一次做Demo的时候一样，不要迷信框架，发挥自己的想象力去开发一个好玩的游戏才是最重要的，需要注意的是，本篇ECS并非是unity的ECS，它没有burst，也没有job system，而是一种设计思想。
-本编会按照ECS的定义手动实现一个ECS框架
+本编会按照ECS的定义手动实现一个ECS框架，会有自己的一些设计糅杂在一起。
 架构 System System 用于描述一个实体的行为，比如MovementSystem，AnimationSystem等，System 之间可以相互组合，比如MovementSystem和AnimationSystem组合在一起，就是一个CharacterController
 Component Component 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character,Component 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character
 Enity Entity 用于描述一个实体的状态，比如Transform，Rigidbody，Animator等,Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，Entity 之间可以相互组合，比如Rigidbody和Animator组合在一起，就是一个Character，

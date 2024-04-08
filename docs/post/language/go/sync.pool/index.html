@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>sync.pool - 满船清梦压星河</title>
+    <title>sync.pool - 朝花夕拾</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -26,7 +26,7 @@
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="sync.pool - 满船清梦压星河" />
+<meta name="twitter:title" content="sync.pool - 朝花夕拾" />
 <meta name="twitter:description"
   content="结构分析 type Pool struct { noCopy noCopy local unsafe.Pointer // P 本地池，固定尺寸，实际结构 [P]poolLocal，类似 void* 并附加长度构成了一个数组 localSize uintptr // size of the local array victim unsafe.Pointer // local from previous cycle victimSize uintptr // size of victims array New func() any } type poolChain struct{ head *poolChainElt tail *poolChainElt } type poolChainElt struct{ // 一个双向链表 poolDequeue next,prev *poolChainElt } type poolDequeue struct{ headtail uint64 vals []eface } type eface struct{ // 数据的真实内存分配，包括一个类型描述和实际数据 typ,val unsafe." />
 <meta name="twitter:site" content="https://domyson.github.io/" />
@@ -36,7 +36,7 @@
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="sync.pool - 满船清梦压星河">
+<meta property="og:title" content="sync.pool - 朝花夕拾">
 <meta property="og:description"
   content="结构分析 type Pool struct { noCopy noCopy local unsafe.Pointer // P 本地池，固定尺寸，实际结构 [P]poolLocal，类似 void* 并附加长度构成了一个数组 localSize uintptr // size of the local array victim unsafe.Pointer // local from previous cycle victimSize uintptr // size of victims array New func() any } type poolChain struct{ head *poolChainElt tail *poolChainElt } type poolChainElt struct{ // 一个双向链表 poolDequeue next,prev *poolChainElt } type poolDequeue struct{ headtail uint64 vals []eface } type eface struct{ // 数据的真实内存分配，包括一个类型描述和实际数据 typ,val unsafe." />
 <meta property="og:url" content="https://domyson.github.io/post/language/go/sync.pool/" />
@@ -142,9 +142,9 @@
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Thu, 28 Mar 2024 03:25:35 &#43;0000"
+                  Modified <relative-time datetime="Sat, 07 Oct 2023 21:54:38 &#43;0800"
                     class="no-wrap">
-                    Thu, 28 Mar 2024 03:25:35 &#43;0000</relative-time>
+                    Sat, 07 Oct 2023 21:54:38 &#43;0800</relative-time>
                   
                 </div>
               </div>

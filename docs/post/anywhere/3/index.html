@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>AIComponent - 满船清梦压星河</title>
+    <title>datatable - 朝花夕拾</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -18,17 +18,33 @@
 
     
     <meta name="description"
-  content="AIComponent " />
+  content="简介 DatatableModule 是一个基于 kpb 编码的配置文件管理系统,它定义了一个配置文件的数据结构，并提供了相应的API来操作和访问配置文件。在Anywhere中它是一个GameComponent。它包含了一个代码生成器，和数据解析器和编码器。
+数据表的加载只有4(2)个接口 LoadDatatable&amp;lt;T&amp;gt;(bool lazy) GetRow&amp;lt;T&amp;gt;(int row) 以及一套同作用的异步接口，前者获取一整张表，后者获取某表的某一行数据，即对应的数据结构体。
+Datatable 静默行为是 Lazy load 对于同一张数据表，它只会根据需要读取指定行然后才缓存，而不是一次性读取所有表格。
+Feature lazy load,它不会加载表格的所有数据，而是按照需要动态一部分一部分的加载，直到全部加载完毕。
+DatatableModule 加载接口提供同步和异步两种模式，也可以加载远程资源，依赖于 Resource
+DatatableModule 提供代码和数据生成的编辑器，无需关注实现逻辑。
+多种类型数据支持 bool,int,float,string,binary,int*,float*,string*,满足绝大部分场景 （2024/05/23）增加了定长数据的支持，减少内存消耗。
+基于kproto编码协议，极小的二进制文件，以及极快的编解码速度。
+栈内存映射，大部分情况下不需要开辟堆空间，节省一部分堆内存的分配，减少Mono Reserved的分配。" />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://domyson.github.io/post/anywhere/6/" />
+<link rel="canonical" href="https://domyson.github.io/post/anywhere/3/" />
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="AIComponent - 满船清梦压星河" />
+<meta name="twitter:title" content="datatable - 朝花夕拾" />
 <meta name="twitter:description"
-  content="AIComponent " />
+  content="简介 DatatableModule 是一个基于 kpb 编码的配置文件管理系统,它定义了一个配置文件的数据结构，并提供了相应的API来操作和访问配置文件。在Anywhere中它是一个GameComponent。它包含了一个代码生成器，和数据解析器和编码器。
+数据表的加载只有4(2)个接口 LoadDatatable&amp;lt;T&amp;gt;(bool lazy) GetRow&amp;lt;T&amp;gt;(int row) 以及一套同作用的异步接口，前者获取一整张表，后者获取某表的某一行数据，即对应的数据结构体。
+Datatable 静默行为是 Lazy load 对于同一张数据表，它只会根据需要读取指定行然后才缓存，而不是一次性读取所有表格。
+Feature lazy load,它不会加载表格的所有数据，而是按照需要动态一部分一部分的加载，直到全部加载完毕。
+DatatableModule 加载接口提供同步和异步两种模式，也可以加载远程资源，依赖于 Resource
+DatatableModule 提供代码和数据生成的编辑器，无需关注实现逻辑。
+多种类型数据支持 bool,int,float,string,binary,int*,float*,string*,满足绝大部分场景 （2024/05/23）增加了定长数据的支持，减少内存消耗。
+基于kproto编码协议，极小的二进制文件，以及极快的编解码速度。
+栈内存映射，大部分情况下不需要开辟堆空间，节省一部分堆内存的分配，减少Mono Reserved的分配。" />
 <meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -36,17 +52,25 @@
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="AIComponent - 满船清梦压星河">
+<meta property="og:title" content="datatable - 朝花夕拾">
 <meta property="og:description"
-  content="AIComponent " />
-<meta property="og:url" content="https://domyson.github.io/post/anywhere/6/" />
-<meta property="og:site_name" content="AIComponent" />
+  content="简介 DatatableModule 是一个基于 kpb 编码的配置文件管理系统,它定义了一个配置文件的数据结构，并提供了相应的API来操作和访问配置文件。在Anywhere中它是一个GameComponent。它包含了一个代码生成器，和数据解析器和编码器。
+数据表的加载只有4(2)个接口 LoadDatatable&amp;lt;T&amp;gt;(bool lazy) GetRow&amp;lt;T&amp;gt;(int row) 以及一套同作用的异步接口，前者获取一整张表，后者获取某表的某一行数据，即对应的数据结构体。
+Datatable 静默行为是 Lazy load 对于同一张数据表，它只会根据需要读取指定行然后才缓存，而不是一次性读取所有表格。
+Feature lazy load,它不会加载表格的所有数据，而是按照需要动态一部分一部分的加载，直到全部加载完毕。
+DatatableModule 加载接口提供同步和异步两种模式，也可以加载远程资源，依赖于 Resource
+DatatableModule 提供代码和数据生成的编辑器，无需关注实现逻辑。
+多种类型数据支持 bool,int,float,string,binary,int*,float*,string*,满足绝大部分场景 （2024/05/23）增加了定长数据的支持，减少内存消耗。
+基于kproto编码协议，极小的二进制文件，以及极快的编解码速度。
+栈内存映射，大部分情况下不需要开辟堆空间，节省一部分堆内存的分配，减少Mono Reserved的分配。" />
+<meta property="og:url" content="https://domyson.github.io/post/anywhere/3/" />
+<meta property="og:site_name" content="datatable" />
 <meta property="og:image"
   content="https://domyson.github.io/">
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
 
-<meta property="article:published_time" content="2023-12-10 00:00:00 &#43;0000 UTC" />
+<meta property="article:published_time" content="2023-04-01 00:00:00 &#43;0000 UTC" />
 
 
 
@@ -132,19 +156,19 @@
                   </span>
                   <span class="path-divider">/</span>
                   <strong class="css-truncate css-truncate-target mr-1" style="max-width: 410px">
-                    <a href="https://domyson.github.io/post/anywhere/6/">AIComponent</a>
+                    <a href="https://domyson.github.io/post/anywhere/3/">datatable</a>
                   </strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Sun, 10 Dec 2023 00:00:00 &#43;0000"
+                  Created <relative-time datetime="Sat, 01 Apr 2023 00:00:00 &#43;0000"
                     class="no-wrap">
-                    Sun, 10 Dec 2023 00:00:00 &#43;0000</relative-time>
+                    Sat, 01 Apr 2023 00:00:00 &#43;0000</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Mon, 01 Apr 2024 12:33:05 &#43;0000"
+                  Modified <relative-time datetime="Fri, 24 May 2024 00:19:03 &#43;0800"
                     class="no-wrap">
-                    Mon, 01 Apr 2024 12:33:05 &#43;0000</relative-time>
+                    Fri, 24 May 2024 00:19:03 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -174,7 +198,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      1 Words
+                      502 Words
                     
 
                   </div>
@@ -197,7 +221,44 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><h1 id="aicomponent">AIComponent</h1>
+                <article class="markdown-body entry-content container-lg"><h1 id="简介">简介</h1>
+<p><code>DatatableModule</code> 是一个基于 <a href="/post/kproto">kpb</a> 编码的配置文件管理系统,它定义了一个配置文件的数据结构，并提供了相应的API来操作和访问配置文件。在<code>Anywhere</code>中它是一个<code>GameComponent</code>。它包含了一个代码生成器，和数据解析器和编码器。</p>
+<p>数据表的加载只有4(2)个接口  <code>LoadDatatable&lt;T&gt;(bool lazy)</code> <code>GetRow&lt;T&gt;(int row)</code> 以及一套同作用的异步接口，前者获取一整张表，后者获取某表的某一行数据，即对应的数据结构体。</p>
+<p><code>Datatable</code> 静默行为是 <code>Lazy load</code> 对于同一张数据表，它只会根据需要读取指定行然后才缓存，而不是一次性读取所有表格。</p>
+<h1 id="feature">Feature</h1>
+<ol>
+<li>
+<p><code>lazy load</code>,它不会加载表格的所有数据，而是按照需要动态一部分一部分的加载，直到全部加载完毕。</p>
+</li>
+<li>
+<p><code>DatatableModule</code> 加载接口提供同步和异步两种模式，也可以加载远程资源，依赖于 <a href="/post/anywhere/2">Resource</a></p>
+</li>
+<li>
+<p><code>DatatableModule</code> 提供代码和数据生成的编辑器，无需关注实现逻辑。</p>
+</li>
+<li>
+<p>多种类型数据支持 <code>bool,int,float,string,binary,int*,float*,string*</code>,满足绝大部分场景
+（2024/05/23）增加了定长数据的支持，减少内存消耗。</p>
+</li>
+<li>
+<p>基于<code>kproto</code>编码协议，极小的二进制文件，以及极快的编解码速度。</p>
+</li>
+<li>
+<p>栈内存映射，大部分情况下不需要开辟堆空间，节省一部分堆内存的分配，减少<code>Mono Reserved</code>的分配。</p>
+</li>
+</ol>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
+     crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7934154300350596"
+     data-ad-slot="3469296166"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 </article>
               </div>
             </div>

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>Posts - 满船清梦压星河</title>
+    <title>Posts - 朝花夕拾</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -26,7 +26,7 @@
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Posts - 满船清梦压星河" />
+<meta name="twitter:title" content="Posts - 朝花夕拾" />
 <meta name="twitter:description"
   content="" />
 <meta name="twitter:site" content="https://domyson.github.io/" />
@@ -36,7 +36,7 @@
 
 
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Posts - 满船清梦压星河">
+<meta property="og:title" content="Posts - 朝花夕拾">
 <meta property="og:description"
   content="" />
 <meta property="og:url" content="https://domyson.github.io/post/" />
@@ -49,7 +49,7 @@
 
 
 
-<link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="满船清梦压星河" />
+<link href="/post/index.xml" rel="alternate" type="application/rss+xml" title="朝花夕拾" />
 
 
 
@@ -143,7 +143,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">45</span>
+              <span class="Counter">46</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -430,7 +430,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">45</span>
+      <span class="Counter ">46</span>
     </a>
   </nav>
 </div>
@@ -724,6 +724,43 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
+                <a href="https://domyson.github.io/post/language/go/sync.pool/">sync.pool</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                结构分析 type Pool struct { noCopy noCopy local unsafe.Pointer // P 本地池，固定尺寸，实际结构 [P]poolLocal，类似 void* 并附加长度构成了一个数组 localSize uintptr // size of the local array victim unsafe.Pointer // local from previous cycle victimSize uintptr // size of victims array New func() any } type poolChain struct{ head *poolChainElt tail *poolChainElt } type poolChainElt struct{ // 一个双向链表 poolDequeue next,prev *poolChainElt } type poolDequeue struct{ headtail uint64 vals []eface } type eface struct{ // 数据的真实内存分配，包括一个类型描述和实际数据 typ,val unsafe.
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+              
+              <a class="muted-link mr-3" href="/tags/sync.pool">
+                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                  <path fill-rule="evenodd"
+                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                  </path>
+                </svg>
+                sync.pool
+              </a>
+              
+              
+
+              Created
+              <relative-time datetime=" Fri, 15 Apr 2022 00:00:00 &#43;0000" class="no-wrap"
+                title=" Fri, 15 Apr 2022 00:00:00 &#43;0000">
+                Fri, 15 Apr 2022 00:00:00 &#43;0000
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
                 <a href="https://domyson.github.io/post/language/go/sync.map/">sync.Map</a>
               </h3>
             </div>
@@ -972,7 +1009,7 @@ ECT2，ASTC 但需要设备支持 OpenGL ES3.0
 LOD unity内置的一项技术，主要是根据目标离相机的距离来断定使用何种精度的模型，减少顶点数的绘制，但代价就是要牺牲部分内存
 Occlusion culling 遮挡剔除 遮挡剔除是用来消除躲在其他物件后面看不到的物件，这代表资源不会浪费在计算那些看不到的顶点上，进而提升性能
 batching dynamic batching 将一些足够小的网格，在CPU上转换它们的顶点，将许多相似的顶点组合在一起，并一次性绘制它们。 无论静态还是动态合批都要求使用相同的材质，动态合批有以下限制：
-+ 如果GameObjects在Transform上包含镜像，则不会对其进行动态合批处理 + 使用多个pass的shader不会被动态合批处理 + 使用不同的Material实例会导致GameObjects不能一起批处理，即使它们基本相同。 + [官方25个不能动批的情况](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FUnity-Technologies%2FBatchBreakingCause) static batching 静态合批是将静态（不移动）GameObjects组合成大网格，然后进行绘制。静态合批使用比较简单，PlayerSettings中开启static batching，然后对需要静态合批物体的Static打钩即可，unity会自动合并被标记为static的对象，前提它们共享相同的材质，并且不移动，被标记为static的物体不能在游戏中移动，旋转或缩放。但是静态批处理需要额外的内存来存储合并的几何体。注意如果多个GameObject在静态批处理之前共享相同的几何体，则会在编辑器或运行时为每个GameObject创建几何体的副本，这会增大内存的开销
++ 如果GameObjects在Transform上包含镜像，则不会对其进行动态合批处理+ 使用多个pass的shader不会被动态合批处理+ 使用不同的Material实例会导致GameObjects不能一起批处理，即使它们基本相同。+ [官方25个不能动批的情况](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2FUnity-Technologies%2FBatchBreakingCause)static batching 静态合批是将静态（不移动）GameObjects组合成大网格，然后进行绘制。静态合批使用比较简单，PlayerSettings中开启static batching，然后对需要静态合批物体的Static打钩即可，unity会自动合并被标记为static的对象，前提它们共享相同的材质，并且不移动，被标记为static的物体不能在游戏中移动，旋转或缩放。但是静态批处理需要额外的内存来存储合并的几何体。注意如果多个GameObject在静态批处理之前共享相同的几何体，则会在编辑器或运行时为每个GameObject创建几何体的副本，这会增大内存的开销
 GPU Instancing 使用GPU Instancing可以一次渲染(render)相同网格的多个副本，仅使用少量DrawCalls。在渲染诸如建筑、树木、草等在场景中重复出现的事物时，GPU Instancing很有用。
 每次draw call，GPU Instancing只渲染相同(identical )的网格，但是每个实例(instance)可以有不同的参数(例如，color或scale)，以增加变化(variation)，减少重复的出现。
 GPU Instancing可以减少每个场景draw calls次数。这显著提升了渲染性能。
@@ -1056,10 +1093,7 @@ Maximum Allowed Timestep 这里我们需要先知道物理系统本身的特性�
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                Pointer 定义一个指针 type *name;，但 type* name; 也无错误，仅仅是风格问题
-使用指针 { int var = 20; int *p; //声明int类型指针 ip = &amp;var; //获取var的地址 } 引用 引用不同于指针，引用必须被赋值，并且引用不能被修改，它指向了数据本身，主要是为了函数传入参数过大发生大量拷贝（函数传递总是值传递）
-NULL 指针 #include &lt;stdio.h&gt; int main(){ int *ptr = NULL; printf(&#34;ptr addr %p\n&#34;,ptr); if(ptr){ // ptr is NULL? } return 0; } //将输出 ptr addr 0x0 指针运算 指针在32位cpu上是一个32位的int，而64上是一个64的int，每递增一次或递减一次将指向下一个或上一个元素的存储单元
-#include &lt;stdio.h&gt; int main(){ int var[] = {10,100,200}; int i,*ptr; ptr = var; //指向数组第一个元素 for(i=0;i&lt;3;i++){ printf(&#34;val %d\n&#34;,*ptr); ptr++; //移动至下一个数组的位置，如果这个数组的元素不都为int的长度，那么数值未知 } } 指针数组 #include &lt;stdio.
+                
               </div>
             </div>
 
@@ -1070,50 +1104,6 @@ NULL 指针 #include &lt;stdio.h&gt; int main(){ int *ptr = NULL; printf(&#34;pt
               <relative-time datetime=" Sat, 02 May 2020 00:00:00 &#43;0000" class="no-wrap"
                 title=" Sat, 02 May 2020 00:00:00 &#43;0000">
                 Sat, 02 May 2020 00:00:00 &#43;0000
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/language/go/pragma/">Go 编译指示</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                编译指示 在计算机编程中，编译指示(pragma) 是一种语言结构，它指示编译器应该如何处理其输入。指示不是编程语言语法的一部分，因编译器而异。
-Go中的编译指示 //go:pragma func Echo(){} 指示详解 //go:noinline 使函数不内联，内联是在编译期间发生的，将函数调用处替换为被调用函数主体的一种编译器优化手段。
-减少函数调用的开销，提高执行速度。
-复制后的更大函数体为其他编译优化带来可能性，如 过程间优化
-消除分支，并改善空间局部性和指令顺序性，同样可以提高性能。
-代码复制带来的空间增长。
-如果有大量重复代码，反而会降低缓存命中率，尤其对 CPU 缓存是致命的。
-内联 func Max(a, b int) int { if a &gt; b { return a } return b } func F() { const a, b = 100, 20 if Max(a, b) == b { panic(b) } } // `Max` 函数被内联，死码消除之后，`F()` 函数被变成了 `F(){ return }` 内联级别：默认常规内联，-gcflags=-l 禁用内联，-gcflags='-l -l' 二级内联，-gcflags='-l -l -l' 三级内联，-gcflags='-l -l -l -l' 四级内联，级数越大，也许更快，但bug更多
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-              
-              <a class="muted-link mr-3" href="/tags/pragma">
-                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-                  <path fill-rule="evenodd"
-                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-                  </path>
-                </svg>
-                pragma
-              </a>
-              
-              
-
-              Created
-              <relative-time datetime=" Sat, 18 Apr 2020 00:00:00 &#43;0000" class="no-wrap"
-                title=" Sat, 18 Apr 2020 00:00:00 &#43;0000">
-                Sat, 18 Apr 2020 00:00:00 &#43;0000
               </relative-time>
             </div>
           </div>

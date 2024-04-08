@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>zmalloc - 满船清梦压星河</title>
+    <title>zmalloc - 朝花夕拾</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -35,7 +35,7 @@ skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="zmalloc - 满船清梦压星河" />
+<meta name="twitter:title" content="zmalloc - 朝花夕拾" />
 <meta name="twitter:description"
   content="简介 无论是对于C版本还是Go版本的skynet而言，一个高效的内存分配器可以提高内存的使用效率，这里效率无论是对于内存碎片亦或是GC而言，都是一种更高效的手段
 基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向runtime申请内存，将会导致内存占用过高。
@@ -54,7 +54,7 @@ skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="zmalloc - 满船清梦压星河">
+<meta property="og:title" content="zmalloc - 朝花夕拾">
 <meta property="og:description"
   content="简介 无论是对于C版本还是Go版本的skynet而言，一个高效的内存分配器可以提高内存的使用效率，这里效率无论是对于内存碎片亦或是GC而言，都是一种更高效的手段
 基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向runtime申请内存，将会导致内存占用过高。
@@ -169,9 +169,9 @@ skynet.free(buf) 释放一段内存,对于slab 而言，它会检查buf的地址
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Mon, 01 Apr 2024 12:33:05 &#43;0000"
+                  Modified <relative-time datetime="Mon, 20 May 2024 09:31:59 &#43;0800"
                     class="no-wrap">
-                    Mon, 01 Apr 2024 12:33:05 &#43;0000</relative-time>
+                    Mon, 20 May 2024 09:31:59 &#43;0800</relative-time>
                   
                 </div>
               </div>
