@@ -18,14 +18,14 @@
 
     
     <meta name="description"
-  content="简介 sktpmd模块是skynet底层集群模块，它承担了skynet网络节点之间的通讯职能。全名为(skynet port managment daemon)
+  content="简介 sktpmd模块是skylark底层集群模块，它承担了skylark网络节点之间的通讯职能。全名为(skylark port managment daemon)
 架构 sktpmd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来，1.6.0改变了个行为，对于像存在类似缓存，或者数据中心的业务而言的单向节点而言，只需要一条连接即可，节省资源。
 sktpmd现在支持原始的tcp,udp,unix协议，后续规划可能由reliable udp实现，降低集群通讯延时并提供更好的性能和时延性。
 远程命名服务，通过内置命令生成唯一的Name，通过Name来与其他节点通讯是友好的。
 使用 启动也非常简单，无须任何代码，仅仅只需要在 conf.conf 中配置一下即可，使用的时候跟节点内通讯无任何区别。因为我已经作平了本地和节点之间的差异。
 内部均由kproto进行编码,提供更快的序列化方式。
 example call
-skynet.send(&amp;#34;host:port@name&amp;#34;,&amp;#34;rpc&amp;#34;...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skynet.send(&amp;#34;alias&amp;#34;,&amp;#34;rpc&amp;#34;,...) -- 通过别名 skynet.send(pid, &amp;#34;rpc&amp;#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
+skylark.send(&amp;#34;host:port@name&amp;#34;,&amp;#34;rpc&amp;#34;...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skylark.send(&amp;#34;alias&amp;#34;,&amp;#34;rpc&amp;#34;,...) -- 通过别名 skylark.send(pid, &amp;#34;rpc&amp;#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
 基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，
 通过配置tun的规则开启多个，则可以实现业务拆分。
 2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&amp;quot;n1.n2.n3@name&amp;quot;)
@@ -43,14 +43,14 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="sktpmd - 朝花夕拾" />
 <meta name="twitter:description"
-  content="简介 sktpmd模块是skynet底层集群模块，它承担了skynet网络节点之间的通讯职能。全名为(skynet port managment daemon)
+  content="简介 sktpmd模块是skylark底层集群模块，它承担了skylark网络节点之间的通讯职能。全名为(skylark port managment daemon)
 架构 sktpmd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来，1.6.0改变了个行为，对于像存在类似缓存，或者数据中心的业务而言的单向节点而言，只需要一条连接即可，节省资源。
 sktpmd现在支持原始的tcp,udp,unix协议，后续规划可能由reliable udp实现，降低集群通讯延时并提供更好的性能和时延性。
 远程命名服务，通过内置命令生成唯一的Name，通过Name来与其他节点通讯是友好的。
 使用 启动也非常简单，无须任何代码，仅仅只需要在 conf.conf 中配置一下即可，使用的时候跟节点内通讯无任何区别。因为我已经作平了本地和节点之间的差异。
 内部均由kproto进行编码,提供更快的序列化方式。
 example call
-skynet.send(&amp;#34;host:port@name&amp;#34;,&amp;#34;rpc&amp;#34;...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skynet.send(&amp;#34;alias&amp;#34;,&amp;#34;rpc&amp;#34;,...) -- 通过别名 skynet.send(pid, &amp;#34;rpc&amp;#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
+skylark.send(&amp;#34;host:port@name&amp;#34;,&amp;#34;rpc&amp;#34;...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skylark.send(&amp;#34;alias&amp;#34;,&amp;#34;rpc&amp;#34;,...) -- 通过别名 skylark.send(pid, &amp;#34;rpc&amp;#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
 基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，
 通过配置tun的规则开启多个，则可以实现业务拆分。
 2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&amp;quot;n1.n2.n3@name&amp;quot;)
@@ -68,14 +68,14 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
 <meta property="og:type" content="article" />
 <meta property="og:title" content="sktpmd - 朝花夕拾">
 <meta property="og:description"
-  content="简介 sktpmd模块是skynet底层集群模块，它承担了skynet网络节点之间的通讯职能。全名为(skynet port managment daemon)
+  content="简介 sktpmd模块是skylark底层集群模块，它承担了skylark网络节点之间的通讯职能。全名为(skylark port managment daemon)
 架构 sktpmd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来，1.6.0改变了个行为，对于像存在类似缓存，或者数据中心的业务而言的单向节点而言，只需要一条连接即可，节省资源。
 sktpmd现在支持原始的tcp,udp,unix协议，后续规划可能由reliable udp实现，降低集群通讯延时并提供更好的性能和时延性。
 远程命名服务，通过内置命令生成唯一的Name，通过Name来与其他节点通讯是友好的。
 使用 启动也非常简单，无须任何代码，仅仅只需要在 conf.conf 中配置一下即可，使用的时候跟节点内通讯无任何区别。因为我已经作平了本地和节点之间的差异。
 内部均由kproto进行编码,提供更快的序列化方式。
 example call
-skynet.send(&amp;#34;host:port@name&amp;#34;,&amp;#34;rpc&amp;#34;...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skynet.send(&amp;#34;alias&amp;#34;,&amp;#34;rpc&amp;#34;,...) -- 通过别名 skynet.send(pid, &amp;#34;rpc&amp;#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
+skylark.send(&amp;#34;host:port@name&amp;#34;,&amp;#34;rpc&amp;#34;...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skylark.send(&amp;#34;alias&amp;#34;,&amp;#34;rpc&amp;#34;,...) -- 通过别名 skylark.send(pid, &amp;#34;rpc&amp;#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
 基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，
 通过配置tun的规则开启多个，则可以实现业务拆分。
 2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&amp;quot;n1.n2.n3@name&amp;quot;)
@@ -187,9 +187,9 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Mon, 20 May 2024 09:32:00 &#43;0800"
+                  Modified <relative-time datetime="Mon, 27 May 2024 15:23:31 &#43;0800"
                     class="no-wrap">
-                    Mon, 20 May 2024 09:32:00 &#43;0800</relative-time>
+                    Mon, 27 May 2024 15:23:31 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -219,7 +219,7 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
                         </div>
                       </div>
                     </details-menu>
-                      909 Words
+                      912 Words
                     
 
                   </div>
@@ -232,7 +232,7 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="简介">简介</h1>
-<p><code>sktpmd</code>模块是<code>skynet</code>底层集群模块，它承担了<code>skynet</code>网络节点之间的通讯职能。全名为(<code>skynet port managment daemon</code>)</p>
+<p><code>sktpmd</code>模块是<code>skylark</code>底层集群模块，它承担了<code>skylark</code>网络节点之间的通讯职能。全名为(<code>skylark port managment daemon</code>)</p>
 <h1 id="架构">架构</h1>
 <ol>
 <li>
@@ -258,9 +258,9 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
 <p>example call</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="n">skynet.send</span><span class="p">(</span><span class="s2">&#34;host:port@name&#34;</span><span class="p">,</span><span class="s2">&#34;rpc&#34;</span><span class="p">...)</span> <span class="c1">-- 通过域名或者地址+端口的形式和其他节点进行通讯</span>
-</span></span><span class="line"><span class="cl"><span class="n">skynet.send</span><span class="p">(</span><span class="s2">&#34;alias&#34;</span><span class="p">,</span><span class="s2">&#34;rpc&#34;</span><span class="p">,...)</span> <span class="c1">-- 通过别名</span>
-</span></span><span class="line"><span class="cl"><span class="n">skynet.send</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="s2">&#34;rpc&#34;</span><span class="p">,...)</span>              <span class="c1">-- 通过pid亦可</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="n">skylark.send</span><span class="p">(</span><span class="s2">&#34;host:port@name&#34;</span><span class="p">,</span><span class="s2">&#34;rpc&#34;</span><span class="p">...)</span> <span class="c1">-- 通过域名或者地址+端口的形式和其他节点进行通讯</span>
+</span></span><span class="line"><span class="cl"><span class="n">skylark.send</span><span class="p">(</span><span class="s2">&#34;alias&#34;</span><span class="p">,</span><span class="s2">&#34;rpc&#34;</span><span class="p">,...)</span> <span class="c1">-- 通过别名</span>
+</span></span><span class="line"><span class="cl"><span class="n">skylark.send</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="s2">&#34;rpc&#34;</span><span class="p">,...)</span>              <span class="c1">-- 通过pid亦可</span>
 </span></span></code></pre></div><h1 id="tunnel"><del>tunnel</del></h1>
 <p>既然节点之间是双向连接，所以连接数量为 <code>f(n) =  n²-n</code>，如果节点过的时候，势必造成 <code>socket fd</code> 消耗殆尽，</p>
 <p>基于这个问题，可以通过内置的<code>tun</code>，来设置代理，这么一来，<code>tun</code>的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 <code>tun</code> 代理是不可见的，</p>

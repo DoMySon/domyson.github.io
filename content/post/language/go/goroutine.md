@@ -53,7 +53,7 @@ draft: false
 > 由于 Go 语言是协作式的调度，不会像线程那样，在时间片用完后，由 CPU 中断任务强行将其调度走。对于 Go 语言中运行时间过长的 goroutine，Go scheduler 有一个后台线程在持续监控，一旦发现 goroutine 运行超过 10 ms，会设置 goroutine 的 “抢占标志位”，之后调度器会处理。
 
 1. syscall
-2. select-channel
+2. select-case
 3. I/O（包括网络和文件）
 4. Gosched()函数调用
 5. go func(){...}()

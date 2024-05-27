@@ -734,37 +734,39 @@
                     </path>
                   </svg>
                   <a class="text-bold flex-auto min-width-0" href="https://domyson.github.io/post/skynet/0/">
-                    <span class="repo" title="skynet 设计初衷以及特性">skynet 设计初衷以及特性</span>
+                    <span class="repo" title="skylark 设计初衷以及特性">skylark 设计初衷以及特性</span>
                   </a>
                 </div>
 
 
                 <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <h1 id="概述">概述</h1>
-<blockquote>
-<p><code>skynet</code> 是一个基于消息和服务的<code>Actor</code>分布式服务框架，采用<code>go</code>编写，致力于简化开发难度和成本。</p>
-</blockquote>
+                  <p>工作中曾经开发了一个<code>cobweb</code>的分布式服务器框架（基于<code>golang</code>,<code>c</code>）,但是在实际开发过程中代码难以维护以及更新，主要是每次都需要跨平台进行编译，特别是<code>cgo</code> 往往需要指定平台的系统库,而且一些不规范的使用方式造成无法充分发挥多核的优势，可以参见 <code>关于Go协程的思考</code> 虽然1.16 支持抢占式，但错误的使用方式依然造成了cpu过高的问题。，后续重新设计了<code>skylark</code> 是一个<code>actor</code>模型分布式服务框架，使用<code>go</code>编写。</p>
+<p>尽管<code>Actor</code>模型和<code>CSP</code>模型各有所有长，为什么不采用<code>CSP</code>主要有两方面考虑。</p>
+<ol>
+<li><code>CSP</code>模式使用尽管很简单，但是一个致命的问题是无法控制消息的优先级，当然若只处理一个<code>Channel</code>那可以规避，那么为啥还需要使用<code>CSP</code>,而且像go channel 本身是基于互斥锁（1.16）实现，且无法进行优化和更加精细的控制，只能依赖于<code>runtime</code>的调度。（网上所说什么时候触发调度，我认为channel不能包含其中，它本质也是加锁导致切换）</li>
+<li>隔离性太弱，后续一些新的<code>channel</code>引入也会造成破坏性修改，而且 <code>select-case</code>模式等待的<code>channel</code>会随着数量的增加性能会慢慢减弱。</li>
+</ol>
 <p>它是一个年轻的框架，仅仅经历了两款项目的迭代 现在版本为 <code>v1.6.0 2023-05-28</code></p>
 <ul>
 <li><a href="https://www.taptap.cn/app/229839">羽翼军团</a> v1.3.0</li>
 <li><a href="https://www.taptap.cn/app/215934">我在民国淘古玩</a> v.1.3.5</li>
 </ul>
-<h1 id="设计目的">设计目的</h1>
+<h1 id="与skynet的差异">与skynet的差异</h1>
 <ol>
 <li>
-<p>过往的工作中曾经开发了一个<code>cobweb</code>的分布式服务器框架（基于<code>golang</code>,<code>c</code>）,但是在实际开发过程中代码难以维护以及更新，主要是每次都需要跨平台进行编译，特别是<code>cgo</code> 往往需要指定平台的系统库,而且一些不规范的使用方式造成无法充分发挥多核的优势，可以参见 <code>关于Go协程的思考</code> 虽然1.16 支持抢占式，但错误的使用方式依然造成了cpu过高的问题。</p>
+<p>增加了独占进程的概念，对于一些性能敏感的服务可以绕过公平调度的原则。</p>
 </li>
 <li>
-<p>再者，服务器过多的 <code>goroutine</code> 被创建，极大浪费了内存以及cpu。我不希望滥用协程，其代价比预估的要高。</p>
+<p>使用协程而非线程，一个好处是对于一些假死服务我们可以重新启动它，其它代价远小于线程（尽管协程的开销很低，但我们必须尽量保证不会被滥用）</p>
 </li>
 <li>
-<p>由于以上目的，重写了<code>cobweb</code> 的底层，底层对用户不再透明。而是通过脚本语言导出来提供支持</p>
+<p>一个简单的二进制文件，<code>skynet</code>修改了lua部分虚拟机源码，而且大部分实现都是基于<code>lua</code>而言，而我想设计的是一个将脚本语言作为可选项。</p>
 </li>
 <li>
-<p>包括后续的<a href="/post/typelang/1">DSL</a></p>
+<p>支持后续的<a href="/post/typelang/0">DSL</a></p>
 </li>
 <li>
-<p>在2024/03我重新用C实现了一版以提供更好的性能和更底层的控制</p>
+<p>在2024/03我正计划重新用C实现了一版以提供更好的性能和更底层的控制</p>
 </li>
 </ol>
                 </div>
@@ -885,7 +887,7 @@
 },
 
 {
-  "title": "skynet%20%e8%ae%be%e8%ae%a1%e5%88%9d%e8%a1%b7%e4%bb%a5%e5%8f%8a%e7%89%b9%e6%80%a7",
+  "title": "skylark%20%e8%ae%be%e8%ae%a1%e5%88%9d%e8%a1%b7%e4%bb%a5%e5%8f%8a%e7%89%b9%e6%80%a7",
   "link": "https://domyson.github.io/post/skynet/0/",
   "publishDate": "2022-06-20%2000:00:00"
 },
