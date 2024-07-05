@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='https://domyson.github.io/css/frameworks.min.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/github.min.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/github-style.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
+    <title>Markdown - 朝花夕拾</title>
+    
+    <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
+    
+    <meta name="theme-color" content="#1e2327">
+
+    
+    <meta name="description"
+  content="Link
+Markdown语法 目录 只能跳转标题，如果有同名标题与标题等级无关，匹配最优先的标题
+标题 字体 引用 分割线 超链接 表格 代码 流程图 语法高亮 转义字符 " />
+<meta name="keywords"
+  content='computer tech' />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://domyson.github.io/post/markdown/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Markdown - 朝花夕拾" />
+<meta name="twitter:description"
+  content="Link
+Markdown语法 目录 只能跳转标题，如果有同名标题与标题等级无关，匹配最优先的标题
+标题 字体 引用 分割线 超链接 表格 代码 流程图 语法高亮 转义字符 " />
+<meta name="twitter:site" content="https://domyson.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image"
+  content="https://domyson.github.io/">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Markdown - 朝花夕拾">
+<meta property="og:description"
+  content="Link
+Markdown语法 目录 只能跳转标题，如果有同名标题与标题等级无关，匹配最优先的标题
+标题 字体 引用 分割线 超链接 表格 代码 流程图 语法高亮 转义字符 " />
+<meta property="og:url" content="https://domyson.github.io/post/markdown/" />
+<meta property="og:site_name" content="Markdown" />
+<meta property="og:image"
+  content="https://domyson.github.io/">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2019-03-05 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+  <div style="position: relative">
+  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+      <a class="Header-link" href="https://domyson.github.io/">
+        <img class="octicon" height="32" width="32" src="">
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button class="Header-link btn-link js-details-target" type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+        <img height="24" class="octicon octicon-three-bars" width="24" src="">
+      </button>
+    </div>
+    <div style="display: none;" id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+        <div class="position-relative">
+          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+            autocomplete="off">
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+              <input type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q" value="" placeholder="Search" autocomplete="off">
+              <input type="hidden" name="q" value="site:https://domyson.github.io/">
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+      <a class="Header-link " href="https://domyson.github.io/">
+        <img class="octicon octicon-mark-github v-align-middle" height="32" width="32" src="">
+      </a>
+    </div>
+    <div class="Header-item" style="margin-right: 0;">
+      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+          version="1.1" width="16" height="16">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </header>
+</div>
+
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io/">
+                  <img class=" avatar-user"
+                    src="https://domyson.github.io/images/avatar.png"
+                    width="32" height="32"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://domyson.github.io/">Treasure</a>
+                  </span>
+                  <span class="path-divider">/</span>
+                  <strong class="css-truncate css-truncate-target mr-1" style="max-width: 410px">
+                    <a href="https://domyson.github.io/post/markdown/">Markdown</a>
+                  </strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Tue, 05 Mar 2019 00:00:00 &#43;0000"
+                    class="no-wrap">
+                    Tue, 05 Mar 2019 00:00:00 &#43;0000</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Fri, 05 Jul 2024 15:30:54 &#43;0000"
+                    class="no-wrap">
+                    Fri, 05 Jul 2024 15:30:54 &#43;0000</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      1620 Words
+                    
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                    
+                    <a class="muted-link mr-3" href="/tags/markdown">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      Markdown
+                    </a>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><p><a href="http://xianbai.me/learn-md/article/syntax/emphasis.html">Link</a></p>
+<h1 id="markdown语法">Markdown语法</h1>
+<h1 id="目录">目录</h1>
+<p>只能跳转标题，如果有同名标题与标题等级无关，匹配最优先的标题</p>
+<ul>
+<li><a href="#%E4%B8%80%E3%80%81%E6%A0%87%E9%A2%98">标题</a></li>
+<li><a href="#%E4%BA%8C%E3%80%81%E5%AD%97%E4%BD%93">字体</a></li>
+<li><a href="#%E4%B8%89%E3%80%81%E5%BC%95%E7%94%A8">引用</a></li>
+<li><a href="#%E5%9B%9B%E3%80%81%E5%88%86%E5%89%B2%E7%BA%BF">分割线</a></li>
+<li><a href="#%E5%85%AD%E3%80%81%E8%B6%85%E9%93%BE%E6%8E%A5">超链接</a></li>
+<li><a href="#%E5%85%AB%E3%80%81%E8%A1%A8%E6%A0%BC">表格</a></li>
+<li><a href="#%E4%B9%9D%E3%80%81%E4%BB%A3%E7%A0%81">代码</a></li>
+<li><a href="#%E5%8D%81%E3%80%81%E6%B5%81%E7%A8%8B%E5%9B%BE">流程图</a></li>
+<li><a href="#%E5%8D%81%E4%B8%80%E3%80%81%E8%AF%AD%E6%B3%95%E9%AB%98%E4%BA%AE">语法高亮</a></li>
+<li><a href="#%E5%8D%81%E4%BA%8C%E3%80%81%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6">转义字符</a></li>
+</ul>
+<h1 id="一标题">一、标题</h1>
+<p>在想要设置为标题的文字前面加#来表示。一个#是一级标题，二个#是二级标题，以此类推。支持六级标题。</p>
+<p>示例:</p>
+<pre><code># 这是一级标题
+
+## 这是二级标题
+
+### 这是三级标题
+
+#### 这是四级标题
+
+##### 这是五级标题
+
+###### 这是六级标题
+</code></pre>
+<p>效果:</p>
+<h1 id="这是一级标题">这是一级标题</h1>
+<h2 id="这是二级标题">这是二级标题</h2>
+<h3 id="这是三级标题">这是三级标题</h3>
+<h4 id="这是四级标题">这是四级标题</h4>
+<h5 id="这是五级标题">这是五级标题</h5>
+<h6 id="这是六级标题">这是六级标题</h6>
+<hr>
+<h1 id="二字体">二、字体</h1>
+<ul>
+<li>
+<p>加粗
+要加粗的文字左右分别用两个*号包起来</p>
+</li>
+<li>
+<p>斜体
+要倾斜的文字左右分别用一个*号包起来</p>
+</li>
+<li>
+<p>斜体加粗
+要倾斜和加粗的文字左右分别用三个*号包起来</p>
+</li>
+<li>
+<p>删除线
+要加删除线的文字左右分别用两个~~号包起来</p>
+</li>
+</ul>
+<p>示例:</p>
+<pre><code>**这是加粗的文字**
+
+*这是倾斜的文字*
+
+***这是斜体加粗的文字***
+
+~~这是加删除线的文字~~
+</code></pre>
+<p>效果:</p>
+<p><strong>这是加粗的文字</strong></p>
+<p><em>这是倾斜的文字</em>`</p>
+<p><em><strong>这是斜体加粗的文字</strong></em></p>
+<p><del>这是加删除线的文字</del></p>
+<hr>
+<h1 id="三引用">三、引用</h1>
+<p>在引用的文字前加&gt;即可。引用也可以嵌套，如加两个&raquo;三个&raquo;&gt;
+n个&hellip;</p>
+<p>示例:</p>
+<pre><code>&gt;这是引用的内容
+
+&gt;&gt;这是引用的内容
+
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;这是引用的内容
+</code></pre>
+<p>效果:</p>
+<blockquote>
+<p>这是引用的内容</p>
+<blockquote>
+<p>这是引用的内容</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>这是引用的内容</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<hr>
+<h1 id="四分割线">四、分割线</h1>
+<blockquote>
+<p>三个或者三个以上的 <code>-</code> 或者 <code>*</code> 都可以。</p>
+</blockquote>
+<p>示例:</p>
+<pre><code>---
+----
+***
+*****
+</code></pre>
+<p>效果:</p>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<h1 id="五图片">五、图片</h1>
+<p>语法:</p>
+<pre><code>![alt](图片地址 &quot;title&quot;)
+</code></pre>
+<p><code>alt</code> 就是显示在图片下面的文字，相当于对图片内容的解释。<code>title</code> 是图片的标题，当鼠标移到图片上时显示的内容。<code>title</code> 可加可不加</p>
+<p>效果:</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/8245841-7ed8a7dcaa5c8fe4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<hr>
+<h1 id="六超链接">六、超链接</h1>
+<p>语法：</p>
+<pre><code>[name](url &quot;title&quot;) `title` 可加可不加
+</code></pre>
+<p>示例:</p>
+<pre><code>[简书](http://jianshu.com)
+[百度](http://baidu.com)
+</code></pre>
+<p>效果:</p>
+<p><a href="http://jianshu.com">简书</a></p>
+<p><a href="http://baidu.com">百度</a></p>
+<hr>
+<h1 id="七列表">七、列表</h1>
+<h2 id="无序列表">无序列表</h2>
+<p>语法：</p>
+<p>无序列表用 <code>-</code> <code>+</code> <code>*</code> 任何一种都可以</p>
+<pre><code>- 列表内容
++ 列表内容
+* 列表内容
+</code></pre>
+<p>注意：- + * 跟内容之间都要有一个空格</p>
+<p>效果：</p>
+<ul>
+<li>列表内容</li>
+</ul>
+<ul>
+<li>列表内容</li>
+</ul>
+<ul>
+<li>列表内容</li>
+</ul>
+<ul>
+<li>列表内容</li>
+</ul>
+<hr>
+<h2 id="有序列表">有序列表</h2>
+<p>语法:</p>
+<pre><code>1. 列表内容
+2. 列表内容
+3. 列表内容
+</code></pre>
+<blockquote>
+<p>注意：序号跟内容之间要有空格</p>
+</blockquote>
+<p>效果:</p>
+<ol>
+<li>列表内容</li>
+<li>列表内容</li>
+<li>列表内容</li>
+</ol>
+<hr>
+<h2 id="列表嵌套">列表嵌套</h2>
+<p>示例:</p>
+<pre><code>+ 一级无序列表内容
+
+    + 二级无序列表内容
+    + 二级无序列表内容
+    + 二级无序列表内容
+
++ 一级无序列表内容
+
+    1. 二级有序列表内容
+    2. 二级有序列表内容
+    3. 二级有序列表内容
+
+
+1. 一级有序列表内容
+
+    + 二级无序列表内容
+    + 二级无序列表内容
+    + 二级无序列表内容
+
+2. 一级有序列表内容
+
+    1. 二级有序列表内容
+    2. 二级有序列表内容
+    3. 二级有序列表内容
+</code></pre>
+<p>效果:</p>
+<ul>
+<li>
+<p>一级无序列表内容</p>
+<ul>
+<li>二级无序列表内容</li>
+<li>二级无序列表内容</li>
+<li>二级无序列表内容</li>
+</ul>
+</li>
+<li>
+<p>一级无序列表内容</p>
+<ol>
+<li>二级有序列表内容</li>
+<li>二级有序列表内容</li>
+<li>二级有序列表内容</li>
+</ol>
+</li>
+</ul>
+<ol>
+<li>
+<p>一级有序列表内容</p>
+<ul>
+<li>二级无序列表内容</li>
+<li>二级无序列表内容</li>
+<li>二级无序列表内容</li>
+</ul>
+</li>
+<li>
+<p>一级有序列表内容</p>
+<ol>
+<li>二级有序列表内容</li>
+<li>二级有序列表内容</li>
+<li>二级有序列表内容</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h1 id="八表格">八、表格</h1>
+<p>语法:</p>
+<pre><code>表头|表头|表头
+---|:--:|---:
+内容|内容|内容
+内容|内容|内容
+</code></pre>
+<blockquote>
+<p>第二行分割表头和内容。<code>-</code> 有一个就行，为了对齐，多加了几个文字默认居左,<code>-</code> 两边加：表示文字居中,<code>-</code> 右边加：表示文字居右</p>
+</blockquote>
+<blockquote>
+<p>注：原生的语法两边都要用 | 包起来。此处省略</p>
+</blockquote>
+<p>示例:</p>
+<pre><code>姓名|技能|排行
+--|:--:|--:
+刘备|哭|大哥
+关羽|打|二哥
+张飞|骂|三弟
+</code></pre>
+<p>效果:</p>
+<table>
+<thead>
+<tr>
+<th>姓名</th>
+<th style="text-align:center">技能</th>
+<th style="text-align:right">排行</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>刘备</td>
+<td style="text-align:center">哭</td>
+<td style="text-align:right">大哥</td>
+</tr>
+<tr>
+<td>关羽</td>
+<td style="text-align:center">打</td>
+<td style="text-align:right">二哥</td>
+</tr>
+<tr>
+<td>张飞</td>
+<td style="text-align:center">骂</td>
+<td style="text-align:right">三弟</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="九代码">九、代码</h1>
+<p>语法:</p>
+<blockquote>
+<p>单行代码:代码之间分别用一个反引号包起来 `代码内容`,</p>
+</blockquote>
+<blockquote>
+<p>代码块:代码之间分别用三个反引号包起来，且两边的反引号单独占一行</p>
+</blockquote>
+<p>示例:</p>
+<p>单行代码</p>
+<pre><code>`create database hero;`
+</code></pre>
+<p>代码块</p>
+<pre><code>```
+function fun(){
+    echo &quot;这是一句非常牛逼的代码&quot;;
+}
+fun();
+```
+</code></pre>
+<p>效果:</p>
+<p>单行代码</p>
+<p><code>create database hero;</code></p>
+<p>代码块</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">fun</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">echo</span> <span class="s2">&#34;这是一句非常牛逼的代码&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fun</span><span class="p">();</span>
+</span></span></code></pre></div><hr>
+<h1 id="十流程图">十、流程图</h1>
+<blockquote>
+<p>Vscode 不支持</p>
+</blockquote>
+<pre><code>```flow
+st=&gt;start: 开始
+op=&gt;operation: My Operation
+cond=&gt;condition: Yes or No?
+e=&gt;end
+st-&gt;op-&gt;cond
+cond(yes)-&gt;e
+cond(no)-&gt;op
+&amp;```
+</code></pre>
+<hr>
+<h1 id="十一语法高亮">十一、语法高亮</h1>
+<p>语法:</p>
+<pre><code>```key
+    code
+```
+</code></pre>
+<p>支持的 <code>key</code> 常用</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">language</th>
+<th style="text-align:center">key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">C++</td>
+<td style="text-align:center">cpp</td>
+</tr>
+<tr>
+<td style="text-align:center">C#</td>
+<td style="text-align:center">cs</td>
+</tr>
+<tr>
+<td style="text-align:center">CSS</td>
+<td style="text-align:center">css</td>
+</tr>
+<tr>
+<td style="text-align:center">Erlang</td>
+<td style="text-align:center">erlang</td>
+</tr>
+<tr>
+<td style="text-align:center">Go</td>
+<td style="text-align:center">go</td>
+</tr>
+<tr>
+<td style="text-align:center">HTML</td>
+<td style="text-align:center">html</td>
+</tr>
+<tr>
+<td style="text-align:center">JavaScript</td>
+<td style="text-align:center">javascript</td>
+</tr>
+<tr>
+<td style="text-align:center">Json</td>
+<td style="text-align:center">json</td>
+</tr>
+<tr>
+<td style="text-align:center">Lua</td>
+<td style="text-align:center">lua</td>
+</tr>
+<tr>
+<td style="text-align:center">Makefile</td>
+<td style="text-align:center">makefile</td>
+</tr>
+<tr>
+<td style="text-align:center">Nginx</td>
+<td style="text-align:center">nginx</td>
+</tr>
+<tr>
+<td style="text-align:center">Python</td>
+<td style="text-align:center">python</td>
+</tr>
+<tr>
+<td style="text-align:center">ProtocolBuffer</td>
+<td style="text-align:center">protobuf</td>
+</tr>
+<tr>
+<td style="text-align:center">SQL</td>
+<td style="text-align:center">sql</td>
+</tr>
+<tr>
+<td style="text-align:center">text</td>
+<td style="text-align:center">text/plain</td>
+</tr>
+<tr>
+<td style="text-align:center">TypeScript</td>
+<td style="text-align:center">typescript</td>
+</tr>
+<tr>
+<td style="text-align:center">XML</td>
+<td style="text-align:center">xml</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="十二转义字符">十二、转义字符</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">显示结果</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">实体名称</th>
+<th style="text-align:center">实体编号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"> </td>
+<td style="text-align:center">空格</td>
+<td style="text-align:center"><code>&amp;nbsp;</code></td>
+<td style="text-align:center"><code>&amp;#160;</code></td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;</td>
+<td style="text-align:center">小于号</td>
+<td style="text-align:center"><code>&amp;lt;</code></td>
+<td style="text-align:center"><code>&amp;#60;</code></td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;</td>
+<td style="text-align:center">大于号</td>
+<td style="text-align:center"><code>&amp;gt;</code></td>
+<td style="text-align:center"><code>&amp;#62;</code></td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;</td>
+<td style="text-align:center">与号</td>
+<td style="text-align:center"><code>&amp;amp;</code></td>
+<td style="text-align:center"><code>&amp;#38;</code></td>
+</tr>
+<tr>
+<td style="text-align:center">&quot;</td>
+<td style="text-align:center">引号</td>
+<td style="text-align:center"><code>&amp;quot;</code></td>
+<td style="text-align:center"><code>&amp;#34;</code></td>
+</tr>
+<tr>
+<td style="text-align:center">'</td>
+<td style="text-align:center">撇号</td>
+<td style="text-align:center"><code>&amp;apos;(IE不支持)</code></td>
+<td style="text-align:center"><code>&amp;#39;</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="十三公式">十三、公式</h1>
+<p>$$dmg=atk-def$$</p></article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
+
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://domyson.github.io/css/gitalk.css'>
+<script src='https://domyson.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    clientID: '258cd417c7c5b85f68e3',
+    clientSecret: '4fd96cf3d02ea5bf11e9c29b159e2041557493e6',
+    repo: 'domyson.github.io',
+    owner: 'domyson',
+    admin: ['domyson'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://domyson.github.io/">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+    </a>
+    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+      
+      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+
+
+</div>
+</body>
+
+<script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
+
+</html>

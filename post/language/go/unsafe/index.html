@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='https://domyson.github.io/css/frameworks.min.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/github.min.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/github-style.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
+    <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
+    <title>unsafe包 - 朝花夕拾</title>
+    
+    <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
+    
+    <meta name="theme-color" content="#1e2327">
+
+    
+    <meta name="description"
+  content="Golang 默认指针是类型安全的，但它有很多限制。Golang 还有非类型安全的指针，这就是 unsafe 包提供的 unsafe.Pointer。在某些情况下，它会使代码更高效，当然，也更危险。unsafe 包用于 Go 编译器，在编译阶段使用。从名字就可以看出来，它是不安全的，官方并不建议使用。Go 语言类型系统是为了安全和效率设计的，有时，安全会导致效率低下。unsafe 包绕过了 Go 的类型系统，达到直接操作内存的目的，使用它有一定的风险性。但是在某些场景下，使用 unsafe 包提供的函数会提升代码的效率，Go 源码中也是大量使用 unsafe 包。
+unsafe 包 //定义 type ArbitraryType int type Pointer *ArbitraryType //函数 func Sizeof(x AribitraryType) uintptr{} func Offsetof(x AribitraryType) uintptr{} func Alignof(x AribitraryType) uintptr{} 分析 Pointer : 指向任意类型，类似于 C 中的 void*。
+Sizeof : 返回所传类型的大小，指针只返回指针的本身（x64 8byte x86 4byte），而不会返回所指向的内存大小。
+Offsetof : 返回 struct 成员在内存中的位置，相对于此结构体的头位置，所传参数必须是结构体成员。传入指针，或者结构体本身，会 error
+Alignof : 返回 M，M 是内存对齐时的倍数。
+任意指针都可以和 unsafe.Pointer 相互转换。
+uintptr 可以和 unsafe." />
+<meta name="keywords"
+  content='computer tech' />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://domyson.github.io/post/language/go/unsafe/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="unsafe包 - 朝花夕拾" />
+<meta name="twitter:description"
+  content="Golang 默认指针是类型安全的，但它有很多限制。Golang 还有非类型安全的指针，这就是 unsafe 包提供的 unsafe.Pointer。在某些情况下，它会使代码更高效，当然，也更危险。unsafe 包用于 Go 编译器，在编译阶段使用。从名字就可以看出来，它是不安全的，官方并不建议使用。Go 语言类型系统是为了安全和效率设计的，有时，安全会导致效率低下。unsafe 包绕过了 Go 的类型系统，达到直接操作内存的目的，使用它有一定的风险性。但是在某些场景下，使用 unsafe 包提供的函数会提升代码的效率，Go 源码中也是大量使用 unsafe 包。
+unsafe 包 //定义 type ArbitraryType int type Pointer *ArbitraryType //函数 func Sizeof(x AribitraryType) uintptr{} func Offsetof(x AribitraryType) uintptr{} func Alignof(x AribitraryType) uintptr{} 分析 Pointer : 指向任意类型，类似于 C 中的 void*。
+Sizeof : 返回所传类型的大小，指针只返回指针的本身（x64 8byte x86 4byte），而不会返回所指向的内存大小。
+Offsetof : 返回 struct 成员在内存中的位置，相对于此结构体的头位置，所传参数必须是结构体成员。传入指针，或者结构体本身，会 error
+Alignof : 返回 M，M 是内存对齐时的倍数。
+任意指针都可以和 unsafe.Pointer 相互转换。
+uintptr 可以和 unsafe." />
+<meta name="twitter:site" content="https://domyson.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image"
+  content="https://domyson.github.io/">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="unsafe包 - 朝花夕拾">
+<meta property="og:description"
+  content="Golang 默认指针是类型安全的，但它有很多限制。Golang 还有非类型安全的指针，这就是 unsafe 包提供的 unsafe.Pointer。在某些情况下，它会使代码更高效，当然，也更危险。unsafe 包用于 Go 编译器，在编译阶段使用。从名字就可以看出来，它是不安全的，官方并不建议使用。Go 语言类型系统是为了安全和效率设计的，有时，安全会导致效率低下。unsafe 包绕过了 Go 的类型系统，达到直接操作内存的目的，使用它有一定的风险性。但是在某些场景下，使用 unsafe 包提供的函数会提升代码的效率，Go 源码中也是大量使用 unsafe 包。
+unsafe 包 //定义 type ArbitraryType int type Pointer *ArbitraryType //函数 func Sizeof(x AribitraryType) uintptr{} func Offsetof(x AribitraryType) uintptr{} func Alignof(x AribitraryType) uintptr{} 分析 Pointer : 指向任意类型，类似于 C 中的 void*。
+Sizeof : 返回所传类型的大小，指针只返回指针的本身（x64 8byte x86 4byte），而不会返回所指向的内存大小。
+Offsetof : 返回 struct 成员在内存中的位置，相对于此结构体的头位置，所传参数必须是结构体成员。传入指针，或者结构体本身，会 error
+Alignof : 返回 M，M 是内存对齐时的倍数。
+任意指针都可以和 unsafe.Pointer 相互转换。
+uintptr 可以和 unsafe." />
+<meta property="og:url" content="https://domyson.github.io/post/language/go/unsafe/" />
+<meta property="og:site_name" content="unsafe包" />
+<meta property="og:image"
+  content="https://domyson.github.io/">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2021-08-25 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+  <div style="position: relative">
+  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+      <a class="Header-link" href="https://domyson.github.io/">
+        <img class="octicon" height="32" width="32" src="">
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button class="Header-link btn-link js-details-target" type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+        <img height="24" class="octicon octicon-three-bars" width="24" src="">
+      </button>
+    </div>
+    <div style="display: none;" id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+        <div class="position-relative">
+          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+            autocomplete="off">
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+              <input type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q" value="" placeholder="Search" autocomplete="off">
+              <input type="hidden" name="q" value="site:https://domyson.github.io/">
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+      <a class="Header-link " href="https://domyson.github.io/">
+        <img class="octicon octicon-mark-github v-align-middle" height="32" width="32" src="">
+      </a>
+    </div>
+    <div class="Header-item" style="margin-right: 0;">
+      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+          version="1.1" width="16" height="16">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </header>
+</div>
+
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io/">
+                  <img class=" avatar-user"
+                    src="https://domyson.github.io/images/avatar.png"
+                    width="32" height="32"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://domyson.github.io/">Treasure</a>
+                  </span>
+                  <span class="path-divider">/</span>
+                  <strong class="css-truncate css-truncate-target mr-1" style="max-width: 410px">
+                    <a href="https://domyson.github.io/post/language/go/unsafe/">unsafe包</a>
+                  </strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Wed, 25 Aug 2021 00:00:00 &#43;0000"
+                    class="no-wrap">
+                    Wed, 25 Aug 2021 00:00:00 &#43;0000</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Fri, 05 Jul 2024 15:30:54 &#43;0000"
+                    class="no-wrap">
+                    Fri, 05 Jul 2024 15:30:54 &#43;0000</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      922 Words
+                    
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><blockquote>
+<p>Golang 默认指针是类型安全的，但它有很多限制。Golang 还有非类型安全的指针，这就是 unsafe 包提供的 unsafe.Pointer。在某些情况下，它会使代码更高效，当然，也更危险。unsafe 包用于 Go 编译器，在编译阶段使用。从名字就可以看出来，它是不安全的，官方并不建议使用。Go 语言类型系统是为了安全和效率设计的，有时，安全会导致效率低下。unsafe 包绕过了 Go 的类型系统，达到直接操作内存的目的，使用它有一定的风险性。但是在某些场景下，使用 unsafe 包提供的函数会提升代码的效率，Go 源码中也是大量使用 unsafe 包。</p>
+</blockquote>
+<h1 id="unsafe-包"><code>unsafe</code> 包</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//定义
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">ArbitraryType</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Pointer</span> <span class="o">*</span><span class="nx">ArbitraryType</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">Sizeof</span><span class="p">(</span><span class="nx">x</span> <span class="nx">AribitraryType</span><span class="p">)</span> <span class="kt">uintptr</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Offsetof</span><span class="p">(</span><span class="nx">x</span> <span class="nx">AribitraryType</span><span class="p">)</span> <span class="kt">uintptr</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Alignof</span><span class="p">(</span><span class="nx">x</span> <span class="nx">AribitraryType</span><span class="p">)</span> <span class="kt">uintptr</span><span class="p">{}</span>
+</span></span></code></pre></div><h1 id="分析">分析</h1>
+<ul>
+<li>
+<p><code>Pointer</code> : 指向任意类型，类似于 C 中的 <code>void*</code>。</p>
+</li>
+<li>
+<p><code>Sizeof</code> : 返回所传类型的大小，指针只返回指针的本身（<code>x64 8byte x86 4byte</code>），而不会返回所指向的内存大小。</p>
+</li>
+<li>
+<p><code>Offsetof</code> : 返回 <code>struct</code> 成员在内存中的位置，相对于此结构体的头位置，所传参数必须是结构体成员。传入指针，或者结构体本身，会 <code>error</code></p>
+</li>
+<li>
+<p><code>Alignof</code> : 返回 M，M 是内存对齐时的倍数。</p>
+</li>
+<li>
+<p>任意指针都可以和 <code>unsafe.Pointer</code> 相互转换。</p>
+</li>
+<li>
+<p><code>uintptr</code> 可以和 <code>unsafe.Pointer</code> 相互转换。</p>
+</li>
+</ul>
+<blockquote>
+<p>综上，<code>unsafe.Pointer</code> 是不能进行指针运算的，只能先转为 <code>uintptr</code> 计算完再转回 <code>unsafe.Pointer</code> ,还有一点要注意的是，
+<code>uintptr</code> 并没有指针的语义，意思就是 <code>uintptr</code> 所指向的对象会被 gc。而 <code>unsafe.Pointer</code> 有指针语义，可以保护它所指向的对象在“有用”的时候不会被垃圾回收。</p>
+</blockquote>
+<h1 id="注意">注意</h1>
+<ul>
+<li>
+<p><code>uintptr</code>：只代表了一个地址的值，其本身是一个整形变量，那么意味着其表示地址的内存可能会被GC。</p>
+</li>
+<li>
+<p><code>unsafe.Poniter</code>：本身指向一个确定内存的地址，相当于其它类型指针的一个抽象，那么其指向的内存将不会被GC。</p>
+</li>
+</ul>
+<h1 id="应用">应用</h1>
+<p><a href="/post/sknt/bbuf">bbuf</a></p>
+<h2 id="获取-slice-的长度和容量">获取 <code>slice</code> 的长度和容量</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//runtime/slice.go
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">slice</span> <span class="kd">struct</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">array</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">len</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">cap</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//而make时创造一个 slice 的结构体
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">makeslice</span><span class="p">(</span><span class="nx">et</span> <span class="o">*</span><span class="nx">_type</span><span class="p">,</span><span class="nx">len</span><span class="p">,</span><span class="nx">cap</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">slice</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//那么
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">s</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//这一步网上教程有一个错误：直接加上8的偏移，这在x64机器上这个偏移将会是4
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">l</span> <span class="o">:=</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="nb">int</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">((</span><span class="nb">uintptr</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">))</span><span class="o">+</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Alignof</span><span class="p">(</span><span class="nx">s</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">c</span> <span class="o">:=</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="nb">int</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">((</span><span class="nb">uintptr</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">))</span><span class="o">+</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Alignof</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">))))</span>
+</span></span></code></pre></div><h2 id="string-和-slice-的转换"><code>string</code> 和 <code>slice</code> 的转换</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//高性能的做法是 zero-copy，那么共享底层 []byte 即可
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">//reflect/value.go
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">StringHeader</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Data</span> <span class="kt">uintptr</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Len</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">SliceHeader</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Data</span> <span class="kt">uintptr</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Len</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Cap</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//所以
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">String2Bytes</span><span class="p">(</span><span class="nx">s</span> <span class="kt">string</span><span class="p">)</span> <span class="p">[]</span><span class="kt">byte</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">strH</span> <span class="o">:=</span> <span class="p">(</span><span class="o">*</span><span class="nx">reflect</span><span class="p">.</span><span class="nx">StringHeader</span><span class="p">)(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">bh</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">SliceHeader</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Data</span><span class="p">:</span> <span class="nx">strH</span><span class="p">.</span><span class="nx">Data</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Len</span><span class="p">:</span>  <span class="nx">strH</span><span class="p">.</span><span class="nx">Len</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Cap</span><span class="p">:</span>  <span class="nx">strH</span><span class="p">.</span><span class="nx">Len</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="p">[]</span><span class="kt">byte</span><span class="p">)(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">bh</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Bytes2String</span><span class="p">(</span><span class="nx">b</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">byteH</span> <span class="o">:=</span> <span class="p">(</span><span class="o">*</span><span class="nx">reflect</span><span class="p">.</span><span class="nx">SliceHeader</span><span class="p">)(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">b</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">sh</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">StringHeader</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Data</span><span class="p">:</span> <span class="nx">byteH</span><span class="p">.</span><span class="nx">Data</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Len</span><span class="p">:</span>  <span class="nx">byteH</span><span class="p">.</span><span class="nx">Len</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="kt">string</span><span class="p">)(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">sh</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h1 id="总结">总结</h1>
+<p>unsafe.Pointer 提供一定程度上的底层内存操作，本质上还是内存排列的关系，使用它能够提升一些类型转换速度，但需要对内存的比较熟悉。</p>
+</article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
+
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://domyson.github.io/css/gitalk.css'>
+<script src='https://domyson.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    clientID: '258cd417c7c5b85f68e3',
+    clientSecret: '4fd96cf3d02ea5bf11e9c29b159e2041557493e6',
+    repo: 'domyson.github.io',
+    owner: 'domyson',
+    admin: ['domyson'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://domyson.github.io/">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+    </a>
+    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+      
+      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+
+
+</div>
+</body>
+
+<script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
+
+</html>
