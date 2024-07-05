@@ -45,4 +45,3 @@
 [supported themes](https://github.com/MeiK2333/github-style)
 
 
-{{< adsense-footer>}}
