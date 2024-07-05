@@ -52,4 +52,4 @@ href = "https://github.com/domyson"
 # https://mephisto.cc/zh-tw/tech/hugo-adsense/
 
 [frontmatter]
-lastmod = ["lastmod", ":fileModTime", ":default"]
+lastmod = [":fileModTime", ":default"]

@@ -6,6 +6,8 @@ on:
       - main  # Set a branch to deploy
   pull_request:
 
+    workflow_dispatch:
+
 jobs:
   deploy:
     runs-on: ubuntu-20.04
@@ -32,6 +34,7 @@ jobs:
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/main' }}
         with:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
