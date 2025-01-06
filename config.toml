@@ -19,12 +19,12 @@ email = "cnmlgbbg@hotmail.com"
 url = "https://domyson.github.io"
 keywords = "computer tech"
 rss = true
-
+enableSearch = true
 userStatusEmoji = "😀"
 favicon = "/images/avatar.png"
 avatar = "/images/avatar.png"
 location = "China"
-
+lastmod = false
 GtmId = "G-V23G8H27BQ"
 
 enableGitalk = true
@@ -53,13 +53,12 @@ href = "https://github.com/domyson"
 # https://mephisto.cc/zh-tw/tech/hugo-adsense/
 
 
-lastmod = false
+
 #[frontmatter]
 #lastmod = [":fileModTime", ":default"]
 
 
-[params]
-  enableSearch = true
+
 
 [outputs]
   home = ["html", "json"]
