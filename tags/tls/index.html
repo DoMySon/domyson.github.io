@@ -17,6 +17,9 @@
     <meta name="theme-color" content="#1e2327">
 
     
+    
+
+    
     <meta name="description"
   content="" />
 <meta name="keywords"
@@ -60,6 +63,7 @@
 
 </head>
 
+
 <body>
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
@@ -71,7 +75,10 @@
     <div class="Header-item d-md-none">
       <button class="Header-link btn-link js-details-target" type="button"
         onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
-        <img height="24" class="octicon octicon-three-bars" width="24" src="">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
       </button>
     </div>
     <div style="display: none;" id="header-search"
@@ -79,6 +86,7 @@
       <div
         class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
         <div class="position-relative">
+          
           <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
             autocomplete="off">
             <label
@@ -89,6 +97,7 @@
               <input type="hidden" name="q" value="site:https://domyson.github.io/">
             </label>
           </form>
+          
         </div>
       </div>
     </div>
@@ -111,10 +120,12 @@
   </header>
 </div>
 
+  <div id="search-result" class="container-lg px-3 new-discussion-timeline" style="display: none;">
+</div>
+
   
 <div class="application-main">
-  <main>
-    
+  
 
 
 <div class="mt-4 position-sticky top-0 d-none d-md-block bg-white width-full border-bottom color-border-secondary"
@@ -135,7 +146,7 @@
               </svg>
               Overview
             </a>
-            <a class="UnderlineNav-item " href="https://domyson.github.io//post/">
+            <a class="UnderlineNav-item " href="https://domyson.github.io/post">
               <svg class="octicon octicon-repo UnderlineNav-octicon hide-sm" height="16" viewBox="0 0 16 16"
                 version="1.1" width="16">
                 <path fill-rule="evenodd"
@@ -143,7 +154,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">45</span>
+              <span class="Counter">35</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -274,7 +285,7 @@
           <div class="user-profile-mini-vcard d-table">
             <span class="user-profile-mini-avatar d-table-cell v-align-middle lh-condensed-ultra pr-2">
               
-              <img class="rounded-1 avatar-user" height="32" width="32" src="https://domyson.github.io/images/avatar.png">
+              <img class="rounded-1 avatar-user" height="32" width="32" src="/images/avatar.png">
               
             </span>
             <span class="d-table-cell v-align-middle lh-condensed">
@@ -285,9 +296,9 @@
         <div class="clearfix d-flex d-md-block flex-items-center mb-4 mb-md-0">
           <div class="position-relative d-inline-block col-2 col-md-12 mr-3 mr-md-0 flex-shrink-0" style="z-index:4;">
             
-            <a href="https://domyson.github.io/images/avatar.png">
+            <a href="/images/avatar.png">
               <img style="height:auto;" alt="Avatar" width="260" height="260" id="headerImg"
-                class="avatar avatar-user width-full border bg-white" src="https://domyson.github.io/images/avatar.png">
+                class="avatar avatar-user width-full border bg-white" src="/images/avatar.png">
             </a>
             
             
@@ -387,6 +398,8 @@
           
 
           
+
+          
           
           
           <a style="margin: 0 10px 10px 0;" href="https://github.com/domyson">
@@ -422,7 +435,7 @@
       Overview
     </a>
     <a class='UnderlineNav-item   selected '
-      href="https://domyson.github.io//post/">
+      href="https://domyson.github.io/post">
       <svg class="octicon octicon-repo UnderlineNav-octicon hide-sm" height="16" viewBox="0 0 16 16" version="1.1"
         width="16">
         <path fill-rule="evenodd"
@@ -430,7 +443,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">45</span>
+      <span class="Counter ">35</span>
     </a>
   </nav>
 </div>
@@ -472,23 +485,69 @@
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                简介 传输层安全性协议（Transport Layer Security），及其前身 SSL3.0 之后安全套接层（Secure Sockets Layer，缩写作SSL）是一种安全协议，目的是为互联网通信提供安全及数据完整性保障。SSL包含记录层（Record Layer）和传输层，记录层协议确定传输层数据的封装格式。传输层安全协议使用X.509认证，之后利用RSA 加密演算来对通信方做身份认证，之后交换对称密钥作为会谈密钥（Session key）。这个会谈密钥是用来将通信两方交换的数据做加密，保证两个应用间通信的保密性和可靠性，使客户与服务器应用之间的通信不被攻击者窃听。
-作用 安全传输层协议（TLS）用于在两个通信应用程序之间提供保密性和数据完整性。
-协议由两层组成： TLS 记录协议（TLS Record）和 TLS 握手协议（TLS Handshake）。
-TLS协议的优势是与高层的应用层协议（如HTTP、FTP、Telnet等）无耦合。应用层协议能透明地运行在TLS协议之上，由TLS协议进行创建加密通道需要的协商和认证。应用层协议传送的数据在通过TLS协议时都会被加密，从而保证通信的私密性。
-连接过程 当客户端连接到支持TLS协议的服务器要求创建安全连接并列出了受支持的密码组合（加密密码算法和加密哈希函数），握手开始。
-服务器从该列表中决定加密和散列函数，并通知客户端。
-服务器发回其数字证书，此证书通常包含服务器的名称、受信任的证书颁发机构（CA）和服务器的公钥。 客户端确认其颁发的证书的有效性。
-为了生成会话密钥用于安全连接，客户端使用服务器的公钥加密随机生成的密钥，并将其发送到服务器，只有服务器才能使用自己的私钥解密。
-利用随机数，双方生成用于加密和解密的对称密钥。这就是TLS协议的握手，握手完毕后的连接是安全的，直到连接（被）关闭。如果上述任何一个步骤失败，TLS握手过程就会失败，并且断开所有的连接。
-TLS协议 https 本身基于 http 传输，但是信息通过了 tls 协议加密。
-tls 协议位于传输层之上，应用层之下。首次进行 tls 1.3 协议传输需要一个 RTT
-tls 可以使用对称加密和非对称加密。
-握手过程 客户端发送一个随机值以及需要的协议和加密方式。
-服务端收到客户端的随机值，自己也产生一个随机值，并根据客户端需求的协议和加密方式来使用对应的方式，并且发送自己的证书（如果需要验证客户端证书需要说明）。
-客户端收到服务端的证书并验证是否有效，验证通过会再生成一个随机值，通过服务端证书的公钥去加密这个随机值并发送给服务端，如果服务端需要验证客户端证书的话会附带证书。
-服务端收到加密过的随机值并使用私钥解密获得第三个随机值，这时候两端都拥有了三个随机值，可以通过这三个随机值按照之前约定的加密方式生成密钥，接下来的通信就可以通过该密钥来加密解密。
-之后通过此非对称加密传输的对称加密的密钥来进行正式通讯。
+                <h1 id="简介">简介</h1>
+<p>传输层安全性协议（Transport Layer Security），及其前身 <code>SSL3.0</code> 之后安全套接层（Secure Sockets Layer，缩写作SSL）是一种安全协议，目的是为互联网通信提供安全及数据完整性保障。SSL包含记录层（Record Layer）和传输层，记录层协议确定传输层数据的封装格式。传输层安全协议使用X.509认证，之后利用<code>RSA</code> 加密演算来对通信方做身份认证，之后交换对称密钥作为会谈密钥（Session key）。这个会谈密钥是用来将通信两方交换的数据做加密，保证两个应用间通信的保密性和可靠性，使客户与服务器应用之间的通信不被攻击者窃听。</p>
+<h1 id="作用">作用</h1>
+<ul>
+<li>
+<p>安全传输层协议（TLS）用于在两个通信应用程序之间提供保密性和数据完整性。</p>
+</li>
+<li>
+<p>协议由两层组成： TLS 记录协议（TLS Record）和 TLS 握手协议（TLS Handshake）。</p>
+</li>
+<li>
+<p>TLS协议的优势是与高层的应用层协议（如HTTP、FTP、Telnet等）无耦合。应用层协议能透明地运行在TLS协议之上，由TLS协议进行创建加密通道需要的协商和认证。应用层协议传送的数据在通过TLS协议时都会被加密，从而保证通信的私密性。</p>
+</li>
+</ul>
+<h1 id="连接过程">连接过程</h1>
+<ul>
+<li>
+<p>当客户端连接到支持TLS协议的服务器要求创建安全连接并列出了受支持的密码组合（加密密码算法和加密哈希函数），握手开始。</p>
+</li>
+<li>
+<p>服务器从该列表中决定加密和散列函数，并通知客户端。</p>
+</li>
+<li>
+<p>服务器发回其数字证书，此证书通常包含服务器的名称、受信任的证书颁发机构（CA）和服务器的公钥。
+客户端确认其颁发的证书的有效性。</p>
+</li>
+<li>
+<p>为了生成会话密钥用于安全连接，客户端使用服务器的公钥加密随机生成的密钥，并将其发送到服务器，只有服务器才能使用自己的私钥解密。</p>
+</li>
+<li>
+<p>利用随机数，双方生成用于加密和解密的对称密钥。这就是TLS协议的握手，握手完毕后的连接是安全的，直到连接（被）关闭。如果上述任何一个步骤失败，TLS握手过程就会失败，并且断开所有的连接。</p>
+</li>
+</ul>
+<h1 id="tls协议">TLS协议</h1>
+<ul>
+<li>
+<p><code>https</code> 本身基于 <code>http</code> 传输，但是信息通过了 <code>tls</code> 协议加密。</p>
+</li>
+<li>
+<p><code>tls</code> 协议位于传输层之上，应用层之下。首次进行 <code>tls 1.3</code> 协议传输需要一个 RTT</p>
+</li>
+<li>
+<p><code>tls</code> 可以使用对称加密和非对称加密。</p>
+</li>
+</ul>
+<h2 id="握手过程">握手过程</h2>
+<ol>
+<li>
+<p>客户端发送一个随机值以及需要的协议和加密方式。</p>
+</li>
+<li>
+<p>服务端收到客户端的随机值，自己也产生一个随机值，并根据客户端需求的协议和加密方式来使用对应的方式，并且发送自己的证书（如果需要验证客户端证书需要说明）。</p>
+</li>
+<li>
+<p>客户端收到服务端的证书并验证是否有效，验证通过会再生成一个随机值，通过服务端证书的公钥去加密这个随机值并发送给服务端，如果服务端需要验证客户端证书的话会附带证书。</p>
+</li>
+<li>
+<p>服务端收到加密过的随机值并使用私钥解密获得第三个随机值，这时候两端都拥有了三个随机值，可以通过这三个随机值按照之前约定的加密方式生成密钥，接下来的通信就可以通过该密钥来加密解密。</p>
+</li>
+<li>
+<p>之后通过此非对称加密传输的对称加密的密钥来进行正式通讯。</p>
+</li>
+</ol>
               </div>
             </div>
 
@@ -550,20 +609,24 @@ window.onscroll = function (e) {
   }
 };
 
-var style = localStorage.getItem('data-color-mode');
-iconElement = document.getElementById('github-icon');
+var style = localStorage.getItem('data-color-mode')
+githubIconElement = document.getElementById('github-icon')
+twitterIconElement = document.getElementById('twitter-icon')
 if (style == 'light') {
-  iconElement.setAttribute('fill', '#24292e');
+  if (githubIconElement) githubIconElement.setAttribute('fill', '#24292e')
+  if (twitterIconElement) twitterIconElement.setAttribute('fill', 'black')
 }
 else {
-  iconElement.removeAttribute('fill');
-  iconElement.setAttribute('class', 'octicon');
-  iconElement.setAttribute('color', '#f0f6fc');
+  if (githubIconElement) {
+    githubIconElement.removeAttribute('fill')
+    githubIconElement.setAttribute('class', 'octicon')
+    githubIconElement.setAttribute('color', '#f0f6fc')
+  }
+  if (twitterIconElement)  twitterIconElement.setAttribute('fill', 'white') 
 }
 </script>
 
-
-    
+  
 
 </div>
 
@@ -581,6 +644,7 @@ else {
       
       <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
       
+      <li class="mr-3 mr-lg-0">GitHub and the Invertocat logo are trademarks of <a href="https://github.com/">GitHub, Inc.</a></li>
     </ul>
   </div>
   <div class="d-flex flex-justify-center pb-6">
@@ -589,9 +653,13 @@ else {
 
 
 </div>
+
 </body>
 
 <script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
 
 
 

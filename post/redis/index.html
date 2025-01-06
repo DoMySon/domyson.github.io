@@ -17,6 +17,9 @@
     <meta name="theme-color" content="#1e2327">
 
     
+    
+
+    
     <meta name="description"
   content="Redis Remote Dictionary Server,采用 ANSI C 编写的 K-V数据库
 Redis命令
@@ -26,7 +29,7 @@ hash
 list 存储有序字符串，最大2^32-1个元素
 set
 同list，但不允许重复
-sorted set 已排序的都字符串集合，但不允许重复 &amp;ndash; 其它
+sorted set 已排序的都字符串集合，但不允许重复 &ndash; 其它
 GEO 地理位置 HyperLogLog 基数统计 Bitsmap bit数组，类似boolean filter redis设计架构 单线程业务，多线程存储，redis6.0引入多线程也仅仅是为了提高解析命令的速度
 虚拟内存
 虚拟内存机制就是暂时把不经常访问的数据(冷数据)从内存交换到磁盘中，从而腾出宝贵的内存空间用于其它需要访问的数据(热数据)。通过VM功能可以实现冷热数据分离，使热数据仍在内存中、冷数据保存到磁盘。这样就可以避免因为内存不足而造成访问速度下降的问题。
@@ -43,7 +46,8 @@ AOF 采用日志的形式来记录每个写操作，追加到文件中，重启�
 哨兵 监视其他节点的状态
 集群 Gossip，HashSlot 16384
 View
-分布式锁 setnx setnx nx [expired]" />
+分布式锁 setnx setnx nx [expired]
+" />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
@@ -61,7 +65,7 @@ hash
 list 存储有序字符串，最大2^32-1个元素
 set
 同list，但不允许重复
-sorted set 已排序的都字符串集合，但不允许重复 &amp;ndash; 其它
+sorted set 已排序的都字符串集合，但不允许重复 &ndash; 其它
 GEO 地理位置 HyperLogLog 基数统计 Bitsmap bit数组，类似boolean filter redis设计架构 单线程业务，多线程存储，redis6.0引入多线程也仅仅是为了提高解析命令的速度
 虚拟内存
 虚拟内存机制就是暂时把不经常访问的数据(冷数据)从内存交换到磁盘中，从而腾出宝贵的内存空间用于其它需要访问的数据(热数据)。通过VM功能可以实现冷热数据分离，使热数据仍在内存中、冷数据保存到磁盘。这样就可以避免因为内存不足而造成访问速度下降的问题。
@@ -78,7 +82,8 @@ AOF 采用日志的形式来记录每个写操作，追加到文件中，重启�
 哨兵 监视其他节点的状态
 集群 Gossip，HashSlot 16384
 View
-分布式锁 setnx setnx nx [expired]" />
+分布式锁 setnx setnx nx [expired]
+" />
 <meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -96,7 +101,7 @@ hash
 list 存储有序字符串，最大2^32-1个元素
 set
 同list，但不允许重复
-sorted set 已排序的都字符串集合，但不允许重复 &amp;ndash; 其它
+sorted set 已排序的都字符串集合，但不允许重复 &ndash; 其它
 GEO 地理位置 HyperLogLog 基数统计 Bitsmap bit数组，类似boolean filter redis设计架构 单线程业务，多线程存储，redis6.0引入多线程也仅仅是为了提高解析命令的速度
 虚拟内存
 虚拟内存机制就是暂时把不经常访问的数据(冷数据)从内存交换到磁盘中，从而腾出宝贵的内存空间用于其它需要访问的数据(热数据)。通过VM功能可以实现冷热数据分离，使热数据仍在内存中、冷数据保存到磁盘。这样就可以避免因为内存不足而造成访问速度下降的问题。
@@ -113,7 +118,8 @@ AOF 采用日志的形式来记录每个写操作，追加到文件中，重启�
 哨兵 监视其他节点的状态
 集群 Gossip，HashSlot 16384
 View
-分布式锁 setnx setnx nx [expired]" />
+分布式锁 setnx setnx nx [expired]
+" />
 <meta property="og:url" content="https://domyson.github.io/post/redis/" />
 <meta property="og:site_name" content="redis" />
 <meta property="og:image"
@@ -135,6 +141,7 @@ View
 
 </head>
 
+
 <body>
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
@@ -146,7 +153,10 @@ View
     <div class="Header-item d-md-none">
       <button class="Header-link btn-link js-details-target" type="button"
         onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
-        <img height="24" class="octicon octicon-three-bars" width="24" src="">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
       </button>
     </div>
     <div style="display: none;" id="header-search"
@@ -154,6 +164,7 @@ View
       <div
         class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
         <div class="position-relative">
+          
           <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
             autocomplete="off">
             <label
@@ -164,6 +175,7 @@ View
               <input type="hidden" name="q" value="site:https://domyson.github.io/">
             </label>
           </form>
+          
         </div>
       </div>
     </div>
@@ -186,8 +198,12 @@ View
   </header>
 </div>
 
+  <div id="search-result" class="container-lg px-3 new-discussion-timeline" style="display: none;">
+</div>
+
   
-<div>
+<div class="application-main">
+  <div>
   <main>
     <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
       <div class="px-0">
@@ -197,7 +213,7 @@ View
               <div class="d-none d-md-block">
                 <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io/">
                   <img class=" avatar-user"
-                    src="https://domyson.github.io/images/avatar.png"
+                    src="/images/avatar.png"
                     width="32" height="32"></a>
               </div>
               <div class="d-flex flex-column">
@@ -215,11 +231,6 @@ View
                     class="no-wrap">
                     Thu, 24 Nov 2022 00:00:00 &#43;0000</relative-time>
 
-                  
-                  <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sun, 07 Jul 2024 18:53:26 &#43;0000"
-                    class="no-wrap">
-                    Sun, 07 Jul 2024 18:53:26 &#43;0000</relative-time>
                   
                 </div>
               </div>
@@ -415,30 +426,30 @@ View
 <li>执行事务。</li>
 </ul>
 <table>
-<thead>
-<tr>
-<th style="text-align:center">+命令</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><code>DISCARD</code></td>
-<td style="text-align:center">取消事务，放弃执行事务块内的所有命令。</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>EXEC</code></td>
-<td style="text-align:center">执行所有事务块内的命令。</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>MULTI</code></td>
-<td style="text-align:center">标记一个事务块的开始。</td>
-</tr>
-<tr>
-<td style="text-align:center"><code>UNWATCH</code></td>
-<td style="text-align:center">取消 WATCH 命令对所有 key 的监视。</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: center">+命令</th>
+          <th style="text-align: center">描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center"><code>DISCARD</code></td>
+          <td style="text-align: center">取消事务，放弃执行事务块内的所有命令。</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><code>EXEC</code></td>
+          <td style="text-align: center">执行所有事务块内的命令。</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><code>MULTI</code></td>
+          <td style="text-align: center">标记一个事务块的开始。</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><code>UNWATCH</code></td>
+          <td style="text-align: center">取消 WATCH 命令对所有 key 的监视。</td>
+      </tr>
+  </tbody>
 </table>
 <p><code>WATCH key [key ...]</code> 监视一个(或多个) key ，如果在事务执行之前这个(或这些) key 被其他命令所改动，那么事务将被打断。</p>
 <h1 id="集群-1">集群</h1>
@@ -586,7 +597,7 @@ appendonly on
 <script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
 
-
+  
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://domyson.github.io/css/gitalk.css'>
 <script src='https://domyson.github.io/js/gitalk.min.js'></script>
@@ -605,6 +616,7 @@ appendonly on
   })();
 </script>
 
+</div>
 
   <div class="footer container-xl width-full p-responsive">
   <div
@@ -620,6 +632,7 @@ appendonly on
       
       <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
       
+      <li class="mr-3 mr-lg-0">GitHub and the Invertocat logo are trademarks of <a href="https://github.com/">GitHub, Inc.</a></li>
     </ul>
   </div>
   <div class="d-flex flex-justify-center pb-6">
@@ -628,9 +641,13 @@ appendonly on
 
 
 </div>
+
 </body>
 
 <script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
 
 
 

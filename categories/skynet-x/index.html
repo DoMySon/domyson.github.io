@@ -17,6 +17,9 @@
     <meta name="theme-color" content="#1e2327">
 
     
+    
+
+    
     <meta name="description"
   content="" />
 <meta name="keywords"
@@ -60,6 +63,7 @@
 
 </head>
 
+
 <body>
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
@@ -71,7 +75,10 @@
     <div class="Header-item d-md-none">
       <button class="Header-link btn-link js-details-target" type="button"
         onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
-        <img height="24" class="octicon octicon-three-bars" width="24" src="">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
       </button>
     </div>
     <div style="display: none;" id="header-search"
@@ -79,6 +86,7 @@
       <div
         class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
         <div class="position-relative">
+          
           <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
             autocomplete="off">
             <label
@@ -89,6 +97,7 @@
               <input type="hidden" name="q" value="site:https://domyson.github.io/">
             </label>
           </form>
+          
         </div>
       </div>
     </div>
@@ -111,10 +120,12 @@
   </header>
 </div>
 
+  <div id="search-result" class="container-lg px-3 new-discussion-timeline" style="display: none;">
+</div>
+
   
 <div class="application-main">
-  <main>
-    
+  
 
 
 <div class="mt-4 position-sticky top-0 d-none d-md-block bg-white width-full border-bottom color-border-secondary"
@@ -135,7 +146,7 @@
               </svg>
               Overview
             </a>
-            <a class="UnderlineNav-item " href="https://domyson.github.io//post/">
+            <a class="UnderlineNav-item " href="https://domyson.github.io/post">
               <svg class="octicon octicon-repo UnderlineNav-octicon hide-sm" height="16" viewBox="0 0 16 16"
                 version="1.1" width="16">
                 <path fill-rule="evenodd"
@@ -143,7 +154,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">45</span>
+              <span class="Counter">35</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -274,7 +285,7 @@
           <div class="user-profile-mini-vcard d-table">
             <span class="user-profile-mini-avatar d-table-cell v-align-middle lh-condensed-ultra pr-2">
               
-              <img class="rounded-1 avatar-user" height="32" width="32" src="https://domyson.github.io/images/avatar.png">
+              <img class="rounded-1 avatar-user" height="32" width="32" src="/images/avatar.png">
               
             </span>
             <span class="d-table-cell v-align-middle lh-condensed">
@@ -285,9 +296,9 @@
         <div class="clearfix d-flex d-md-block flex-items-center mb-4 mb-md-0">
           <div class="position-relative d-inline-block col-2 col-md-12 mr-3 mr-md-0 flex-shrink-0" style="z-index:4;">
             
-            <a href="https://domyson.github.io/images/avatar.png">
+            <a href="/images/avatar.png">
               <img style="height:auto;" alt="Avatar" width="260" height="260" id="headerImg"
-                class="avatar avatar-user width-full border bg-white" src="https://domyson.github.io/images/avatar.png">
+                class="avatar avatar-user width-full border bg-white" src="/images/avatar.png">
             </a>
             
             
@@ -387,6 +398,8 @@
           
 
           
+
+          
           
           
           <a style="margin: 0 10px 10px 0;" href="https://github.com/domyson">
@@ -422,7 +435,7 @@
       Overview
     </a>
     <a class='UnderlineNav-item  '
-      href="https://domyson.github.io//post/">
+      href="https://domyson.github.io/post">
       <svg class="octicon octicon-repo UnderlineNav-octicon hide-sm" height="16" viewBox="0 0 16 16" version="1.1"
         width="16">
         <path fill-rule="evenodd"
@@ -430,7 +443,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">45</span>
+      <span class="Counter ">35</span>
     </a>
   </nav>
 </div>
@@ -447,28 +460,6 @@
 </style>
 <div class="f6 text-gray mt-2 tags border-bottom">
 	
-	
-	<a class="muted-link mr-3" href="/categories/anywhere/">
-		
-		<svg class="octicon octicon-package" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-			<path fill-rule="evenodd"
-				d="M8.878.392a1.75 1.75 0 00-1.756 0l-5.25 3.045A1.75 1.75 0 001 4.951v6.098c0 .624.332 1.2.872 1.514l5.25 3.045a1.75 1.75 0 001.756 0l5.25-3.045c.54-.313.872-.89.872-1.514V4.951c0-.624-.332-1.2-.872-1.514L8.878.392zM7.875 1.69a.25.25 0 01.25 0l4.63 2.685L8 7.133 3.245 4.375l4.63-2.685zM2.5 5.677v5.372c0 .09.047.171.125.216l4.625 2.683V8.432L2.5 5.677zm6.25 8.271l4.625-2.683a.25.25 0 00.125-.216V5.677L8.75 8.432v5.516z">
-			</path>
-		</svg>
-		
-		anywhere
-	</a>
-	
-	<a class="muted-link mr-3" href="/categories/c/">
-		
-		<svg class="octicon octicon-package" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-			<path fill-rule="evenodd"
-				d="M8.878.392a1.75 1.75 0 00-1.756 0l-5.25 3.045A1.75 1.75 0 001 4.951v6.098c0 .624.332 1.2.872 1.514l5.25 3.045a1.75 1.75 0 001.756 0l5.25-3.045c.54-.313.872-.89.872-1.514V4.951c0-.624-.332-1.2-.872-1.514L8.878.392zM7.875 1.69a.25.25 0 01.25 0l4.63 2.685L8 7.133 3.245 4.375l4.63-2.685zM2.5 5.677v5.372c0 .09.047.171.125.216l4.625 2.683V8.432L2.5 5.677zm6.25 8.271l4.625-2.683a.25.25 0 00.125-.216V5.677L8.75 8.432v5.516z">
-			</path>
-		</svg>
-		
-		c
-	</a>
 	
 	<a class="muted-link mr-3" href="/categories/cloud-native/">
 		
@@ -558,18 +549,18 @@
 		typelang
 	</a>
 	
-	
-	
-	<a class="muted-link mr-3" href="/tags/c/">
+	<a class="muted-link mr-3" href="/categories/zen/">
 		
-		<svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+		<svg class="octicon octicon-package" viewBox="0 0 16 16" version="1.1" width="16" height="16">
 			<path fill-rule="evenodd"
-				d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+				d="M8.878.392a1.75 1.75 0 00-1.756 0l-5.25 3.045A1.75 1.75 0 001 4.951v6.098c0 .624.332 1.2.872 1.514l5.25 3.045a1.75 1.75 0 001.756 0l5.25-3.045c.54-.313.872-.89.872-1.514V4.951c0-.624-.332-1.2-.872-1.514L8.878.392zM7.875 1.69a.25.25 0 01.25 0l4.63 2.685L8 7.133 3.245 4.375l4.63-2.685zM2.5 5.677v5.372c0 .09.047.171.125.216l4.625 2.683V8.432L2.5 5.677zm6.25 8.271l4.625-2.683a.25.25 0 00.125-.216V5.677L8.75 8.432v5.516z">
 			</path>
 		</svg>
 		
-		c
+		zen
 	</a>
+	
+	
 	
 	<a class="muted-link mr-3" href="/tags/docker/">
 		
@@ -604,17 +595,6 @@
 		goroutine
 	</a>
 	
-	<a class="muted-link mr-3" href="/tags/go%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
-		
-		<svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-			<path fill-rule="evenodd"
-				d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-			</path>
-		</svg>
-		
-		go源码分析
-	</a>
-	
 	<a class="muted-link mr-3" href="/tags/i/o/">
 		
 		<svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
@@ -626,17 +606,6 @@
 		i/o
 	</a>
 	
-	<a class="muted-link mr-3" href="/tags/locker/">
-		
-		<svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-			<path fill-rule="evenodd"
-				d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-			</path>
-		</svg>
-		
-		locker
-	</a>
-	
 	<a class="muted-link mr-3" href="/tags/markdown/">
 		
 		<svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
@@ -646,39 +615,6 @@
 		</svg>
 		
 		markdown
-	</a>
-	
-	<a class="muted-link mr-3" href="/tags/pprof/">
-		
-		<svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-			<path fill-rule="evenodd"
-				d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-			</path>
-		</svg>
-		
-		pprof
-	</a>
-	
-	<a class="muted-link mr-3" href="/tags/pragma/">
-		
-		<svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-			<path fill-rule="evenodd"
-				d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-			</path>
-		</svg>
-		
-		pragma
-	</a>
-	
-	<a class="muted-link mr-3" href="/tags/sync.map/">
-		
-		<svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-			<path fill-rule="evenodd"
-				d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-			</path>
-		</svg>
-		
-		sync.map
 	</a>
 	
 	<a class="muted-link mr-3" href="/tags/sync.pool/">
@@ -730,28 +666,58 @@
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                简介 skynet-x是基于actor 消息的服务框架，那么我们需要定义一套标准且高效的消息结构
-Processor 一个伪线程的逻辑处理器概念，它分为独占和负载两种模式。
-独占Processor是为了更好的处理实时性更高的业务，它不会被其他任务抢占
-负载Processor又可分为两种运行态，均匀的处理业务以及从其他Processor上偷窃任务，尽量保证Processor不会过于闲置，除此之外，负载Processor可随着任务的变动而增加（不会超过最大设定值），特别的当某个任务陷入”死循环”或者是超出设定运行阈值的时候会重新创建一个Processor，并让之前的挂起（在C版本中将会被强制关闭）。
-C版本和Go版本调度和设计上差异不大，但一些细节上的处理可能不同，因为C可以提供更多的底层控制
-PID 一个 message 最重要的是消息地址，如果一个消息没有地址的话我们称为 dead-letter。 那么我们通过Pid 标定一个地址类型，
-它表示该服务的唯一id (本质上是一个uint64)的类习惯，它一定能确保在当前节点以及集群中唯一的。
-在服务本身未被关闭的时候，pid一定不会产生变动，但重新启动节点之后，它的值可能会发生改变，因为所有服务默认都是并发启动，除非手动指定了关系(这也是它与skynet-x的区别)，所以不要尝试保存这个pid
-一旦能确定了一个pid的话，就可以通过 skynet.send(pid,cmd,...) or skynet.call(ti,pid,cmd,...) 将其发送出去了。
-服务的消息队列 Actor 模型最重要的的概念是 mailbox,它代表了一个实体需要处理的队列容器，
-得益于go的简单性，可以使用 channel 来实现，但这种方式的实现性能不高，因为 channel 底层的结构使用的是互斥锁，
-所以我采用了mpsc 实现了无锁队列，性能更优于 channel
-TODO: 吞吐量对比
-消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet-x 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 struct{}{}。
-而且消息发送成功只能代表被 mailbox 接受了，不代表会被立即处理，而不会一定处理成功，所以需要正确理解这种方式。
-如果发送失败，那么一定失败，并返回一个错误
-接收 接受回调只包含5个关键参数 context,addr,session,mtype,argument
-context 其实就是创建服务用户指定的结构指针，用于数据传递和状态修改
-session 主要的作用是用以区分这条消息是否是同步请求， 如若大于0，则其值就是请求序列号,只需要通过 skynet.ret(msg) 返回即可
-mtype 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义，可作为rpc消息类型
-argument 才是真实的数据，它可以是任意值，特别的，在lua中这个值是会被解构，在跨节点通讯这个值恒为 []byte，当不需要时记得 skynet.free 1.4.0 这个由底层回收，用户不用关心
-异步消息 异步消息通过 skynet.
+                <h1 id="简介">简介</h1>
+<p><code>skynet-x</code>是基于<code>actor</code> 消息的服务框架，那么我们需要定义一套标准且高效的消息结构</p>
+<h2 id="processor">Processor</h2>
+<p>一个伪线程的逻辑处理器概念，它分为独占和负载两种模式。</p>
+<ul>
+<li>
+<p>独占<code>Processor</code>是为了更好的处理实时性更高的业务，它不会被其他任务抢占</p>
+</li>
+<li>
+<p>负载<code>Processor</code>又可分为两种运行态，均匀的处理业务以及从其他<code>Processor</code>上偷窃任务，尽量保证<code>Processor</code>不会过于闲置，除此之外，负载<code>Processor</code>可随着任务的变动而增加（不会超过最大设定值），特别的当某个任务陷入”死循环”或者是超出设定运行阈值的时候会重新创建一个<code>Processor</code>，并让之前的挂起（在C版本中将会被强制关闭）。</p>
+</li>
+</ul>
+<blockquote>
+<p>C版本和Go版本调度和设计上差异不大，但一些细节上的处理可能不同，因为C可以提供更多的底层控制</p>
+</blockquote>
+<h2 id="pid">PID</h2>
+<p>一个 <code>message</code> 最重要的是消息地址，如果一个消息没有地址的话我们称为 <code>dead-letter</code>。 那么我们通过<code>Pid</code> 标定一个地址类型，</p>
+<p>它表示该服务的唯一id (本质上是一个<code>uint64</code>)的类习惯，它一定能确保在当前节点以及集群中唯一的。</p>
+<p>在服务本身未被关闭的时候，<code>pid</code>一定不会产生变动，但重新启动节点之后，它的值可能会发生改变，因为所有服务默认都是并发启动，除非手动指定了关系(这也是它与<code>skynet-x</code>的区别)，所以不要尝试保存这个<code>pid</code></p>
+<p>一旦能确定了一个<code>pid</code>的话，就可以通过 <code>skynet.send(pid,cmd,...) or skynet.call(ti,pid,cmd,...)</code> 将其发送出去了。</p>
+<h2 id="服务的消息队列">服务的消息队列</h2>
+<p><code>Actor</code> 模型最重要的的概念是 <code>mailbox</code>,它代表了一个实体需要处理的队列容器，</p>
+<p>得益于<code>go</code>的简单性，可以使用 <code>channel</code> 来实现，但这种方式的实现性能不高，因为 <code>channel</code> 底层的结构使用的是互斥锁，</p>
+<p>所以我采用了<code>mpsc</code> 实现了无锁队列，性能更优于 <code>channel</code></p>
+<p>TODO: 吞吐量对比</p>
+<h1 id="消息的接受和发送">消息的接受和发送</h1>
+<ul>
+<li>发送</li>
+</ul>
+<p>用户不需要构建这个结构体，仅仅需要指定 <code>destination</code> 以及需要发送的数据，而且 <code>skynet-x</code> 消息投递被设计成不允许发送 <code>nil</code> 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 <code>struct{}{}</code>。</p>
+<p>而且消息发送成功只能代表被 <code>mailbox</code> 接受了，不代表会被立即处理，而不会一定处理成功，所以需要正确理解这种方式。</p>
+<p>如果发送失败，那么一定失败，并返回一个错误</p>
+<ul>
+<li>接收</li>
+</ul>
+<p>接受回调只包含<code>5</code>个关键参数 <code>context</code>,<code>addr</code>,<code>session</code>,<code>mtype</code>,<code>argument</code></p>
+<ul>
+<li>
+<p><code>context</code> 其实就是创建服务用户指定的结构指针，用于数据传递和状态修改</p>
+</li>
+<li>
+<p><code>session</code> 主要的作用是用以区分这条消息是否是同步请求， 如若大于0，则其值就是请求序列号,只需要通过 <code>skynet.ret(msg)</code> 返回即可</p>
+</li>
+<li>
+<p><code>mtype</code> 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义，可作为<code>rpc</code>消息类型</p>
+</li>
+<li>
+<p><code>argument</code> 才是真实的数据，它可以是任意值，特别的，在<code>lua</code>中这个值是会被解构，在跨节点通讯这个值恒为 <code>[]byte</code>，<del>当不需要时记得 skynet.free</del>  1.4.0 这个由底层回收，用户不用关心</p>
+</li>
+</ul>
+<h1 id="异步消息">异步消息</h1>
+<p>异步消息通过 <code>skynet.send</code>的方式进行投递，它只在乎这个消息有没有正确到达到对点服务，而不关心是否能被对点服务正确处理，并返回一个 <code>error</code></p>
               </div>
             </div>
 
@@ -840,21 +806,52 @@ argument 才是真实的数据，它可以是任意值，特别的，在lua中�
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                简介 sktpmd模块是skynet-x底层集群模块，它承担了skynet-x网络节点之间的通讯职能。全名为(skynet port managment daemon)
-架构 sktpmd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来，1.6.0改变了个行为，对于像存在类似缓存，或者数据中心的业务而言的单向节点而言，只需要一条连接即可，节省资源。
-sktpmd现在支持原始的tcp,udp,unix协议，后续规划可能由reliable udp实现，降低集群通讯延时并提供更好的性能和时延性。
-远程命名服务，通过内置命令生成唯一的Name，通过Name来与其他节点通讯是友好的。
-使用 启动也非常简单，无须任何代码，仅仅只需要在 conf.conf 中配置一下即可，使用的时候跟节点内通讯无任何区别。因为我已经作平了本地和节点之间的差异。
-内部均由kproto进行编码,提供更快的序列化方式。
-example call
-skynet-x.send(&#34;host:port@name&#34;,&#34;rpc&#34;...) -- 通过域名或者地址+端口的形式和其他节点进行通讯 skynet-x.send(&#34;alias&#34;,&#34;rpc&#34;,...) -- 通过别名 skynet-x.send(pid, &#34;rpc&#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
-基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，
-通过配置tun的规则开启多个，则可以实现业务拆分。
-2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&quot;n1.n2.n3@name&quot;)
-服务发现 sktpmd 提供了一套服务发现机制，但其运作原理是不同于 etcd 或者 consul,它本身是一个惰性发现，它不需要一个中心服维持它们的关系。
-sktpmd整个发现流程是基于 gossip 算法来发现的,但一些api依然可以主动触发，v1.6.0 这个模块将保留，因为集群模式的逻辑改变了
-v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一个单向服务器，如 dns server,conf server 等，大部分是 request/response 模式，惰性连接的收益很大，所以去除之前的一些设计。
-网络底层 参考 Go协程的思考,在linux下，使用了 epoll。所以尽量部署到 linux 下以发挥更好的性能
+                <h1 id="简介">简介</h1>
+<p><code>sktpmd</code>模块是<code>skynet-x</code>底层集群模块，它承担了<code>skynet-x</code>网络节点之间的通讯职能。全名为(<code>skynet port managment daemon</code>)</p>
+<h1 id="架构">架构</h1>
+<ol>
+<li>
+<p><code>sktpmd</code> 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接，
+当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来，<strong><a href="#v1.6.0%E9%9B%86%E7%BE%A4%E5%BB%BA%E7%AB%8B">1.6.0</a>改变了个行为</strong>，对于像存在类似缓存，或者数据中心的业务而言的单向节点而言，只需要一条连接即可，节省资源。</p>
+</li>
+<li>
+<p><code>sktpmd</code>现在支持原始的<code>tcp,udp,unix</code>协议，后续规划可能由<code>reliable udp</code>实现，降低集群通讯延时并提供更好的性能和时延性。</p>
+</li>
+<li>
+<p>远程命名服务，通过内置命令生成唯一的Name，通过Name来与其他节点通讯是友好的。</p>
+</li>
+</ol>
+<h1 id="使用">使用</h1>
+<ul>
+<li>
+<p>启动也非常简单，无须任何代码，仅仅只需要在 <code>conf.conf</code> 中配置一下即可，使用的时候跟节点内通讯无任何区别。因为我已经作平了本地和节点之间的差异。</p>
+</li>
+<li>
+<p>内部均由<a href="/post/kproto">kproto</a>进行编码,提供更快的序列化方式。</p>
+</li>
+<li>
+<p>example call</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="n">skynet</span><span class="o">-</span><span class="n">x.send</span><span class="p">(</span><span class="s2">&#34;host:port@name&#34;</span><span class="p">,</span><span class="s2">&#34;rpc&#34;</span><span class="p">...)</span> <span class="c1">-- 通过域名或者地址+端口的形式和其他节点进行通讯</span>
+</span></span><span class="line"><span class="cl"><span class="n">skynet</span><span class="o">-</span><span class="n">x.send</span><span class="p">(</span><span class="s2">&#34;alias&#34;</span><span class="p">,</span><span class="s2">&#34;rpc&#34;</span><span class="p">,...)</span> <span class="c1">-- 通过别名</span>
+</span></span><span class="line"><span class="cl"><span class="n">skynet</span><span class="o">-</span><span class="n">x.send</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="s2">&#34;rpc&#34;</span><span class="p">,...)</span>              <span class="c1">-- 通过pid亦可</span>
+</span></span></code></pre></div><h1 id="tunnel"><del>tunnel</del></h1>
+<p>既然节点之间是双向连接，所以连接数量为 <code>f(n) =  n²-n</code>，如果节点过的时候，势必造成 <code>socket fd</code> 消耗殆尽，</p>
+<p>基于这个问题，可以通过内置的<code>tun</code>，来设置代理，这么一来，<code>tun</code>的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 <code>tun</code> 代理是不可见的，</p>
+<p>通过配置<code>tun</code>的规则开启多个，则可以实现业务拆分。</p>
+<blockquote>
+<p>2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 <code>send(&quot;n1.n2.n3@name&quot;)</code></p>
+</blockquote>
+<h1 id="服务发现"><del>服务发现</del></h1>
+<p><code>sktpmd</code> 提供了一套服务发现机制，但其运作原理是不同于 <code>etcd</code> 或者 <code>consul</code>,它本身是一个惰性发现，它不需要一个中心服维持它们的关系。</p>
+<blockquote>
+<p>sktpmd整个发现流程是基于 <code>gossip</code> 算法来发现的,但一些api依然可以主动触发，<code>v1.6.0</code> 这个模块将保留，因为集群模式的逻辑改变了</p>
+</blockquote>
+<h1 id="v160集群建立">v1.6.0集群建立</h1>
+<p><code>v1.5.0</code> 之前节点之间都是双向链接，但考虑到一个单向服务器，如 <code>dns server</code>,<code>conf server</code> 等，大部分是 <code>request/response</code> 模式，惰性连接的收益很大，所以去除之前的一些设计。</p>
+<h1 id="网络底层">网络底层</h1>
+<p>参考 <a href="/post/language/go/goroutine">Go协程的思考</a>,在<code>linux</code>下，使用了 <code>epoll</code>。所以尽量部署到 <code>linux</code> 下以发挥更好的性能</p>
               </div>
             </div>
 
@@ -880,15 +877,94 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                无论是对于C版本还是Go版本的skynet-x而言，一个高效的内存分配器可以提高内存的使用效率，这里效率无论是对于内存碎片亦或是GC而言，都是一种更高效的手段
-基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet-x中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向runtime申请内存，将会导致内存占用过高。
-而且内置的Debug模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 Debug 只能定位到存在 memory-leak，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失
-基于 sync.Pool 的分段内存分配器 将不同size的buffer放入不同的池中，按需进行分配，减少race的开销，这个方法虽然简单，但是性能是低于 slab-allocator。
-但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是skynet-x默认使用的策略。如果需要使用可以在编译指令中指明slab
-Zmalloc zmlloc 本身也是 slab的升级版本，增加可伸缩链表实现对于预分配内存额外部分的缓冲池。
-在24个线程的cpu条件测试结果如下,zmalloc保持了一种稳定的时间复杂度，额外产生的内存分配也很少
-- time(ns) alloc/op(B) slab-128 23.5 1 sync.Pool-128 2490 65562 zmalloc-128 43.31 16 slab-256 24 256 sync.Pool-256 2204 65562 zmalloc-256 44 16 slab-1024 92 1024 sync.Pool-1024 2490 65562 zmalloc-1024 49 17 slab-4096 365 4096 sync.Pool-4096 2210 65562 zmalloc-4096 45 23 API skynet.zalloc(n) 用以分配指定大小的内存块，考虑到 64在go中为tiny-size，直接会从P上分配，所以zmalloc分配块从128开始
-skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存
+                <p>无论是对于C版本还是Go版本的<code>skynet-x</code>而言，一个高效的内存分配器可以提高内存的使用效率，这里效率无论是对于内存碎片亦或是GC而言，都是一种更高效的手段</p>
+<h1 id="基于-slab-算法的分段内存分配器">基于 <code>SLAB</code> 算法的分段内存分配器</h1>
+<p><code>SLAB</code> 最开始是阅读 <code>linux</code> 源码学习的算法，在<code>skynet-x</code>中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向<code>runtime</code>申请内存，将会导致内存占用过高。</p>
+<p>而且内置的<code>Debug</code>模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 <code>Debug</code> 只能定位到存在 <code>memory-leak</code>，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失</p>
+<h1 id="基于-syncpool-的分段内存分配器">基于 <code>sync.Pool</code> 的分段内存分配器</h1>
+<p>将不同size的buffer放入不同的池中，按需进行分配，减少race的开销，这个方法虽然简单，但是性能是低于 <code>slab-allocator</code>。</p>
+<p>但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是<code>skynet-x</code>默认使用的策略。如果需要使用可以在编译指令中指明<code>slab</code></p>
+<h1 id="zmalloc">Zmalloc</h1>
+<p><code>zmlloc</code> 本身也是 <code>slab</code>的升级版本，增加可伸缩链表实现对于预分配内存额外部分的缓冲池。</p>
+<p>在24个线程的cpu条件测试结果如下,<code>zmalloc</code>保持了一种稳定的时间复杂度，额外产生的内存分配也很少</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">-</th>
+          <th style="text-align: center">time(ns)</th>
+          <th style="text-align: center">alloc/op(B)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">slab-128</td>
+          <td style="text-align: center">23.5</td>
+          <td style="text-align: center">1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">sync.Pool-128</td>
+          <td style="text-align: center">2490</td>
+          <td style="text-align: center">65562</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">zmalloc-128</td>
+          <td style="text-align: center">43.31</td>
+          <td style="text-align: center">16</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">slab-256</td>
+          <td style="text-align: center">24</td>
+          <td style="text-align: center">256</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">sync.Pool-256</td>
+          <td style="text-align: center">2204</td>
+          <td style="text-align: center">65562</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">zmalloc-256</td>
+          <td style="text-align: center">44</td>
+          <td style="text-align: center">16</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">slab-1024</td>
+          <td style="text-align: center">92</td>
+          <td style="text-align: center">1024</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">sync.Pool-1024</td>
+          <td style="text-align: center">2490</td>
+          <td style="text-align: center">65562</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">zmalloc-1024</td>
+          <td style="text-align: center">49</td>
+          <td style="text-align: center">17</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">slab-4096</td>
+          <td style="text-align: center">365</td>
+          <td style="text-align: center">4096</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">sync.Pool-4096</td>
+          <td style="text-align: center">2210</td>
+          <td style="text-align: center">65562</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">zmalloc-4096</td>
+          <td style="text-align: center">45</td>
+          <td style="text-align: center">23</td>
+      </tr>
+  </tbody>
+</table>
+<h1 id="api">API</h1>
+<ul>
+<li>
+<p><code>skynet.zalloc(n)</code> 用以分配指定大小的内存块，考虑到 64在go中为tiny-size，直接会从P上分配，所以zmalloc分配块从128开始</p>
+</li>
+<li>
+<p><code>skynet.zrealloc(buf,n)</code> realloc函数会先检查buf，确保是否需要重新分配内存</p>
               </div>
             </div>
 
@@ -939,20 +1015,24 @@ window.onscroll = function (e) {
   }
 };
 
-var style = localStorage.getItem('data-color-mode');
-iconElement = document.getElementById('github-icon');
+var style = localStorage.getItem('data-color-mode')
+githubIconElement = document.getElementById('github-icon')
+twitterIconElement = document.getElementById('twitter-icon')
 if (style == 'light') {
-  iconElement.setAttribute('fill', '#24292e');
+  if (githubIconElement) githubIconElement.setAttribute('fill', '#24292e')
+  if (twitterIconElement) twitterIconElement.setAttribute('fill', 'black')
 }
 else {
-  iconElement.removeAttribute('fill');
-  iconElement.setAttribute('class', 'octicon');
-  iconElement.setAttribute('color', '#f0f6fc');
+  if (githubIconElement) {
+    githubIconElement.removeAttribute('fill')
+    githubIconElement.setAttribute('class', 'octicon')
+    githubIconElement.setAttribute('color', '#f0f6fc')
+  }
+  if (twitterIconElement)  twitterIconElement.setAttribute('fill', 'white') 
 }
 </script>
 
-
-    
+  
 
 </div>
 
@@ -970,6 +1050,7 @@ else {
       
       <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
       
+      <li class="mr-3 mr-lg-0">GitHub and the Invertocat logo are trademarks of <a href="https://github.com/">GitHub, Inc.</a></li>
     </ul>
   </div>
   <div class="d-flex flex-justify-center pb-6">
@@ -978,9 +1059,13 @@ else {
 
 
 </div>
+
 </body>
 
 <script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
 
 
 

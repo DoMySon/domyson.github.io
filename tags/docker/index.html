@@ -17,6 +17,9 @@
     <meta name="theme-color" content="#1e2327">
 
     
+    
+
+    
     <meta name="description"
   content="" />
 <meta name="keywords"
@@ -60,6 +63,7 @@
 
 </head>
 
+
 <body>
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
@@ -71,7 +75,10 @@
     <div class="Header-item d-md-none">
       <button class="Header-link btn-link js-details-target" type="button"
         onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
-        <img height="24" class="octicon octicon-three-bars" width="24" src="">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
       </button>
     </div>
     <div style="display: none;" id="header-search"
@@ -79,6 +86,7 @@
       <div
         class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
         <div class="position-relative">
+          
           <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
             autocomplete="off">
             <label
@@ -89,6 +97,7 @@
               <input type="hidden" name="q" value="site:https://domyson.github.io/">
             </label>
           </form>
+          
         </div>
       </div>
     </div>
@@ -111,10 +120,12 @@
   </header>
 </div>
 
+  <div id="search-result" class="container-lg px-3 new-discussion-timeline" style="display: none;">
+</div>
+
   
 <div class="application-main">
-  <main>
-    
+  
 
 
 <div class="mt-4 position-sticky top-0 d-none d-md-block bg-white width-full border-bottom color-border-secondary"
@@ -135,7 +146,7 @@
               </svg>
               Overview
             </a>
-            <a class="UnderlineNav-item " href="https://domyson.github.io//post/">
+            <a class="UnderlineNav-item " href="https://domyson.github.io/post">
               <svg class="octicon octicon-repo UnderlineNav-octicon hide-sm" height="16" viewBox="0 0 16 16"
                 version="1.1" width="16">
                 <path fill-rule="evenodd"
@@ -143,7 +154,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">45</span>
+              <span class="Counter">35</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -274,7 +285,7 @@
           <div class="user-profile-mini-vcard d-table">
             <span class="user-profile-mini-avatar d-table-cell v-align-middle lh-condensed-ultra pr-2">
               
-              <img class="rounded-1 avatar-user" height="32" width="32" src="https://domyson.github.io/images/avatar.png">
+              <img class="rounded-1 avatar-user" height="32" width="32" src="/images/avatar.png">
               
             </span>
             <span class="d-table-cell v-align-middle lh-condensed">
@@ -285,9 +296,9 @@
         <div class="clearfix d-flex d-md-block flex-items-center mb-4 mb-md-0">
           <div class="position-relative d-inline-block col-2 col-md-12 mr-3 mr-md-0 flex-shrink-0" style="z-index:4;">
             
-            <a href="https://domyson.github.io/images/avatar.png">
+            <a href="/images/avatar.png">
               <img style="height:auto;" alt="Avatar" width="260" height="260" id="headerImg"
-                class="avatar avatar-user width-full border bg-white" src="https://domyson.github.io/images/avatar.png">
+                class="avatar avatar-user width-full border bg-white" src="/images/avatar.png">
             </a>
             
             
@@ -387,6 +398,8 @@
           
 
           
+
+          
           
           
           <a style="margin: 0 10px 10px 0;" href="https://github.com/domyson">
@@ -422,7 +435,7 @@
       Overview
     </a>
     <a class='UnderlineNav-item   selected '
-      href="https://domyson.github.io//post/">
+      href="https://domyson.github.io/post">
       <svg class="octicon octicon-repo UnderlineNav-octicon hide-sm" height="16" viewBox="0 0 16 16" version="1.1"
         width="16">
         <path fill-rule="evenodd"
@@ -430,7 +443,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">45</span>
+      <span class="Counter ">35</span>
     </a>
   </nav>
 </div>
@@ -495,35 +508,35 @@
 </blockquote>
 <p>传统虚拟机技术是虚拟出一套硬件后，在其上运行一个完整操作系统，在该系统上再运行所需应用进程；而容器内的应用进程直接运行于宿主的内核，容器内没有自己的内核，而且也没有进行硬件虚拟。因此容器要比传统虚拟机更为轻便。</p>
 <table>
-<thead>
-<tr>
-<th style="text-align:center">特性</th>
-<th style="text-align:center">容器</th>
-<th style="text-align:center">虚拟机</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">启动</td>
-<td style="text-align:center">秒级</td>
-<td style="text-align:center">分钟级</td>
-</tr>
-<tr>
-<td style="text-align:center">硬盘</td>
-<td style="text-align:center">MB</td>
-<td style="text-align:center">GB</td>
-</tr>
-<tr>
-<td style="text-align:center">性能</td>
-<td style="text-align:center">接近原生</td>
-<td style="text-align:center">弱于原生</td>
-</tr>
-<tr>
-<td style="text-align:center">支持量</td>
-<td style="text-align:center">单机上千</td>
-<td style="text-align:center">单机几十左右</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: center">特性</th>
+          <th style="text-align: center">容器</th>
+          <th style="text-align: center">虚拟机</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">启动</td>
+          <td style="text-align: center">秒级</td>
+          <td style="text-align: center">分钟级</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">硬盘</td>
+          <td style="text-align: center">MB</td>
+          <td style="text-align: center">GB</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">性能</td>
+          <td style="text-align: center">接近原生</td>
+          <td style="text-align: center">弱于原生</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">支持量</td>
+          <td style="text-align: center">单机上千</td>
+          <td style="text-align: center">单机几十左右</td>
+      </tr>
+  </tbody>
 </table>
 <ul>
 <li>
@@ -884,20 +897,24 @@ window.onscroll = function (e) {
   }
 };
 
-var style = localStorage.getItem('data-color-mode');
-iconElement = document.getElementById('github-icon');
+var style = localStorage.getItem('data-color-mode')
+githubIconElement = document.getElementById('github-icon')
+twitterIconElement = document.getElementById('twitter-icon')
 if (style == 'light') {
-  iconElement.setAttribute('fill', '#24292e');
+  if (githubIconElement) githubIconElement.setAttribute('fill', '#24292e')
+  if (twitterIconElement) twitterIconElement.setAttribute('fill', 'black')
 }
 else {
-  iconElement.removeAttribute('fill');
-  iconElement.setAttribute('class', 'octicon');
-  iconElement.setAttribute('color', '#f0f6fc');
+  if (githubIconElement) {
+    githubIconElement.removeAttribute('fill')
+    githubIconElement.setAttribute('class', 'octicon')
+    githubIconElement.setAttribute('color', '#f0f6fc')
+  }
+  if (twitterIconElement)  twitterIconElement.setAttribute('fill', 'white') 
 }
 </script>
 
-
-    
+  
 
 </div>
 
@@ -915,6 +932,7 @@ else {
       
       <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
       
+      <li class="mr-3 mr-lg-0">GitHub and the Invertocat logo are trademarks of <a href="https://github.com/">GitHub, Inc.</a></li>
     </ul>
   </div>
   <div class="d-flex flex-justify-center pb-6">
@@ -923,9 +941,13 @@ else {
 
 
 </div>
+
 </body>
 
 <script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
 
 
 

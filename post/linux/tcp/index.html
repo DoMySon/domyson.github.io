@@ -17,6 +17,9 @@
     <meta name="theme-color" content="#1e2327">
 
     
+    
+
+    
     <meta name="description"
   content="什么是 Tcp 三次握手 tcp client发送连接请求报文，报文首部同步标记位 SYN=1 同时随机序列号 seq=x，此时 tcp client 进入 SYNC-SENT 状态的
 tcp server 若同意连接则确认报文为 ACK=1,SYN=1,ASK=x&#43;1,seq=y 返回给客户端，并进入 SYNC_RCVD 状态
@@ -29,7 +32,8 @@ tcp client 收到回复并确认 ACK 是否为1，seq 是否为 x&#43;1,并返�
 如何确保可靠性 三次握手，四次挥手确保连接和断开的可靠
 记录了哪些数据被接受，哪些未接收，序列号保证了消息的顺序性
 ACK应答，超时重传，失序重传，丢弃重复数据，流量控制，拥塞控制
-重传机制 RTT，RTO Round-Trip Time 消息往返时间 Retransmission Timeout 超时重传" />
+重传机制 RTT，RTO Round-Trip Time 消息往返时间 Retransmission Timeout 超时重传
+" />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
@@ -50,7 +54,8 @@ tcp client 收到回复并确认 ACK 是否为1，seq 是否为 x&#43;1,并返�
 如何确保可靠性 三次握手，四次挥手确保连接和断开的可靠
 记录了哪些数据被接受，哪些未接收，序列号保证了消息的顺序性
 ACK应答，超时重传，失序重传，丢弃重复数据，流量控制，拥塞控制
-重传机制 RTT，RTO Round-Trip Time 消息往返时间 Retransmission Timeout 超时重传" />
+重传机制 RTT，RTO Round-Trip Time 消息往返时间 Retransmission Timeout 超时重传
+" />
 <meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -71,7 +76,8 @@ tcp client 收到回复并确认 ACK 是否为1，seq 是否为 x&#43;1,并返�
 如何确保可靠性 三次握手，四次挥手确保连接和断开的可靠
 记录了哪些数据被接受，哪些未接收，序列号保证了消息的顺序性
 ACK应答，超时重传，失序重传，丢弃重复数据，流量控制，拥塞控制
-重传机制 RTT，RTO Round-Trip Time 消息往返时间 Retransmission Timeout 超时重传" />
+重传机制 RTT，RTO Round-Trip Time 消息往返时间 Retransmission Timeout 超时重传
+" />
 <meta property="og:url" content="https://domyson.github.io/post/linux/tcp/" />
 <meta property="og:site_name" content="tcp协议" />
 <meta property="og:image"
@@ -93,6 +99,7 @@ ACK应答，超时重传，失序重传，丢弃重复数据，流量控制，�
 
 </head>
 
+
 <body>
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
@@ -104,7 +111,10 @@ ACK应答，超时重传，失序重传，丢弃重复数据，流量控制，�
     <div class="Header-item d-md-none">
       <button class="Header-link btn-link js-details-target" type="button"
         onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
-        <img height="24" class="octicon octicon-three-bars" width="24" src="">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
       </button>
     </div>
     <div style="display: none;" id="header-search"
@@ -112,6 +122,7 @@ ACK应答，超时重传，失序重传，丢弃重复数据，流量控制，�
       <div
         class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
         <div class="position-relative">
+          
           <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
             autocomplete="off">
             <label
@@ -122,6 +133,7 @@ ACK应答，超时重传，失序重传，丢弃重复数据，流量控制，�
               <input type="hidden" name="q" value="site:https://domyson.github.io/">
             </label>
           </form>
+          
         </div>
       </div>
     </div>
@@ -144,8 +156,12 @@ ACK应答，超时重传，失序重传，丢弃重复数据，流量控制，�
   </header>
 </div>
 
+  <div id="search-result" class="container-lg px-3 new-discussion-timeline" style="display: none;">
+</div>
+
   
-<div>
+<div class="application-main">
+  <div>
   <main>
     <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
       <div class="px-0">
@@ -155,7 +171,7 @@ ACK应答，超时重传，失序重传，丢弃重复数据，流量控制，�
               <div class="d-none d-md-block">
                 <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io/">
                   <img class=" avatar-user"
-                    src="https://domyson.github.io/images/avatar.png"
+                    src="/images/avatar.png"
                     width="32" height="32"></a>
               </div>
               <div class="d-flex flex-column">
@@ -173,11 +189,6 @@ ACK应答，超时重传，失序重传，丢弃重复数据，流量控制，�
                     class="no-wrap">
                     Thu, 16 Sep 2021 00:00:00 &#43;0000</relative-time>
 
-                  
-                  <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sun, 07 Jul 2024 18:53:26 &#43;0000"
-                    class="no-wrap">
-                    Sun, 07 Jul 2024 18:53:26 &#43;0000</relative-time>
                   
                 </div>
               </div>
@@ -349,7 +360,7 @@ ACK应答，超时重传，失序重传，丢弃重复数据，流量控制，�
 <script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
 
-
+  
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://domyson.github.io/css/gitalk.css'>
 <script src='https://domyson.github.io/js/gitalk.min.js'></script>
@@ -368,6 +379,7 @@ ACK应答，超时重传，失序重传，丢弃重复数据，流量控制，�
   })();
 </script>
 
+</div>
 
   <div class="footer container-xl width-full p-responsive">
   <div
@@ -383,6 +395,7 @@ ACK应答，超时重传，失序重传，丢弃重复数据，流量控制，�
       
       <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
       
+      <li class="mr-3 mr-lg-0">GitHub and the Invertocat logo are trademarks of <a href="https://github.com/">GitHub, Inc.</a></li>
     </ul>
   </div>
   <div class="d-flex flex-justify-center pb-6">
@@ -391,9 +404,13 @@ ACK应答，超时重传，失序重传，丢弃重复数据，流量控制，�
 
 
 </div>
+
 </body>
 
 <script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
 
 
 

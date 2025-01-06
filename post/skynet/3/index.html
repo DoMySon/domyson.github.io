@@ -17,6 +17,9 @@
     <meta name="theme-color" content="#1e2327">
 
     
+    
+
+    
     <meta name="description"
   content="简介 sktpmd模块是skynet-x底层集群模块，它承担了skynet-x网络节点之间的通讯职能。全名为(skynet port managment daemon)
 架构 sktpmd 为了满足对等网络的性质，所以每次和其他节点建立连接是有两条连接， 当A节点于B节点建立连接，首先A节点发送握手等待B确认，B确认完成之后重复走A的流程，这样一个双向连接就被建立了起来，1.6.0改变了个行为，对于像存在类似缓存，或者数据中心的业务而言的单向节点而言，只需要一条连接即可，节省资源。
@@ -25,14 +28,15 @@ sktpmd现在支持原始的tcp,udp,unix协议，后续规划可能由reliable ud
 使用 启动也非常简单，无须任何代码，仅仅只需要在 conf.conf 中配置一下即可，使用的时候跟节点内通讯无任何区别。因为我已经作平了本地和节点之间的差异。
 内部均由kproto进行编码,提供更快的序列化方式。
 example call
-skynet-x.send(&amp;#34;host:port@name&amp;#34;,&amp;#34;rpc&amp;#34;...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skynet-x.send(&amp;#34;alias&amp;#34;,&amp;#34;rpc&amp;#34;,...) -- 通过别名 skynet-x.send(pid, &amp;#34;rpc&amp;#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
+skynet-x.send(&#34;host:port@name&#34;,&#34;rpc&#34;...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skynet-x.send(&#34;alias&#34;,&#34;rpc&#34;,...) -- 通过别名 skynet-x.send(pid, &#34;rpc&#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
 基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，
 通过配置tun的规则开启多个，则可以实现业务拆分。
-2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&amp;quot;n1.n2.n3@name&amp;quot;)
+2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&quot;n1.n2.n3@name&quot;)
 服务发现 sktpmd 提供了一套服务发现机制，但其运作原理是不同于 etcd 或者 consul,它本身是一个惰性发现，它不需要一个中心服维持它们的关系。
 sktpmd整个发现流程是基于 gossip 算法来发现的,但一些api依然可以主动触发，v1.6.0 这个模块将保留，因为集群模式的逻辑改变了
 v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一个单向服务器，如 dns server,conf server 等，大部分是 request/response 模式，惰性连接的收益很大，所以去除之前的一些设计。
-网络底层 参考 Go协程的思考,在linux下，使用了 epoll。所以尽量部署到 linux 下以发挥更好的性能" />
+网络底层 参考 Go协程的思考,在linux下，使用了 epoll。所以尽量部署到 linux 下以发挥更好的性能
+" />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
@@ -49,14 +53,15 @@ sktpmd现在支持原始的tcp,udp,unix协议，后续规划可能由reliable ud
 使用 启动也非常简单，无须任何代码，仅仅只需要在 conf.conf 中配置一下即可，使用的时候跟节点内通讯无任何区别。因为我已经作平了本地和节点之间的差异。
 内部均由kproto进行编码,提供更快的序列化方式。
 example call
-skynet-x.send(&amp;#34;host:port@name&amp;#34;,&amp;#34;rpc&amp;#34;...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skynet-x.send(&amp;#34;alias&amp;#34;,&amp;#34;rpc&amp;#34;,...) -- 通过别名 skynet-x.send(pid, &amp;#34;rpc&amp;#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
+skynet-x.send(&#34;host:port@name&#34;,&#34;rpc&#34;...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skynet-x.send(&#34;alias&#34;,&#34;rpc&#34;,...) -- 通过别名 skynet-x.send(pid, &#34;rpc&#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
 基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，
 通过配置tun的规则开启多个，则可以实现业务拆分。
-2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&amp;quot;n1.n2.n3@name&amp;quot;)
+2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&quot;n1.n2.n3@name&quot;)
 服务发现 sktpmd 提供了一套服务发现机制，但其运作原理是不同于 etcd 或者 consul,它本身是一个惰性发现，它不需要一个中心服维持它们的关系。
 sktpmd整个发现流程是基于 gossip 算法来发现的,但一些api依然可以主动触发，v1.6.0 这个模块将保留，因为集群模式的逻辑改变了
 v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一个单向服务器，如 dns server,conf server 等，大部分是 request/response 模式，惰性连接的收益很大，所以去除之前的一些设计。
-网络底层 参考 Go协程的思考,在linux下，使用了 epoll。所以尽量部署到 linux 下以发挥更好的性能" />
+网络底层 参考 Go协程的思考,在linux下，使用了 epoll。所以尽量部署到 linux 下以发挥更好的性能
+" />
 <meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -73,14 +78,15 @@ sktpmd现在支持原始的tcp,udp,unix协议，后续规划可能由reliable ud
 使用 启动也非常简单，无须任何代码，仅仅只需要在 conf.conf 中配置一下即可，使用的时候跟节点内通讯无任何区别。因为我已经作平了本地和节点之间的差异。
 内部均由kproto进行编码,提供更快的序列化方式。
 example call
-skynet-x.send(&amp;#34;host:port@name&amp;#34;,&amp;#34;rpc&amp;#34;...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skynet-x.send(&amp;#34;alias&amp;#34;,&amp;#34;rpc&amp;#34;,...) -- 通过别名 skynet-x.send(pid, &amp;#34;rpc&amp;#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
+skynet-x.send(&#34;host:port@name&#34;,&#34;rpc&#34;...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skynet-x.send(&#34;alias&#34;,&#34;rpc&#34;,...) -- 通过别名 skynet-x.send(pid, &#34;rpc&#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
 基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，
 通过配置tun的规则开启多个，则可以实现业务拆分。
-2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&amp;quot;n1.n2.n3@name&amp;quot;)
+2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&quot;n1.n2.n3@name&quot;)
 服务发现 sktpmd 提供了一套服务发现机制，但其运作原理是不同于 etcd 或者 consul,它本身是一个惰性发现，它不需要一个中心服维持它们的关系。
 sktpmd整个发现流程是基于 gossip 算法来发现的,但一些api依然可以主动触发，v1.6.0 这个模块将保留，因为集群模式的逻辑改变了
 v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一个单向服务器，如 dns server,conf server 等，大部分是 request/response 模式，惰性连接的收益很大，所以去除之前的一些设计。
-网络底层 参考 Go协程的思考,在linux下，使用了 epoll。所以尽量部署到 linux 下以发挥更好的性能" />
+网络底层 参考 Go协程的思考,在linux下，使用了 epoll。所以尽量部署到 linux 下以发挥更好的性能
+" />
 <meta property="og:url" content="https://domyson.github.io/post/skynet/3/" />
 <meta property="og:site_name" content="sktpmd" />
 <meta property="og:image"
@@ -102,6 +108,7 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
 
 </head>
 
+
 <body>
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
@@ -113,7 +120,10 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
     <div class="Header-item d-md-none">
       <button class="Header-link btn-link js-details-target" type="button"
         onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
-        <img height="24" class="octicon octicon-three-bars" width="24" src="">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
       </button>
     </div>
     <div style="display: none;" id="header-search"
@@ -121,6 +131,7 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
       <div
         class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
         <div class="position-relative">
+          
           <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
             autocomplete="off">
             <label
@@ -131,6 +142,7 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
               <input type="hidden" name="q" value="site:https://domyson.github.io/">
             </label>
           </form>
+          
         </div>
       </div>
     </div>
@@ -153,8 +165,12 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
   </header>
 </div>
 
+  <div id="search-result" class="container-lg px-3 new-discussion-timeline" style="display: none;">
+</div>
+
   
-<div>
+<div class="application-main">
+  <div>
   <main>
     <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
       <div class="px-0">
@@ -164,7 +180,7 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
               <div class="d-none d-md-block">
                 <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io/">
                   <img class=" avatar-user"
-                    src="https://domyson.github.io/images/avatar.png"
+                    src="/images/avatar.png"
                     width="32" height="32"></a>
               </div>
               <div class="d-flex flex-column">
@@ -182,11 +198,6 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
                     class="no-wrap">
                     Mon, 30 May 2022 00:00:00 &#43;0000</relative-time>
 
-                  
-                  <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sun, 07 Jul 2024 18:53:26 &#43;0000"
-                    class="no-wrap">
-                    Sun, 07 Jul 2024 18:53:26 &#43;0000</relative-time>
                   
                 </div>
               </div>
@@ -286,7 +297,7 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
 <script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
 
-
+  
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://domyson.github.io/css/gitalk.css'>
 <script src='https://domyson.github.io/js/gitalk.min.js'></script>
@@ -305,6 +316,7 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
   })();
 </script>
 
+</div>
 
   <div class="footer container-xl width-full p-responsive">
   <div
@@ -320,6 +332,7 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
       
       <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
       
+      <li class="mr-3 mr-lg-0">GitHub and the Invertocat logo are trademarks of <a href="https://github.com/">GitHub, Inc.</a></li>
     </ul>
   </div>
   <div class="d-flex flex-justify-center pb-6">
@@ -328,9 +341,13 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
 
 
 </div>
+
 </body>
 
 <script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
 
 
 

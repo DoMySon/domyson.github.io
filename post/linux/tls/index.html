@@ -17,6 +17,9 @@
     <meta name="theme-color" content="#1e2327">
 
     
+    
+
+    
     <meta name="description"
   content="简介 传输层安全性协议（Transport Layer Security），及其前身 SSL3.0 之后安全套接层（Secure Sockets Layer，缩写作SSL）是一种安全协议，目的是为互联网通信提供安全及数据完整性保障。SSL包含记录层（Record Layer）和传输层，记录层协议确定传输层数据的封装格式。传输层安全协议使用X.509认证，之后利用RSA 加密演算来对通信方做身份认证，之后交换对称密钥作为会谈密钥（Session key）。这个会谈密钥是用来将通信两方交换的数据做加密，保证两个应用间通信的保密性和可靠性，使客户与服务器应用之间的通信不被攻击者窃听。
 作用 安全传输层协议（TLS）用于在两个通信应用程序之间提供保密性和数据完整性。
@@ -34,7 +37,8 @@ tls 可以使用对称加密和非对称加密。
 服务端收到客户端的随机值，自己也产生一个随机值，并根据客户端需求的协议和加密方式来使用对应的方式，并且发送自己的证书（如果需要验证客户端证书需要说明）。
 客户端收到服务端的证书并验证是否有效，验证通过会再生成一个随机值，通过服务端证书的公钥去加密这个随机值并发送给服务端，如果服务端需要验证客户端证书的话会附带证书。
 服务端收到加密过的随机值并使用私钥解密获得第三个随机值，这时候两端都拥有了三个随机值，可以通过这三个随机值按照之前约定的加密方式生成密钥，接下来的通信就可以通过该密钥来加密解密。
-之后通过此非对称加密传输的对称加密的密钥来进行正式通讯。" />
+之后通过此非对称加密传输的对称加密的密钥来进行正式通讯。
+" />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
@@ -60,7 +64,8 @@ tls 可以使用对称加密和非对称加密。
 服务端收到客户端的随机值，自己也产生一个随机值，并根据客户端需求的协议和加密方式来使用对应的方式，并且发送自己的证书（如果需要验证客户端证书需要说明）。
 客户端收到服务端的证书并验证是否有效，验证通过会再生成一个随机值，通过服务端证书的公钥去加密这个随机值并发送给服务端，如果服务端需要验证客户端证书的话会附带证书。
 服务端收到加密过的随机值并使用私钥解密获得第三个随机值，这时候两端都拥有了三个随机值，可以通过这三个随机值按照之前约定的加密方式生成密钥，接下来的通信就可以通过该密钥来加密解密。
-之后通过此非对称加密传输的对称加密的密钥来进行正式通讯。" />
+之后通过此非对称加密传输的对称加密的密钥来进行正式通讯。
+" />
 <meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -86,7 +91,8 @@ tls 可以使用对称加密和非对称加密。
 服务端收到客户端的随机值，自己也产生一个随机值，并根据客户端需求的协议和加密方式来使用对应的方式，并且发送自己的证书（如果需要验证客户端证书需要说明）。
 客户端收到服务端的证书并验证是否有效，验证通过会再生成一个随机值，通过服务端证书的公钥去加密这个随机值并发送给服务端，如果服务端需要验证客户端证书的话会附带证书。
 服务端收到加密过的随机值并使用私钥解密获得第三个随机值，这时候两端都拥有了三个随机值，可以通过这三个随机值按照之前约定的加密方式生成密钥，接下来的通信就可以通过该密钥来加密解密。
-之后通过此非对称加密传输的对称加密的密钥来进行正式通讯。" />
+之后通过此非对称加密传输的对称加密的密钥来进行正式通讯。
+" />
 <meta property="og:url" content="https://domyson.github.io/post/linux/tls/" />
 <meta property="og:site_name" content="TLS" />
 <meta property="og:image"
@@ -108,6 +114,7 @@ tls 可以使用对称加密和非对称加密。
 
 </head>
 
+
 <body>
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
@@ -119,7 +126,10 @@ tls 可以使用对称加密和非对称加密。
     <div class="Header-item d-md-none">
       <button class="Header-link btn-link js-details-target" type="button"
         onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
-        <img height="24" class="octicon octicon-three-bars" width="24" src="">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
       </button>
     </div>
     <div style="display: none;" id="header-search"
@@ -127,6 +137,7 @@ tls 可以使用对称加密和非对称加密。
       <div
         class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
         <div class="position-relative">
+          
           <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
             autocomplete="off">
             <label
@@ -137,6 +148,7 @@ tls 可以使用对称加密和非对称加密。
               <input type="hidden" name="q" value="site:https://domyson.github.io/">
             </label>
           </form>
+          
         </div>
       </div>
     </div>
@@ -159,8 +171,12 @@ tls 可以使用对称加密和非对称加密。
   </header>
 </div>
 
+  <div id="search-result" class="container-lg px-3 new-discussion-timeline" style="display: none;">
+</div>
+
   
-<div>
+<div class="application-main">
+  <div>
   <main>
     <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
       <div class="px-0">
@@ -170,7 +186,7 @@ tls 可以使用对称加密和非对称加密。
               <div class="d-none d-md-block">
                 <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io/">
                   <img class=" avatar-user"
-                    src="https://domyson.github.io/images/avatar.png"
+                    src="/images/avatar.png"
                     width="32" height="32"></a>
               </div>
               <div class="d-flex flex-column">
@@ -188,11 +204,6 @@ tls 可以使用对称加密和非对称加密。
                     class="no-wrap">
                     Sun, 09 Feb 2020 00:00:00 &#43;0000</relative-time>
 
-                  
-                  <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sun, 07 Jul 2024 18:53:26 &#43;0000"
-                    class="no-wrap">
-                    Sun, 07 Jul 2024 18:53:26 &#43;0000</relative-time>
                   
                 </div>
               </div>
@@ -320,7 +331,7 @@ tls 可以使用对称加密和非对称加密。
 <script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
 
-
+  
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://domyson.github.io/css/gitalk.css'>
 <script src='https://domyson.github.io/js/gitalk.min.js'></script>
@@ -339,6 +350,7 @@ tls 可以使用对称加密和非对称加密。
   })();
 </script>
 
+</div>
 
   <div class="footer container-xl width-full p-responsive">
   <div
@@ -354,6 +366,7 @@ tls 可以使用对称加密和非对称加密。
       
       <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
       
+      <li class="mr-3 mr-lg-0">GitHub and the Invertocat logo are trademarks of <a href="https://github.com/">GitHub, Inc.</a></li>
     </ul>
   </div>
   <div class="d-flex flex-justify-center pb-6">
@@ -362,9 +375,13 @@ tls 可以使用对称加密和非对称加密。
 
 
 </div>
+
 </body>
 
 <script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
 
 
 

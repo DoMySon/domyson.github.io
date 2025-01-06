@@ -17,6 +17,9 @@
     <meta name="theme-color" content="#1e2327">
 
     
+    
+
+    
     <meta name="description"
   content="工作中曾经开发了一个cobweb的分布式服务器框架（基于golang,c）,但是在实际开发过程中代码难以维护以及更新，主要是每次都需要跨平台进行编译，特别是cgo 往往需要指定平台的系统库,而且一些不规范的使用方式造成无法充分发挥多核的优势，可以参见 关于Go协程的思考 虽然1.16 支持抢占式，但错误的使用方式依然造成了cpu过高的问题。，后续重新设计了skynet-x 是一个actor模型分布式服务框架，使用go编写。
 尽管Actor模型和CSP模型各有所有长，为什么不采用CSP主要有两方面考虑。
@@ -93,6 +96,7 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
 
 </head>
 
+
 <body>
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
@@ -104,7 +108,10 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
     <div class="Header-item d-md-none">
       <button class="Header-link btn-link js-details-target" type="button"
         onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
-        <img height="24" class="octicon octicon-three-bars" width="24" src="">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
       </button>
     </div>
     <div style="display: none;" id="header-search"
@@ -112,6 +119,7 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
       <div
         class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
         <div class="position-relative">
+          
           <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
             autocomplete="off">
             <label
@@ -122,6 +130,7 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
               <input type="hidden" name="q" value="site:https://domyson.github.io/">
             </label>
           </form>
+          
         </div>
       </div>
     </div>
@@ -144,8 +153,12 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
   </header>
 </div>
 
+  <div id="search-result" class="container-lg px-3 new-discussion-timeline" style="display: none;">
+</div>
+
   
-<div>
+<div class="application-main">
+  <div>
   <main>
     <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
       <div class="px-0">
@@ -155,7 +168,7 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
               <div class="d-none d-md-block">
                 <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io/">
                   <img class=" avatar-user"
-                    src="https://domyson.github.io/images/avatar.png"
+                    src="/images/avatar.png"
                     width="32" height="32"></a>
               </div>
               <div class="d-flex flex-column">
@@ -173,11 +186,6 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
                     class="no-wrap">
                     Mon, 20 Jun 2022 00:00:00 &#43;0000</relative-time>
 
-                  
-                  <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sun, 07 Jul 2024 18:53:26 &#43;0000"
-                    class="no-wrap">
-                    Sun, 07 Jul 2024 18:53:26 &#43;0000</relative-time>
                   
                 </div>
               </div>
@@ -318,7 +326,7 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
 <script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
 
-
+  
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://domyson.github.io/css/gitalk.css'>
 <script src='https://domyson.github.io/js/gitalk.min.js'></script>
@@ -337,6 +345,7 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
   })();
 </script>
 
+</div>
 
   <div class="footer container-xl width-full p-responsive">
   <div
@@ -352,6 +361,7 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
       
       <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
       
+      <li class="mr-3 mr-lg-0">GitHub and the Invertocat logo are trademarks of <a href="https://github.com/">GitHub, Inc.</a></li>
     </ul>
   </div>
   <div class="d-flex flex-justify-center pb-6">
@@ -360,9 +370,13 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
 
 
 </div>
+
 </body>
 
 <script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
 
 
 

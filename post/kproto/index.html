@@ -17,6 +17,9 @@
     <meta name="theme-color" content="#1e2327">
 
     
+    
+
+    
     <meta name="description"
   content="前言 其实在cobweb之初就设计了一种编码协议(kproto)，用于内部消息的编码,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护， 而后期在研发的时候，发现需要与多种语言交互，显然 json,xml 不是一个很好的选择，而 protobuf 对弱类型语言支持不友好。
 Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd64 format compress rate encode rate decode rate json std 0% 0%( 213.8 ns/op) 0%(1204ns/op) proto v3 -40% -51%(98.36 ns/op) -84%(190.1ns/op) kproto -40% -76% (65.21 ns/op) -95%(62.18ns/op) " />
@@ -63,6 +66,7 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
 
 </head>
 
+
 <body>
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
@@ -74,7 +78,10 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
     <div class="Header-item d-md-none">
       <button class="Header-link btn-link js-details-target" type="button"
         onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
-        <img height="24" class="octicon octicon-three-bars" width="24" src="">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
       </button>
     </div>
     <div style="display: none;" id="header-search"
@@ -82,6 +89,7 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
       <div
         class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
         <div class="position-relative">
+          
           <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
             autocomplete="off">
             <label
@@ -92,6 +100,7 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
               <input type="hidden" name="q" value="site:https://domyson.github.io/">
             </label>
           </form>
+          
         </div>
       </div>
     </div>
@@ -114,8 +123,12 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
   </header>
 </div>
 
+  <div id="search-result" class="container-lg px-3 new-discussion-timeline" style="display: none;">
+</div>
+
   
-<div>
+<div class="application-main">
+  <div>
   <main>
     <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
       <div class="px-0">
@@ -125,7 +138,7 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
               <div class="d-none d-md-block">
                 <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io/">
                   <img class=" avatar-user"
-                    src="https://domyson.github.io/images/avatar.png"
+                    src="/images/avatar.png"
                     width="32" height="32"></a>
               </div>
               <div class="d-flex flex-column">
@@ -143,11 +156,6 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
                     class="no-wrap">
                     Wed, 21 Sep 2022 00:00:00 &#43;0000</relative-time>
 
-                  
-                  <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sun, 07 Jul 2024 18:53:26 &#43;0000"
-                    class="no-wrap">
-                    Sun, 07 Jul 2024 18:53:26 &#43;0000</relative-time>
                   
                 </div>
               </div>
@@ -177,7 +185,7 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
                         </div>
                       </div>
                     </details-menu>
-                      1513 Words
+                      1544 Words
                     
 
                   </div>
@@ -210,34 +218,34 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
 <li>arch: amd64</li>
 </ul>
 <table>
-<thead>
-<tr>
-<th style="text-align:center">format</th>
-<th style="text-align:center">compress rate</th>
-<th style="text-align:center">encode rate</th>
-<th style="text-align:center">decode rate</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">json std</td>
-<td style="text-align:center">0%</td>
-<td style="text-align:center">0%( 213.8 ns/op)</td>
-<td style="text-align:center">0%(1204ns/op)</td>
-</tr>
-<tr>
-<td style="text-align:center">proto v3</td>
-<td style="text-align:center">-40%</td>
-<td style="text-align:center">-51%(98.36 ns/op)</td>
-<td style="text-align:center">-84%(190.1ns/op)</td>
-</tr>
-<tr>
-<td style="text-align:center">kproto</td>
-<td style="text-align:center">-40%</td>
-<td style="text-align:center">-76% (65.21 ns/op)</td>
-<td style="text-align:center">-95%(62.18ns/op)</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: center">format</th>
+          <th style="text-align: center">compress rate</th>
+          <th style="text-align: center">encode rate</th>
+          <th style="text-align: center">decode rate</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">json std</td>
+          <td style="text-align: center">0%</td>
+          <td style="text-align: center">0%( 213.8 ns/op)</td>
+          <td style="text-align: center">0%(1204ns/op)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">proto v3</td>
+          <td style="text-align: center">-40%</td>
+          <td style="text-align: center">-51%(98.36 ns/op)</td>
+          <td style="text-align: center">-84%(190.1ns/op)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">kproto</td>
+          <td style="text-align: center">-40%</td>
+          <td style="text-align: center">-76% (65.21 ns/op)</td>
+          <td style="text-align: center">-95%(62.18ns/op)</td>
+      </tr>
+  </tbody>
 </table>
 <h1 id="feture">Feture</h1>
 <ul>
@@ -367,7 +375,10 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
 </span></span><span class="line"><span class="cl">message AddressBook {
 </span></span><span class="line"><span class="cl">    *Person person 
 </span></span><span class="line"><span class="cl">}
-</span></span></code></pre></div><h2 id="lua-序列化">Lua 序列化</h2>
+</span></span></code></pre></div><blockquote>
+<p>后续可能考虑直接读取<code>protobuf</code>,免费的提示和高亮的插件 :)</p>
+</blockquote>
+<h2 id="lua-序列化">Lua 序列化</h2>
 <ul>
 <li>
 <p><code>kproto</code> 开发过程的附加产物，唯一的区别仅能在<code>lua</code>侧使用,不支持<code>userdata</code>,<code>function</code>,<code>thread</code></p>
@@ -403,7 +414,7 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
 <script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
 
-
+  
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://domyson.github.io/css/gitalk.css'>
 <script src='https://domyson.github.io/js/gitalk.min.js'></script>
@@ -422,6 +433,7 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
   })();
 </script>
 
+</div>
 
   <div class="footer container-xl width-full p-responsive">
   <div
@@ -437,6 +449,7 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
       
       <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
       
+      <li class="mr-3 mr-lg-0">GitHub and the Invertocat logo are trademarks of <a href="https://github.com/">GitHub, Inc.</a></li>
     </ul>
   </div>
   <div class="d-flex flex-justify-center pb-6">
@@ -445,9 +458,13 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
 
 
 </div>
+
 </body>
 
 <script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
 
 
 

@@ -17,6 +17,9 @@
     <meta name="theme-color" content="#1e2327">
 
     
+    
+
+    
     <meta name="description"
   content="" />
 <meta name="keywords"
@@ -60,6 +63,7 @@
 
 </head>
 
+
 <body>
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
@@ -71,7 +75,10 @@
     <div class="Header-item d-md-none">
       <button class="Header-link btn-link js-details-target" type="button"
         onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
-        <img height="24" class="octicon octicon-three-bars" width="24" src="">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
       </button>
     </div>
     <div style="display: none;" id="header-search"
@@ -79,6 +86,7 @@
       <div
         class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
         <div class="position-relative">
+          
           <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
             autocomplete="off">
             <label
@@ -89,6 +97,7 @@
               <input type="hidden" name="q" value="site:https://domyson.github.io/">
             </label>
           </form>
+          
         </div>
       </div>
     </div>
@@ -111,10 +120,12 @@
   </header>
 </div>
 
+  <div id="search-result" class="container-lg px-3 new-discussion-timeline" style="display: none;">
+</div>
+
   
 <div class="application-main">
-  <main>
-    
+  
 
 
 <div class="mt-4 position-sticky top-0 d-none d-md-block bg-white width-full border-bottom color-border-secondary"
@@ -135,7 +146,7 @@
               </svg>
               Overview
             </a>
-            <a class="UnderlineNav-item  selected " href="https://domyson.github.io//post/">
+            <a class="UnderlineNav-item  selected " href="https://domyson.github.io/post">
               <svg class="octicon octicon-repo UnderlineNav-octicon hide-sm" height="16" viewBox="0 0 16 16"
                 version="1.1" width="16">
                 <path fill-rule="evenodd"
@@ -143,7 +154,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">45</span>
+              <span class="Counter">35</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -274,7 +285,7 @@
           <div class="user-profile-mini-vcard d-table">
             <span class="user-profile-mini-avatar d-table-cell v-align-middle lh-condensed-ultra pr-2">
               
-              <img class="rounded-1 avatar-user" height="32" width="32" src="https://domyson.github.io/images/avatar.png">
+              <img class="rounded-1 avatar-user" height="32" width="32" src="/images/avatar.png">
               
             </span>
             <span class="d-table-cell v-align-middle lh-condensed">
@@ -285,9 +296,9 @@
         <div class="clearfix d-flex d-md-block flex-items-center mb-4 mb-md-0">
           <div class="position-relative d-inline-block col-2 col-md-12 mr-3 mr-md-0 flex-shrink-0" style="z-index:4;">
             
-            <a href="https://domyson.github.io/images/avatar.png">
+            <a href="/images/avatar.png">
               <img style="height:auto;" alt="Avatar" width="260" height="260" id="headerImg"
-                class="avatar avatar-user width-full border bg-white" src="https://domyson.github.io/images/avatar.png">
+                class="avatar avatar-user width-full border bg-white" src="/images/avatar.png">
             </a>
             
             
@@ -387,6 +398,8 @@
           
 
           
+
+          
           
           
           <a style="margin: 0 10px 10px 0;" href="https://github.com/domyson">
@@ -422,7 +435,7 @@
       Overview
     </a>
     <a class='UnderlineNav-item   selected '
-      href="https://domyson.github.io//post/">
+      href="https://domyson.github.io/post">
       <svg class="octicon octicon-repo UnderlineNav-octicon hide-sm" height="16" viewBox="0 0 16 16" version="1.1"
         width="16">
         <path fill-rule="evenodd"
@@ -430,7 +443,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">45</span>
+      <span class="Counter ">35</span>
     </a>
   </nav>
 </div>
@@ -447,28 +460,6 @@
 </style>
 <div class="f6 text-gray mt-2 tags border-bottom">
 	
-	
-	<a class="muted-link mr-3" href="/categories/anywhere/">
-		
-		<svg class="octicon octicon-package" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-			<path fill-rule="evenodd"
-				d="M8.878.392a1.75 1.75 0 00-1.756 0l-5.25 3.045A1.75 1.75 0 001 4.951v6.098c0 .624.332 1.2.872 1.514l5.25 3.045a1.75 1.75 0 001.756 0l5.25-3.045c.54-.313.872-.89.872-1.514V4.951c0-.624-.332-1.2-.872-1.514L8.878.392zM7.875 1.69a.25.25 0 01.25 0l4.63 2.685L8 7.133 3.245 4.375l4.63-2.685zM2.5 5.677v5.372c0 .09.047.171.125.216l4.625 2.683V8.432L2.5 5.677zm6.25 8.271l4.625-2.683a.25.25 0 00.125-.216V5.677L8.75 8.432v5.516z">
-			</path>
-		</svg>
-		
-		anywhere
-	</a>
-	
-	<a class="muted-link mr-3" href="/categories/c/">
-		
-		<svg class="octicon octicon-package" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-			<path fill-rule="evenodd"
-				d="M8.878.392a1.75 1.75 0 00-1.756 0l-5.25 3.045A1.75 1.75 0 001 4.951v6.098c0 .624.332 1.2.872 1.514l5.25 3.045a1.75 1.75 0 001.756 0l5.25-3.045c.54-.313.872-.89.872-1.514V4.951c0-.624-.332-1.2-.872-1.514L8.878.392zM7.875 1.69a.25.25 0 01.25 0l4.63 2.685L8 7.133 3.245 4.375l4.63-2.685zM2.5 5.677v5.372c0 .09.047.171.125.216l4.625 2.683V8.432L2.5 5.677zm6.25 8.271l4.625-2.683a.25.25 0 00.125-.216V5.677L8.75 8.432v5.516z">
-			</path>
-		</svg>
-		
-		c
-	</a>
 	
 	<a class="muted-link mr-3" href="/categories/cloud-native/">
 		
@@ -558,18 +549,18 @@
 		typelang
 	</a>
 	
-	
-	
-	<a class="muted-link mr-3" href="/tags/c/">
+	<a class="muted-link mr-3" href="/categories/zen/">
 		
-		<svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+		<svg class="octicon octicon-package" viewBox="0 0 16 16" version="1.1" width="16" height="16">
 			<path fill-rule="evenodd"
-				d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+				d="M8.878.392a1.75 1.75 0 00-1.756 0l-5.25 3.045A1.75 1.75 0 001 4.951v6.098c0 .624.332 1.2.872 1.514l5.25 3.045a1.75 1.75 0 001.756 0l5.25-3.045c.54-.313.872-.89.872-1.514V4.951c0-.624-.332-1.2-.872-1.514L8.878.392zM7.875 1.69a.25.25 0 01.25 0l4.63 2.685L8 7.133 3.245 4.375l4.63-2.685zM2.5 5.677v5.372c0 .09.047.171.125.216l4.625 2.683V8.432L2.5 5.677zm6.25 8.271l4.625-2.683a.25.25 0 00.125-.216V5.677L8.75 8.432v5.516z">
 			</path>
 		</svg>
 		
-		c
+		zen
 	</a>
+	
+	
 	
 	<a class="muted-link mr-3" href="/tags/docker/">
 		
@@ -604,17 +595,6 @@
 		goroutine
 	</a>
 	
-	<a class="muted-link mr-3" href="/tags/go%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
-		
-		<svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-			<path fill-rule="evenodd"
-				d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-			</path>
-		</svg>
-		
-		go源码分析
-	</a>
-	
 	<a class="muted-link mr-3" href="/tags/i/o/">
 		
 		<svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
@@ -626,17 +606,6 @@
 		i/o
 	</a>
 	
-	<a class="muted-link mr-3" href="/tags/locker/">
-		
-		<svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-			<path fill-rule="evenodd"
-				d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-			</path>
-		</svg>
-		
-		locker
-	</a>
-	
 	<a class="muted-link mr-3" href="/tags/markdown/">
 		
 		<svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
@@ -646,39 +615,6 @@
 		</svg>
 		
 		markdown
-	</a>
-	
-	<a class="muted-link mr-3" href="/tags/pprof/">
-		
-		<svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-			<path fill-rule="evenodd"
-				d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-			</path>
-		</svg>
-		
-		pprof
-	</a>
-	
-	<a class="muted-link mr-3" href="/tags/pragma/">
-		
-		<svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-			<path fill-rule="evenodd"
-				d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-			</path>
-		</svg>
-		
-		pragma
-	</a>
-	
-	<a class="muted-link mr-3" href="/tags/sync.map/">
-		
-		<svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-			<path fill-rule="evenodd"
-				d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-			</path>
-		</svg>
-		
-		sync.map
 	</a>
 	
 	<a class="muted-link mr-3" href="/tags/sync.pool/">
@@ -730,8 +666,10 @@
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                 makefile 很早就想写了，高阶概念总是忘了又忘，一千个人一千个哈姆雷特，理解抽象概念的方式各有不同
-What&rsquo;s makefile? 
+                <blockquote>
+<p><code>makefile</code> 很早就想写了，高阶概念总是忘了又忘，一千个人一千个哈姆雷特，理解抽象概念的方式各有不同</p>
+</blockquote>
+<h1 id="whats-makefile">What&rsquo;s makefile?</h1>
               </div>
             </div>
 
@@ -768,7 +706,8 @@ What&rsquo;s makefile?
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                序 还没写
+                <h1 id="序">序</h1>
+<p>还没写</p>
               </div>
             </div>
 
@@ -805,7 +744,8 @@ What&rsquo;s makefile?
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                序 还没写
+                <h1 id="序">序</h1>
+<p>还没写</p>
               </div>
             </div>
 
@@ -842,7 +782,8 @@ What&rsquo;s makefile?
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                序 还没写
+                <h1 id="序">序</h1>
+<p>还没写</p>
               </div>
             </div>
 
@@ -917,7 +858,8 @@ What&rsquo;s makefile?
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                序 还没写
+                <h1 id="序">序</h1>
+<p>还没写</p>
               </div>
             </div>
 
@@ -993,47 +935,39 @@ What&rsquo;s makefile?
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/anywhere/0/">anywhere 客户端框架概述</a>
+                <a href="https://domyson.github.io/post/zen/3/">datatable</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="序">序</h1>
-<p><code>Anywhere</code> 是一个基于 Unity 引擎的<code>GamePlay</code>框架，脱离 <code>Monobehaviour</code> 开发，致力简化开发流程。内部提供了一个<code>伪ECS</code>的上层抽象来开发它，但事实上你并不一定需要使用这个<code>ECS</code>，你也可以使用自定义的上层，比如自己实现像<code>MVCC</code>，或者是<code>MVC</code>的上层封装。让开发聚焦在游戏玩法而非一些底层架构上。Anywhere有两重含义，一可以实现任意类型的游戏，二可以在任意地方调动，而非需要定义一个字段保存访问索引。</p>
-<blockquote>
-<p>Anywhere的一些设计思想不算是纯粹的<code>OOP</code>，它有ECS的概念，也有<code>type embedding</code>的概念，而且设计概念大部分是参考面过过程和内嵌的设计思想，所以理解曲线会比较困难</p>
-</blockquote>
-<h1 id="设计目标">设计目标</h1>
+                <h1 id="简介">简介</h1>
+<p><code>DatatableModule</code> 是一个基于 <a href="/post/kproto">kpb</a> 编码的配置文件管理系统,它定义了一个配置文件的数据结构，并提供了相应的API来操作和访问配置文件。在<code>Zen</code>中它是一个<code>GameComponent</code>。它包含了一个代码生成器，和数据解析器和编码器。</p>
+<p>数据表的加载只有4(2)个接口  <code>LoadDatatable&lt;T&gt;(bool lazy)</code> <code>GetRow&lt;T&gt;(int row)</code> 以及一套同作用的异步接口，前者获取一整张表，后者获取某表的某一行数据，即对应的数据结构体。</p>
+<p><code>Datatable</code> 静默行为是 <code>Lazy load</code> 对于同一张数据表，它只会根据需要读取指定行然后才缓存，而不是一次性读取所有表格。</p>
+<h1 id="feature">Feature</h1>
 <ol>
 <li>
-<p>无框架化，它之所有不提供是为了更好的设计出不同品类的游戏，而我在近10年的游戏开发生涯中，我始终觉得框架的约束即使最大的约束，因为业务的多样性和非明确性的特点，一般游戏后期的一些奇奇怪怪的需求总是会迫使你绕过框架的约束从而形成屎山code，所以我希望<code>Anywhere</code>框架本身可以尽可能的简单，让开发者可以自由的去选择框架的约束。你可使用<code>Anywhere</code>的一部分，或者全部，甚至是都不需要。</p>
+<p><code>lazy load</code>,它不会加载表格的所有数据，而是按照需要动态一部分一部分的加载，直到全部加载完毕。</p>
 </li>
 <li>
-<p>无<code>MonoBehaviour</code>编程设计，解除引擎原始的约束，更自由的编程方式，像之前开发游戏，一个角色身上可能挂在各式各样的组件，一旦后期业务变动很容易出现引用丢失或者维护起来更为困难，而且一些特殊的时候可能还需要设置一下脚本的执行顺序，给维护带来巨大的不便（如我之前所呆的项目各种口口相传的细节规范，让开发痛不欲生）</p>
+<p><code>DatatableModule</code> 加载接口提供同步和异步两种模式，也可以加载远程资源，依赖于 <a href="/post/Zen/2">Resource</a></p>
 </li>
 <li>
-<p>模块化，<code>Anywhere</code>的一大特色，以像<code>C library</code>的方式来组织模块，让模块之间可以互相调用，并且可以互相替换，让开发者可以自由的去选择模块的约束。选择何种内置模块，或者是自定义模块由开发者决定，这也是使用 <code>Anywhere</code> 唯一的约束，你的模块可以是框架，也可以是<code>Module</code>。</p>
+<p><code>DatatableModule</code> 提供代码和数据生成的编辑器，无需关注实现逻辑。</p>
 </li>
 <li>
-<p>简单化，<code>Anywhere</code> 本身只提最必要的一些基础组件，你可以重新实现，而并非是必要的，就是这么随意，就像它的名字一样。</p>
+<p>多种类型数据支持 <code>bool,int,float,string,binary,int*,float*,string*</code>,满足绝大部分场景
+（2024/05/23）增加了定长数据的支持，减少内存消耗。</p>
 </li>
 <li>
-<p>自由化，游戏开发是自由的，是创造性的，<code>Anywhere</code> 不会约束你干什么，你只需要关注你的想法，怎么做取决于你的点子。</p>
+<p>基于<code>kproto</code>编码协议，极小的二进制文件，以及极快的编解码速度。</p>
 </li>
 <li>
-<p>去屎山，一旦使用<code>Anywhere</code>的<code>Module</code>约束，那么它一定是强类型约束，这么做的目的是让业务不容易形成屎山，避免屎上添粪的情况出现（我所在的一些项目就是这样，后期持续性优化，由于业务量巨大，实难以支撑）</p>
-</li>
-<li>
-<p>非文档约束性组件控制器绑定，面向对象的模式必然导致代码变得复杂，因使用内嵌代替<code>OOP</code>，但显然C#做不到，需要额外的封装，但过于麻烦不符合<code>Anywhere</code>的设计哲学，故通过静态泛型约束实现。</p>
-</li>
-<li>
-<p>无任何反射调度，提高代码的运行速度。</p>
-</li>
-<li>
-<p><code>Hybrid</code>集成（todo）</p>
+<p>栈内存映射，大部分情况下不需要开辟堆空间，节省一部分堆内存的分配，减少<code>Mono Reserved</code>的分配。</p>
 </li>
 </ol>
+<!-- raw HTML omitted -->
               </div>
             </div>
 
@@ -1064,21 +998,54 @@ What&rsquo;s makefile?
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/anywhere/3/">datatable</a>
+                <a href="https://domyson.github.io/post/zen/5/">EntityManager</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                简介 DatatableModule 是一个基于 kpb 编码的配置文件管理系统,它定义了一个配置文件的数据结构，并提供了相应的API来操作和访问配置文件。在Anywhere中它是一个GameComponent。它包含了一个代码生成器，和数据解析器和编码器。
-数据表的加载只有4(2)个接口 LoadDatatable&lt;T&gt;(bool lazy) GetRow&lt;T&gt;(int row) 以及一套同作用的异步接口，前者获取一整张表，后者获取某表的某一行数据，即对应的数据结构体。
-Datatable 静默行为是 Lazy load 对于同一张数据表，它只会根据需要读取指定行然后才缓存，而不是一次性读取所有表格。
-Feature lazy load,它不会加载表格的所有数据，而是按照需要动态一部分一部分的加载，直到全部加载完毕。
-DatatableModule 加载接口提供同步和异步两种模式，也可以加载远程资源，依赖于 Resource
-DatatableModule 提供代码和数据生成的编辑器，无需关注实现逻辑。
-多种类型数据支持 bool,int,float,string,binary,int*,float*,string*,满足绝大部分场景 （2024/05/23）增加了定长数据的支持，减少内存消耗。
-基于kproto编码协议，极小的二进制文件，以及极快的编解码速度。
-栈内存映射，大部分情况下不需要开辟堆空间，节省一部分堆内存的分配，减少Mono Reserved的分配。
+                <p><code>EntityManager</code>是一个很重要的模块，像游戏开发本身就是视觉感知，而<code>EntityManager</code>是对所有场景物体的统一抽象封装, 并提供一系列通用操作，<code>EntityManager</code> 本身是一个抽象类，提供了一定程度的通用性操作，但针对一些特殊情况我们还是需要针对特定问题特定实现（千万不想要想着做平，来自某家公司的教训:)）</p>
+<p><code>EntityManager</code> 附带一个默认的 <code>EntityController</code>,提供一些常规的实体控制，像 <code>Zen</code>的UI框架就是基于 <code>EntityManager</code>的一个具体实现。</p>
+<h1 id="entity">Entity</h1>
+<p>抽象描述一个物体的实体，它的生命周期函数定义类似于<code>GameComponent</code>,但是它的调度不由<code>GameEntry</code>而是 <code>GameComponent</code>。</p>
+<p>简单来说，要创建一个物体首先我们需要定义它的逻辑模板（骨架）以及它的数据（描述）</p>
+<p>举个例子</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">struct</span> <span class="nc">EnemyData</span><span class="p">:</span><span class="n">IEntityData</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 对于实体数据接口，资源名必不可少</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Assets</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span><span class="k">set</span><span class="p">;}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">void</span> <span class="n">OnCtor</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 有些时候，实体的数据更关卡等级或这地图这类外部数据挂钩，可能需要在这里动态设置一次</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 定义Entity的逻辑模板</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">struct</span> <span class="nc">Enemy</span><span class="p">:</span><span class="n">Entity</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="n">EnemyData</span> <span class="n">userdata</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="k">void</span> <span class="n">OnCtor</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// init setup...</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>     
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="k">void</span> <span class="n">OnUpdate</span><span class="p">(</span><span class="kt">float</span> <span class="n">delta</span><span class="p">,</span><span class="kt">float</span> <span class="n">unscaleDelta</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// loop logic.</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">void</span> <span class="n">dosomething</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 直接在默认的EntityManager中创建一个实体</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GameEntry</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">EntityManager</span><span class="p">&gt;().</span><span class="n">Load</span><span class="p">&lt;</span><span class="n">Enemy</span><span class="p">&gt;(</span><span class="k">new</span> <span class="n">EnemyData</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>对于实体的销毁，像敌人死亡，特效消失之类的，仅仅只需要设置一个 <code>Alive</code> 属性，即可完成，生命周期由<code>EntityManger</code>自行决断。</p>
+<p>需要注意的是 继承<code>IEntityData</code>的数据模板是会一直复用的，它与 <code>Entity</code>的复用规则不同，后者复用的是<code>Entity</code>所持有的实体，因为它本身只是一系列函数集合且很少会带有数据并不会占用太多的内存，而前者大部分情况下是都是通过读表获取，复杂的实体数据可能会导致内存异常大，所以保留实体数据是<code>EntityManager</code>的默认行为。</p>
+<h1 id="entitysettings">EntitySettings</h1>
+<p><code>EntityManager</code>可能需要在某些大量对象时使用对象池（<code>Entity</code>），或者内存池(<code>EntityData</code>),但在大多数情况下，框架并不清楚是否需要对象池，或者是需要一个定长周期的物体（子弹或者特效）。</p>
+<p>这个时候需要设置就非常有必要了，可以决断出是否需要且生命周期（keepalive）或者是需要多大的对象池，以及自动孵化的频率了。</p>
+<!-- raw HTML omitted -->
               </div>
             </div>
 
@@ -1109,20 +1076,61 @@ DatatableModule 提供代码和数据生成的编辑器，无需关注实现逻�
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/anywhere/5/">EntityManager</a>
+                <a href="https://domyson.github.io/post/zen/2/">Resource</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                EntityManager是一个很重要的模块，像游戏开发本身就是视觉感知，而EntityManager是对所有场景物体的统一抽象封装, 并提供一系列通用操作，EntityManager 本身是一个抽象类，提供了一定程度的通用性操作，但针对一些特殊情况我们还是需要针对特定问题特定实现（千万不想要想着做平，来自某家公司的教训:)）
-EntityManager 附带一个默认的 EntityController,提供一些常规的实体控制，像 Anywhere的UI框架就是基于 EntityManager的一个具体实现。
-Entity 抽象描述一个物体的实体，它的生命周期函数定义类似于GameComponent,但是它的调度不由GameEntry而是 GameComponent。
-简单来说，要创建一个物体首先我们需要定义它的逻辑模板（骨架）以及它的数据（描述）
-举个例子
-public struct EnemyData:IEntityData{ // 对于实体数据接口，资源名必不可少 public string Assets {get;set;} public void OnCtor(){ // 有些时候，实体的数据更关卡等级或这地图这类外部数据挂钩，可能需要在这里动态设置一次 } } // 定义Entity的逻辑模板 public struct Enemy:Entity { protected EnemyData userdata; protected void OnCtor(){ // init setup... } protected void OnUpdate(float delta,float unscaleDelta){ // loop logic. } } void dosomething(){ // 直接在默认的EntityManager中创建一个实体 GameEntry.GetComponent&lt;EntityManager&gt;().Load&lt;Enemy&gt;(new EnemyData()); } 对于实体的销毁，像敌人死亡，特效消失之类的，仅仅只需要设置一个 Alive 属性，即可完成，生命周期由EntityManger自行决断。
-需要注意的是 继承IEntityData的数据模板是会一直复用的，它与 Entity的复用规则不同，后者复用的是Entity所持有的实体，因为它本身只是一系列函数集合且很少会带有数据并不会占用太多的内存，而前者大部分情况下是都是通过读表获取，复杂的实体数据可能会导致内存异常大，所以保留实体数据是EntityManager的默认行为。
-EntitySettings EntityManager可能需要在某些大量对象时使用对象池（Entity），或者内存池(EntityData),但在大多数情况下，框架并不清楚是否需要对象池，或者是需要一个定长周期的物体（子弹或者特效）。
+                <h1 id="简介">简介</h1>
+<p><code>Resource</code> 是一个全自动化，且简单易用的资源管理系统,继承于<code>GameComponet</code>实现 ，它内部使用<code>RC</code>的方式来管理资源的引用，且不需要手动显示释放,而是通过拦截finalizer的方式，来达到释放的目的，比手动安全性更高，也更易用。</p>
+<p>它仅提供了两组接口资源加载接口<code>LoadAsset</code>  <code>LoadAssetAsync</code>，。并提供了虚拟化的方式加载，在编辑器模式下不会真正的构建<code>AssetBundle</code>包，从而提供开发效率。</p>
+<p><code>Resource</code>也包括流场景构建，可以将整个场景都作为热更新资源。</p>
+<h1 id="feature">Feature</h1>
+<ol>
+<li>
+<p>自动化检测文件变动
+通过<code>Radix</code>算法，监控资源变动，来自动构建<code>manifest</code>。上层只需要关注资源本身，无需关注<code>AssetBundle</code>包的构建。做到对上层完全无感。</p>
+</li>
+<li>
+<p>自动化引用计数
+通过 <code>RC</code>+ finalizer，监控资源的引用，来自动释放资源。且无需轮询检查资源的引用计数，提供更好的性能，做到对上层完全无感。也没有手动释放接口，提高安全性和易用性</p>
+</li>
+<li>
+<p>自动化冗余剔除
+在构建的时候自动收集冗余资源，如像A-&gt;(C,D) B-&gt;(C) 此时(A,D)将会作为一个的bundle，而C则会单独作为一个bundle</p>
+</li>
+<li>
+<p>Profile资源使用分析，用以在运行时统计各个资源的引用和加载数</p>
+</li>
+<li>
+<p>自定义流处理，支持加密等自定义操作</p>
+</li>
+<li>
+<p>多种模式支持</p>
+<ol>
+<li>
+<p>Builtin: 内建资源，默认将资源插入母包中。</p>
+</li>
+<li>
+<p>Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放，防止被反编译资源</p>
+</li>
+</ol>
+</li>
+<li>
+<p>无感知资源更新
+一般出现资源更新的时候，都是先下载到本地，然后再通过加载本地资源的方式实现， 现由<code>FS</code>映射的远程目录，通过分流的方式，可以实现一边从远程直接读取，并copy另外一部分流到本地磁盘，减少重新读盘的情况。
+对于下载过程对于玩家而言完全无感，其本身下载速度是可以被控制，当前并没有暴露此接口（因为带宽值是动态变化的，无法根据不同的条件找到一个合理值），只是需要设定一个百分率阈值，内部自动计算下载速度尽可能保证达到预期值。</p>
+</li>
+<li>
+<p>淘汰策略
+当某个Assetbundle的引用计数为0时候，底层不会立即释放它，而是根据它过往的加载次数判断下一次淘汰次数，越大将会越晚淘汰，当然也提供了强制卸载函数。</p>
+</li>
+</ol>
+<h1 id="后续计划">后续计划</h1>
+<p><del>现阶段<code>Resource</code>是依赖于<code>Assetbundle</code> 后续会抽象出一层 <code>FS</code> 以提供自定义流提供更多可操作性和安全性。</del> 已实现</p>
+<p><code>Resource</code>现在可以说是完全不能脱离<code>Unity</code>独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步时只需要在<code>Unity</code>中需要手动实现一个<code>Adaptor</code>即可。</p>
+<!-- raw HTML omitted -->
               </div>
             </div>
 
@@ -1184,20 +1192,24 @@ window.onscroll = function (e) {
   }
 };
 
-var style = localStorage.getItem('data-color-mode');
-iconElement = document.getElementById('github-icon');
+var style = localStorage.getItem('data-color-mode')
+githubIconElement = document.getElementById('github-icon')
+twitterIconElement = document.getElementById('twitter-icon')
 if (style == 'light') {
-  iconElement.setAttribute('fill', '#24292e');
+  if (githubIconElement) githubIconElement.setAttribute('fill', '#24292e')
+  if (twitterIconElement) twitterIconElement.setAttribute('fill', 'black')
 }
 else {
-  iconElement.removeAttribute('fill');
-  iconElement.setAttribute('class', 'octicon');
-  iconElement.setAttribute('color', '#f0f6fc');
+  if (githubIconElement) {
+    githubIconElement.removeAttribute('fill')
+    githubIconElement.setAttribute('class', 'octicon')
+    githubIconElement.setAttribute('color', '#f0f6fc')
+  }
+  if (twitterIconElement)  twitterIconElement.setAttribute('fill', 'white') 
 }
 </script>
 
-
-    
+  
 
 </div>
 
@@ -1215,6 +1227,7 @@ else {
       
       <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
       
+      <li class="mr-3 mr-lg-0">GitHub and the Invertocat logo are trademarks of <a href="https://github.com/">GitHub, Inc.</a></li>
     </ul>
   </div>
   <div class="d-flex flex-justify-center pb-6">
@@ -1223,9 +1236,13 @@ else {
 
 
 </div>
+
 </body>
 
 <script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
 
 
 

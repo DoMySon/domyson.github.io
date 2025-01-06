@@ -17,6 +17,9 @@
     <meta name="theme-color" content="#1e2327">
 
     
+    
+
+    
     <meta name="description"
   content="无论是对于C版本还是Go版本的skynet-x而言，一个高效的内存分配器可以提高内存的使用效率，这里效率无论是对于内存碎片亦或是GC而言，都是一种更高效的手段
 基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet-x中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向runtime申请内存，将会导致内存占用过高。
@@ -26,7 +29,8 @@
 Zmalloc zmlloc 本身也是 slab的升级版本，增加可伸缩链表实现对于预分配内存额外部分的缓冲池。
 在24个线程的cpu条件测试结果如下,zmalloc保持了一种稳定的时间复杂度，额外产生的内存分配也很少
 - time(ns) alloc/op(B) slab-128 23.5 1 sync.Pool-128 2490 65562 zmalloc-128 43.31 16 slab-256 24 256 sync.Pool-256 2204 65562 zmalloc-256 44 16 slab-1024 92 1024 sync.Pool-1024 2490 65562 zmalloc-1024 49 17 slab-4096 365 4096 sync.Pool-4096 2210 65562 zmalloc-4096 45 23 API skynet.zalloc(n) 用以分配指定大小的内存块，考虑到 64在go中为tiny-size，直接会从P上分配，所以zmalloc分配块从128开始
-skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存" />
+skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存
+" />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
@@ -44,7 +48,8 @@ skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新�
 Zmalloc zmlloc 本身也是 slab的升级版本，增加可伸缩链表实现对于预分配内存额外部分的缓冲池。
 在24个线程的cpu条件测试结果如下,zmalloc保持了一种稳定的时间复杂度，额外产生的内存分配也很少
 - time(ns) alloc/op(B) slab-128 23.5 1 sync.Pool-128 2490 65562 zmalloc-128 43.31 16 slab-256 24 256 sync.Pool-256 2204 65562 zmalloc-256 44 16 slab-1024 92 1024 sync.Pool-1024 2490 65562 zmalloc-1024 49 17 slab-4096 365 4096 sync.Pool-4096 2210 65562 zmalloc-4096 45 23 API skynet.zalloc(n) 用以分配指定大小的内存块，考虑到 64在go中为tiny-size，直接会从P上分配，所以zmalloc分配块从128开始
-skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存" />
+skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存
+" />
 <meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -62,7 +67,8 @@ skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新�
 Zmalloc zmlloc 本身也是 slab的升级版本，增加可伸缩链表实现对于预分配内存额外部分的缓冲池。
 在24个线程的cpu条件测试结果如下,zmalloc保持了一种稳定的时间复杂度，额外产生的内存分配也很少
 - time(ns) alloc/op(B) slab-128 23.5 1 sync.Pool-128 2490 65562 zmalloc-128 43.31 16 slab-256 24 256 sync.Pool-256 2204 65562 zmalloc-256 44 16 slab-1024 92 1024 sync.Pool-1024 2490 65562 zmalloc-1024 49 17 slab-4096 365 4096 sync.Pool-4096 2210 65562 zmalloc-4096 45 23 API skynet.zalloc(n) 用以分配指定大小的内存块，考虑到 64在go中为tiny-size，直接会从P上分配，所以zmalloc分配块从128开始
-skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存" />
+skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存
+" />
 <meta property="og:url" content="https://domyson.github.io/post/skynet/5/" />
 <meta property="og:site_name" content="zmalloc" />
 <meta property="og:image"
@@ -84,6 +90,7 @@ skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新�
 
 </head>
 
+
 <body>
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
@@ -95,7 +102,10 @@ skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新�
     <div class="Header-item d-md-none">
       <button class="Header-link btn-link js-details-target" type="button"
         onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
-        <img height="24" class="octicon octicon-three-bars" width="24" src="">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
       </button>
     </div>
     <div style="display: none;" id="header-search"
@@ -103,6 +113,7 @@ skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新�
       <div
         class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
         <div class="position-relative">
+          
           <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
             autocomplete="off">
             <label
@@ -113,6 +124,7 @@ skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新�
               <input type="hidden" name="q" value="site:https://domyson.github.io/">
             </label>
           </form>
+          
         </div>
       </div>
     </div>
@@ -135,8 +147,12 @@ skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新�
   </header>
 </div>
 
+  <div id="search-result" class="container-lg px-3 new-discussion-timeline" style="display: none;">
+</div>
+
   
-<div>
+<div class="application-main">
+  <div>
   <main>
     <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
       <div class="px-0">
@@ -146,7 +162,7 @@ skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新�
               <div class="d-none d-md-block">
                 <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io/">
                   <img class=" avatar-user"
-                    src="https://domyson.github.io/images/avatar.png"
+                    src="/images/avatar.png"
                     width="32" height="32"></a>
               </div>
               <div class="d-flex flex-column">
@@ -164,11 +180,6 @@ skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新�
                     class="no-wrap">
                     Thu, 21 Apr 2022 00:00:00 &#43;0000</relative-time>
 
-                  
-                  <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sun, 07 Jul 2024 18:53:26 &#43;0000"
-                    class="no-wrap">
-                    Sun, 07 Jul 2024 18:53:26 &#43;0000</relative-time>
                   
                 </div>
               </div>
@@ -221,75 +232,75 @@ skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新�
 <p><code>zmlloc</code> 本身也是 <code>slab</code>的升级版本，增加可伸缩链表实现对于预分配内存额外部分的缓冲池。</p>
 <p>在24个线程的cpu条件测试结果如下,<code>zmalloc</code>保持了一种稳定的时间复杂度，额外产生的内存分配也很少</p>
 <table>
-<thead>
-<tr>
-<th style="text-align:left">-</th>
-<th style="text-align:center">time(ns)</th>
-<th style="text-align:center">alloc/op(B)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">slab-128</td>
-<td style="text-align:center">23.5</td>
-<td style="text-align:center">1</td>
-</tr>
-<tr>
-<td style="text-align:left">sync.Pool-128</td>
-<td style="text-align:center">2490</td>
-<td style="text-align:center">65562</td>
-</tr>
-<tr>
-<td style="text-align:left">zmalloc-128</td>
-<td style="text-align:center">43.31</td>
-<td style="text-align:center">16</td>
-</tr>
-<tr>
-<td style="text-align:left">slab-256</td>
-<td style="text-align:center">24</td>
-<td style="text-align:center">256</td>
-</tr>
-<tr>
-<td style="text-align:left">sync.Pool-256</td>
-<td style="text-align:center">2204</td>
-<td style="text-align:center">65562</td>
-</tr>
-<tr>
-<td style="text-align:left">zmalloc-256</td>
-<td style="text-align:center">44</td>
-<td style="text-align:center">16</td>
-</tr>
-<tr>
-<td style="text-align:left">slab-1024</td>
-<td style="text-align:center">92</td>
-<td style="text-align:center">1024</td>
-</tr>
-<tr>
-<td style="text-align:left">sync.Pool-1024</td>
-<td style="text-align:center">2490</td>
-<td style="text-align:center">65562</td>
-</tr>
-<tr>
-<td style="text-align:left">zmalloc-1024</td>
-<td style="text-align:center">49</td>
-<td style="text-align:center">17</td>
-</tr>
-<tr>
-<td style="text-align:left">slab-4096</td>
-<td style="text-align:center">365</td>
-<td style="text-align:center">4096</td>
-</tr>
-<tr>
-<td style="text-align:left">sync.Pool-4096</td>
-<td style="text-align:center">2210</td>
-<td style="text-align:center">65562</td>
-</tr>
-<tr>
-<td style="text-align:left">zmalloc-4096</td>
-<td style="text-align:center">45</td>
-<td style="text-align:center">23</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">-</th>
+          <th style="text-align: center">time(ns)</th>
+          <th style="text-align: center">alloc/op(B)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">slab-128</td>
+          <td style="text-align: center">23.5</td>
+          <td style="text-align: center">1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">sync.Pool-128</td>
+          <td style="text-align: center">2490</td>
+          <td style="text-align: center">65562</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">zmalloc-128</td>
+          <td style="text-align: center">43.31</td>
+          <td style="text-align: center">16</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">slab-256</td>
+          <td style="text-align: center">24</td>
+          <td style="text-align: center">256</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">sync.Pool-256</td>
+          <td style="text-align: center">2204</td>
+          <td style="text-align: center">65562</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">zmalloc-256</td>
+          <td style="text-align: center">44</td>
+          <td style="text-align: center">16</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">slab-1024</td>
+          <td style="text-align: center">92</td>
+          <td style="text-align: center">1024</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">sync.Pool-1024</td>
+          <td style="text-align: center">2490</td>
+          <td style="text-align: center">65562</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">zmalloc-1024</td>
+          <td style="text-align: center">49</td>
+          <td style="text-align: center">17</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">slab-4096</td>
+          <td style="text-align: center">365</td>
+          <td style="text-align: center">4096</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">sync.Pool-4096</td>
+          <td style="text-align: center">2210</td>
+          <td style="text-align: center">65562</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">zmalloc-4096</td>
+          <td style="text-align: center">45</td>
+          <td style="text-align: center">23</td>
+      </tr>
+  </tbody>
 </table>
 <h1 id="api">API</h1>
 <ul>
@@ -318,7 +329,7 @@ skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新�
 <script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
 
-
+  
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://domyson.github.io/css/gitalk.css'>
 <script src='https://domyson.github.io/js/gitalk.min.js'></script>
@@ -337,6 +348,7 @@ skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新�
   })();
 </script>
 
+</div>
 
   <div class="footer container-xl width-full p-responsive">
   <div
@@ -352,6 +364,7 @@ skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新�
       
       <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
       
+      <li class="mr-3 mr-lg-0">GitHub and the Invertocat logo are trademarks of <a href="https://github.com/">GitHub, Inc.</a></li>
     </ul>
   </div>
   <div class="d-flex flex-justify-center pb-6">
@@ -360,9 +373,13 @@ skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新�
 
 
 </div>
+
 </body>
 
 <script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
 
 
 

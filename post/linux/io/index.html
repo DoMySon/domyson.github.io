@@ -17,6 +17,9 @@
     <meta name="theme-color" content="#1e2327">
 
     
+    
+
+    
     <meta name="description"
   content="前言 数据的读取分为:
 等待数据准备
@@ -72,6 +75,7 @@
 
 </head>
 
+
 <body>
   <div style="position: relative">
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
@@ -83,7 +87,10 @@
     <div class="Header-item d-md-none">
       <button class="Header-link btn-link js-details-target" type="button"
         onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
-        <img height="24" class="octicon octicon-three-bars" width="24" src="">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
       </button>
     </div>
     <div style="display: none;" id="header-search"
@@ -91,6 +98,7 @@
       <div
         class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
         <div class="position-relative">
+          
           <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
             autocomplete="off">
             <label
@@ -101,6 +109,7 @@
               <input type="hidden" name="q" value="site:https://domyson.github.io/">
             </label>
           </form>
+          
         </div>
       </div>
     </div>
@@ -123,8 +132,12 @@
   </header>
 </div>
 
+  <div id="search-result" class="container-lg px-3 new-discussion-timeline" style="display: none;">
+</div>
+
   
-<div>
+<div class="application-main">
+  <div>
   <main>
     <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
       <div class="px-0">
@@ -134,7 +147,7 @@
               <div class="d-none d-md-block">
                 <a class="avatar mr-2 flex-shrink-0" href="https://domyson.github.io/">
                   <img class=" avatar-user"
-                    src="https://domyson.github.io/images/avatar.png"
+                    src="/images/avatar.png"
                     width="32" height="32"></a>
               </div>
               <div class="d-flex flex-column">
@@ -152,11 +165,6 @@
                     class="no-wrap">
                     Mon, 25 Feb 2019 00:00:00 &#43;0000</relative-time>
 
-                  
-                  <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sun, 07 Jul 2024 18:53:26 &#43;0000"
-                    class="no-wrap">
-                    Sun, 07 Jul 2024 18:53:26 &#43;0000</relative-time>
                   
                 </div>
               </div>
@@ -225,25 +233,25 @@
 <li>
 <p>基本模型矩阵</p>
 <table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">阻塞</th>
-<th style="text-align:center">非阻塞</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">同步</td>
-<td style="text-align:center"><code>Read/Write</code></td>
-<td style="text-align:center"><code>Read\Write(O_NONBLOCK)</code></td>
-</tr>
-<tr>
-<td style="text-align:center">异步</td>
-<td style="text-align:center"><code>I/O multiplexing(select/poll)</code></td>
-<td style="text-align:center"><code>AIO</code></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: center"></th>
+          <th style="text-align: center">阻塞</th>
+          <th style="text-align: center">非阻塞</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">同步</td>
+          <td style="text-align: center"><code>Read/Write</code></td>
+          <td style="text-align: center"><code>Read\Write(O_NONBLOCK)</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">异步</td>
+          <td style="text-align: center"><code>I/O multiplexing(select/poll)</code></td>
+          <td style="text-align: center"><code>AIO</code></td>
+      </tr>
+  </tbody>
 </table>
 </li>
 </ul>
@@ -309,7 +317,7 @@
 <script type="application/javascript" src='https://domyson.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://domyson.github.io/css/toc.css' />
 
-
+  
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://domyson.github.io/css/gitalk.css'>
 <script src='https://domyson.github.io/js/gitalk.min.js'></script>
@@ -328,6 +336,7 @@
   })();
 </script>
 
+</div>
 
   <div class="footer container-xl width-full p-responsive">
   <div
@@ -343,6 +352,7 @@
       
       <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
       
+      <li class="mr-3 mr-lg-0">GitHub and the Invertocat logo are trademarks of <a href="https://github.com/">GitHub, Inc.</a></li>
     </ul>
   </div>
   <div class="d-flex flex-justify-center pb-6">
@@ -351,9 +361,13 @@
 
 
 </div>
+
 </body>
 
 <script type="application/javascript" src="https://domyson.github.io/js/github-style.js"></script>
+
+
+
 
 
 
