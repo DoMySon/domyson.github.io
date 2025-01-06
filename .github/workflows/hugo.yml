@@ -28,7 +28,6 @@ jobs:
 
       - name: Build
         run: |
-          cp ./adsense-footer.html ./themes/github-style/layouts/shortcodes/adsense-footer.html
           cp ./avatar.png ./docs/images/
           hugo -d docs
           echo -n "google.com, pub-7934154300350596, DIRECT, f08c47fec0942fa0" > ./docs/ads.txt
