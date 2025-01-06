@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>zen 客户端框架概述 - 朝花夕拾</title>
+    <title>Zen Gameplay Framework - 朝花夕拾</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -21,17 +21,18 @@
 
     
     <meta name="description"
-  content="序 Zen 是一个基于 Unity 引擎的GamePlay框架，脱离 Monobehaviour 开发，致力简化开发流程。内部提供了一个伪ECS的上层抽象来开发它，但事实上你并不一定需要使用这个ECS，你也可以使用自定义的上层，比如自己实现像MVCC，或者是MVC的上层封装。让开发聚焦在游戏玩法而非一些底层架构上。Zen有两重含义，一可以实现任意类型的游戏，二可以在任意地方调动，而非需要定义一个字段保存访问索引。
+  content="序 Zen 是一个基于 Unity 引擎的GamePlay框架，脱离 Monobehaviour 开发，致力简化开发流程。内部提供了一个类ECS的架构满足开发，你也可以使用自定义的上层，比如自己实现像MVCC，或者是MVC的上层封装。让开发聚焦在游戏玩法而非一些底层架构上。
 Zen的一些设计思想不算是纯粹的OOP，它有ECS的概念，也有type embedding的概念，而且设计概念大部分是参考面过过程和内嵌的设计思想，所以理解曲线会比较困难
 设计目标 无框架化，它之所有不提供是为了更好的设计出不同品类的游戏，而我在近10年的游戏开发生涯中，我始终觉得框架的约束即使最大的约束，因为业务的多样性和非明确性的特点，一般游戏后期的一些奇奇怪怪的需求总是会迫使你绕过框架的约束从而形成屎山code，所以我希望Zen框架本身可以尽可能的简单，让开发者可以自由的去选择框架的约束。你可使用Zen的一部分，或者全部，甚至是都不需要。
 无MonoBehaviour编程设计，解除引擎原始的约束，更自由的编程方式，像之前开发游戏，一个角色身上可能挂在各式各样的组件，一旦后期业务变动很容易出现引用丢失或者维护起来更为困难，而且一些特殊的时候可能还需要设置一下脚本的执行顺序，给维护带来巨大的不便（如我之前所呆的项目各种口口相传的细节规范，让开发痛不欲生）
 模块化，Zen的一大特色，以像C library的方式来组织模块，让模块之间可以互相调用，并且可以互相替换，让开发者可以自由的去选择模块的约束。选择何种内置模块，或者是自定义模块由开发者决定，这也是使用 Zen 唯一的约束，你的模块可以是框架，也可以是Module。
-简单化，Zen 本身只提最必要的一些基础组件，你可以重新实现，而并非是必要的，就是这么随意，就像它的名字一样。
+简单化，Zen 本身只提最必要的一些基础组件，你可以重新实现，而并非是必要的
 自由化，游戏开发是自由的，是创造性的，Zen 不会约束你干什么，你只需要关注你的想法，怎么做取决于你的点子。
-去屎山，一旦使用Zen的Module约束，那么它一定是强类型约束，这么做的目的是让业务不容易形成屎山，避免屎上添粪的情况出现（我所在的一些项目就是这样，后期持续性优化，由于业务量巨大，实难以支撑）
 非文档约束性组件控制器绑定，面向对象的模式必然导致代码变得复杂，因使用内嵌代替OOP，但显然C#做不到，需要额外的封装，但过于麻烦不符合Zen的设计哲学，故通过静态泛型约束实现。
 无任何反射调度，提高代码的运行速度。
-Hybrid集成（todo）
+高度继承的构建管线，非常完善且易使用基建设计（配置，资源，本地化，网络等）
+ZenRpc现在可用了，无关乎网络，无缝与 skynet-go
+Zen不鼓励继承，其内部设计也是符合此规范，所以整个拓扑架构更平整
 " />
 <meta name="keywords"
   content='computer tech' />
@@ -40,19 +41,20 @@ Hybrid集成（todo）
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="zen 客户端框架概述 - 朝花夕拾" />
+<meta name="twitter:title" content="Zen Gameplay Framework - 朝花夕拾" />
 <meta name="twitter:description"
-  content="序 Zen 是一个基于 Unity 引擎的GamePlay框架，脱离 Monobehaviour 开发，致力简化开发流程。内部提供了一个伪ECS的上层抽象来开发它，但事实上你并不一定需要使用这个ECS，你也可以使用自定义的上层，比如自己实现像MVCC，或者是MVC的上层封装。让开发聚焦在游戏玩法而非一些底层架构上。Zen有两重含义，一可以实现任意类型的游戏，二可以在任意地方调动，而非需要定义一个字段保存访问索引。
+  content="序 Zen 是一个基于 Unity 引擎的GamePlay框架，脱离 Monobehaviour 开发，致力简化开发流程。内部提供了一个类ECS的架构满足开发，你也可以使用自定义的上层，比如自己实现像MVCC，或者是MVC的上层封装。让开发聚焦在游戏玩法而非一些底层架构上。
 Zen的一些设计思想不算是纯粹的OOP，它有ECS的概念，也有type embedding的概念，而且设计概念大部分是参考面过过程和内嵌的设计思想，所以理解曲线会比较困难
 设计目标 无框架化，它之所有不提供是为了更好的设计出不同品类的游戏，而我在近10年的游戏开发生涯中，我始终觉得框架的约束即使最大的约束，因为业务的多样性和非明确性的特点，一般游戏后期的一些奇奇怪怪的需求总是会迫使你绕过框架的约束从而形成屎山code，所以我希望Zen框架本身可以尽可能的简单，让开发者可以自由的去选择框架的约束。你可使用Zen的一部分，或者全部，甚至是都不需要。
 无MonoBehaviour编程设计，解除引擎原始的约束，更自由的编程方式，像之前开发游戏，一个角色身上可能挂在各式各样的组件，一旦后期业务变动很容易出现引用丢失或者维护起来更为困难，而且一些特殊的时候可能还需要设置一下脚本的执行顺序，给维护带来巨大的不便（如我之前所呆的项目各种口口相传的细节规范，让开发痛不欲生）
 模块化，Zen的一大特色，以像C library的方式来组织模块，让模块之间可以互相调用，并且可以互相替换，让开发者可以自由的去选择模块的约束。选择何种内置模块，或者是自定义模块由开发者决定，这也是使用 Zen 唯一的约束，你的模块可以是框架，也可以是Module。
-简单化，Zen 本身只提最必要的一些基础组件，你可以重新实现，而并非是必要的，就是这么随意，就像它的名字一样。
+简单化，Zen 本身只提最必要的一些基础组件，你可以重新实现，而并非是必要的
 自由化，游戏开发是自由的，是创造性的，Zen 不会约束你干什么，你只需要关注你的想法，怎么做取决于你的点子。
-去屎山，一旦使用Zen的Module约束，那么它一定是强类型约束，这么做的目的是让业务不容易形成屎山，避免屎上添粪的情况出现（我所在的一些项目就是这样，后期持续性优化，由于业务量巨大，实难以支撑）
 非文档约束性组件控制器绑定，面向对象的模式必然导致代码变得复杂，因使用内嵌代替OOP，但显然C#做不到，需要额外的封装，但过于麻烦不符合Zen的设计哲学，故通过静态泛型约束实现。
 无任何反射调度，提高代码的运行速度。
-Hybrid集成（todo）
+高度继承的构建管线，非常完善且易使用基建设计（配置，资源，本地化，网络等）
+ZenRpc现在可用了，无关乎网络，无缝与 skynet-go
+Zen不鼓励继承，其内部设计也是符合此规范，所以整个拓扑架构更平整
 " />
 <meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -61,22 +63,23 @@ Hybrid集成（todo）
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="zen 客户端框架概述 - 朝花夕拾">
+<meta property="og:title" content="Zen Gameplay Framework - 朝花夕拾">
 <meta property="og:description"
-  content="序 Zen 是一个基于 Unity 引擎的GamePlay框架，脱离 Monobehaviour 开发，致力简化开发流程。内部提供了一个伪ECS的上层抽象来开发它，但事实上你并不一定需要使用这个ECS，你也可以使用自定义的上层，比如自己实现像MVCC，或者是MVC的上层封装。让开发聚焦在游戏玩法而非一些底层架构上。Zen有两重含义，一可以实现任意类型的游戏，二可以在任意地方调动，而非需要定义一个字段保存访问索引。
+  content="序 Zen 是一个基于 Unity 引擎的GamePlay框架，脱离 Monobehaviour 开发，致力简化开发流程。内部提供了一个类ECS的架构满足开发，你也可以使用自定义的上层，比如自己实现像MVCC，或者是MVC的上层封装。让开发聚焦在游戏玩法而非一些底层架构上。
 Zen的一些设计思想不算是纯粹的OOP，它有ECS的概念，也有type embedding的概念，而且设计概念大部分是参考面过过程和内嵌的设计思想，所以理解曲线会比较困难
 设计目标 无框架化，它之所有不提供是为了更好的设计出不同品类的游戏，而我在近10年的游戏开发生涯中，我始终觉得框架的约束即使最大的约束，因为业务的多样性和非明确性的特点，一般游戏后期的一些奇奇怪怪的需求总是会迫使你绕过框架的约束从而形成屎山code，所以我希望Zen框架本身可以尽可能的简单，让开发者可以自由的去选择框架的约束。你可使用Zen的一部分，或者全部，甚至是都不需要。
 无MonoBehaviour编程设计，解除引擎原始的约束，更自由的编程方式，像之前开发游戏，一个角色身上可能挂在各式各样的组件，一旦后期业务变动很容易出现引用丢失或者维护起来更为困难，而且一些特殊的时候可能还需要设置一下脚本的执行顺序，给维护带来巨大的不便（如我之前所呆的项目各种口口相传的细节规范，让开发痛不欲生）
 模块化，Zen的一大特色，以像C library的方式来组织模块，让模块之间可以互相调用，并且可以互相替换，让开发者可以自由的去选择模块的约束。选择何种内置模块，或者是自定义模块由开发者决定，这也是使用 Zen 唯一的约束，你的模块可以是框架，也可以是Module。
-简单化，Zen 本身只提最必要的一些基础组件，你可以重新实现，而并非是必要的，就是这么随意，就像它的名字一样。
+简单化，Zen 本身只提最必要的一些基础组件，你可以重新实现，而并非是必要的
 自由化，游戏开发是自由的，是创造性的，Zen 不会约束你干什么，你只需要关注你的想法，怎么做取决于你的点子。
-去屎山，一旦使用Zen的Module约束，那么它一定是强类型约束，这么做的目的是让业务不容易形成屎山，避免屎上添粪的情况出现（我所在的一些项目就是这样，后期持续性优化，由于业务量巨大，实难以支撑）
 非文档约束性组件控制器绑定，面向对象的模式必然导致代码变得复杂，因使用内嵌代替OOP，但显然C#做不到，需要额外的封装，但过于麻烦不符合Zen的设计哲学，故通过静态泛型约束实现。
 无任何反射调度，提高代码的运行速度。
-Hybrid集成（todo）
+高度继承的构建管线，非常完善且易使用基建设计（配置，资源，本地化，网络等）
+ZenRpc现在可用了，无关乎网络，无缝与 skynet-go
+Zen不鼓励继承，其内部设计也是符合此规范，所以整个拓扑架构更平整
 " />
 <meta property="og:url" content="https://domyson.github.io/post/zen/0/" />
-<meta property="og:site_name" content="zen 客户端框架概述" />
+<meta property="og:site_name" content="Zen Gameplay Framework" />
 <meta property="og:image"
   content="https://domyson.github.io/">
 <meta property="og:image:width" content="2048">
@@ -102,7 +105,7 @@ Hybrid集成（todo）
   <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
     <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
       <a class="Header-link" href="https://domyson.github.io/">
-        <img class="octicon" height="32" width="32" src="">
+        <img class="octicon" height="32" width="32" src="/images/avatar.png">
       </a>
     </div>
     <div class="Header-item d-md-none">
@@ -136,7 +139,7 @@ Hybrid集成（todo）
 
     <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
       <a class="Header-link " href="https://domyson.github.io/">
-        <img class="octicon octicon-mark-github v-align-middle" height="32" width="32" src="">
+        <img class="octicon octicon-mark-github v-align-middle" height="32" width="32" src="/images/avatar.png">
       </a>
     </div>
     <div class="Header-item" style="margin-right: 0;">
@@ -177,7 +180,7 @@ Hybrid集成（todo）
                   </span>
                   <span class="path-divider">/</span>
                   <strong class="css-truncate css-truncate-target mr-1" style="max-width: 410px">
-                    <a href="https://domyson.github.io/post/zen/0/">zen 客户端框架概述</a>
+                    <a href="https://domyson.github.io/post/zen/0/">Zen Gameplay Framework</a>
                   </strong>
                 </h1>
                 <div class="note m-0">
@@ -214,7 +217,7 @@ Hybrid集成（todo）
                         </div>
                       </div>
                     </details-menu>
-                      2695 Words
+                      1624 Words
                     
 
                   </div>
@@ -238,7 +241,7 @@ Hybrid集成（todo）
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="序">序</h1>
-<p><code>Zen</code> 是一个基于 Unity 引擎的<code>GamePlay</code>框架，脱离 <code>Monobehaviour</code> 开发，致力简化开发流程。内部提供了一个<code>伪ECS</code>的上层抽象来开发它，但事实上你并不一定需要使用这个<code>ECS</code>，你也可以使用自定义的上层，比如自己实现像<code>MVCC</code>，或者是<code>MVC</code>的上层封装。让开发聚焦在游戏玩法而非一些底层架构上。Zen有两重含义，一可以实现任意类型的游戏，二可以在任意地方调动，而非需要定义一个字段保存访问索引。</p>
+<p><code>Zen</code> 是一个基于 Unity 引擎的<code>GamePlay</code>框架，脱离 <code>Monobehaviour</code> 开发，致力简化开发流程。内部提供了一个类<code>ECS</code>的架构满足开发，你也可以使用自定义的上层，比如自己实现像<code>MVCC</code>，或者是<code>MVC</code>的上层封装。让开发聚焦在游戏玩法而非一些底层架构上。</p>
 <blockquote>
 <p>Zen的一些设计思想不算是纯粹的<code>OOP</code>，它有ECS的概念，也有<code>type embedding</code>的概念，而且设计概念大部分是参考面过过程和内嵌的设计思想，所以理解曲线会比较困难</p>
 </blockquote>
@@ -254,13 +257,10 @@ Hybrid集成（todo）
 <p>模块化，<code>Zen</code>的一大特色，以像<code>C library</code>的方式来组织模块，让模块之间可以互相调用，并且可以互相替换，让开发者可以自由的去选择模块的约束。选择何种内置模块，或者是自定义模块由开发者决定，这也是使用 <code>Zen</code> 唯一的约束，你的模块可以是框架，也可以是<code>Module</code>。</p>
 </li>
 <li>
-<p>简单化，<code>Zen</code> 本身只提最必要的一些基础组件，你可以重新实现，而并非是必要的，就是这么随意，就像它的名字一样。</p>
+<p>简单化，<code>Zen</code> 本身只提最必要的一些基础组件，你可以重新实现，而并非是必要的</p>
 </li>
 <li>
 <p>自由化，游戏开发是自由的，是创造性的，<code>Zen</code> 不会约束你干什么，你只需要关注你的想法，怎么做取决于你的点子。</p>
-</li>
-<li>
-<p>去屎山，一旦使用<code>Zen</code>的<code>Module</code>约束，那么它一定是强类型约束，这么做的目的是让业务不容易形成屎山，避免屎上添粪的情况出现（我所在的一些项目就是这样，后期持续性优化，由于业务量巨大，实难以支撑）</p>
 </li>
 <li>
 <p>非文档约束性组件控制器绑定，面向对象的模式必然导致代码变得复杂，因使用内嵌代替<code>OOP</code>，但显然C#做不到，需要额外的封装，但过于麻烦不符合<code>Zen</code>的设计哲学，故通过静态泛型约束实现。</p>
@@ -269,84 +269,63 @@ Hybrid集成（todo）
 <p>无任何反射调度，提高代码的运行速度。</p>
 </li>
 <li>
-<p><code>Hybrid</code>集成（todo）</p>
+<p>高度继承的构建管线，非常完善且易使用基建设计（配置，资源，本地化，网络等）</p>
+</li>
+<li>
+<p><code>ZenRpc</code>现在可用了，无关乎网络，无缝与 <a href="https://domyson.github.io/">skynet-go</a></p>
 </li>
 </ol>
+<blockquote>
+<p><code>Zen</code>不鼓励继承，其内部设计也是符合此规范，所以整个拓扑架构更平整</p>
+</blockquote>
 <h1 id="应用案例">应用案例</h1>
 <blockquote>
-<p>就线上项目而言，并没有完全通道<code>Zen</code>的全部内容（都是某一些<code>Component</code>做了适配），因为它确实有一些思维上的理解成本，就我个人使用<code>Zen</code>开发过三款独立项目（，一款Roguelike，一款塔防，一款农场经营，这三款项目都使用了<code>Zen</code>框架，完成大部分核心内容只花费了一个月不到的时间，从中也调整过需要设计上的变动，是为了更好的适应游戏开发。原计划是这三款项目的将会上架<code>Steam</code>，但受限于美术资源，可能开发周期会被拉长。</p>
+<p>它确实有一些思维上的理解成本，就我个人使用<code>Zen</code>开发过三款独立项目（，一款Roguelike，一款塔防，一款农场经营，这三款项目都使用了<code>Zen</code>框架，完成大部分核心内容只花费了一个月不到的时间，从中也调整过需要设计上的变动，是为了更好的适应游戏开发。原计划是这三款项目的将会上架<code>Steam</code>，但受限于美术资源，可能开发周期会被拉长。</p>
 </blockquote>
 <blockquote>
 <p><code>Zen</code>是一个持续迭代的框架，随着后期一些理解和学习也会增删一些内容，也有可能会断更（或许会在断更前开源吧）。</p>
 </blockquote>
-<h2 id="gamecomponent">GameComponent</h2>
-<p><code>GameComponent</code> 它用于执行游戏运行中的实际逻辑，约束了创建和销毁和执行的方式，它可以拥有数据，也可以拥有逻辑，并且它是泛型全局唯一的，如<code>TimeComponent</code>，<code>NetPollComponent</code>,<code>EnityManager</code>等，它表示一系列相似功能的集合实现。 而且它的每一个类型实现都是全局唯一，除非手动卸载，它的生命周期等同于全局。外部可以直接通过<code>CreateOrGetGameComponent&lt;T&gt;()</code>获取即可,里面所有方法都会由<code>GameEntry</code>负责调度，不需要手动调用，所以内建模块默认行为是只有逻辑。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="p">...</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// Define a component that satisfies the Zen specification</span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">CustomComponent</span><span class="p">:</span><span class="n">GameComponent</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">OnCtor</span><span class="p">(</span><span class="kt">object</span> <span class="n">userdata</span><span class="p">)</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">OnDestroy</span><span class="p">()</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">OnEnable</span><span class="p">()</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">OnDisable</span><span class="p">()</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">OnUpdate</span><span class="p">(</span><span class="kt">float</span> <span class="n">delta</span><span class="p">,</span><span class="kt">float</span> <span class="n">unscaleDelta</span><span class="p">)</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">OnSettingUpdate</span><span class="p">(){}</span>
-</span></span><span class="line"><span class="cl"><span class="p">...</span>
-</span></span></code></pre></div><h2 id="gamecontroller">GameController</h2>
-<p><code>GameController</code> 需要注意的是它是基于内嵌编程思想的设计，用于定制<code>GameComponent</code> 的默认行为逻辑（如果要求的话）, 它可以动态开关，动态修改，它被设计成定义一个方法集，所以尽量不要带有任何数据对象，当然也可以带，不带的好处是为了复用用一个<code>Controller</code> 的时候，可以避免数据对象被重复创建，而带来的性能消耗。它在<code>Runtime</code>时根据不同的策略而产生不同的效果。 当然若本身连个<code>GameComponent</code>直接是父子或者是有相似度的关系（如不同种类的实体组，但数据结构以及逻辑相似）亦可复用。</p>
-<ol>
-<li>
-<p>一个<code>GameController</code>可以绑定多个<code>GameComponent</code>,通过静态泛型约束避免非相关<code>Controller</code>调用<code>Component</code>出现不可预期的错误 （可在编译时期确定）。反之亦然</p>
-</li>
-<li>
-<p>无需关注初始化时机，它会在必要的时候被初始化，因<code>Controller</code>不能比<code>Component</code>的初始化时机更早,若此时<code>Component</code>没有被创建的化，将会由框架自动创建并绑定。符合Zen的设计哲学</p>
-</li>
-<li>
-<p>通过 <code>GameController&lt;Com&gt;.Get&lt;Controller&gt;</code> 辅助调用，提供更简单的访问，绕过<code>OOP</code>为了得到其内嵌类型方法或数据而需要的额外包装的问题，减少了重复字段引用定义的问题，通过Runtime的类型系统其本身调用开销几乎等同于访问。</p>
-</li>
-</ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="p">...</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// CustomController It is bound to the component it belongs to</span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">CustomController</span><span class="p">:</span><span class="n">GameController</span><span class="p">&lt;</span><span class="n">CustomComponent</span><span class="p">&gt;{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// some code...</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
+<h2 id="isystem">ISystem</h2>
+<p><code>System</code> 它用于执行游戏运行中的实际逻辑，约束了创建和销毁和执行的方式，它可以拥有数据，也可以拥有逻辑，并且它是泛型全局唯一的，如<code>TimeComponent</code>，<code>NetPollComponent</code>,<code>EnityManager</code>等，它表示一系列相似功能的集合实现。 而且它的每一个类型实现都是全局唯一，除非手动卸载，它的生命周期等同于全局。外部可以直接通过<code>CreateOrGetGameComponent&lt;T&gt;()</code>获取即可,里面所有方法都会由<code>GameEntry</code>负责调度，不需要手动调用，所以内建模块默认行为是只有逻辑。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// Define a Zen framwork System</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">CustomSystem</span><span class="p">:</span><span class="n">ISystem</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// Gets the specified instance through a constraint</span>
-</span></span><span class="line"><span class="cl">    <span class="n">GameControllerGetter</span><span class="p">&lt;</span><span class="n">CustomComponent</span><span class="p">,</span><span class="n">CustomController</span><span class="p">&gt;.</span><span class="n">Owner</span><span class="p">;</span> <span class="c1">// call custom controller. Owner == CustomComponent</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">...</span>
-</span></span></code></pre></div><h2 id="settings">Settings</h2>
-<p><code>GameSetting</code> 定义了<code>GameComponent</code>的一些外部设置行为，它只能同时被一个<code>GameComponent</code>持有，但是 <code>GameComponent</code>又可以拥有多个<code>GameSettings</code>,当它数据被修改时会自动调用 <code>OnSettingUpdate</code>方法告知数据已刷新。同理，<code>GameController</code>也是可以访问到这个数据的.</p>
-<p>尤其需要注意的是，<code>GameSettings</code>只能被定义为结构体，为了防止外部持有引用而绕过 <code>Zen</code>的机制出现意想不到的行为。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// constrained as struct</span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">struct</span> <span class="nc">CustomGameSettings</span><span class="p">:</span><span class="n">GameSettings</span><span class="p">&lt;</span><span class="n">CustomComponent</span><span class="p">&gt;{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">ISystem</span><span class="p">.</span><span class="n">Order</span> <span class="p">=&gt;</span> <span class="m">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">ISystem</span><span class="p">.</span><span class="n">OnCtor</span><span class="p">(</span><span class="kt">object</span> <span class="n">userdata</span> <span class="p">=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// do something</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">ISystem</span><span class="p">.</span><span class="n">OnShutdown</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// do something</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h1 id="enitymanager">EnityManager</h1>
-<p><code>EntityManager</code> 是所有可见的<code>Visable</code>物体的创建入口,它提供了一类物体的构造模板（这个概念是抽象的,用代码的话来说它们存在共同特性）。
-本身按类型区分比较抽象，大多数游戏类型它们的<code>Entity</code>结构几乎一样（就算有差异也可以做平），按组分或者按照关卡分都是可以的，甚至是一组，这就是开发这需要考虑的维护性问题了。</p>
-<p><code>EntityManager</code> 本身是一个抽象类，有一些特定方法需要实现，如对象回收策略和创建策略等。 后面有专题文章介绍。</p>
+</span></span></code></pre></div><h2 id="builtin">Builtin</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> 
+</span></span></code></pre></div><h1 id="enitiy">Enitiy</h1>
+<p><code>Entity</code>需要着重介绍下，它不完全是<code>ECS</code>中的概念，而不全是<code>GameObject</code>,我们可以认为任何单元都是<code>Entity</code> 如网络简介，甚至是玩家身上的装备数据。具体看如何划分</p>
 <h1 id="hybridclr">HybridCLR</h1>
 <p>暂时还未接入，考虑到版本更新的频率现阶段接入不太现实，而且最近传闻ios将会开放，后续直接DLL的方式也未尝不可。</p>
 <h1 id="目录">目录</h1>
-<p><a href="/post/Zen/1">ECS</a></p>
-<p><a href="/post/Zen/2">Resource</a></p>
-<p><a href="/post/Zen/3">Datatable</a></p>
-<p><a href="/post/Zen/4">NetPollComponent</a></p>
-<p><a href="/post/Zen/5">EntityManager</a></p>
-<p><a href="/post/Zen/6">ReGoap</a></p>
-<!-- raw HTML omitted --></article>
+<p><a href="/post/zen/1">ECS</a></p>
+<p><a href="/post/zen/2">Resource</a></p>
+<p><a href="/post/zen/3">Datatable</a></p>
+<p><a href="/post/zen/4">NetPollComponent</a></p>
+<p><a href="/post/zen/5">EntityManager</a></p>
+<p><a href="/post/zen/6">ReGoap</a></p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
+     crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7934154300350596"
+     data-ad-slot="3469296166"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></article>
               </div>
             </div>
           </div>
