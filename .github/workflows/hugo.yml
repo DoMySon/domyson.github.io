@@ -28,6 +28,7 @@ jobs:
 
       - name: Build
         run: |
+          git clone https://github.com/DoMySon/github-style.git ./themes/github-style
           cp ./adscene.html ./themes/github-style/layouts/shortcodes/adsense-footer.html
           cp ./avatar.png ./docs/images/avatar.png
           hugo -d docs

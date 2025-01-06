@@ -150,6 +150,8 @@ message AddressBook {
 }
 ```
 
+> 后续可能考虑直接读取`protobuf`,免费的提示和高亮的插件 :)
+
 
 ## Lua 序列化
 

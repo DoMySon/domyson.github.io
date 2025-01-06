@@ -19,9 +19,10 @@ email = "cnmlgbbg@hotmail.com"
 url = "https://domyson.github.io"
 keywords = "computer tech"
 rss = true
-lastmod = true
+lastmod = false
 userStatusEmoji = "😀"
 favicon = "/images/avatar.png"
+avatar = "/images/avatar.png"
 location = "China"
 
 GtmId = "G-V23G8H27BQ"

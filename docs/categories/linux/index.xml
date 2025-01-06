@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on 朝花夕拾</title>
+    <link>https://domyson.github.io/categories/linux/</link>
+    <description>Recent content in Linux on 朝花夕拾</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 06 Jan 2025 02:10:11 +0000</lastBuildDate>
+    <atom:link href="https://domyson.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>iptables and ipvs</title>
+      <link>https://domyson.github.io/post/linux/iptables/</link>
+      <pubDate>Sat, 19 Nov 2022 00:00:00 +0000</pubDate>
+      <guid>https://domyson.github.io/post/linux/iptables/</guid>
+      <description>&lt;h1 id=&#34;iptables&#34;&gt;iptables&lt;/h1&gt;&#xA;&lt;p&gt;&lt;code&gt;iptables&lt;/code&gt; 基于 &lt;code&gt;netfilter&lt;/code&gt; 采用一条条规则链表，时间复杂度为O(n)，最主要的是 &lt;code&gt;iptables&lt;/code&gt; 专为防火墙设计&lt;/p&gt;&#xA;&lt;h1 id=&#34;ipvs&#34;&gt;ipvs&lt;/h1&gt;&#xA;&lt;p&gt;&lt;code&gt;ipvs&lt;/code&gt; 同样基于 &lt;code&gt;netfilter&lt;/code&gt;，但底层采用的是hash表，索引复杂度为O(1)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>tcp协议</title>
+      <link>https://domyson.github.io/post/linux/tcp/</link>
+      <pubDate>Thu, 16 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>https://domyson.github.io/post/linux/tcp/</guid>
+      <description>&lt;h1 id=&#34;什么是-tcp&#34;&gt;什么是 Tcp&lt;/h1&gt;&#xA;&lt;h1 id=&#34;三次握手&#34;&gt;三次握手&lt;/h1&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;tcp client发送连接请求报文，报文首部同步标记位 SYN=1 同时随机序列号 seq=x，此时 tcp client 进入 &lt;code&gt;SYNC-SENT&lt;/code&gt; 状态的&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;tcp server 若同意连接则确认报文为 &lt;code&gt;ACK=1,SYN=1,ASK=x+1,seq=y&lt;/code&gt; 返回给客户端，并进入 &lt;code&gt;SYNC_RCVD&lt;/code&gt; 状态&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;tcp client 收到回复并确认 ACK 是否为1，seq 是否为 x+1,并返回报文 &lt;code&gt;ACK=1,ASK=y+1&lt;/code&gt;,此时双方进入 &lt;code&gt;ESTABLISHED&lt;/code&gt; 状态&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h1 id=&#34;四次挥手&#34;&gt;四次挥手&lt;/h1&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;主动方发送报文&lt;code&gt;FIN=1,seq=last+1&lt;/code&gt;并进入&lt;code&gt;FIN_WAIT_1&lt;/code&gt;,此时报文不能携带任何数据&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;被动方收到连接释放报文，并发送确认报文 &lt;code&gt;ACK=1,ack=u+1,seq=v&lt;/code&gt; ，并进入 &lt;code&gt;CLOSE_WAIT&lt;/code&gt;状态，但此时如果缓冲区存在未发送数据，那么需要继续发送（这也是 CLOSE_WAIT 持续的时长），主动方收到此条报文后进入 &lt;code&gt;FIN_WAIT_2&lt;/code&gt;,因为还需要处理未发送数据&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;上一步执行完毕，被动方发送 &lt;code&gt;FIN=1,ack=w+1,seq=u+1&lt;/code&gt; 并进入 &lt;code&gt;LAST-ACK&lt;/code&gt; 状态，而主动方收到此条报文后进入 &lt;code&gt;TIME_WAIT&lt;/code&gt; （2msl maximum segment life），之后才会进入 &lt;code&gt;CLOSED&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;在主动方进入 &lt;code&gt;CLOSED&lt;/code&gt; 之前，需要发送报文确认退出&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h1 id=&#34;2msl&#34;&gt;2MSL&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;1MSL保证主动方最后的 ACK 能到达对端，1MSL 确保 ACK 重传&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h1 id=&#34;如何确保可靠性&#34;&gt;如何确保可靠性&lt;/h1&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;三次握手，四次挥手确保连接和断开的可靠&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;记录了哪些数据被接受，哪些未接收，序列号保证了消息的顺序性&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;ACK应答，超时重传，失序重传，丢弃重复数据，流量控制，拥塞控制&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h1 id=&#34;重传机制&#34;&gt;重传机制&lt;/h1&gt;&#xA;&lt;h2 id=&#34;rttrto&#34;&gt;RTT，RTO&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Round-Trip Time 消息往返时间  Retransmission Timeout 超时重传&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>process</title>
+      <link>https://domyson.github.io/post/linux/process/</link>
+      <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>https://domyson.github.io/post/linux/process/</guid>
+      <description>&lt;h1 id=&#34;进程状态&#34;&gt;进程状态&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;TASK_RUNNING&lt;/li&gt;&#xA;&lt;li&gt;TASK_INTERRUPTIBLE&lt;/li&gt;&#xA;&lt;li&gt;TASK_UNINTERRUPTIBLE&lt;/li&gt;&#xA;&lt;li&gt;TASK_TRACED&lt;/li&gt;&#xA;&lt;li&gt;TASK_STOPPED&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>I/O</title>
+      <link>https://domyson.github.io/post/linux/io/</link>
+      <pubDate>Mon, 25 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>https://domyson.github.io/post/linux/io/</guid>
+      <description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;数据的读取分为:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;等待数据准备&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;等待内核拷贝至用户空间&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;基本模型矩阵&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th style=&#34;text-align: center&#34;&gt;&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: center&#34;&gt;阻塞&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: center&#34;&gt;非阻塞&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;同步&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;&lt;code&gt;Read/Write&lt;/code&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;&lt;code&gt;Read\Write(O_NONBLOCK)&lt;/code&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;异步&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;&lt;code&gt;I/O multiplexing(select/poll)&lt;/code&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;&lt;code&gt;AIO&lt;/code&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>

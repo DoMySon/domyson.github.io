@@ -27,4 +27,4 @@ build:
 
 	@echo -n "google.com, pub-7934154300350596, DIRECT, f08c47fec0942fa0" > ./docs/ads.txt
 
-	# @cp ./images/avatar.png ./docs/images/avatar.png
+	#@cp ./images/avatar.png ./docs/images/avatar.png

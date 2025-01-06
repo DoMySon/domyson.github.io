@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GC on 朝花夕拾</title>
+    <link>https://domyson.github.io/tags/gc/</link>
+    <description>Recent content in GC on 朝花夕拾</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 06 Jan 2025 02:10:11 +0000</lastBuildDate>
+    <atom:link href="https://domyson.github.io/tags/gc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go GC分析</title>
+      <link>https://domyson.github.io/post/lang/gc/</link>
+      <pubDate>Sat, 26 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>https://domyson.github.io/post/lang/gc/</guid>
+      <description>&lt;h1 id=&#34;如何启用gc跟踪&#34;&gt;如何启用GC跟踪&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;GODEBUG=gctrace=1 go run *.go&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;其中 &lt;code&gt;gctrace=1&lt;/code&gt; 表示只针对这个进程进行GC追踪&lt;/p&gt;&#xA;&lt;h1 id=&#34;标记流程&#34;&gt;标记流程&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;go采用三色标记法，主要是为了提高并发度，这样扫描过程可以拆分为多个阶段，而不用一次扫描全部&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;黑 根节点扫描完毕，子节点也扫描完毕&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;灰 根节点扫描完毕，子节点未扫描&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;白 未扫描&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;扫描是从 .bss .data goroutine栈开始扫描，最终遍历整个堆上的对象树&lt;/p&gt;&#xA;&lt;h2 id=&#34;标记-mark&#34;&gt;标记 mark&lt;/h2&gt;&#xA;&lt;p&gt;标记过程是一个广度优先的遍历过程，扫描节点，将节点的子节点推送到任务队列中，然后递归扫描子叶节点，直到所有工作队列被排空&lt;/p&gt;&#xA;&lt;p&gt;mark阶段会将白色对象标记，并推入队列中变为灰色&lt;/p&gt;&#xA;&lt;h1 id=&#34;memory-barrier&#34;&gt;memory barrier&lt;/h1&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;保障了代码描述中对内存的操作顺序，&lt;code&gt;即不会在编译期被编译器进行调整，也不会在运行时被CPU的乱序执行所打乱&lt;/code&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;write-barrier&#34;&gt;write barrier&lt;/h2&gt;&#xA;&lt;p&gt;在应用进入 GC 标记阶段前的 stw 阶段，会将全局变量 runtime.writeBarrier.enabled 修改为 true，这时所有的堆上指针修改操作在修改之前便会额外调用 runtime.gcWriteBarrier&lt;/p&gt;&#xA;&lt;p&gt;由于GC和Go主程序并发执行，所以必须要在扫描时监控内存可能出现的状态改变，所以需要写屏障，所以需要暂停GO主程序（STW）&lt;/p&gt;&#xA;&lt;h2 id=&#34;hybrid-wirte-barrier-after-go18&#34;&gt;hybrid wirte barrier (after go1.8)&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;改方式的基本思想是：对正在被覆盖的对象进行着色，且如果当时栈未扫描完成，则同样对指针进行着色&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h1 id=&#34;gc流程&#34;&gt;GC流程&lt;/h1&gt;&#xA;&lt;p&gt;程序启动会为每个P分配一个 mark worker 来标记内存，负责为进入STW做前期工作&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;起初认为所有 object 都被认定为白色&lt;/li&gt;&#xA;&lt;li&gt;但栈，堆和全局变量的object被标记为灰色&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;GC会将灰色object标记为黑色，将灰色object所包含的所有指针所指向的地址都标记为灰色，递归这两个步骤，最终对象非黑即白，其中白色object即未被引用且可以被回收，如果object标记为no scan，则递归结束，标记为黑色&lt;/p&gt;&#xA;&lt;p&gt;todo &lt;a href=&#34;https://blog.csdn.net/asd1126163471/article/details/124113816&#34;&gt;https://blog.csdn.net/asd1126163471/article/details/124113816&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
