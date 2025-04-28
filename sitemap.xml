@@ -59,12 +59,6 @@
     <loc>https://domyson.github.io/post/zen/0/</loc>
     <lastmod>2023-04-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://domyson.github.io/post/linux/iptables/</loc>
-    <lastmod>2022-11-19T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://domyson.github.io/categories/linux/</loc>
-    <lastmod>2022-11-19T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://domyson.github.io/categories/kproto/</loc>
     <lastmod>2022-09-21T00:00:00+00:00</lastmod>
   </url><url>
@@ -107,26 +101,8 @@
     <loc>https://domyson.github.io/post/lang/gc/</loc>
     <lastmod>2022-02-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://domyson.github.io/tags/tcp/</loc>
-    <lastmod>2021-09-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://domyson.github.io/post/linux/tcp/</loc>
-    <lastmod>2021-09-16T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://domyson.github.io/post/lang/unsafe/</loc>
     <lastmod>2021-08-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://domyson.github.io/categories/net/</loc>
-    <lastmod>2020-02-09T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://domyson.github.io/post/linux/tls/</loc>
-    <lastmod>2020-02-09T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://domyson.github.io/tags/tls/</loc>
-    <lastmod>2020-02-09T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://domyson.github.io/post/linux/process/</loc>
-    <lastmod>2019-12-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://domyson.github.io/post/protobuf/</loc>
     <lastmod>2019-05-13T00:00:00+00:00</lastmod>
@@ -142,14 +118,6 @@
   </url><url>
     <loc>https://domyson.github.io/tags/markdown/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://domyson.github.io/post/linux/io/</loc>
-    <lastmod>2019-02-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://domyson.github.io/tags/i/o/</loc>
-    <lastmod>2019-02-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://domyson.github.io/post/linux/file/</loc>
   </url><url>
     <loc>https://domyson.github.io/readme/</loc>
   </url>
