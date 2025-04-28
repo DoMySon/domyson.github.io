@@ -6,8 +6,15 @@
     <description>Recent content in Categories on 朝花夕拾</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 30 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 14 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://domyson.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Etc</title>
+      <link>https://domyson.github.io/categories/etc/</link>
+      <pubDate>Mon, 14 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://domyson.github.io/categories/etc/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Skynet</title>
       <link>https://domyson.github.io/categories/skynet/</link>
@@ -37,6 +44,13 @@
       <description></description>
     </item>
     <item>
+      <title>Kproto</title>
+      <link>https://domyson.github.io/categories/kproto/</link>
+      <pubDate>Wed, 21 Sep 2022 00:00:00 +0000</pubDate>
+      <guid>https://domyson.github.io/categories/kproto/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Go</title>
       <link>https://domyson.github.io/categories/go/</link>
       <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
@@ -44,31 +58,10 @@
       <description></description>
     </item>
     <item>
-      <title>Mysql</title>
-      <link>https://domyson.github.io/categories/mysql/</link>
-      <pubDate>Wed, 06 Apr 2022 00:00:00 +0000</pubDate>
-      <guid>https://domyson.github.io/categories/mysql/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Net</title>
       <link>https://domyson.github.io/categories/net/</link>
       <pubDate>Sun, 09 Feb 2020 00:00:00 +0000</pubDate>
       <guid>https://domyson.github.io/categories/net/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Others</title>
-      <link>https://domyson.github.io/categories/others/</link>
-      <pubDate>Mon, 13 May 2019 00:00:00 +0000</pubDate>
-      <guid>https://domyson.github.io/categories/others/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Cloud Native</title>
-      <link>https://domyson.github.io/categories/cloud-native/</link>
-      <pubDate>Tue, 12 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>https://domyson.github.io/categories/cloud-native/</guid>
       <description></description>
     </item>
   </channel>
