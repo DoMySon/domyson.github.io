@@ -2,7 +2,7 @@
 title: kproto 编码协议
 date: 2022-09-21
 tags: ['']
-categories: ['']
+categories: ['kproto']
 description: 
 pin: true
 toc: true

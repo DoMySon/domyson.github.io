@@ -2,7 +2,7 @@
 title: Markdown
 date: 2019-03-05
 tags: ["Markdown"]
-categories: ["others"]
+categories: ["etc"]
 description: 文本标记
 toc: true
 draft: false

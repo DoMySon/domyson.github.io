@@ -1,7 +1,7 @@
 ---
 title: 个人日记
 date: 2025-04-14
-categories: ['']
+categories: ['etc']
 description: 
 toc: true
 draft: false
