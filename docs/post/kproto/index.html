@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V23G8H27BQ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V23G8H27BQ');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
@@ -21,7 +30,7 @@
 
     
     <meta name="description"
-  content="前言 其实在cobweb之初就设计了一种编码协议(kproto)，用于内部消息的编码,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护， 而后期在研发的时候，发现需要与多种语言交互，显然 json,xml 不是一个很好的选择，而 protobuf 对弱类型语言支持不友好。
+  content="前言 其实在cobweb之初就设计了一种编码协议(kproto)，用于内部服务消息之间的编码,但因为项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护， 而后期在研发的时候，发现需要与多种语言交互，显然 json,xml 不是一个很好的选择，而 protobuf 对弱类型语言支持不友好。所以诞生了它 （kproto,kpb ）
 Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd64 format compress rate encode rate decode rate json std 0% 0%( 213.8 ns/op) 0%(1204ns/op) proto v3 -40% -51%(98.36 ns/op) -84%(190.1ns/op) kproto -40% -76% (65.21 ns/op) -95%(62.18ns/op) " />
 <meta name="keywords"
   content='computer tech' />
@@ -32,7 +41,7 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="kproto 编码协议 - 朝花夕拾" />
 <meta name="twitter:description"
-  content="前言 其实在cobweb之初就设计了一种编码协议(kproto)，用于内部消息的编码,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护， 而后期在研发的时候，发现需要与多种语言交互，显然 json,xml 不是一个很好的选择，而 protobuf 对弱类型语言支持不友好。
+  content="前言 其实在cobweb之初就设计了一种编码协议(kproto)，用于内部服务消息之间的编码,但因为项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护， 而后期在研发的时候，发现需要与多种语言交互，显然 json,xml 不是一个很好的选择，而 protobuf 对弱类型语言支持不友好。所以诞生了它 （kproto,kpb ）
 Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd64 format compress rate encode rate decode rate json std 0% 0%( 213.8 ns/op) 0%(1204ns/op) proto v3 -40% -51%(98.36 ns/op) -84%(190.1ns/op) kproto -40% -76% (65.21 ns/op) -95%(62.18ns/op) " />
 <meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -43,7 +52,7 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
 <meta property="og:type" content="article" />
 <meta property="og:title" content="kproto 编码协议 - 朝花夕拾">
 <meta property="og:description"
-  content="前言 其实在cobweb之初就设计了一种编码协议(kproto)，用于内部消息的编码,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护， 而后期在研发的时候，发现需要与多种语言交互，显然 json,xml 不是一个很好的选择，而 protobuf 对弱类型语言支持不友好。
+  content="前言 其实在cobweb之初就设计了一种编码协议(kproto)，用于内部服务消息之间的编码,但因为项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护， 而后期在研发的时候，发现需要与多种语言交互，显然 json,xml 不是一个很好的选择，而 protobuf 对弱类型语言支持不友好。所以诞生了它 （kproto,kpb ）
 Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd64 format compress rate encode rate decode rate json std 0% 0%( 213.8 ns/op) 0%(1204ns/op) proto v3 -40% -51%(98.36 ns/op) -84%(190.1ns/op) kproto -40% -76% (65.21 ns/op) -95%(62.18ns/op) " />
 <meta property="og:url" content="https://domyson.github.io/post/kproto/" />
 <meta property="og:site_name" content="kproto 编码协议" />
@@ -184,7 +193,7 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
                         </div>
                       </div>
                     </details-menu>
-                      1544 Words
+                      1606 Words
                     
 
                   </div>
@@ -208,8 +217,8 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="前言">前言</h1>
-<p>其实在<code>cobweb</code>之初就设计了一种编码协议(kproto)，用于内部消息的编码,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护，
-而后期在研发的时候，发现需要与多种语言交互，显然 <code>json</code>,<code>xml</code> 不是一个很好的选择，而 <code>protobuf</code> 对弱类型语言支持不友好。</p>
+<p>其实在<code>cobweb</code>之初就设计了一种编码协议(kproto)，用于内部服务消息之间的编码,但因为项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护，
+而后期在研发的时候，发现需要与多种语言交互，显然 <code>json</code>,<code>xml</code> 不是一个很好的选择，而 <code>protobuf</code> 对弱类型语言支持不友好。所以诞生了它 （kproto,kpb ）</p>
 <h1 id="benchmark">Benchmark</h1>
 <ul>
 <li>cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz</li>
@@ -252,25 +261,22 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
 <p>快速，比<code>protobuf-v3</code> 基本高出 <code>20%</code>左右</p>
 </li>
 <li>
-<p>简单，文件生成方式不是必须的，也是动态设置</p>
+<p>简单，文件生成方式不是必须的，也可以是动态序列化的</p>
 </li>
 <li>
-<p>小体积， 基本编码后的二进制与<code>protobuf</code>持平</p>
+<p>小体积， 编码后的二进制体积与<code>protobuf</code>持平</p>
 </li>
 <li>
-<p>流式， 它可以直接读取任意字段而不需要解析出所有字段</p>
+<p>跳读， 它可以直接读取任意字段的值而不需要解析出所有字段 （主要是对于大结构，能快速检查数据是否符合预期）</p>
 </li>
 <li>
-<p>多语言支持 提供了完整的<code>golang</code>和<code>c</code>实现，额外的在go中提供了文件生成，而且在<code>skynet</code> 中也是默认编码协议，所以也对<code>Lua</code>提供了支持</p>
+<p>多语言支持 提供了<code>C,Go,C#,Lua</code>实现版本，而且在<code>skynet</code> 中也是默认协议，所以也对<code>Lua</code>提供了支持</p>
 </li>
 <li>
-<p>干净， 没有任何隐式内存分配，由外部指定分配器</p>
+<p>透明， 没有任何隐式内存分配，全由外部指定分配器，可以参考 <code>Zmalloc</code> 内存分配器这</p>
 </li>
 <li>
-<p>无冗余， 可以通过<code>sizeof</code>直接获取需要的内存大小，避免多余的内存浪费</p>
-</li>
-<li>
-<p>自带元数据，无需额外的信息</p>
+<p>自带元数据，无需额外存储的信息</p>
 </li>
 </ul>
 <h1 id="词法解析器">词法解析器</h1>
@@ -309,8 +315,7 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
 <li>
 <p>使用</p>
 <blockquote>
-<p>kproto 支持两种模式，其一类似<code>.proto</code>文件，定义模板，其二直接使用库进行解析,这里拿lua举例，其他语言类似</p>
-</blockquote>
+<p>kproto 支持两种模式，其一类似<code>.proto</code>文件，定义模板，其二直接使用库进行解析,这里拿lua举例，其他语言类似</p></blockquote>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">kproto</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s2">&#34;kproto&#34;</span><span class="p">)</span>  <span class="c1">-- 基于文件结构的生成</span>
 </span></span><span class="line"><span class="cl"><span class="kd">local</span> <span class="n">err</span> <span class="o">=</span> <span class="n">kproto.load</span><span class="p">(</span><span class="s2">&#34;file path or dir path&#34;</span><span class="p">)</span>  <span class="c1">-- 注意 此函数执行结果在当前节点是共享的，所以只需要加载一次，并返回一个错误（string）</span>
 </span></span><span class="line"><span class="cl"><span class="kr">if</span> <span class="n">err</span><span class="o">~=</span><span class="kc">nil</span> <span class="kr">then</span>
@@ -338,9 +343,11 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
 </span></span><span class="line"><span class="cl"><span class="kr">end</span><span class="p">)</span>
 </span></span></code></pre></div></li>
 <li>
-<p>kproto file</p>
+<p>kproto proto file</p>
 </li>
 </ol>
+<blockquote>
+<p>基本上算是<code>protobuf</code>的简化版本，不过后续考虑用<code>protobuf</code>算了，不然还得维护一套分析器</p></blockquote>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">package gen   // 影响到文件的scope
 </span></span><span class="line"><span class="cl">// 注释
 </span></span><span class="line"><span class="cl">
@@ -375,8 +382,7 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
 </span></span><span class="line"><span class="cl">    *Person person 
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></div><blockquote>
-<p>后续可能考虑直接读取<code>protobuf</code>,免费的提示和高亮的插件 :)</p>
-</blockquote>
+<p>后续可能考虑直接读取<code>protobuf</code>,免费的提示和高亮的插件 :)</p></blockquote>
 <h2 id="lua-序列化">Lua 序列化</h2>
 <ul>
 <li>
@@ -387,12 +393,10 @@ Benchmark cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz os: windows11 arch: amd6
 </li>
 </ul>
 <blockquote>
-<p>这里特别注明，<code>userdata</code>不支持仅仅是为了兼容节点通讯。因为它本质上一个8byte的整形(x64),而其他物理机或者进程的内存地址是不同的</p>
-</blockquote>
+<p>这里特别注明，<code>userdata</code>不支持仅仅是为了兼容节点通讯。因为它本质上一个8byte的整形(x64),而其他物理机或者进程的内存地址是不同的</p></blockquote>
 <h1 id="excel-数据表支持">excel 数据表支持</h1>
 <blockquote>
-<p>惰性加载，数据表索引，二进制编码</p>
-</blockquote>
+<p>惰性加载，数据表索引，二进制编码</p></blockquote>
 <h1 id="未来将支持">未来将支持</h1>
 <ul>
 <li>

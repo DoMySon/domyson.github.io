@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V23G8H27BQ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V23G8H27BQ');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
@@ -211,13 +220,13 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Pool</span> <span class="kd">struct</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="nx">noCopy</span> <span class="nx">noCopy</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="nx">local</span>     <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span> <span class="c1">// P 本地池，固定尺寸，实际结构 [P]poolLocal，类似 void* 并附加长度构成了一个数组
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">localSize</span> <span class="kt">uintptr</span>        <span class="c1">// size of the local array
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">	<span class="nx">victim</span>     <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span> <span class="c1">// local from previous cycle
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">victimSize</span> <span class="kt">uintptr</span>        <span class="c1">// size of victims array
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">	<span class="nx">New</span> <span class="kd">func</span><span class="p">()</span> <span class="nx">any</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">local</span>     <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span> <span class="c1">// P 本地池，固定尺寸，实际结构 [P]poolLocal，类似 void* 并附加长度构成了一个数组</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">localSize</span> <span class="kt">uintptr</span>        <span class="c1">// size of the local array</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">victim</span>     <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span> <span class="c1">// local from previous cycle</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">victimSize</span> <span class="kt">uintptr</span>        <span class="c1">// size of victims array</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">New</span> <span class="kd">func</span><span class="p">()</span> <span class="kt">any</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">poolChain</span> <span class="kd">struct</span><span class="p">{</span>
@@ -226,8 +235,8 @@
 </span></span><span class="line"><span class="cl">    <span class="nx">tail</span> <span class="o">*</span><span class="nx">poolChainElt</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">poolChainElt</span> <span class="kd">struct</span><span class="p">{</span> <span class="c1">// 一个双向链表
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">poolDequeue</span>
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">poolChainElt</span> <span class="kd">struct</span><span class="p">{</span> <span class="c1">// 一个双向链表</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">poolDequeue</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nx">next</span><span class="p">,</span><span class="nx">prev</span> <span class="o">*</span><span class="nx">poolChainElt</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -238,72 +247,72 @@
 </span></span><span class="line"><span class="cl">    <span class="nx">vals</span> <span class="p">[]</span><span class="nx">eface</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">eface</span> <span class="kd">struct</span><span class="p">{</span>  <span class="c1">// 数据的真实内存分配，包括一个类型描述和实际数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">typ</span><span class="p">,</span><span class="nx">val</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span>
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">eface</span> <span class="kd">struct</span><span class="p">{</span>  <span class="c1">// 数据的真实内存分配，包括一个类型描述和实际数据</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">typ</span><span class="p">,</span><span class="nx">val</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">poolLocalInternal</span> <span class="kd">struct</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">private</span> <span class="nx">any</span> <span class="c1">// p的私有缓冲区
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="nx">shared</span> <span class="nx">poolChain</span> <span class="c1">// 公共缓冲区
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">private</span> <span class="kt">any</span> <span class="c1">// p的私有缓冲区</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">shared</span> <span class="nx">poolChain</span> <span class="c1">// 公共缓冲区</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">poolLocal</span> <span class="kd">struct</span><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">poolLocalInternal</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nx">pad</span> <span class="p">[</span><span class="mi">128</span><span class="o">-</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Sizeof</span><span class="p">(</span><span class="nx">poolLocalInternal</span><span class="p">{})</span><span class="o">%</span><span class="mi">128</span><span class="p">]</span><span class="kt">byte</span>  <span class="c1">// 应该是补位，可以确保刚好占满一个 cache line 加速访问
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">pad</span> <span class="p">[</span><span class="mi">128</span><span class="o">-</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Sizeof</span><span class="p">(</span><span class="nx">poolLocalInternal</span><span class="p">{})</span><span class="o">%</span><span class="mi">128</span><span class="p">]</span><span class="kt">byte</span>  <span class="c1">// 应该是补位，可以确保刚好占满一个 cache line 加速访问</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h1 id="申请释放">申请释放</h1>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">Pool</span><span class="p">)</span> <span class="nf">pin</span><span class="p">()</span> <span class="p">(</span><span class="o">*</span><span class="nx">poolLocal</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">pid</span> <span class="o">:=</span> <span class="nf">runtime_procPin</span><span class="p">()</span> <span class="c1">// 将当前G和P绑定，并返回P的id
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">s</span> <span class="o">:=</span> <span class="nf">runtime_LoadAcquintptr</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">p</span><span class="p">.</span><span class="nx">localSize</span><span class="p">)</span> <span class="c1">// load-acquire
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">l</span> <span class="o">:=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">local</span>                              <span class="c1">// load-consume
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">pid</span><span class="p">)</span> <span class="p">&lt;</span> <span class="nx">s</span> <span class="p">{</span>  <span class="c1">// 主要是P的数量可能会变动 重新找一个
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">return</span> <span class="nf">indexLocal</span><span class="p">(</span><span class="nx">l</span><span class="p">,</span> <span class="nx">pid</span><span class="p">),</span> <span class="nx">pid</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">pid</span> <span class="o">:=</span> <span class="nf">runtime_procPin</span><span class="p">()</span> <span class="c1">// 将当前G和P绑定，并返回P的id</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">s</span> <span class="o">:=</span> <span class="nf">runtime_LoadAcquintptr</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">p</span><span class="p">.</span><span class="nx">localSize</span><span class="p">)</span> <span class="c1">// load-acquire</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">l</span> <span class="o">:=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">local</span>                              <span class="c1">// load-consume</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">pid</span><span class="p">)</span> <span class="p">&lt;</span> <span class="nx">s</span> <span class="p">{</span>  <span class="c1">// 主要是P的数量可能会变动 重新找一个</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nf">indexLocal</span><span class="p">(</span><span class="nx">l</span><span class="p">,</span> <span class="nx">pid</span><span class="p">),</span> <span class="nx">pid</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">p</span><span class="p">.</span><span class="nf">pinSlow</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">Pool</span><span class="p">)</span> <span class="nf">pinSlow</span><span class="p">()</span> <span class="p">(</span><span class="o">*</span><span class="nx">poolLocal</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nf">runtime_procUnpin</span><span class="p">()</span>  <span class="c1">// 禁止 P 抢占，否则当前G会被放回本地或者全局队列，当时之后G不一定在现在这个P上
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">allPoolsMu</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">runtime_procUnpin</span><span class="p">()</span>  <span class="c1">// 禁止 P 抢占，否则当前G会被放回本地或者全局队列，当时之后G不一定在现在这个P上</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">allPoolsMu</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nx">allPoolsMu</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">	<span class="nx">pid</span> <span class="o">:=</span> <span class="nf">runtime_procPin</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">	<span class="nx">s</span> <span class="o">:=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">localSize</span>
 </span></span><span class="line"><span class="cl">	<span class="nx">l</span> <span class="o">:=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">local</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">pid</span><span class="p">)</span> <span class="p">&lt;</span> <span class="nx">s</span> <span class="p">{</span> <span class="c1">// double check
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">return</span> <span class="nf">indexLocal</span><span class="p">(</span><span class="nx">l</span><span class="p">,</span> <span class="nx">pid</span><span class="p">),</span> <span class="nx">pid</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">pid</span><span class="p">)</span> <span class="p">&lt;</span> <span class="nx">s</span> <span class="p">{</span> <span class="c1">// double check</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nf">indexLocal</span><span class="p">(</span><span class="nx">l</span><span class="p">,</span> <span class="nx">pid</span><span class="p">),</span> <span class="nx">pid</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">p</span><span class="p">.</span><span class="nx">local</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>  <span class="c1">// 如果本地队列为空，那么此时Pool没被初始化，加入全局池引用
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">allPools</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">allPools</span><span class="p">,</span> <span class="nx">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">p</span><span class="p">.</span><span class="nx">local</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>  <span class="c1">// 如果本地队列为空，那么此时Pool没被初始化，加入全局池引用</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">allPools</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">allPools</span><span class="p">,</span> <span class="nx">p</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="nx">size</span> <span class="o">:=</span> <span class="nx">runtime</span><span class="p">.</span><span class="nf">GOMAXPROCS</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">// 查看现在P的个数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">local</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="nx">poolLocal</span><span class="p">,</span> <span class="nx">size</span><span class="p">)</span> <span class="c1">// 为这个Pool分配跟P数量相同的本地池
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">atomic</span><span class="p">.</span><span class="nf">StorePointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">p</span><span class="p">.</span><span class="nx">local</span><span class="p">,</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">local</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="c1">// store-release
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nf">runtime_StoreReluintptr</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">p</span><span class="p">.</span><span class="nx">localSize</span><span class="p">,</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">size</span><span class="p">))</span>     <span class="c1">// store-release
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">local</span><span class="p">[</span><span class="nx">pid</span><span class="p">],</span> <span class="nx">pid</span> <span class="c1">// 返回当前和P绑定的本地池
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">size</span> <span class="o">:=</span> <span class="nx">runtime</span><span class="p">.</span><span class="nf">GOMAXPROCS</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">// 查看现在P的个数</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">local</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="nx">poolLocal</span><span class="p">,</span> <span class="nx">size</span><span class="p">)</span> <span class="c1">// 为这个Pool分配跟P数量相同的本地池</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">atomic</span><span class="p">.</span><span class="nf">StorePointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">p</span><span class="p">.</span><span class="nx">local</span><span class="p">,</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">local</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="c1">// store-release</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">runtime_StoreReluintptr</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">p</span><span class="p">.</span><span class="nx">localSize</span><span class="p">,</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">size</span><span class="p">))</span>     <span class="c1">// store-release</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">local</span><span class="p">[</span><span class="nx">pid</span><span class="p">],</span> <span class="nx">pid</span> <span class="c1">// 返回当前和P绑定的本地池</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">Pool</span><span class="p">)</span> <span class="nf">Get</span><span class="p">()</span> <span class="nx">any</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">Pool</span><span class="p">)</span> <span class="nf">Get</span><span class="p">()</span> <span class="kt">any</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">race</span><span class="p">.</span><span class="nx">Enabled</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">		<span class="nx">race</span><span class="p">.</span><span class="nf">Disable</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">l</span><span class="p">,</span> <span class="nx">pid</span> <span class="o">:=</span> <span class="nx">p</span><span class="p">.</span><span class="nf">pin</span><span class="p">()</span> <span class="c1">// 先找本地池
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">x</span> <span class="o">:=</span> <span class="nx">l</span><span class="p">.</span><span class="nx">private</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">l</span><span class="p">,</span> <span class="nx">pid</span> <span class="o">:=</span> <span class="nx">p</span><span class="p">.</span><span class="nf">pin</span><span class="p">()</span> <span class="c1">// 先找本地池</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">x</span> <span class="o">:=</span> <span class="nx">l</span><span class="p">.</span><span class="nx">private</span>
 </span></span><span class="line"><span class="cl">	<span class="nx">l</span><span class="p">.</span><span class="nx">private</span> <span class="p">=</span> <span class="kc">nil</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">x</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">// 如果没有，那么从全局池找
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="c1">// Try to pop the head of the local shard. We prefer
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="c1">// the head over the tail for temporal locality of
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="c1">// reuse.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">x</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">l</span><span class="p">.</span><span class="nx">shared</span><span class="p">.</span><span class="nf">popHead</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">x</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">// 如果没有，那么从全局池找</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// Try to pop the head of the local shard. We prefer</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// the head over the tail for temporal locality of</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// reuse.</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">x</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">l</span><span class="p">.</span><span class="nx">shared</span><span class="p">.</span><span class="nf">popHead</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">x</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">			<span class="nx">x</span> <span class="p">=</span> <span class="nx">p</span><span class="p">.</span><span class="nf">getSlow</span><span class="p">(</span><span class="nx">pid</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">		<span class="p">}</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="nf">runtime_procUnpin</span><span class="p">()</span> <span class="c1">//释放P，让其可以被抢占
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">race</span><span class="p">.</span><span class="nx">Enabled</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">runtime_procUnpin</span><span class="p">()</span> <span class="c1">//释放P，让其可以被抢占</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">race</span><span class="p">.</span><span class="nx">Enabled</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">		<span class="nx">race</span><span class="p">.</span><span class="nf">Enable</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">x</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">			<span class="nx">race</span><span class="p">.</span><span class="nf">Acquire</span><span class="p">(</span><span class="nf">poolRaceAddr</span><span class="p">(</span><span class="nx">x</span><span class="p">))</span>
@@ -316,25 +325,25 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// Put adds x to the pool.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">Pool</span><span class="p">)</span> <span class="nf">Put</span><span class="p">(</span><span class="nx">x</span> <span class="nx">any</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Put adds x to the pool.</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">Pool</span><span class="p">)</span> <span class="nf">Put</span><span class="p">(</span><span class="nx">x</span> <span class="kt">any</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">x</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">		<span class="k">return</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">race</span><span class="p">.</span><span class="nx">Enabled</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nf">fastrandn</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">			<span class="c1">// Randomly drop x on floor.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="k">return</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">// Randomly drop x on floor.</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>
 </span></span><span class="line"><span class="cl">		<span class="p">}</span>
 </span></span><span class="line"><span class="cl">		<span class="nx">race</span><span class="p">.</span><span class="nf">ReleaseMerge</span><span class="p">(</span><span class="nf">poolRaceAddr</span><span class="p">(</span><span class="nx">x</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">		<span class="nx">race</span><span class="p">.</span><span class="nf">Disable</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">l</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">p</span><span class="p">.</span><span class="nf">pin</span><span class="p">()</span> <span class="c1">// 老规矩，先禁止P被抢占
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">l</span><span class="p">.</span><span class="nx">private</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">// 本地没有 则先放入本地
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">l</span><span class="p">.</span><span class="nx">private</span> <span class="p">=</span> <span class="nx">x</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">l</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">p</span><span class="p">.</span><span class="nf">pin</span><span class="p">()</span> <span class="c1">// 老规矩，先禁止P被抢占</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">l</span><span class="p">.</span><span class="nx">private</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">// 本地没有 则先放入本地</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">l</span><span class="p">.</span><span class="nx">private</span> <span class="p">=</span> <span class="nx">x</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">l</span><span class="p">.</span><span class="nx">shared</span><span class="p">.</span><span class="nf">pushHead</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="c1">// 否则放入全局
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">l</span><span class="p">.</span><span class="nx">shared</span><span class="p">.</span><span class="nf">pushHead</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="c1">// 否则放入全局</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">	<span class="nf">runtime_procUnpin</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">race</span><span class="p">.</span><span class="nx">Enabled</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">		<span class="nx">race</span><span class="p">.</span><span class="nf">Enable</span><span class="p">()</span>
@@ -342,8 +351,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h1 id="gc">GC</h1>
 <blockquote>
-<p>其实很好理解，正好是一次二级缓冲模型，第一次gc会将local放入 victim，第二gc victim不为空才会真正清理，local不会参与gc</p>
-</blockquote>
+<p>其实很好理解，正好是一次二级缓冲模型，第一次gc会将local放入 victim，第二gc victim不为空才会真正清理，local不会参与gc</p></blockquote>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">poolCleanup</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">p</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">oldPools</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">		<span class="nx">p</span><span class="p">.</span><span class="nx">victim</span> <span class="p">=</span> <span class="kc">nil</span>

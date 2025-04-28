@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V23G8H27BQ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V23G8H27BQ');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
@@ -153,7 +162,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">34</span>
+              <span class="Counter">37</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -442,7 +451,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">34</span>
+      <span class="Counter ">37</span>
     </a>
   </nav>
 </div>
@@ -486,13 +495,11 @@
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
                 <h1 id="如何启用gc跟踪">如何启用GC跟踪</h1>
 <blockquote>
-<p>GODEBUG=gctrace=1 go run *.go</p>
-</blockquote>
+<p>GODEBUG=gctrace=1 go run *.go</p></blockquote>
 <p>其中 <code>gctrace=1</code> 表示只针对这个进程进行GC追踪</p>
 <h1 id="标记流程">标记流程</h1>
 <blockquote>
-<p>go采用三色标记法，主要是为了提高并发度，这样扫描过程可以拆分为多个阶段，而不用一次扫描全部</p>
-</blockquote>
+<p>go采用三色标记法，主要是为了提高并发度，这样扫描过程可以拆分为多个阶段，而不用一次扫描全部</p></blockquote>
 <ul>
 <li>
 <p>黑 根节点扫描完毕，子节点也扫描完毕</p>
@@ -510,15 +517,13 @@
 <p>mark阶段会将白色对象标记，并推入队列中变为灰色</p>
 <h1 id="memory-barrier">memory barrier</h1>
 <blockquote>
-<p>保障了代码描述中对内存的操作顺序，<code>即不会在编译期被编译器进行调整，也不会在运行时被CPU的乱序执行所打乱</code></p>
-</blockquote>
+<p>保障了代码描述中对内存的操作顺序，<code>即不会在编译期被编译器进行调整，也不会在运行时被CPU的乱序执行所打乱</code></p></blockquote>
 <h2 id="write-barrier">write barrier</h2>
 <p>在应用进入 GC 标记阶段前的 stw 阶段，会将全局变量 runtime.writeBarrier.enabled 修改为 true，这时所有的堆上指针修改操作在修改之前便会额外调用 runtime.gcWriteBarrier</p>
 <p>由于GC和Go主程序并发执行，所以必须要在扫描时监控内存可能出现的状态改变，所以需要写屏障，所以需要暂停GO主程序（STW）</p>
 <h2 id="hybrid-wirte-barrier-after-go18">hybrid wirte barrier (after go1.8)</h2>
 <blockquote>
-<p>改方式的基本思想是：对正在被覆盖的对象进行着色，且如果当时栈未扫描完成，则同样对指针进行着色</p>
-</blockquote>
+<p>改方式的基本思想是：对正在被覆盖的对象进行着色，且如果当时栈未扫描完成，则同样对指针进行着色</p></blockquote>
 <h1 id="gc流程">GC流程</h1>
 <p>程序启动会为每个P分配一个 mark worker 来标记内存，负责为进入STW做前期工作</p>
 <ul>

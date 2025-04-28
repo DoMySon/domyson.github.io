@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V23G8H27BQ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V23G8H27BQ');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
@@ -10,7 +19,7 @@
     <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>Resource - 朝花夕拾</title>
+    <title>Beam - 朝花夕拾</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -21,10 +30,8 @@
 
     
     <meta name="description"
-  content="简介 Resource 是一个全自动化，且简单易用的资源管理系统,继承于GameComponet实现 ，它内部使用RC的方式来管理资源的引用，且不需要手动显示释放,而是通过拦截finalizer的方式，来达到释放的目的，比手动安全性更高，也更易用。
-它仅提供了两组接口资源加载接口LoadAsset LoadAssetAsync，。并提供了虚拟化的方式加载，在编辑器模式下不会真正的构建AssetBundle包，从而提供开发效率。
-Resource也包括流场景构建，可以将整个场景都作为热更新资源。
-Feature 自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。做到对上层完全无感。
+  content="简介 Beam 是一个全自动化，且简单易用的资源管理系统, 它只提供资源的加载和管理方式，不提供资源的解析方式，意味这它是可以跨引擎使用，这里只指出它在Unity中的部分，他本身只会管理文件的依赖 （manifest）以及 文件句柄资源 （在 C&#43;&#43; 中叫 fd，在C#中成为 FileStream）
+Feature 自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。可做到对上层完全无感。
 自动化引用计数 通过 RC&#43; finalizer，监控资源的引用，来自动释放资源。且无需轮询检查资源的引用计数，提供更好的性能，做到对上层完全无感。也没有手动释放接口，提高安全性和易用性
 自动化冗余剔除 在构建的时候自动收集冗余资源，如像A-&gt;(C,D) B-&gt;(C) 此时(A,D)将会作为一个的bundle，而C则会单独作为一个bundle
 Profile资源使用分析，用以在运行时统计各个资源的引用和加载数
@@ -33,7 +40,7 @@ Profile资源使用分析，用以在运行时统计各个资源的引用和加�
 Builtin: 内建资源，默认将资源插入母包中。
 Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放，防止被反编译资源
 无感知资源更新 一般出现资源更新的时候，都是先下载到本地，然后再通过加载本地资源的方式实现， 现由FS映射的远程目录，通过分流的方式，可以实现一边从远程直接读取，并copy另外一部分流到本地磁盘，减少重新读盘的情况。 对于下载过程对于玩家而言完全无感，其本身下载速度是可以被控制，当前并没有暴露此接口（因为带宽值是动态变化的，无法根据不同的条件找到一个合理值），只是需要设定一个百分率阈值，内部自动计算下载速度尽可能保证达到预期值。
-淘汰策略 当某个Assetbundle的引用计数为0时候，底层不会立即释放它，而是根据它过往的加载次数判断下一次淘汰次数，越大将会越晚淘汰，当然也提供了强制卸载函数。
+淘汰策略 当某个Assetbundle的引用计数为0时候，底层不会立即释放它，基于引用计数&#43; LRU 淘汰机制，当然也提供了强制卸载函数。
 后续计划 现阶段Resource是依赖于Assetbundle 后续会抽象出一层 FS 以提供自定义流提供更多可操作性和安全性。 已实现
 Resource现在可以说是完全不能脱离Unity独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步时只需要在Unity中需要手动实现一个Adaptor即可。
 " />
@@ -44,12 +51,10 @@ Resource现在可以说是完全不能脱离Unity独立运行，这不是一个�
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Resource - 朝花夕拾" />
+<meta name="twitter:title" content="Beam - 朝花夕拾" />
 <meta name="twitter:description"
-  content="简介 Resource 是一个全自动化，且简单易用的资源管理系统,继承于GameComponet实现 ，它内部使用RC的方式来管理资源的引用，且不需要手动显示释放,而是通过拦截finalizer的方式，来达到释放的目的，比手动安全性更高，也更易用。
-它仅提供了两组接口资源加载接口LoadAsset LoadAssetAsync，。并提供了虚拟化的方式加载，在编辑器模式下不会真正的构建AssetBundle包，从而提供开发效率。
-Resource也包括流场景构建，可以将整个场景都作为热更新资源。
-Feature 自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。做到对上层完全无感。
+  content="简介 Beam 是一个全自动化，且简单易用的资源管理系统, 它只提供资源的加载和管理方式，不提供资源的解析方式，意味这它是可以跨引擎使用，这里只指出它在Unity中的部分，他本身只会管理文件的依赖 （manifest）以及 文件句柄资源 （在 C&#43;&#43; 中叫 fd，在C#中成为 FileStream）
+Feature 自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。可做到对上层完全无感。
 自动化引用计数 通过 RC&#43; finalizer，监控资源的引用，来自动释放资源。且无需轮询检查资源的引用计数，提供更好的性能，做到对上层完全无感。也没有手动释放接口，提高安全性和易用性
 自动化冗余剔除 在构建的时候自动收集冗余资源，如像A-&gt;(C,D) B-&gt;(C) 此时(A,D)将会作为一个的bundle，而C则会单独作为一个bundle
 Profile资源使用分析，用以在运行时统计各个资源的引用和加载数
@@ -58,7 +63,7 @@ Profile资源使用分析，用以在运行时统计各个资源的引用和加�
 Builtin: 内建资源，默认将资源插入母包中。
 Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放，防止被反编译资源
 无感知资源更新 一般出现资源更新的时候，都是先下载到本地，然后再通过加载本地资源的方式实现， 现由FS映射的远程目录，通过分流的方式，可以实现一边从远程直接读取，并copy另外一部分流到本地磁盘，减少重新读盘的情况。 对于下载过程对于玩家而言完全无感，其本身下载速度是可以被控制，当前并没有暴露此接口（因为带宽值是动态变化的，无法根据不同的条件找到一个合理值），只是需要设定一个百分率阈值，内部自动计算下载速度尽可能保证达到预期值。
-淘汰策略 当某个Assetbundle的引用计数为0时候，底层不会立即释放它，而是根据它过往的加载次数判断下一次淘汰次数，越大将会越晚淘汰，当然也提供了强制卸载函数。
+淘汰策略 当某个Assetbundle的引用计数为0时候，底层不会立即释放它，基于引用计数&#43; LRU 淘汰机制，当然也提供了强制卸载函数。
 后续计划 现阶段Resource是依赖于Assetbundle 后续会抽象出一层 FS 以提供自定义流提供更多可操作性和安全性。 已实现
 Resource现在可以说是完全不能脱离Unity独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步时只需要在Unity中需要手动实现一个Adaptor即可。
 " />
@@ -69,12 +74,10 @@ Resource现在可以说是完全不能脱离Unity独立运行，这不是一个�
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="Resource - 朝花夕拾">
+<meta property="og:title" content="Beam - 朝花夕拾">
 <meta property="og:description"
-  content="简介 Resource 是一个全自动化，且简单易用的资源管理系统,继承于GameComponet实现 ，它内部使用RC的方式来管理资源的引用，且不需要手动显示释放,而是通过拦截finalizer的方式，来达到释放的目的，比手动安全性更高，也更易用。
-它仅提供了两组接口资源加载接口LoadAsset LoadAssetAsync，。并提供了虚拟化的方式加载，在编辑器模式下不会真正的构建AssetBundle包，从而提供开发效率。
-Resource也包括流场景构建，可以将整个场景都作为热更新资源。
-Feature 自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。做到对上层完全无感。
+  content="简介 Beam 是一个全自动化，且简单易用的资源管理系统, 它只提供资源的加载和管理方式，不提供资源的解析方式，意味这它是可以跨引擎使用，这里只指出它在Unity中的部分，他本身只会管理文件的依赖 （manifest）以及 文件句柄资源 （在 C&#43;&#43; 中叫 fd，在C#中成为 FileStream）
+Feature 自动化检测文件变动 通过Radix算法，监控资源变动，来自动构建manifest。上层只需要关注资源本身，无需关注AssetBundle包的构建。可做到对上层完全无感。
 自动化引用计数 通过 RC&#43; finalizer，监控资源的引用，来自动释放资源。且无需轮询检查资源的引用计数，提供更好的性能，做到对上层完全无感。也没有手动释放接口，提高安全性和易用性
 自动化冗余剔除 在构建的时候自动收集冗余资源，如像A-&gt;(C,D) B-&gt;(C) 此时(A,D)将会作为一个的bundle，而C则会单独作为一个bundle
 Profile资源使用分析，用以在运行时统计各个资源的引用和加载数
@@ -83,12 +86,12 @@ Profile资源使用分析，用以在运行时统计各个资源的引用和加�
 Builtin: 内建资源，默认将资源插入母包中。
 Remote: 远程资源模式，仅需要配置远程资源地址即可，所有资源不会在本地存盘，只会在内存中使用，使用完后立即释放，防止被反编译资源
 无感知资源更新 一般出现资源更新的时候，都是先下载到本地，然后再通过加载本地资源的方式实现， 现由FS映射的远程目录，通过分流的方式，可以实现一边从远程直接读取，并copy另外一部分流到本地磁盘，减少重新读盘的情况。 对于下载过程对于玩家而言完全无感，其本身下载速度是可以被控制，当前并没有暴露此接口（因为带宽值是动态变化的，无法根据不同的条件找到一个合理值），只是需要设定一个百分率阈值，内部自动计算下载速度尽可能保证达到预期值。
-淘汰策略 当某个Assetbundle的引用计数为0时候，底层不会立即释放它，而是根据它过往的加载次数判断下一次淘汰次数，越大将会越晚淘汰，当然也提供了强制卸载函数。
+淘汰策略 当某个Assetbundle的引用计数为0时候，底层不会立即释放它，基于引用计数&#43; LRU 淘汰机制，当然也提供了强制卸载函数。
 后续计划 现阶段Resource是依赖于Assetbundle 后续会抽象出一层 FS 以提供自定义流提供更多可操作性和安全性。 已实现
 Resource现在可以说是完全不能脱离Unity独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步时只需要在Unity中需要手动实现一个Adaptor即可。
 " />
 <meta property="og:url" content="https://domyson.github.io/post/zen/2/" />
-<meta property="og:site_name" content="Resource" />
+<meta property="og:site_name" content="Beam" />
 <meta property="og:image"
   content="https://domyson.github.io/">
 <meta property="og:image:width" content="2048">
@@ -189,7 +192,7 @@ Resource现在可以说是完全不能脱离Unity独立运行，这不是一个�
                   </span>
                   <span class="path-divider">/</span>
                   <strong class="css-truncate css-truncate-target mr-1" style="max-width: 410px">
-                    <a href="https://domyson.github.io/post/zen/2/">Resource</a>
+                    <a href="https://domyson.github.io/post/zen/2/">Beam</a>
                   </strong>
                 </h1>
                 <div class="note m-0">
@@ -226,7 +229,7 @@ Resource现在可以说是完全不能脱离Unity独立运行，这不是一个�
                         </div>
                       </div>
                     </details-menu>
-                      1065 Words
+                      947 Words
                     
 
                   </div>
@@ -250,14 +253,13 @@ Resource现在可以说是完全不能脱离Unity独立运行，这不是一个�
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="简介">简介</h1>
-<p><code>Resource</code> 是一个全自动化，且简单易用的资源管理系统,继承于<code>GameComponet</code>实现 ，它内部使用<code>RC</code>的方式来管理资源的引用，且不需要手动显示释放,而是通过拦截finalizer的方式，来达到释放的目的，比手动安全性更高，也更易用。</p>
-<p>它仅提供了两组接口资源加载接口<code>LoadAsset</code>  <code>LoadAssetAsync</code>，。并提供了虚拟化的方式加载，在编辑器模式下不会真正的构建<code>AssetBundle</code>包，从而提供开发效率。</p>
-<p><code>Resource</code>也包括流场景构建，可以将整个场景都作为热更新资源。</p>
+<p><code>Beam</code> 是一个全自动化，且简单易用的资源管理系统, 它只提供资源的加载和管理方式，不提供资源的解析方式，意味这它是可以跨引擎使用，这里只指出它在<code>Unity</code>中的部分，他本身只会管理文件的依赖 （manifest）以及
+文件句柄资源 （在 C++ 中叫 fd，在C#中成为 FileStream）</p>
 <h1 id="feature">Feature</h1>
 <ol>
 <li>
 <p>自动化检测文件变动
-通过<code>Radix</code>算法，监控资源变动，来自动构建<code>manifest</code>。上层只需要关注资源本身，无需关注<code>AssetBundle</code>包的构建。做到对上层完全无感。</p>
+通过<code>Radix</code>算法，监控资源变动，来自动构建<code>manifest</code>。上层只需要关注资源本身，无需关注<code>AssetBundle</code>包的构建。可做到对上层完全无感。</p>
 </li>
 <li>
 <p>自动化引用计数
@@ -291,12 +293,12 @@ Resource现在可以说是完全不能脱离Unity独立运行，这不是一个�
 </li>
 <li>
 <p>淘汰策略
-当某个Assetbundle的引用计数为0时候，底层不会立即释放它，而是根据它过往的加载次数判断下一次淘汰次数，越大将会越晚淘汰，当然也提供了强制卸载函数。</p>
+当某个Assetbundle的引用计数为0时候，底层不会立即释放它，基于引用计数+ LRU 淘汰机制，当然也提供了强制卸载函数。</p>
 </li>
 </ol>
 <h1 id="后续计划">后续计划</h1>
 <p><del>现阶段<code>Resource</code>是依赖于<code>Assetbundle</code> 后续会抽象出一层 <code>FS</code> 以提供自定义流提供更多可操作性和安全性。</del> 已实现</p>
-<p><code>Resource</code>现在可以说是完全不能脱离<code>Unity</code>独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步时只需要在<code>Unity</code>中需要手动实现一个<code>Adaptor</code>即可。</p>
+<p><del><code>Resource</code>现在可以说是完全不能脱离<code>Unity</code>独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步时只需要在<code>Unity</code>中需要手动实现一个<code>Adaptor</code>即可。</del></p>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
      crossorigin="anonymous"></script>
 

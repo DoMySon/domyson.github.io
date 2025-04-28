@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V23G8H27BQ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V23G8H27BQ');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
@@ -21,18 +30,14 @@
 
     
     <meta name="description"
-  content="工作中曾经开发了一个cobweb的分布式服务器框架（基于golang,c）,但是在实际开发过程中代码难以维护以及更新，主要是每次都需要跨平台进行编译，特别是cgo 往往需要指定平台的系统库,而且一些不规范的使用方式造成无法充分发挥多核的优势，可以参见 关于Go协程的思考 虽然1.16 支持抢占式，但错误的使用方式依然造成了cpu过高的问题。，后续重新设计了skynet-x 是一个actor模型分布式服务框架，使用go编写。
-尽管Actor模型和CSP模型各有所有长，为什么不采用CSP主要有两方面考虑。
-CSP模式使用尽管很简单，但是一个致命的问题是无法控制消息的优先级，当然若只处理一个Channel那可以规避，那么为啥还需要使用CSP,而且像go channel 本身是基于互斥锁（1.16）实现，且无法进行优化和更加精细的控制，只能依赖于runtime的调度。（网上所说什么时候触发调度，我认为channel不能包含其中，它本质也是加锁导致切换） 隔离性太弱，后续一些新的channel引入也会造成破坏性修改，而且 select-case模式等待的channel会随着数量的增加性能会慢慢减弱。 它是一个年轻的框架，仅仅经历了两款项目的迭代 现在版本为 v1.6.0 2023-05-28
-羽翼军团 v1.3.0 我在民国淘古玩 v.1.3.5 与skynet的差异 增加了独占进程的概念，对于一些性能敏感的服务可以绕过公平调度的原则。（公平调度是一个很普遍但并非最优解的调度策略，但对于需要占用资源较多的进程就显得无力）
-使用协程而非线程，一个好处是对于一些假死服务我们可以重新启动它，其它代价远小于线程（尽管协程的开销很低，但我们尽量保证不会被滥用）
-一个简单的二进制文件，skynet修改了lua部分虚拟机源码，而且大部分实现都是基于lua实现，而我设计的是一个将脚本语言作为可选项的插件。
-所有库都是底层语言的实现方式，可控制力和性能更好，完全将业务和底层区分方便同时进行维护
-无感的集群交互方式，调用其他服务（无论在不在本地）就像普通消息那样简单，不需要像skynet需要显示调用cluster。
-进程支持错误重启且消息不会丢失（beta)
-支持后续的DSL
-在2024/03我正计划重新用C实现了一版以提供更好的性能和更底层的控制
-" />
+  content="工作中曾经开发了一个cobweb的分布式服务器框架（基于golang,c）,但是在实际开发过程中代码难以维护以及更新，主要是每次都需要跨平台进行编译，特别是cgo 往往需要指定平台的系统库,而且一些不规范的使用方式造成无法充分发挥多核的优势，可以参见 关于Go协程的思考 虽然1.16 支持抢占式，但错误的使用方式依然造成了cpu过高的问题。，后续重新设计了skynet 是一个actor模型分布式服务框架，使用go编写。
+尽管Actor模型和CSP模型各有所有长，为什么不采用CSP主要有以下方面考虑。
+CSP模式使用尽管很简单，但是一个致命的问题是无法控制消息的优先级，当然若只处理一个Channel那可以规避，那么为啥还需要使用CSP,而且像go channel 本身是基于互斥锁（1.16）实现，且无法进行优化和更加精细的控制，只能依赖于runtime的调度。（网上所说什么时候触发调度，我认为channel不能包含其中，它本质也是加锁导致切换）
+隔离性太弱，后续一些新的channel引入也会造成破坏性修改。
+select-case模式会随着等待数量的增加性能会慢慢减弱。
+channel 多大合适？
+它是一个年轻的框架，仅仅经历了两款项目的迭代 现在版本为 v1.6.0 2023-05-28 重启了 v2 版本
+羽翼军团 v1.3.0 我在民国淘古玩 v.1.3.5 " />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
@@ -42,18 +47,14 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="skynet 服务器框架简介 - 朝花夕拾" />
 <meta name="twitter:description"
-  content="工作中曾经开发了一个cobweb的分布式服务器框架（基于golang,c）,但是在实际开发过程中代码难以维护以及更新，主要是每次都需要跨平台进行编译，特别是cgo 往往需要指定平台的系统库,而且一些不规范的使用方式造成无法充分发挥多核的优势，可以参见 关于Go协程的思考 虽然1.16 支持抢占式，但错误的使用方式依然造成了cpu过高的问题。，后续重新设计了skynet-x 是一个actor模型分布式服务框架，使用go编写。
-尽管Actor模型和CSP模型各有所有长，为什么不采用CSP主要有两方面考虑。
-CSP模式使用尽管很简单，但是一个致命的问题是无法控制消息的优先级，当然若只处理一个Channel那可以规避，那么为啥还需要使用CSP,而且像go channel 本身是基于互斥锁（1.16）实现，且无法进行优化和更加精细的控制，只能依赖于runtime的调度。（网上所说什么时候触发调度，我认为channel不能包含其中，它本质也是加锁导致切换） 隔离性太弱，后续一些新的channel引入也会造成破坏性修改，而且 select-case模式等待的channel会随着数量的增加性能会慢慢减弱。 它是一个年轻的框架，仅仅经历了两款项目的迭代 现在版本为 v1.6.0 2023-05-28
-羽翼军团 v1.3.0 我在民国淘古玩 v.1.3.5 与skynet的差异 增加了独占进程的概念，对于一些性能敏感的服务可以绕过公平调度的原则。（公平调度是一个很普遍但并非最优解的调度策略，但对于需要占用资源较多的进程就显得无力）
-使用协程而非线程，一个好处是对于一些假死服务我们可以重新启动它，其它代价远小于线程（尽管协程的开销很低，但我们尽量保证不会被滥用）
-一个简单的二进制文件，skynet修改了lua部分虚拟机源码，而且大部分实现都是基于lua实现，而我设计的是一个将脚本语言作为可选项的插件。
-所有库都是底层语言的实现方式，可控制力和性能更好，完全将业务和底层区分方便同时进行维护
-无感的集群交互方式，调用其他服务（无论在不在本地）就像普通消息那样简单，不需要像skynet需要显示调用cluster。
-进程支持错误重启且消息不会丢失（beta)
-支持后续的DSL
-在2024/03我正计划重新用C实现了一版以提供更好的性能和更底层的控制
-" />
+  content="工作中曾经开发了一个cobweb的分布式服务器框架（基于golang,c）,但是在实际开发过程中代码难以维护以及更新，主要是每次都需要跨平台进行编译，特别是cgo 往往需要指定平台的系统库,而且一些不规范的使用方式造成无法充分发挥多核的优势，可以参见 关于Go协程的思考 虽然1.16 支持抢占式，但错误的使用方式依然造成了cpu过高的问题。，后续重新设计了skynet 是一个actor模型分布式服务框架，使用go编写。
+尽管Actor模型和CSP模型各有所有长，为什么不采用CSP主要有以下方面考虑。
+CSP模式使用尽管很简单，但是一个致命的问题是无法控制消息的优先级，当然若只处理一个Channel那可以规避，那么为啥还需要使用CSP,而且像go channel 本身是基于互斥锁（1.16）实现，且无法进行优化和更加精细的控制，只能依赖于runtime的调度。（网上所说什么时候触发调度，我认为channel不能包含其中，它本质也是加锁导致切换）
+隔离性太弱，后续一些新的channel引入也会造成破坏性修改。
+select-case模式会随着等待数量的增加性能会慢慢减弱。
+channel 多大合适？
+它是一个年轻的框架，仅仅经历了两款项目的迭代 现在版本为 v1.6.0 2023-05-28 重启了 v2 版本
+羽翼军团 v1.3.0 我在民国淘古玩 v.1.3.5 " />
 <meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -63,18 +64,14 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
 <meta property="og:type" content="article" />
 <meta property="og:title" content="skynet 服务器框架简介 - 朝花夕拾">
 <meta property="og:description"
-  content="工作中曾经开发了一个cobweb的分布式服务器框架（基于golang,c）,但是在实际开发过程中代码难以维护以及更新，主要是每次都需要跨平台进行编译，特别是cgo 往往需要指定平台的系统库,而且一些不规范的使用方式造成无法充分发挥多核的优势，可以参见 关于Go协程的思考 虽然1.16 支持抢占式，但错误的使用方式依然造成了cpu过高的问题。，后续重新设计了skynet-x 是一个actor模型分布式服务框架，使用go编写。
-尽管Actor模型和CSP模型各有所有长，为什么不采用CSP主要有两方面考虑。
-CSP模式使用尽管很简单，但是一个致命的问题是无法控制消息的优先级，当然若只处理一个Channel那可以规避，那么为啥还需要使用CSP,而且像go channel 本身是基于互斥锁（1.16）实现，且无法进行优化和更加精细的控制，只能依赖于runtime的调度。（网上所说什么时候触发调度，我认为channel不能包含其中，它本质也是加锁导致切换） 隔离性太弱，后续一些新的channel引入也会造成破坏性修改，而且 select-case模式等待的channel会随着数量的增加性能会慢慢减弱。 它是一个年轻的框架，仅仅经历了两款项目的迭代 现在版本为 v1.6.0 2023-05-28
-羽翼军团 v1.3.0 我在民国淘古玩 v.1.3.5 与skynet的差异 增加了独占进程的概念，对于一些性能敏感的服务可以绕过公平调度的原则。（公平调度是一个很普遍但并非最优解的调度策略，但对于需要占用资源较多的进程就显得无力）
-使用协程而非线程，一个好处是对于一些假死服务我们可以重新启动它，其它代价远小于线程（尽管协程的开销很低，但我们尽量保证不会被滥用）
-一个简单的二进制文件，skynet修改了lua部分虚拟机源码，而且大部分实现都是基于lua实现，而我设计的是一个将脚本语言作为可选项的插件。
-所有库都是底层语言的实现方式，可控制力和性能更好，完全将业务和底层区分方便同时进行维护
-无感的集群交互方式，调用其他服务（无论在不在本地）就像普通消息那样简单，不需要像skynet需要显示调用cluster。
-进程支持错误重启且消息不会丢失（beta)
-支持后续的DSL
-在2024/03我正计划重新用C实现了一版以提供更好的性能和更底层的控制
-" />
+  content="工作中曾经开发了一个cobweb的分布式服务器框架（基于golang,c）,但是在实际开发过程中代码难以维护以及更新，主要是每次都需要跨平台进行编译，特别是cgo 往往需要指定平台的系统库,而且一些不规范的使用方式造成无法充分发挥多核的优势，可以参见 关于Go协程的思考 虽然1.16 支持抢占式，但错误的使用方式依然造成了cpu过高的问题。，后续重新设计了skynet 是一个actor模型分布式服务框架，使用go编写。
+尽管Actor模型和CSP模型各有所有长，为什么不采用CSP主要有以下方面考虑。
+CSP模式使用尽管很简单，但是一个致命的问题是无法控制消息的优先级，当然若只处理一个Channel那可以规避，那么为啥还需要使用CSP,而且像go channel 本身是基于互斥锁（1.16）实现，且无法进行优化和更加精细的控制，只能依赖于runtime的调度。（网上所说什么时候触发调度，我认为channel不能包含其中，它本质也是加锁导致切换）
+隔离性太弱，后续一些新的channel引入也会造成破坏性修改。
+select-case模式会随着等待数量的增加性能会慢慢减弱。
+channel 多大合适？
+它是一个年轻的框架，仅仅经历了两款项目的迭代 现在版本为 v1.6.0 2023-05-28 重启了 v2 版本
+羽翼军团 v1.3.0 我在民国淘古玩 v.1.3.5 " />
 <meta property="og:url" content="https://domyson.github.io/post/skynet/0/" />
 <meta property="og:site_name" content="skynet 服务器框架简介" />
 <meta property="og:image"
@@ -214,7 +211,7 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
                         </div>
                       </div>
                     </details-menu>
-                      1469 Words
+                      1490 Words
                     
 
                   </div>
@@ -227,12 +224,23 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><p>工作中曾经开发了一个<code>cobweb</code>的分布式服务器框架（基于<code>golang</code>,<code>c</code>）,但是在实际开发过程中代码难以维护以及更新，主要是每次都需要跨平台进行编译，特别是<code>cgo</code> 往往需要指定平台的系统库,而且一些不规范的使用方式造成无法充分发挥多核的优势，可以参见 <code>关于Go协程的思考</code> 虽然1.16 支持抢占式，但错误的使用方式依然造成了cpu过高的问题。，后续重新设计了<code>skynet</code> 是一个<code>actor</code>模型分布式服务框架，使用<code>go</code>编写。</p>
-<p>尽管<code>Actor</code>模型和<code>CSP</code>模型各有所有长，为什么不采用<code>CSP</code>主要有两方面考虑。</p>
+<p>尽管<code>Actor</code>模型和<code>CSP</code>模型各有所有长，为什么不采用<code>CSP</code>主要有以下方面考虑。</p>
 <ol>
-<li><code>CSP</code>模式使用尽管很简单，但是一个致命的问题是无法控制消息的优先级，当然若只处理一个<code>Channel</code>那可以规避，那么为啥还需要使用<code>CSP</code>,而且像go channel 本身是基于互斥锁（1.16）实现，且无法进行优化和更加精细的控制，只能依赖于<code>runtime</code>的调度。（网上所说什么时候触发调度，我认为channel不能包含其中，它本质也是加锁导致切换）</li>
-<li>隔离性太弱，后续一些新的<code>channel</code>引入也会造成破坏性修改，而且 <code>select-case</code>模式等待的<code>channel</code>会随着数量的增加性能会慢慢减弱。</li>
+<li>
+<p><code>CSP</code>模式使用尽管很简单，但是一个致命的问题是无法控制消息的优先级，当然若只处理一个<code>Channel</code>那可以规避，那么为啥还需要使用<code>CSP</code>,而且像go channel 本身是基于互斥锁（1.16）实现，且无法进行优化和更加精细的控制，只能依赖于<code>runtime</code>的调度。（网上所说什么时候触发调度，我认为channel不能包含其中，它本质也是加锁导致切换）</p>
+</li>
+<li>
+<p>隔离性太弱，后续一些新的<code>channel</code>引入也会造成破坏性修改。</p>
+</li>
+<li>
+<p><code>select-case</code>模式会随着等待数量的增加性能会慢慢减弱。</p>
+</li>
+<li>
+<p><code>channel</code> 多大合适？</p>
+</li>
 </ol>
-<p>它是一个年轻的框架，仅仅经历了两款项目的迭代 现在版本为 <code>v1.6.0 2023-05-28</code></p>
+<blockquote>
+<p>它是一个年轻的框架，仅仅经历了两款项目的迭代 <del>现在版本为 <code>v1.6.0 2023-05-28</code></del> 重启了 v2 版本</p></blockquote>
 <ul>
 <li><a href="https://www.taptap.cn/app/229839">羽翼军团</a> v1.3.0</li>
 <li><a href="https://www.taptap.cn/app/215934">我在民国淘古玩</a> v.1.3.5</li>
@@ -240,7 +248,8 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
 <h1 id="与skynet的差异">与skynet的差异</h1>
 <ol>
 <li>
-<p>增加了独占进程的概念，对于一些性能敏感的服务可以绕过公平调度的原则。（公平调度是一个很普遍但并非最优解的调度策略，但对于需要占用资源较多的进程就显得无力）</p>
+<p>增加了独占进程的概念，对于一些性能敏感的服务可以绕过公平调度的原则。
+（公平调度是一个很普遍但并非最优解的调度策略，但对于需要偏占资源较多的场景就显得无力）</p>
 </li>
 <li>
 <p>使用协程而非线程，一个好处是对于一些假死服务我们可以重新启动它，其它代价远小于线程（尽管协程的开销很低，但我们尽量保证不会被滥用）</p>
@@ -255,10 +264,10 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
 <p>无感的集群交互方式，调用其他服务（无论在不在本地）就像普通消息那样简单，不需要像<code>skynet</code>需要显示调用<code>cluster</code>。</p>
 </li>
 <li>
-<p>进程支持错误重启且消息不会丢失（beta)</p>
+<p>进程支持错误重启且消息不会丢失 <del>（beta）</del></p>
 </li>
 <li>
-<p>支持后续的<a href="/post/typelang/0">DSL</a></p>
+<p>支持后续的<a href="/post/typelang/0">DSL</a> （鸽了两年，还是没写完~）</p>
 </li>
 <li>
 <p>在2024/03我正计划重新用C实现了一版以提供更好的性能和更底层的控制</p>
@@ -273,19 +282,19 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
 <p>mysql,redis client支持,值得注意的是这些库都是作为插件实现，跟主库关联不大，需要编译时指定<code>tags</code></p>
 </li>
 <li>
-<p>native网络支持，对于golang的网络模型而言它不是一个实现高性能的解决方案，尤其是对大量长连接的情况，，特别是<code>cgo</code> 往往需要指定平台的系统库,而且一些不规范的使用方，可参见<a href="/post/language/go/goroutine">golang的协程思考</a></p>
+<p>native网络支持，对于golang的网络模型而言它不是一个高性能的解决方案，尤其是对大量长连接的情况，可参见<a href="/post/language/go/goroutine">golang的协程思考</a></p>
 </li>
 <li>
-<p>内置集群组件 <a href="/post/skynet/sktpmd">sktpmd</a>,易于实现分布式</p>
+<p>内置集群组件 <a href="/post/skynet/3">sktpmd</a>,易于实现分布式</p>
 </li>
 <li>
 <p>隐藏的数据编码，对业务不透明，提供比<code>protobuf-v3</code> 更快的编码 <a href="/post/kproto">kproto</a></p>
 </li>
 <li>
-<p>超快的性能，完全摒弃<code>interface{}</code>以及各种抽象，采用<code>unsafe.Pointer</code>的方式传递数据（仅底层，上层无须关心）</p>
+<p>高性能，完全摒弃<code>interface{}</code>以及各种抽象，无任何类型断言，满足<code>cache-line</code>的结构设计</p>
 </li>
 <li>
-<p>基于 slab算法实现的无锁内存分配器<code>zmalloc</code>，比<code>sync.Pool</code>更快</p>
+<p>基于<code>slab</code>算法实现的无锁内存分配器<code>zmalloc</code>，比<code>sync.Pool</code>更快</p>
 </li>
 </ol>
 <h1 id="优势">优势</h1>
@@ -306,13 +315,13 @@ CSP模式使用尽管很简单，但是一个致命的问题是无法控制消�
 <p>更快的<code>zmalloc</code>内存分配器</p>
 </li>
 <li>
-<p>纯C版本持续开发中。。。</p>
+<p>native网络支持，支持 <code>windows,linux,macos</code>，其他平台未测试。 （需要注意的是<code>windows</code>是一个残血版本，仅作为调试）</p>
 </li>
 </ul>
 <h1 id="目录大纲">目录大纲</h1>
-<p><a href="/post/skynet/1">processor</a></p>
+<p><a href="/post/skynet/1">scheduler</a></p>
+<p><a href="/post/skynet/2">eventbus</a></p>
 <p><a href="/post/skynet/3">sktpmd</a></p>
-<p><a href="/post/skynet/4">socket</a></p>
 <p><a href="/post/skynet/5">zmalloc</a></p></article>
               </div>
             </div>

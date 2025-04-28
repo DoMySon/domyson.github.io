@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V23G8H27BQ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V23G8H27BQ');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
@@ -21,12 +30,12 @@
 
     
     <meta name="description"
-  content="无论是对于C版本还是Go版本的skynet-x而言，一个高效的内存分配器可以提高内存的使用效率，这里效率无论是对于内存碎片亦或是GC而言，都是一种更高效的手段
-基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet-x中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向runtime申请内存，将会导致内存占用过高。
+  content="无论是对于C版本还是Go版本的skynet而言，一个高效的内存分配器可以提高内存的使用效率，这里效率无论是对于内存碎片亦或是GC而言，都是一种更高效的手段
+基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向runtime申请内存，将会导致内存占用过高。
 而且内置的Debug模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 Debug 只能定位到存在 memory-leak，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失
-基于 sync.Pool 的分段内存分配器 将不同size的buffer放入不同的池中，按需进行分配，减少race的开销，这个方法虽然简单，但是性能是低于 slab-allocator。
-但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是skynet-x默认使用的策略。如果需要使用可以在编译指令中指明slab
-Zmalloc zmlloc 本身也是 slab的升级版本，增加可伸缩链表实现对于预分配内存额外部分的缓冲池。
+基于 sync.Pool 的分段内存分配器 将不同size的buffer放入不同的池中，按需进行分配，减少race的开销，这个方法虽然简单，但是性能是低于 slab。
+但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是skynet默认使用的策略。如果需要使用可以在编译指令中指明slab
+Zmalloc zmalloc 本身也是 slab的升级版本，增加可伸缩链表实现对于预分配内存额外部分的缓冲池。
 在24个线程的cpu条件测试结果如下,zmalloc保持了一种稳定的时间复杂度，额外产生的内存分配也很少
 - time(ns) alloc/op(B) slab-128 23.5 1 sync.Pool-128 2490 65562 zmalloc-128 43.31 16 slab-256 24 256 sync.Pool-256 2204 65562 zmalloc-256 44 16 slab-1024 92 1024 sync.Pool-1024 2490 65562 zmalloc-1024 49 17 slab-4096 365 4096 sync.Pool-4096 2210 65562 zmalloc-4096 45 23 API skynet.zalloc(n) 用以分配指定大小的内存块，考虑到 64在go中为tiny-size，直接会从P上分配，所以zmalloc分配块从128开始
 skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存
@@ -40,12 +49,12 @@ skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新�
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="zmalloc - 朝花夕拾" />
 <meta name="twitter:description"
-  content="无论是对于C版本还是Go版本的skynet-x而言，一个高效的内存分配器可以提高内存的使用效率，这里效率无论是对于内存碎片亦或是GC而言，都是一种更高效的手段
-基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet-x中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向runtime申请内存，将会导致内存占用过高。
+  content="无论是对于C版本还是Go版本的skynet而言，一个高效的内存分配器可以提高内存的使用效率，这里效率无论是对于内存碎片亦或是GC而言，都是一种更高效的手段
+基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向runtime申请内存，将会导致内存占用过高。
 而且内置的Debug模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 Debug 只能定位到存在 memory-leak，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失
-基于 sync.Pool 的分段内存分配器 将不同size的buffer放入不同的池中，按需进行分配，减少race的开销，这个方法虽然简单，但是性能是低于 slab-allocator。
-但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是skynet-x默认使用的策略。如果需要使用可以在编译指令中指明slab
-Zmalloc zmlloc 本身也是 slab的升级版本，增加可伸缩链表实现对于预分配内存额外部分的缓冲池。
+基于 sync.Pool 的分段内存分配器 将不同size的buffer放入不同的池中，按需进行分配，减少race的开销，这个方法虽然简单，但是性能是低于 slab。
+但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是skynet默认使用的策略。如果需要使用可以在编译指令中指明slab
+Zmalloc zmalloc 本身也是 slab的升级版本，增加可伸缩链表实现对于预分配内存额外部分的缓冲池。
 在24个线程的cpu条件测试结果如下,zmalloc保持了一种稳定的时间复杂度，额外产生的内存分配也很少
 - time(ns) alloc/op(B) slab-128 23.5 1 sync.Pool-128 2490 65562 zmalloc-128 43.31 16 slab-256 24 256 sync.Pool-256 2204 65562 zmalloc-256 44 16 slab-1024 92 1024 sync.Pool-1024 2490 65562 zmalloc-1024 49 17 slab-4096 365 4096 sync.Pool-4096 2210 65562 zmalloc-4096 45 23 API skynet.zalloc(n) 用以分配指定大小的内存块，考虑到 64在go中为tiny-size，直接会从P上分配，所以zmalloc分配块从128开始
 skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存
@@ -59,12 +68,12 @@ skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新�
 <meta property="og:type" content="article" />
 <meta property="og:title" content="zmalloc - 朝花夕拾">
 <meta property="og:description"
-  content="无论是对于C版本还是Go版本的skynet-x而言，一个高效的内存分配器可以提高内存的使用效率，这里效率无论是对于内存碎片亦或是GC而言，都是一种更高效的手段
-基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet-x中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向runtime申请内存，将会导致内存占用过高。
+  content="无论是对于C版本还是Go版本的skynet而言，一个高效的内存分配器可以提高内存的使用效率，这里效率无论是对于内存碎片亦或是GC而言，都是一种更高效的手段
+基于 SLAB 算法的分段内存分配器 SLAB 最开始是阅读 linux 源码学习的算法，在skynet中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向runtime申请内存，将会导致内存占用过高。
 而且内置的Debug模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 Debug 只能定位到存在 memory-leak，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失
-基于 sync.Pool 的分段内存分配器 将不同size的buffer放入不同的池中，按需进行分配，减少race的开销，这个方法虽然简单，但是性能是低于 slab-allocator。
-但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是skynet-x默认使用的策略。如果需要使用可以在编译指令中指明slab
-Zmalloc zmlloc 本身也是 slab的升级版本，增加可伸缩链表实现对于预分配内存额外部分的缓冲池。
+基于 sync.Pool 的分段内存分配器 将不同size的buffer放入不同的池中，按需进行分配，减少race的开销，这个方法虽然简单，但是性能是低于 slab。
+但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是skynet默认使用的策略。如果需要使用可以在编译指令中指明slab
+Zmalloc zmalloc 本身也是 slab的升级版本，增加可伸缩链表实现对于预分配内存额外部分的缓冲池。
 在24个线程的cpu条件测试结果如下,zmalloc保持了一种稳定的时间复杂度，额外产生的内存分配也很少
 - time(ns) alloc/op(B) slab-128 23.5 1 sync.Pool-128 2490 65562 zmalloc-128 43.31 16 slab-256 24 256 sync.Pool-256 2204 65562 zmalloc-256 44 16 slab-1024 92 1024 sync.Pool-1024 2490 65562 zmalloc-1024 49 17 slab-4096 365 4096 sync.Pool-4096 2210 65562 zmalloc-4096 45 23 API skynet.zalloc(n) 用以分配指定大小的内存块，考虑到 64在go中为tiny-size，直接会从P上分配，所以zmalloc分配块从128开始
 skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新分配内存
@@ -225,10 +234,10 @@ skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新�
 <p><code>SLAB</code> 最开始是阅读 <code>linux</code> 源码学习的算法，在<code>skynet</code>中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向<code>runtime</code>申请内存，将会导致内存占用过高。</p>
 <p>而且内置的<code>Debug</code>模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 <code>Debug</code> 只能定位到存在 <code>memory-leak</code>，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失</p>
 <h1 id="基于-syncpool-的分段内存分配器">基于 <code>sync.Pool</code> 的分段内存分配器</h1>
-<p>将不同size的buffer放入不同的池中，按需进行分配，减少race的开销，这个方法虽然简单，但是性能是低于 <code>slab-allocator</code>。</p>
+<p>将不同size的buffer放入不同的池中，按需进行分配，减少race的开销，这个方法虽然简单，但是性能是低于 <code>slab</code>。</p>
 <p>但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是<code>skynet</code>默认使用的策略。如果需要使用可以在编译指令中指明<code>slab</code></p>
 <h1 id="zmalloc">Zmalloc</h1>
-<p><code>zmlloc</code> 本身也是 <code>slab</code>的升级版本，增加可伸缩链表实现对于预分配内存额外部分的缓冲池。</p>
+<p><code>zmalloc</code> 本身也是 <code>slab</code>的升级版本，增加可伸缩链表实现对于预分配内存额外部分的缓冲池。</p>
 <p>在24个线程的cpu条件测试结果如下,<code>zmalloc</code>保持了一种稳定的时间复杂度，额外产生的内存分配也很少</p>
 <table>
   <thead>
@@ -310,12 +319,24 @@ skynet.zrealloc(buf,n) realloc函数会先检查buf，确保是否需要重新�
 <p><code>skynet.zrealloc(buf,n)</code> realloc函数会先检查buf，确保是否需要重新分配内存</p>
 </li>
 <li>
-<p><code>skynet.zmemmove(buf,data)</code></p>
+<p><code>skynet.zmemmove(buf,data)</code> 与c的 <code>memmove</code> 类似，提供可重叠copy</p>
 </li>
 <li>
 <p><code>skynet.zfree(buf)</code> 释放一段内存,对于<code>slab</code> 而言，它会检查buf的地址是否属于当前class，然后判断是否属于其中的某个<code>segment</code>,否则会继续使用系统的gc。</p>
 </li>
 </ul>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
+     crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7934154300350596"
+     data-ad-slot="3469296166"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 </article>
               </div>
             </div>

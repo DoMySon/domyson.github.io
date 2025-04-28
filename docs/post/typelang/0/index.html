@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V23G8H27BQ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V23G8H27BQ');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
@@ -217,14 +226,12 @@
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><blockquote>
-<p>这篇文章将会是一个系列，更新会比源码慢，文档写的也不会写的很完全，名字暂定 <code>typelang</code>, C syntax-like</p>
-</blockquote>
+<p>这篇文章将会是一个系列，更新会比源码慢，文档写的也不会写的很完全，名字暂定 <code>typelang</code>, C syntax-like</p></blockquote>
 <h1 id="设计缘由">设计缘由</h1>
 <p>早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 <a href="/post/skynet/skynet">skynet</a> 写一门dsl，现在是用lua作为服务的脚本端。但由于的若约束性导致在开发的时候很多同时并不够优雅，总是以一种奇怪的方式来解决问题，Lua本身并没有任何问题，它被设计之初是为了修补C的不足，但它的语法设计却并不符合我的预期。</p>
 <p>尽管它的性能是脚本语言中顶尖的，但是一些隐式写法并不能保证它的预期性能，如混合<code>table</code>,过多的函数调用栈，字符串操作以及无类型系统。</p>
 <blockquote>
-<p>关于类型系统有利有弊，但我个人的观点是宁愿多出30%的开发时间，从而减少70%的bug。</p>
-</blockquote>
+<p>关于类型系统有利有弊，但我个人的观点是宁愿多出30%的开发时间，从而减少70%的bug。</p></blockquote>
 <h1 id="register-based-和-stack-based">Register Based 和 Stack Based</h1>
 <p>如<code>python,ruby,js,java</code> 属于 <code>Stack Based</code>, 而<code>lua</code>在5.0之后则属于<code>Register Based</code>.</p>
 <p>关于它们的区别，无非是一次表达式计算需要多少步骤，形如 <code>c=a+b</code>，对于<code>stack base</code>，需要3个步骤，而对于<code>register base</code>，只需要1个步骤。</p>

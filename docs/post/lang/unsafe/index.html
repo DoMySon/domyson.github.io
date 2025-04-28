@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V23G8H27BQ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V23G8H27BQ');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
@@ -218,16 +227,15 @@ uintptr 可以和 unsafe.Pointer 相互转换。
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><blockquote>
-<p>Golang 默认指针是类型安全的，但它有很多限制。Golang 还有非类型安全的指针，这就是 unsafe 包提供的 unsafe.Pointer。在某些情况下，它会使代码更高效，当然，也更危险。unsafe 包用于 Go 编译器，在编译阶段使用。从名字就可以看出来，它是不安全的，官方并不建议使用。Go 语言类型系统是为了安全和效率设计的，有时，安全会导致效率低下。unsafe 包绕过了 Go 的类型系统，达到直接操作内存的目的，使用它有一定的风险性。但是在某些场景下，使用 unsafe 包提供的函数会提升代码的效率，Go 源码中也是大量使用 unsafe 包。</p>
-</blockquote>
+<p>Golang 默认指针是类型安全的，但它有很多限制。Golang 还有非类型安全的指针，这就是 unsafe 包提供的 unsafe.Pointer。在某些情况下，它会使代码更高效，当然，也更危险。unsafe 包用于 Go 编译器，在编译阶段使用。从名字就可以看出来，它是不安全的，官方并不建议使用。Go 语言类型系统是为了安全和效率设计的，有时，安全会导致效率低下。unsafe 包绕过了 Go 的类型系统，达到直接操作内存的目的，使用它有一定的风险性。但是在某些场景下，使用 unsafe 包提供的函数会提升代码的效率，Go 源码中也是大量使用 unsafe 包。</p></blockquote>
 <h1 id="unsafe-包"><code>unsafe</code> 包</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//定义
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">ArbitraryType</span> <span class="kt">int</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//定义</span>
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">ArbitraryType</span> <span class="kt">int</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Pointer</span> <span class="o">*</span><span class="nx">ArbitraryType</span> 
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">//函数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">Sizeof</span><span class="p">(</span><span class="nx">x</span> <span class="nx">AribitraryType</span><span class="p">)</span> <span class="kt">uintptr</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//函数</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Sizeof</span><span class="p">(</span><span class="nx">x</span> <span class="nx">AribitraryType</span><span class="p">)</span> <span class="kt">uintptr</span><span class="p">{}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Offsetof</span><span class="p">(</span><span class="nx">x</span> <span class="nx">AribitraryType</span><span class="p">)</span> <span class="kt">uintptr</span><span class="p">{}</span>
 </span></span><span class="line"><span class="cl">
@@ -255,8 +263,7 @@ uintptr 可以和 unsafe.Pointer 相互转换。
 </ul>
 <blockquote>
 <p>综上，<code>unsafe.Pointer</code> 是不能进行指针运算的，只能先转为 <code>uintptr</code> 计算完再转回 <code>unsafe.Pointer</code> ,还有一点要注意的是，
-<code>uintptr</code> 并没有指针的语义，意思就是 <code>uintptr</code> 所指向的对象会被 gc。而 <code>unsafe.Pointer</code> 有指针语义，可以保护它所指向的对象在“有用”的时候不会被垃圾回收。</p>
-</blockquote>
+<code>uintptr</code> 并没有指针的语义，意思就是 <code>uintptr</code> 所指向的对象会被 gc。而 <code>unsafe.Pointer</code> 有指针语义，可以保护它所指向的对象在“有用”的时候不会被垃圾回收。</p></blockquote>
 <h1 id="注意">注意</h1>
 <ul>
 <li>
@@ -269,28 +276,28 @@ uintptr 可以和 unsafe.Pointer 相互转换。
 <h1 id="应用">应用</h1>
 <p><a href="/post/sknt/bbuf">bbuf</a></p>
 <h2 id="获取-slice-的长度和容量">获取 <code>slice</code> 的长度和容量</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//runtime/slice.go
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">slice</span> <span class="kd">struct</span><span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//runtime/slice.go</span>
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">slice</span> <span class="kd">struct</span><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">array</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">len</span> <span class="kt">int</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">cap</span> <span class="kt">int</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">//而make时创造一个 slice 的结构体
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">makeslice</span><span class="p">(</span><span class="nx">et</span> <span class="o">*</span><span class="nx">_type</span><span class="p">,</span><span class="nx">len</span><span class="p">,</span><span class="nx">cap</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">slice</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//而make时创造一个 slice 的结构体</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">makeslice</span><span class="p">(</span><span class="nx">et</span> <span class="o">*</span><span class="nx">_type</span><span class="p">,</span><span class="nx">len</span><span class="p">,</span><span class="nx">cap</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">slice</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">//那么
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">s</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//那么</span>
+</span></span><span class="line"><span class="cl"><span class="nx">s</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">//这一步网上教程有一个错误：直接加上8的偏移，这在x64机器上这个偏移将会是4
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">l</span> <span class="o">:=</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="nb">int</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">((</span><span class="nb">uintptr</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">))</span><span class="o">+</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Alignof</span><span class="p">(</span><span class="nx">s</span><span class="p">)))))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//这一步网上教程有一个错误：直接加上8的偏移，这在x64机器上这个偏移将会是4</span>
+</span></span><span class="line"><span class="cl"><span class="nx">l</span> <span class="o">:=</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="nb">int</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">((</span><span class="nb">uintptr</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">))</span><span class="o">+</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Alignof</span><span class="p">(</span><span class="nx">s</span><span class="p">)))))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nx">c</span> <span class="o">:=</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="nb">int</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">((</span><span class="nb">uintptr</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">))</span><span class="o">+</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Alignof</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">))))</span>
 </span></span></code></pre></div><h2 id="string-和-slice-的转换"><code>string</code> 和 <code>slice</code> 的转换</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//高性能的做法是 zero-copy，那么共享底层 []byte 即可
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="c1">//reflect/value.go
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">StringHeader</span> <span class="kd">struct</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//高性能的做法是 zero-copy，那么共享底层 []byte 即可</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//reflect/value.go</span>
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">StringHeader</span> <span class="kd">struct</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">Data</span> <span class="kt">uintptr</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">Len</span> <span class="kt">int</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -301,8 +308,8 @@ uintptr 可以和 unsafe.Pointer 相互转换。
 </span></span><span class="line"><span class="cl">    <span class="nx">Cap</span> <span class="kt">int</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">//所以
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">String2Bytes</span><span class="p">(</span><span class="nx">s</span> <span class="kt">string</span><span class="p">)</span> <span class="p">[]</span><span class="kt">byte</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//所以</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">String2Bytes</span><span class="p">(</span><span class="nx">s</span> <span class="kt">string</span><span class="p">)</span> <span class="p">[]</span><span class="kt">byte</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="nx">strH</span> <span class="o">:=</span> <span class="p">(</span><span class="o">*</span><span class="nx">reflect</span><span class="p">.</span><span class="nx">StringHeader</span><span class="p">)(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">	<span class="nx">bh</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">SliceHeader</span><span class="p">{</span>
 </span></span><span class="line"><span class="cl">		<span class="nx">Data</span><span class="p">:</span> <span class="nx">strH</span><span class="p">.</span><span class="nx">Data</span><span class="p">,</span>

@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V23G8H27BQ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V23G8H27BQ');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
@@ -222,8 +231,7 @@
 </span></span><span class="line"><span class="cl">        <span class="kt">char</span> <span class="o">*</span><span class="n">c</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">};</span>
 </span></span></code></pre></div><blockquote>
-<p>学过语言的都知道，什么是语言关键字。</p>
-</blockquote>
+<p>学过语言的都知道，什么是语言关键字。</p></blockquote>
 <p><code>typedef</code>,<code>struct</code>,<code>int</code>,<code>my_struct</code> 等都可以认为是一个<code>token</code>,可以简单理解为一个词的代号，而<code>keyword</code>属于被包含关系，<code>typedef</code>,<code>struct</code>,<code>int</code> 它们属于<code>keyword</code>,因为它们是程序内部定义&quot;词&quot;，而<code>my_struct</code>则属于用于定义的，</p>
 <p>像类似于 <code>+,-,*,/</code> 等都属于运算符</p>
 <p>其中 <code>const int sum = 100; </code> 中的<code>100</code> 则认为是一个常数.</p>
@@ -268,8 +276,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>这个函数专门处理一些关键字，和<code>identity</code></p>
 <blockquote>
-<p>辅助函数只能处理当前字符，那么如何知道是否满足某个条件，如变量只允许下划线和字母开头，答案就是状态机，类似于一个临时缓冲，将扫描到的字符放入其中方便做检测，而实际开发中其实只需要记录两次偏移的位置就可以拿到这段字符了</p>
-</blockquote>
+<p>辅助函数只能处理当前字符，那么如何知道是否满足某个条件，如变量只允许下划线和字母开头，答案就是状态机，类似于一个临时缓冲，将扫描到的字符放入其中方便做检测，而实际开发中其实只需要记录两次偏移的位置就可以拿到这段字符了</p></blockquote>
 </li>
 </ol>
 <h2 id="分析器的分析流程">分析器的分析流程</h2>

@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V23G8H27BQ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V23G8H27BQ');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
@@ -153,7 +162,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">34</span>
+              <span class="Counter">37</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -442,7 +451,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">34</span>
+      <span class="Counter ">37</span>
     </a>
   </nav>
 </div>
@@ -659,6 +668,102 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
+                <a href="https://domyson.github.io/post/personal/">个人日记</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <blockquote>
+<p>本人引用但未注明的版权资料，可邮件联系 （不是故意只是懒~）</p></blockquote>
+<h1 id="2025-04-28">2025-04-28</h1>
+<p>人还是比较懒，虽然更新了很多代码（同时维护四个以上的框架，还是没时间更新文档）每次打开又要重新组织语言，还是得保证人能看懂（尽管写的比较散）</p>
+<ul>
+<li>
+<p>像 <code>Anywhere</code> 现在叫 <code>Zen</code> 新增了大量模块 （比如 ECS版网络Module，<code>Multiplayer</code> 多人联机 Module 等, 哦 当然 Kpb序列化终于实现C#版本，（基于最早的<code>C</code>和<code>Go</code>版本已经过去了近两年，所以整个来说确实
+挺墨迹的， 倒不是难而是懒，总觉得同一个算法写三次感觉脑子瓦特了，哈哈~</p>
+</li>
+<li>
+<p><code>skynet</code> 最早是为了解决云风大佬一些特异化场景而驱动开发的，但现在已经完全像个学术派 （ 把Go写成浓浓的<code>C style</code>味），果然还是喜欢折腾</p>
+</li>
+<li>
+<p>前阵子翻了翻几年的库，自我感觉写的一般，又拿出折腾了一番</p>
+</li>
+<li>
+<p>总之尽快更新新的文档，后续先提供可用版本，至于开源的事再考虑考虑，（毕竟国内，吃干抹净，过河拆桥的人不在少数，至少本人用开源保留 copyright, 也会提 issus 促进发展 ） 嗯~，就是瞧不起这些人</p>
+</li>
+</ul>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Mon, 14 Apr 2025 00:00:00 &#43;0000" class="no-wrap"
+                title=" Mon, 14 Apr 2025 00:00:00 &#43;0000">
+                Mon, 14 Apr 2025 00:00:00 &#43;0000
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://domyson.github.io/post/skynet/2/">eventbus</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="事件总线">事件总线</h1>
+<p>消息订阅，发布是每个服务器都必备的机制，当然 <code>skynet</code> 也不例外，而且更加优雅。</p>
+<p>绕不开传统的事件订阅流程，<code>skynet</code>的事件总线是一个<code>process</code>,意味着</p>
+<ol>
+<li>
+<p>所以事件订阅发布都是异步的，</p>
+</li>
+<li>
+<p>所有消息的发布是可调度的（参见上节 <code>scheduler</code>）,</p>
+</li>
+<li>
+<p>可以通过控制独占来解决事件总线的调度频率</p>
+</li>
+</ol>
+<p>emm&hellip; 似乎也没什么好些的，<code>eventbus</code>更像底层某些机制的封装，了解即可</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
+     crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7934154300350596"
+     data-ad-slot="3469296166"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 30 Jan 2025 00:00:00 &#43;0000" class="no-wrap"
+                title=" Thu, 30 Jan 2025 00:00:00 &#43;0000">
+                Thu, 30 Jan 2025 00:00:00 &#43;0000
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
                 <a href="https://domyson.github.io/post/makefile/">makefile</a>
               </h3>
             </div>
@@ -666,8 +771,7 @@
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
                 <blockquote>
-<p><code>makefile</code> 很早就想写了，高阶概念总是忘了又忘，一千个人一千个哈姆雷特，理解抽象概念的方式各有不同</p>
-</blockquote>
+<p><code>makefile</code> 很早就想写了，高阶概念总是忘了又忘，一千个人一千个哈姆雷特，理解抽象概念的方式各有不同</p></blockquote>
 <h1 id="whats-makefile">What&rsquo;s makefile?</h1>
               </div>
             </div>
@@ -896,14 +1000,12 @@
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
                 <blockquote>
-<p>这篇文章将会是一个系列，更新会比源码慢，文档写的也不会写的很完全，名字暂定 <code>typelang</code>, C syntax-like</p>
-</blockquote>
+<p>这篇文章将会是一个系列，更新会比源码慢，文档写的也不会写的很完全，名字暂定 <code>typelang</code>, C syntax-like</p></blockquote>
 <h1 id="设计缘由">设计缘由</h1>
 <p>早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 <a href="/post/skynet/skynet">skynet</a> 写一门dsl，现在是用lua作为服务的脚本端。但由于的若约束性导致在开发的时候很多同时并不够优雅，总是以一种奇怪的方式来解决问题，Lua本身并没有任何问题，它被设计之初是为了修补C的不足，但它的语法设计却并不符合我的预期。</p>
 <p>尽管它的性能是脚本语言中顶尖的，但是一些隐式写法并不能保证它的预期性能，如混合<code>table</code>,过多的函数调用栈，字符串操作以及无类型系统。</p>
 <blockquote>
-<p>关于类型系统有利有弊，但我个人的观点是宁愿多出30%的开发时间，从而减少70%的bug。</p>
-</blockquote>
+<p>关于类型系统有利有弊，但我个人的观点是宁愿多出30%的开发时间，从而减少70%的bug。</p></blockquote>
               </div>
             </div>
 
@@ -934,184 +1036,20 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/zen/3/">datatable</a>
+                <a href="https://domyson.github.io/post/zen/2/">Beam</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
                 <h1 id="简介">简介</h1>
-<p><code>DatatableModule</code> 是一个基于 <a href="/post/kproto">kpb</a> 编码的配置文件管理系统,它定义了一个配置文件的数据结构，并提供了相应的API来操作和访问配置文件。在<code>Zen</code>中它是一个<code>GameComponent</code>。它包含了一个代码生成器，和数据解析器和编码器。</p>
-<p>数据表的加载只有4(2)个接口  <code>LoadDatatable&lt;T&gt;(bool lazy)</code> <code>GetRow&lt;T&gt;(int row)</code> 以及一套同作用的异步接口，前者获取一整张表，后者获取某表的某一行数据，即对应的数据结构体。</p>
-<p><code>Datatable</code> 静默行为是 <code>Lazy load</code> 对于同一张数据表，它只会根据需要读取指定行然后才缓存，而不是一次性读取所有表格。</p>
-<h1 id="feature">Feature</h1>
-<ol>
-<li>
-<p><code>lazy load</code>,它不会加载表格的所有数据，而是按照需要动态一部分一部分的加载，直到全部加载完毕。</p>
-</li>
-<li>
-<p><code>DatatableModule</code> 加载接口提供同步和异步两种模式，也可以加载远程资源，依赖于 <a href="/post/Zen/2">Resource</a></p>
-</li>
-<li>
-<p><code>DatatableModule</code> 提供代码和数据生成的编辑器，无需关注实现逻辑。</p>
-</li>
-<li>
-<p>多种类型数据支持 <code>bool,int,float,string,binary,int*,float*,string*</code>,满足绝大部分场景
-（2024/05/23）增加了定长数据的支持，减少内存消耗。</p>
-</li>
-<li>
-<p>基于<code>kproto</code>编码协议，极小的二进制文件，以及极快的编解码速度。</p>
-</li>
-<li>
-<p>栈内存映射，大部分情况下不需要开辟堆空间，节省一部分堆内存的分配，减少<code>Mono Reserved</code>的分配。</p>
-</li>
-</ol>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
-     crossorigin="anonymous"></script>
-
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7934154300350596"
-     data-ad-slot="3469296166"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-              
-              <a class="muted-link mr-3" href="/tags/">
-                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-                  <path fill-rule="evenodd"
-                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-                  </path>
-                </svg>
-                
-              </a>
-              
-              
-
-              Created
-              <relative-time datetime=" Sat, 01 Apr 2023 00:00:00 &#43;0000" class="no-wrap"
-                title=" Sat, 01 Apr 2023 00:00:00 &#43;0000">
-                Sat, 01 Apr 2023 00:00:00 &#43;0000
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/zen/5/">EntityManager</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p><code>EntityManager</code>是一个很重要的模块，像游戏开发本身就是视觉感知，而<code>EntityManager</code>是对所有场景物体的统一抽象封装, 并提供一系列通用操作，<code>EntityManager</code> 本身是一个抽象类，提供了一定程度的通用性操作，但针对一些特殊情况我们还是需要针对特定问题特定实现（千万不想要想着做平，来自某家公司的教训:)）</p>
-<p><code>EntityManager</code> 附带一个默认的 <code>EntityController</code>,提供一些常规的实体控制，像 <code>Zen</code>的UI框架就是基于 <code>EntityManager</code>的一个具体实现。</p>
-<h1 id="entity">Entity</h1>
-<p>抽象描述一个物体的实体，它的生命周期函数定义类似于<code>GameComponent</code>,但是它的调度不由<code>GameEntry</code>而是 <code>GameComponent</code>。</p>
-<p>简单来说，要创建一个物体首先我们需要定义它的逻辑模板（骨架）以及它的数据（描述）</p>
-<p>举个例子</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">struct</span> <span class="nc">EnemyData</span><span class="p">:</span><span class="n">IEntityData</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 对于实体数据接口，资源名必不可少</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Assets</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span><span class="k">set</span><span class="p">;}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">void</span> <span class="n">OnCtor</span><span class="p">(){</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// 有些时候，实体的数据更关卡等级或这地图这类外部数据挂钩，可能需要在这里动态设置一次</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 定义Entity的逻辑模板</span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">struct</span> <span class="nc">Enemy</span><span class="p">:</span><span class="n">Entity</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="n">EnemyData</span> <span class="n">userdata</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="k">void</span> <span class="n">OnCtor</span><span class="p">(){</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// init setup...</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>     
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="k">void</span> <span class="n">OnUpdate</span><span class="p">(</span><span class="kt">float</span> <span class="n">delta</span><span class="p">,</span><span class="kt">float</span> <span class="n">unscaleDelta</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// loop logic.</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">void</span> <span class="n">dosomething</span><span class="p">(){</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 直接在默认的EntityManager中创建一个实体</span>
-</span></span><span class="line"><span class="cl">    <span class="n">GameEntry</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">EntityManager</span><span class="p">&gt;().</span><span class="n">Load</span><span class="p">&lt;</span><span class="n">Enemy</span><span class="p">&gt;(</span><span class="k">new</span> <span class="n">EnemyData</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>对于实体的销毁，像敌人死亡，特效消失之类的，仅仅只需要设置一个 <code>Alive</code> 属性，即可完成，生命周期由<code>EntityManger</code>自行决断。</p>
-<p>需要注意的是 继承<code>IEntityData</code>的数据模板是会一直复用的，它与 <code>Entity</code>的复用规则不同，后者复用的是<code>Entity</code>所持有的实体，因为它本身只是一系列函数集合且很少会带有数据并不会占用太多的内存，而前者大部分情况下是都是通过读表获取，复杂的实体数据可能会导致内存异常大，所以保留实体数据是<code>EntityManager</code>的默认行为。</p>
-<h1 id="entitysettings">EntitySettings</h1>
-<p><code>EntityManager</code>可能需要在某些大量对象时使用对象池（<code>Entity</code>），或者内存池(<code>EntityData</code>),但在大多数情况下，框架并不清楚是否需要对象池，或者是需要一个定长周期的物体（子弹或者特效）。</p>
-<p>这个时候需要设置就非常有必要了，可以决断出是否需要且生命周期（keepalive）或者是需要多大的对象池，以及自动孵化的频率了。</p>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
-     crossorigin="anonymous"></script>
-
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7934154300350596"
-     data-ad-slot="3469296166"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-              
-              <a class="muted-link mr-3" href="/tags/">
-                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-                  <path fill-rule="evenodd"
-                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-                  </path>
-                </svg>
-                
-              </a>
-              
-              
-
-              Created
-              <relative-time datetime=" Sat, 01 Apr 2023 00:00:00 &#43;0000" class="no-wrap"
-                title=" Sat, 01 Apr 2023 00:00:00 &#43;0000">
-                Sat, 01 Apr 2023 00:00:00 &#43;0000
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/zen/2/">Resource</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="简介">简介</h1>
-<p><code>Resource</code> 是一个全自动化，且简单易用的资源管理系统,继承于<code>GameComponet</code>实现 ，它内部使用<code>RC</code>的方式来管理资源的引用，且不需要手动显示释放,而是通过拦截finalizer的方式，来达到释放的目的，比手动安全性更高，也更易用。</p>
-<p>它仅提供了两组接口资源加载接口<code>LoadAsset</code>  <code>LoadAssetAsync</code>，。并提供了虚拟化的方式加载，在编辑器模式下不会真正的构建<code>AssetBundle</code>包，从而提供开发效率。</p>
-<p><code>Resource</code>也包括流场景构建，可以将整个场景都作为热更新资源。</p>
+<p><code>Beam</code> 是一个全自动化，且简单易用的资源管理系统, 它只提供资源的加载和管理方式，不提供资源的解析方式，意味这它是可以跨引擎使用，这里只指出它在<code>Unity</code>中的部分，他本身只会管理文件的依赖 （manifest）以及
+文件句柄资源 （在 C++ 中叫 fd，在C#中成为 FileStream）</p>
 <h1 id="feature">Feature</h1>
 <ol>
 <li>
 <p>自动化检测文件变动
-通过<code>Radix</code>算法，监控资源变动，来自动构建<code>manifest</code>。上层只需要关注资源本身，无需关注<code>AssetBundle</code>包的构建。做到对上层完全无感。</p>
+通过<code>Radix</code>算法，监控资源变动，来自动构建<code>manifest</code>。上层只需要关注资源本身，无需关注<code>AssetBundle</code>包的构建。可做到对上层完全无感。</p>
 </li>
 <li>
 <p>自动化引用计数
@@ -1145,12 +1083,12 @@
 </li>
 <li>
 <p>淘汰策略
-当某个Assetbundle的引用计数为0时候，底层不会立即释放它，而是根据它过往的加载次数判断下一次淘汰次数，越大将会越晚淘汰，当然也提供了强制卸载函数。</p>
+当某个Assetbundle的引用计数为0时候，底层不会立即释放它，基于引用计数+ LRU 淘汰机制，当然也提供了强制卸载函数。</p>
 </li>
 </ol>
 <h1 id="后续计划">后续计划</h1>
 <p><del>现阶段<code>Resource</code>是依赖于<code>Assetbundle</code> 后续会抽象出一层 <code>FS</code> 以提供自定义流提供更多可操作性和安全性。</del> 已实现</p>
-<p><code>Resource</code>现在可以说是完全不能脱离<code>Unity</code>独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步时只需要在<code>Unity</code>中需要手动实现一个<code>Adaptor</code>即可。</p>
+<p><del><code>Resource</code>现在可以说是完全不能脱离<code>Unity</code>独立运行，这不是一个好的方式，我期望提供更高的抽象满足多个引擎的需求。当完成这一步时只需要在<code>Unity</code>中需要手动实现一个<code>Adaptor</code>即可。</del></p>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
      crossorigin="anonymous"></script>
 

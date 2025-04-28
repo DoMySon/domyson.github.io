@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V23G8H27BQ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V23G8H27BQ');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
@@ -266,8 +275,7 @@
 <p><code>I/O复用</code> 有时又被称为 <code>事件驱动I/O</code>, 它的最大优势在于，我们可以将感兴趣的多个I/O事件（更精确的说，应该是 I/O 所对应的文件描述符）注册到 <code>select/poll/epoll/kqueue</code> 之中某一个系统调用上（很多时候，这些系统调用又被称为多路复用器。假设此时我们选择了 select() ）。此后，调用进程会阻塞在 select() 系统调用之上（而不是阻塞在真正的 I/O 系统调用（如 read(), write() 等）上）。select() 会负责监视所有已注册的 I/O 事件，一旦有任意一个事件的数据准备好，那么 select() 会立即返回，此时我们的用户进程便能够进行数据的复制操作。</p>
 <p><img src="/images/others/IO%E5%A4%8D%E7%94%A8.png" alt="IO复用"></p>
 <blockquote>
-<p><code>select</code>、<code>poll</code>、<code>epoll</code>、<code>kqueue</code>。</p>
-</blockquote>
+<p><code>select</code>、<code>poll</code>、<code>epoll</code>、<code>kqueue</code>。</p></blockquote>
 <ol>
 <li>
 <p><code>select</code></p>
@@ -289,22 +297,18 @@
 <hr>
 <h1 id="异步非阻塞io">异步非阻塞I/O</h1>
 <blockquote>
-<p>Windows的<code>IOCP</code>模型</p>
-</blockquote>
+<p>Windows的<code>IOCP</code>模型</p></blockquote>
 <p><code>异步非阻塞 /O模型</code> 是一种处理与 I/O 重叠进行的模型。读请求会立即返回，说明 read 请求已经成功发起了。在后台完成读操作时，应用程序然后会执行其他处理操作。当 read 的响应到达时，就会产生一个信号或执行一个基于线程的回调函数来完成这次 I/O 处理过程。本质上阻塞是用户 I/O 线程，主线程是非阻塞的，所以此模型是<code>真异步</code>。</p>
 <p><img src="/images/others/%E5%BC%82%E6%AD%A5%E9%9D%9E%E9%98%BB%E5%A1%9EIO.png" alt="异步非阻塞IO"></p>
 <blockquote>
-<p>仅unix支持</p>
-</blockquote>
+<p>仅unix支持</p></blockquote>
 <h1 id="几种io模型的比较">几种I/O模型的比较</h1>
 <blockquote>
-<p>判断是否是真正异步的方式是，内核完成通知之后是否是主线程处理，还是I/O线程处理。</p>
-</blockquote>
+<p>判断是否是真正异步的方式是，内核完成通知之后是否是主线程处理，还是I/O线程处理。</p></blockquote>
 <p><img src="/images/others/IO%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%AF%94%E8%BE%83.png" alt="IO模型的比较"></p>
 <h1 id="reactor和proactor"><code>Reactor</code>和<code>Proactor</code></h1>
 <blockquote>
-<p>还没写</p>
-</blockquote></article>
+<p>还没写</p></blockquote></article>
               </div>
             </div>
           </div>

@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V23G8H27BQ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V23G8H27BQ');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
@@ -153,7 +162,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">34</span>
+              <span class="Counter">37</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -442,7 +451,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">34</span>
+      <span class="Counter ">37</span>
     </a>
   </nav>
 </div>
@@ -659,6 +668,169 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
+                <a href="https://domyson.github.io/post/zen/3/">datatable</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="简介">简介</h1>
+<p><code>DatatableModule</code> 是一个基于 <a href="/post/kproto">kpb</a> 编码的配置文件管理系统,它定义了一个配置文件的数据结构，并提供了相应的API来操作和访问配置文件。在<code>Zen</code>中它是一个<code>GameComponent</code>。它包含了一个代码生成器，和数据解析器和编码器。</p>
+<p>数据表的加载只有4(2)个接口  <code>LoadDatatable&lt;T&gt;(bool lazy)</code> <code>GetRow&lt;T&gt;(int row)</code> 以及一套同作用的异步接口，前者获取一整张表，后者获取某表的某一行数据，即对应的数据结构体。</p>
+<p><code>Datatable</code> 静默行为是 <code>Lazy load</code> 对于同一张数据表，它只会根据需要读取指定行然后才缓存，而不是一次性读取所有表格。</p>
+<h1 id="feature">Feature</h1>
+<ol>
+<li>
+<p><code>lazy load</code>,它不会加载表格的所有数据，而是按照需要动态一部分一部分的加载，直到全部加载完毕。</p>
+</li>
+<li>
+<p><code>DatatableModule</code> 加载接口提供同步和异步两种模式，也可以加载远程资源，依赖于 <a href="/post/Zen/2">Resource</a></p>
+</li>
+<li>
+<p><code>DatatableModule</code> 提供代码和数据生成的编辑器，无需关注实现逻辑。</p>
+</li>
+<li>
+<p>多种类型数据支持 <code>bool,int,float,string,binary,int*,float*,string*</code>,满足绝大部分场景
+（2024/05/23）增加了定长数据的支持，减少内存消耗。</p>
+</li>
+<li>
+<p>基于<code>kproto</code>编码协议，极小的二进制文件，以及极快的编解码速度。</p>
+</li>
+<li>
+<p>栈内存映射，大部分情况下不需要开辟堆空间，节省一部分堆内存的分配，减少<code>Mono Reserved</code>的分配。</p>
+</li>
+</ol>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
+     crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7934154300350596"
+     data-ad-slot="3469296166"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+              
+              <a class="muted-link mr-3" href="/tags/">
+                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                  <path fill-rule="evenodd"
+                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                  </path>
+                </svg>
+                
+              </a>
+              
+              
+
+              Created
+              <relative-time datetime=" Sat, 01 Apr 2023 00:00:00 &#43;0000" class="no-wrap"
+                title=" Sat, 01 Apr 2023 00:00:00 &#43;0000">
+                Sat, 01 Apr 2023 00:00:00 &#43;0000
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://domyson.github.io/post/zen/5/">EntityManager</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p><code>EntityManager</code>是一个很重要的模块，像游戏开发本身就是视觉感知，而<code>EntityManager</code>是对所有场景物体的统一抽象封装, 并提供一系列通用操作，<code>EntityManager</code> 本身是一个抽象类，提供了一定程度的通用性操作，但针对一些特殊情况我们还是需要针对特定问题特定实现（千万不想要想着做平，来自某家公司的教训:)）</p>
+<p><code>EntityManager</code> 附带一个默认的 <code>EntityController</code>,提供一些常规的实体控制，像 <code>Zen</code>的UI框架就是基于 <code>EntityManager</code>的一个具体实现。</p>
+<h1 id="entity">Entity</h1>
+<p>抽象描述一个物体的实体，它的生命周期函数定义类似于<code>GameComponent</code>,但是它的调度不由<code>GameEntry</code>而是 <code>GameComponent</code>。</p>
+<p>简单来说，要创建一个物体首先我们需要定义它的逻辑模板（骨架）以及它的数据（描述）</p>
+<p>举个例子</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">struct</span> <span class="nc">EnemyData</span><span class="p">:</span><span class="n">IEntityData</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 对于实体数据接口，资源名必不可少</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Assets</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span><span class="k">set</span><span class="p">;}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">void</span> <span class="n">OnCtor</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 有些时候，实体的数据更关卡等级或这地图这类外部数据挂钩，可能需要在这里动态设置一次</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 定义Entity的逻辑模板</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">struct</span> <span class="nc">Enemy</span><span class="p">:</span><span class="n">Entity</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="n">EnemyData</span> <span class="n">userdata</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="k">void</span> <span class="n">OnCtor</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// init setup...</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>     
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="k">void</span> <span class="n">OnUpdate</span><span class="p">(</span><span class="kt">float</span> <span class="n">delta</span><span class="p">,</span><span class="kt">float</span> <span class="n">unscaleDelta</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// loop logic.</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">void</span> <span class="n">dosomething</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 直接在默认的EntityManager中创建一个实体</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GameEntry</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">EntityManager</span><span class="p">&gt;().</span><span class="n">Load</span><span class="p">&lt;</span><span class="n">Enemy</span><span class="p">&gt;(</span><span class="k">new</span> <span class="n">EnemyData</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>对于实体的销毁，像敌人死亡，特效消失之类的，仅仅只需要设置一个 <code>Alive</code> 属性，即可完成，生命周期由<code>EntityManger</code>自行决断。</p>
+<p>需要注意的是 继承<code>IEntityData</code>的数据模板是会一直复用的，它与 <code>Entity</code>的复用规则不同，后者复用的是<code>Entity</code>所持有的实体，因为它本身只是一系列函数集合且很少会带有数据并不会占用太多的内存，而前者大部分情况下是都是通过读表获取，复杂的实体数据可能会导致内存异常大，所以保留实体数据是<code>EntityManager</code>的默认行为。</p>
+<h1 id="entitysettings">EntitySettings</h1>
+<p><code>EntityManager</code>可能需要在某些大量对象时使用对象池（<code>Entity</code>），或者内存池(<code>EntityData</code>),但在大多数情况下，框架并不清楚是否需要对象池，或者是需要一个定长周期的物体（子弹或者特效）。</p>
+<p>这个时候需要设置就非常有必要了，可以决断出是否需要且生命周期（keepalive）或者是需要多大的对象池，以及自动孵化的频率了。</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
+     crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7934154300350596"
+     data-ad-slot="3469296166"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+              
+              <a class="muted-link mr-3" href="/tags/">
+                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                  <path fill-rule="evenodd"
+                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                  </path>
+                </svg>
+                
+              </a>
+              
+              
+
+              Created
+              <relative-time datetime=" Sat, 01 Apr 2023 00:00:00 &#43;0000" class="no-wrap"
+                title=" Sat, 01 Apr 2023 00:00:00 &#43;0000">
+                Sat, 01 Apr 2023 00:00:00 &#43;0000
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
                 <a href="https://domyson.github.io/post/zen/0/">Zen Gameplay Framework</a>
               </h3>
             </div>
@@ -666,43 +838,10 @@
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
                 <h1 id="序">序</h1>
-<p><code>Zen</code> 是一个基于 Unity 引擎的<code>GamePlay</code>框架，脱离 <code>Monobehaviour</code> 开发，致力简化开发流程。内部提供了一个类<code>ECS</code>的架构满足开发，你也可以使用自定义的上层，比如自己实现像<code>MVCC</code>，或者是<code>MVC</code>的上层封装。让开发聚焦在游戏玩法而非一些底层架构上。</p>
+<p><code>Zen</code> 是一个基于 Unity 引擎的<code>GamePlay</code>框架，脱离 <code>Monobehaviour</code> 开发，致力简化开发流程。内部提供了一个类<code>ECS</code>的架构满足开发，你也可以使用自定义的上层，比如自己实现像<code>MVCC</code>，或者是<code>MVC</code>的上层封装。让开发聚焦在游戏玩法而非一些底层架构上。同时也
+提供一些自定义性，不至于给予开发者太强约束性</p>
 <blockquote>
-<p>Zen的一些设计思想不算是纯粹的<code>OOP</code>，它有ECS的概念，也有<code>type embedding</code>的概念，而且设计概念大部分是参考面过过程和内嵌的设计思想，所以理解曲线会比较困难</p>
-</blockquote>
-<h1 id="设计目标">设计目标</h1>
-<ol>
-<li>
-<p>无框架化，它之所有不提供是为了更好的设计出不同品类的游戏，而我在近10年的游戏开发生涯中，我始终觉得框架的约束即使最大的约束，因为业务的多样性和非明确性的特点，一般游戏后期的一些奇奇怪怪的需求总是会迫使你绕过框架的约束从而形成屎山code，所以我希望<code>Zen</code>框架本身可以尽可能的简单，让开发者可以自由的去选择框架的约束。你可使用<code>Zen</code>的一部分，或者全部，甚至是都不需要。</p>
-</li>
-<li>
-<p>无<code>MonoBehaviour</code>编程设计，解除引擎原始的约束，更自由的编程方式，像之前开发游戏，一个角色身上可能挂在各式各样的组件，一旦后期业务变动很容易出现引用丢失或者维护起来更为困难，而且一些特殊的时候可能还需要设置一下脚本的执行顺序，给维护带来巨大的不便（如我之前所呆的项目各种口口相传的细节规范，让开发痛不欲生）</p>
-</li>
-<li>
-<p>模块化，<code>Zen</code>的一大特色，以像<code>C library</code>的方式来组织模块，让模块之间可以互相调用，并且可以互相替换，让开发者可以自由的去选择模块的约束。选择何种内置模块，或者是自定义模块由开发者决定，这也是使用 <code>Zen</code> 唯一的约束，你的模块可以是框架，也可以是<code>Module</code>。</p>
-</li>
-<li>
-<p>简单化，<code>Zen</code> 本身只提最必要的一些基础组件，你可以重新实现，而并非是必要的</p>
-</li>
-<li>
-<p>自由化，游戏开发是自由的，是创造性的，<code>Zen</code> 不会约束你干什么，你只需要关注你的想法，怎么做取决于你的点子。</p>
-</li>
-<li>
-<p>非文档约束性组件控制器绑定，面向对象的模式必然导致代码变得复杂，因使用内嵌代替<code>OOP</code>，但显然C#做不到，需要额外的封装，但过于麻烦不符合<code>Zen</code>的设计哲学，故通过静态泛型约束实现。</p>
-</li>
-<li>
-<p>无任何反射调度，提高代码的运行速度。</p>
-</li>
-<li>
-<p>高度继承的构建管线，非常完善且易使用基建设计（配置，资源，本地化，网络等）</p>
-</li>
-<li>
-<p><code>ZenRpc</code>现在可用了，无关乎网络，无缝与 <a href="https://domyson.github.io/">skynet-go</a></p>
-</li>
-</ol>
-<blockquote>
-<p><code>Zen</code>不鼓励继承，其内部设计也是符合此规范，所以整个拓扑架构更平整</p>
-</blockquote>
+<p>Zen的一些设计思想不算是纯粹的<code>OOP</code>，它有ECS的概念，也有<code>type embedding</code>的概念，而且设计概念大部分是参考面过过程和内嵌的设计思想，所以理解曲线会比较困难，但是用起来还是挺 easy。</p></blockquote>
               </div>
             </div>
 
@@ -741,14 +880,11 @@
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
                 <h1 id="redis">Redis</h1>
 <blockquote>
-<p>Remote Dictionary Server,采用 ANSI C 编写的 K-V数据库</p>
-</blockquote>
+<p>Remote Dictionary Server,采用 ANSI C 编写的 K-V数据库</p></blockquote>
 <blockquote>
-<p><a href="http://doc.redisfans.com/index.html">Redis命令</a></p>
-</blockquote>
+<p><a href="http://doc.redisfans.com/index.html">Redis命令</a></p></blockquote>
 <blockquote>
-<p><a href="https://redis.io/download">Redis下载</a></p>
-</blockquote>
+<p><a href="https://redis.io/download">Redis下载</a></p></blockquote>
 <h1 id="类型">类型</h1>
 <ul>
 <li>
@@ -787,8 +923,7 @@
 </li>
 </ol>
 <blockquote>
-<p>虚拟内存机制就是暂时把不经常访问的数据(冷数据)从内存交换到磁盘中，从而腾出宝贵的内存空间用于其它需要访问的数据(热数据)。通过VM功能可以实现冷热数据分离，使热数据仍在内存中、冷数据保存到磁盘。这样就可以避免因为内存不足而造成访问速度下降的问题。</p>
-</blockquote>
+<p>虚拟内存机制就是暂时把不经常访问的数据(冷数据)从内存交换到磁盘中，从而腾出宝贵的内存空间用于其它需要访问的数据(热数据)。通过VM功能可以实现冷热数据分离，使热数据仍在内存中、冷数据保存到磁盘。这样就可以避免因为内存不足而造成访问速度下降的问题。</p></blockquote>
 <h1 id="击穿穿透雪崩">击穿，穿透，雪崩</h1>
 <h2 id="击穿">击穿</h2>
 <p>某个key在过期点的时候，突然出现大量请求查找这个key</p>
@@ -809,17 +944,11 @@
 <h1 id="高可用">高可用</h1>
 <h2 id="主从">主从</h2>
 <blockquote>
-<p>类似mysql主从，master负责写，slave负责读</p>
-</blockquote>
+<p>类似mysql主从，master负责写，slave负责读</p></blockquote>
 <h2 id="哨兵">哨兵</h2>
 <p>监视其他节点的状态</p>
 <h2 id="集群">集群</h2>
 <p>Gossip，HashSlot 16384</p>
-<p><a href="https://zhuanlan.zhihu.com/p/427496556">View</a></p>
-<h1 id="分布式锁">分布式锁</h1>
-<h2 id="setnx">setnx</h2>
-<blockquote>
-<p>setnx nx [expired]</p>
               </div>
             </div>
 
@@ -886,8 +1015,8 @@
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
                 <h1 id="前言">前言</h1>
-<p>其实在<code>cobweb</code>之初就设计了一种编码协议(kproto)，用于内部消息的编码,但因为公司项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护，
-而后期在研发的时候，发现需要与多种语言交互，显然 <code>json</code>,<code>xml</code> 不是一个很好的选择，而 <code>protobuf</code> 对弱类型语言支持不友好。</p>
+<p>其实在<code>cobweb</code>之初就设计了一种编码协议(kproto)，用于内部服务消息之间的编码,但因为项目长期需要维护以及开发（两款线上，一款开发中），所以一直未对此库进行维护，
+而后期在研发的时候，发现需要与多种语言交互，显然 <code>json</code>,<code>xml</code> 不是一个很好的选择，而 <code>protobuf</code> 对弱类型语言支持不友好。所以诞生了它 （kproto,kpb ）</p>
 <h1 id="benchmark">Benchmark</h1>
 <ul>
 <li>cpu: Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz</li>
@@ -954,32 +1083,35 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/skynet/1/">message</a>
+                <a href="https://domyson.github.io/post/skynet/1/">scheduler</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
                 <h1 id="简介">简介</h1>
-<p><code>skynet</code>是基于<code>actor</code> 消息的服务框架，那么我们需要定义一套标准且高效的消息结构</p>
-<h2 id="processor">Processor</h2>
+<p><code>skynet</code> 实现了一套调度器机制，用以调度 <code>process</code>, 与云风大佬不同的是，<code>sched</code> 支持公平模式以及独占模式，独占模式主要是为了解决特性场景下业务的响应速度，从而提升体验感，
+其次，不一定需要按照每个 <code>process</code> 对应一条协程，减少<code>runtime</code>调度以及内存的开销</p>
+<h2 id="sched">Sched</h2>
 <p>一个伪线程的逻辑处理器概念，它分为独占和负载两种模式。</p>
 <ul>
 <li>
-<p>独占<code>Processor</code>是为了更好的处理实时性更高的业务，它不会被其他任务抢占</p>
+<p>独占是为了更好的处理实时性更高的业务，它不会被其他任务抢占</p>
 </li>
 <li>
-<p>负载<code>Processor</code>又可分为两种运行态，均匀的处理业务以及从其他<code>Processor</code>上偷窃任务，尽量保证<code>Processor</code>不会过于闲置，除此之外，负载<code>Processor</code>可随着任务的变动而增加（不会超过最大设定值），特别的当某个任务陷入”死循环”或者是超出设定运行阈值的时候会重新创建一个<code>Processor</code>，并让之前的挂起（在C版本中将会被强制关闭）。</p>
+<p>负载<code>又可分为两种运行态，均匀的处理业务以及从其他</code>process<code>上偷窃任务，尽量保证</code>Processor<code>不会过于闲置，除此之外，负载</code>Processor<code>可随着任务的变动而增加（不会超过最大设定值），特别的当某个任务陷入”死循环”或者是超出设定运行阈值的时候会重新创建一个</code>Processor`，并让之前的挂起（在C版本中将会被强制关闭）。</p>
+</li>
+<li>
+<p>多数时候协程过多会造成系统压力。</p>
 </li>
 </ul>
 <blockquote>
-<p>C版本和Go版本调度和设计上差异不大，但一些细节上的处理可能不同，因为C可以提供更多的底层控制</p>
-</blockquote>
-<h2 id="pid">PID</h2>
-<p>一个 <code>message</code> 最重要的是消息地址，如果一个消息没有地址的话我们称为 <code>dead-letter</code>。 那么我们通过<code>Pid</code> 标定一个地址类型，</p>
-<p>它表示该服务的唯一id (本质上是一个<code>uint64</code>)的类习惯，它一定能确保在当前节点以及集群中唯一的。</p>
-<p>在服务本身未被关闭的时候，<code>pid</code>一定不会产生变动，但重新启动节点之后，它的值可能会发生改变，因为所有服务默认都是并发启动，除非手动指定了关系(这也是它与<code>skynet</code>的区别)，所以不要尝试保存这个<code>pid</code></p>
-<p>一旦能确定了一个<code>pid</code>的话，就可以通过 <code>skynet.send(pid,cmd,...) or skynet.call(ti,pid,cmd,...)</code> 将其发送出去了。</p>
+<p>C版本和Go版本调度和设计上差异不大，但一些细节上的处理可能不同，因为C可以提供更多的底层控制</p></blockquote>
+<h2 id="process">Process</h2>
+<p><code>process</code> 是一种用户态的伪概念，用于描述一个 <code>actor</code>的具体实现方式，也是 <code>skynet</code>最小调度单元，这种概念对于分布式而言更友好，无关乎process在哪，只需要知道 <code>PID</code> 或者 <code>Alias</code> 即可向其投送消息。
+主要是对业务几乎无侵入</p>
+<h2 id="message">Message</h2>
+<p><code>message</code> 是 <code>skynet</code> 基础消息承载结构</p>
 <h2 id="服务的消息队列">服务的消息队列</h2>
 <p><code>Actor</code> 模型最重要的的概念是 <code>mailbox</code>,它代表了一个实体需要处理的队列容器，</p>
 <p>得益于<code>go</code>的简单性，可以使用 <code>channel</code> 来实现，但这种方式的实现性能不高，因为 <code>channel</code> 底层的结构使用的是互斥锁，</p>
@@ -989,29 +1121,21 @@
 <ul>
 <li>发送</li>
 </ul>
-<p>用户不需要构建这个结构体，仅仅需要指定 <code>destination</code> 以及需要发送的数据，而且 <code>skynet</code> 消息投递被设计成不允许发送 <code>nil</code> 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 <code>struct{}{}</code>。</p>
-<p>而且消息发送成功只能代表被 <code>mailbox</code> 接受了，不代表会被立即处理，而不会一定处理成功，所以需要正确理解这种方式。</p>
-<p>如果发送失败，那么一定失败，并返回一个错误</p>
+<p>用户不需要构建这个结构体，仅仅需要指定 <code>dest</code> 以及需要发送的数据，而且 <code>skynet</code> 消息投递被设计成不允许发送 <code>nil</code> 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 <code>struct{}{}</code>。</p>
+<p>至于这个节点是再本地，还是其他地方并不重要</p>
 <ul>
 <li>接收</li>
 </ul>
-<p>接受回调只包含<code>5</code>个关键参数 <code>context</code>,<code>addr</code>,<code>session</code>,<code>mtype</code>,<code>argument</code></p>
+<p>接受回调只包含<code>5</code>个关键参数 <code>context</code>,<code>addr</code>,<code>session</code>,<code>mtype</code>,<code>msg</code>,<code>size</code></p>
 <ul>
 <li>
-<p><code>context</code> 其实就是创建服务用户指定的结构指针，用于数据传递和状态修改</p>
+<p><code>context</code> 其实就是创建<code>process</code>指定的结构指针，用于表示处理上下文</p>
+</li>
+<li>
+<p><code>addr</code> 即为投递者的<code>Pid</code>,(需要注意的是，<code>skynet</code>支持<code>redirect</code> 以及 <code>fake</code>模式，所以这地址需要在发送的时候明确)</p>
 </li>
 <li>
 <p><code>session</code> 主要的作用是用以区分这条消息是否是同步请求， 如若大于0，则其值就是请求序列号,只需要通过 <code>skynet.ret(msg)</code> 返回即可</p>
-</li>
-<li>
-<p><code>mtype</code> 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义，可作为<code>rpc</code>消息类型</p>
-</li>
-<li>
-<p><code>argument</code> 才是真实的数据，它可以是任意值，特别的，在<code>lua</code>中这个值是会被解构，在跨节点通讯这个值恒为 <code>[]byte</code>，<del>当不需要时记得 skynet.free</del>  1.4.0 这个由底层回收，用户不用关心</p>
-</li>
-</ul>
-<h1 id="异步消息">异步消息</h1>
-<p>异步消息通过 <code>skynet.send</code>的方式进行投递，它只在乎这个消息有没有正确到达到对点服务，而不关心是否能被对点服务正确处理，并返回一个 <code>error</code></p>
               </div>
             </div>
 
@@ -1038,43 +1162,27 @@
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
                 <p>工作中曾经开发了一个<code>cobweb</code>的分布式服务器框架（基于<code>golang</code>,<code>c</code>）,但是在实际开发过程中代码难以维护以及更新，主要是每次都需要跨平台进行编译，特别是<code>cgo</code> 往往需要指定平台的系统库,而且一些不规范的使用方式造成无法充分发挥多核的优势，可以参见 <code>关于Go协程的思考</code> 虽然1.16 支持抢占式，但错误的使用方式依然造成了cpu过高的问题。，后续重新设计了<code>skynet</code> 是一个<code>actor</code>模型分布式服务框架，使用<code>go</code>编写。</p>
-<p>尽管<code>Actor</code>模型和<code>CSP</code>模型各有所有长，为什么不采用<code>CSP</code>主要有两方面考虑。</p>
+<p>尽管<code>Actor</code>模型和<code>CSP</code>模型各有所有长，为什么不采用<code>CSP</code>主要有以下方面考虑。</p>
 <ol>
-<li><code>CSP</code>模式使用尽管很简单，但是一个致命的问题是无法控制消息的优先级，当然若只处理一个<code>Channel</code>那可以规避，那么为啥还需要使用<code>CSP</code>,而且像go channel 本身是基于互斥锁（1.16）实现，且无法进行优化和更加精细的控制，只能依赖于<code>runtime</code>的调度。（网上所说什么时候触发调度，我认为channel不能包含其中，它本质也是加锁导致切换）</li>
-<li>隔离性太弱，后续一些新的<code>channel</code>引入也会造成破坏性修改，而且 <code>select-case</code>模式等待的<code>channel</code>会随着数量的增加性能会慢慢减弱。</li>
+<li>
+<p><code>CSP</code>模式使用尽管很简单，但是一个致命的问题是无法控制消息的优先级，当然若只处理一个<code>Channel</code>那可以规避，那么为啥还需要使用<code>CSP</code>,而且像go channel 本身是基于互斥锁（1.16）实现，且无法进行优化和更加精细的控制，只能依赖于<code>runtime</code>的调度。（网上所说什么时候触发调度，我认为channel不能包含其中，它本质也是加锁导致切换）</p>
+</li>
+<li>
+<p>隔离性太弱，后续一些新的<code>channel</code>引入也会造成破坏性修改。</p>
+</li>
+<li>
+<p><code>select-case</code>模式会随着等待数量的增加性能会慢慢减弱。</p>
+</li>
+<li>
+<p><code>channel</code> 多大合适？</p>
+</li>
 </ol>
-<p>它是一个年轻的框架，仅仅经历了两款项目的迭代 现在版本为 <code>v1.6.0 2023-05-28</code></p>
+<blockquote>
+<p>它是一个年轻的框架，仅仅经历了两款项目的迭代 <del>现在版本为 <code>v1.6.0 2023-05-28</code></del> 重启了 v2 版本</p></blockquote>
 <ul>
 <li><a href="https://www.taptap.cn/app/229839">羽翼军团</a> v1.3.0</li>
 <li><a href="https://www.taptap.cn/app/215934">我在民国淘古玩</a> v.1.3.5</li>
 </ul>
-<h1 id="与skynet的差异">与skynet的差异</h1>
-<ol>
-<li>
-<p>增加了独占进程的概念，对于一些性能敏感的服务可以绕过公平调度的原则。（公平调度是一个很普遍但并非最优解的调度策略，但对于需要占用资源较多的进程就显得无力）</p>
-</li>
-<li>
-<p>使用协程而非线程，一个好处是对于一些假死服务我们可以重新启动它，其它代价远小于线程（尽管协程的开销很低，但我们尽量保证不会被滥用）</p>
-</li>
-<li>
-<p>一个简单的二进制文件，<code>skynet</code>修改了lua部分虚拟机源码，而且大部分实现都是基于<code>lua</code>实现，而我设计的是一个将脚本语言作为可选项的插件。</p>
-</li>
-<li>
-<p>所有库都是底层语言的实现方式，可控制力和性能更好，完全将业务和底层区分方便同时进行维护</p>
-</li>
-<li>
-<p>无感的集群交互方式，调用其他服务（无论在不在本地）就像普通消息那样简单，不需要像<code>skynet</code>需要显示调用<code>cluster</code>。</p>
-</li>
-<li>
-<p>进程支持错误重启且消息不会丢失（beta)</p>
-</li>
-<li>
-<p>支持后续的<a href="/post/typelang/0">DSL</a></p>
-</li>
-<li>
-<p>在2024/03我正计划重新用C实现了一版以提供更好的性能和更底层的控制</p>
-</li>
-</ol>
               </div>
             </div>
 
@@ -1127,25 +1235,35 @@
 <p>example call</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="n">skynet</span><span class="o">-</span><span class="n">x.send</span><span class="p">(</span><span class="s2">&#34;host:port@name&#34;</span><span class="p">,</span><span class="s2">&#34;rpc&#34;</span><span class="p">...)</span> <span class="c1">-- 通过域名或者地址+端口的形式和其他节点进行通讯</span>
-</span></span><span class="line"><span class="cl"><span class="n">skynet</span><span class="o">-</span><span class="n">x.send</span><span class="p">(</span><span class="s2">&#34;alias&#34;</span><span class="p">,</span><span class="s2">&#34;rpc&#34;</span><span class="p">,...)</span> <span class="c1">-- 通过别名</span>
-</span></span><span class="line"><span class="cl"><span class="n">skynet</span><span class="o">-</span><span class="n">x.send</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="s2">&#34;rpc&#34;</span><span class="p">,...)</span>              <span class="c1">-- 通过pid亦可</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="n">skynet.send</span><span class="p">(</span><span class="s2">&#34;host:port@name&#34;</span><span class="p">,</span><span class="s2">&#34;rpc&#34;</span><span class="p">...)</span> <span class="c1">-- 通过域名或者地址+端口的形式和其他节点进行通讯</span>
+</span></span><span class="line"><span class="cl"><span class="n">skynet.send</span><span class="p">(</span><span class="s2">&#34;alias&#34;</span><span class="p">,</span><span class="s2">&#34;rpc&#34;</span><span class="p">,...)</span> <span class="c1">-- 通过别名</span>
+</span></span><span class="line"><span class="cl"><span class="n">skynet.send</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="s2">&#34;rpc&#34;</span><span class="p">,...)</span>              <span class="c1">-- 通过pid亦可</span>
 </span></span></code></pre></div><h1 id="tunnel"><del>tunnel</del></h1>
 <p>既然节点之间是双向连接，所以连接数量为 <code>f(n) =  n²-n</code>，如果节点过的时候，势必造成 <code>socket fd</code> 消耗殆尽，</p>
 <p>基于这个问题，可以通过内置的<code>tun</code>，来设置代理，这么一来，<code>tun</code>的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 <code>tun</code> 代理是不可见的，</p>
 <p>通过配置<code>tun</code>的规则开启多个，则可以实现业务拆分。</p>
 <blockquote>
-<p>2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 <code>send(&quot;n1.n2.n3@name&quot;)</code></p>
-</blockquote>
+<p>2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 <code>send(&quot;n1.n2.n3@name&quot;)</code></p></blockquote>
 <h1 id="服务发现"><del>服务发现</del></h1>
 <p><code>sktpmd</code> 提供了一套服务发现机制，但其运作原理是不同于 <code>etcd</code> 或者 <code>consul</code>,它本身是一个惰性发现，它不需要一个中心服维持它们的关系。</p>
 <blockquote>
-<p>sktpmd整个发现流程是基于 <code>gossip</code> 算法来发现的,但一些api依然可以主动触发，<code>v1.6.0</code> 这个模块将保留，因为集群模式的逻辑改变了</p>
-</blockquote>
+<p>sktpmd整个发现流程是基于 <code>gossip</code> 算法来发现的,但一些api依然可以主动触发，<code>v1.6.0</code> 这个模块将保留，因为集群模式的逻辑改变了</p></blockquote>
 <h1 id="v160集群建立">v1.6.0集群建立</h1>
 <p><code>v1.5.0</code> 之前节点之间都是双向链接，但考虑到一个单向服务器，如 <code>dns server</code>,<code>conf server</code> 等，大部分是 <code>request/response</code> 模式，惰性连接的收益很大，所以去除之前的一些设计。</p>
 <h1 id="网络底层">网络底层</h1>
 <p>参考 <a href="/post/language/go/goroutine">Go协程的思考</a>,在<code>linux</code>下，使用了 <code>epoll</code>。所以尽量部署到 <code>linux</code> 下以发挥更好的性能</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
+     crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7934154300350596"
+     data-ad-slot="3469296166"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
               </div>
             </div>
 
@@ -1165,100 +1283,25 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/skynet/5/">zmalloc</a>
+                <a href="https://domyson.github.io/post/skynet/4/">scheduler</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>无论是对于C版本还是Go版本的<code>skynet</code>而言，一个高效的内存分配器可以提高内存的使用效率，这里效率无论是对于内存碎片亦或是GC而言，都是一种更高效的手段</p>
-<h1 id="基于-slab-算法的分段内存分配器">基于 <code>SLAB</code> 算法的分段内存分配器</h1>
-<p><code>SLAB</code> 最开始是阅读 <code>linux</code> 源码学习的算法，在<code>skynet</code>中它确实有更优秀的性能，因为它直接分配了一块大共用内存，所以不会产生任何GC和真实分配,但在业务开发过程中，一旦忘记释放 那么这段内存将不能再被使用和获取了（也就是野指针），直到程序结束。最后的保守策略依然会向<code>runtime</code>申请内存，将会导致内存占用过高。</p>
-<p>而且内置的<code>Debug</code>模式也无法定位到这个指针，原因在于 golang 堆栈伸缩会导致指针地址变动，所以 <code>Debug</code> 只能定位到存在 <code>memory-leak</code>，而无法知道具体位置。若需要具体位置则需要hook这个调用栈，性能方面得不偿失</p>
-<h1 id="基于-syncpool-的分段内存分配器">基于 <code>sync.Pool</code> 的分段内存分配器</h1>
-<p>将不同size的buffer放入不同的池中，按需进行分配，减少race的开销，这个方法虽然简单，但是性能是低于 <code>slab-allocator</code>。</p>
-<p>但它确实能减轻心智负担，代价就是牺牲了部分性能以及gc压力，但这也是<code>skynet</code>默认使用的策略。如果需要使用可以在编译指令中指明<code>slab</code></p>
-<h1 id="zmalloc">Zmalloc</h1>
-<p><code>zmlloc</code> 本身也是 <code>slab</code>的升级版本，增加可伸缩链表实现对于预分配内存额外部分的缓冲池。</p>
-<p>在24个线程的cpu条件测试结果如下,<code>zmalloc</code>保持了一种稳定的时间复杂度，额外产生的内存分配也很少</p>
-<table>
-  <thead>
-      <tr>
-          <th style="text-align: left">-</th>
-          <th style="text-align: center">time(ns)</th>
-          <th style="text-align: center">alloc/op(B)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left">slab-128</td>
-          <td style="text-align: center">23.5</td>
-          <td style="text-align: center">1</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">sync.Pool-128</td>
-          <td style="text-align: center">2490</td>
-          <td style="text-align: center">65562</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">zmalloc-128</td>
-          <td style="text-align: center">43.31</td>
-          <td style="text-align: center">16</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">slab-256</td>
-          <td style="text-align: center">24</td>
-          <td style="text-align: center">256</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">sync.Pool-256</td>
-          <td style="text-align: center">2204</td>
-          <td style="text-align: center">65562</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">zmalloc-256</td>
-          <td style="text-align: center">44</td>
-          <td style="text-align: center">16</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">slab-1024</td>
-          <td style="text-align: center">92</td>
-          <td style="text-align: center">1024</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">sync.Pool-1024</td>
-          <td style="text-align: center">2490</td>
-          <td style="text-align: center">65562</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">zmalloc-1024</td>
-          <td style="text-align: center">49</td>
-          <td style="text-align: center">17</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">slab-4096</td>
-          <td style="text-align: center">365</td>
-          <td style="text-align: center">4096</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">sync.Pool-4096</td>
-          <td style="text-align: center">2210</td>
-          <td style="text-align: center">65562</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">zmalloc-4096</td>
-          <td style="text-align: center">45</td>
-          <td style="text-align: center">23</td>
-      </tr>
-  </tbody>
-</table>
-<h1 id="api">API</h1>
-<ul>
-<li>
-<p><code>skynet.zalloc(n)</code> 用以分配指定大小的内存块，考虑到 64在go中为tiny-size，直接会从P上分配，所以zmalloc分配块从128开始</p>
-</li>
-<li>
-<p><code>skynet.zrealloc(buf,n)</code> realloc函数会先检查buf，确保是否需要重新分配内存</p>
+                <h1 id="等后续补充很多概念描述起来比较绕等有空再写-偷个懒">等后续补充，很多概念描述起来比较绕，等有空再写 （偷个懒）</h1>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
+     crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7934154300350596"
+     data-ad-slot="3469296166"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
               </div>
             </div>
 
@@ -1266,303 +1309,9 @@
               
 
               Created
-              <relative-time datetime=" Thu, 21 Apr 2022 00:00:00 &#43;0000" class="no-wrap"
-                title=" Thu, 21 Apr 2022 00:00:00 &#43;0000">
-                Thu, 21 Apr 2022 00:00:00 &#43;0000
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/lang/sync.pool/">sync.pool</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="结构分析">结构分析</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Pool</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">noCopy</span> <span class="nx">noCopy</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="nx">local</span>     <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span> <span class="c1">// P 本地池，固定尺寸，实际结构 [P]poolLocal，类似 void* 并附加长度构成了一个数组
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">localSize</span> <span class="kt">uintptr</span>        <span class="c1">// size of the local array
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">	<span class="nx">victim</span>     <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span> <span class="c1">// local from previous cycle
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">victimSize</span> <span class="kt">uintptr</span>        <span class="c1">// size of victims array
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">	<span class="nx">New</span> <span class="kd">func</span><span class="p">()</span> <span class="nx">any</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">poolChain</span> <span class="kd">struct</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">head</span> <span class="o">*</span><span class="nx">poolChainElt</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nx">tail</span> <span class="o">*</span><span class="nx">poolChainElt</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">poolChainElt</span> <span class="kd">struct</span><span class="p">{</span> <span class="c1">// 一个双向链表
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">poolDequeue</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nx">next</span><span class="p">,</span><span class="nx">prev</span> <span class="o">*</span><span class="nx">poolChainElt</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">poolDequeue</span> <span class="kd">struct</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">headtail</span> <span class="kt">uint64</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nx">vals</span> <span class="p">[]</span><span class="nx">eface</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">eface</span> <span class="kd">struct</span><span class="p">{</span>  <span class="c1">// 数据的真实内存分配，包括一个类型描述和实际数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">typ</span><span class="p">,</span><span class="nx">val</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">poolLocalInternal</span> <span class="kd">struct</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">private</span> <span class="nx">any</span> <span class="c1">// p的私有缓冲区
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="nx">shared</span> <span class="nx">poolChain</span> <span class="c1">// 公共缓冲区
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">poolLocal</span> <span class="kd">struct</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">poolLocalInternal</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nx">pad</span> <span class="p">[</span><span class="mi">128</span><span class="o">-</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Sizeof</span><span class="p">(</span><span class="nx">poolLocalInternal</span><span class="p">{})</span><span class="o">%</span><span class="mi">128</span><span class="p">]</span><span class="kt">byte</span>  <span class="c1">// 应该是补位，可以确保刚好占满一个 cache line 加速访问
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
-</span></span></code></pre></div><h1 id="申请释放">申请释放</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">Pool</span><span class="p">)</span> <span class="nf">pin</span><span class="p">()</span> <span class="p">(</span><span class="o">*</span><span class="nx">poolLocal</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">pid</span> <span class="o">:=</span> <span class="nf">runtime_procPin</span><span class="p">()</span> <span class="c1">// 将当前G和P绑定，并返回P的id
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">s</span> <span class="o">:=</span> <span class="nf">runtime_LoadAcquintptr</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">p</span><span class="p">.</span><span class="nx">localSize</span><span class="p">)</span> <span class="c1">// load-acquire
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">l</span> <span class="o">:=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">local</span>                              <span class="c1">// load-consume
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">pid</span><span class="p">)</span> <span class="p">&lt;</span> <span class="nx">s</span> <span class="p">{</span>  <span class="c1">// 主要是P的数量可能会变动 重新找一个
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">return</span> <span class="nf">indexLocal</span><span class="p">(</span><span class="nx">l</span><span class="p">,</span> <span class="nx">pid</span><span class="p">),</span> <span class="nx">pid</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">p</span><span class="p">.</span><span class="nf">pinSlow</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">Pool</span><span class="p">)</span> <span class="nf">pinSlow</span><span class="p">()</span> <span class="p">(</span><span class="o">*</span><span class="nx">poolLocal</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nf">runtime_procUnpin</span><span class="p">()</span>  <span class="c1">// 禁止 P 抢占，否则当前G会被放回本地或者全局队列，当时之后G不一定在现在这个P上
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">allPoolsMu</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nx">allPoolsMu</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">pid</span> <span class="o">:=</span> <span class="nf">runtime_procPin</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">s</span> <span class="o">:=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">localSize</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">l</span> <span class="o">:=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">local</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">pid</span><span class="p">)</span> <span class="p">&lt;</span> <span class="nx">s</span> <span class="p">{</span> <span class="c1">// double check
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">return</span> <span class="nf">indexLocal</span><span class="p">(</span><span class="nx">l</span><span class="p">,</span> <span class="nx">pid</span><span class="p">),</span> <span class="nx">pid</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">p</span><span class="p">.</span><span class="nx">local</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>  <span class="c1">// 如果本地队列为空，那么此时Pool没被初始化，加入全局池引用
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">allPools</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">allPools</span><span class="p">,</span> <span class="nx">p</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="nx">size</span> <span class="o">:=</span> <span class="nx">runtime</span><span class="p">.</span><span class="nf">GOMAXPROCS</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">// 查看现在P的个数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">local</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="nx">poolLocal</span><span class="p">,</span> <span class="nx">size</span><span class="p">)</span> <span class="c1">// 为这个Pool分配跟P数量相同的本地池
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">atomic</span><span class="p">.</span><span class="nf">StorePointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">p</span><span class="p">.</span><span class="nx">local</span><span class="p">,</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">local</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="c1">// store-release
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nf">runtime_StoreReluintptr</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">p</span><span class="p">.</span><span class="nx">localSize</span><span class="p">,</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">size</span><span class="p">))</span>     <span class="c1">// store-release
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">local</span><span class="p">[</span><span class="nx">pid</span><span class="p">],</span> <span class="nx">pid</span> <span class="c1">// 返回当前和P绑定的本地池
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">Pool</span><span class="p">)</span> <span class="nf">Get</span><span class="p">()</span> <span class="nx">any</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">race</span><span class="p">.</span><span class="nx">Enabled</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">race</span><span class="p">.</span><span class="nf">Disable</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">l</span><span class="p">,</span> <span class="nx">pid</span> <span class="o">:=</span> <span class="nx">p</span><span class="p">.</span><span class="nf">pin</span><span class="p">()</span> <span class="c1">// 先找本地池
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">x</span> <span class="o">:=</span> <span class="nx">l</span><span class="p">.</span><span class="nx">private</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">l</span><span class="p">.</span><span class="nx">private</span> <span class="p">=</span> <span class="kc">nil</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">x</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">// 如果没有，那么从全局池找
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="c1">// Try to pop the head of the local shard. We prefer
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="c1">// the head over the tail for temporal locality of
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="c1">// reuse.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">x</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">l</span><span class="p">.</span><span class="nx">shared</span><span class="p">.</span><span class="nf">popHead</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">x</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">			<span class="nx">x</span> <span class="p">=</span> <span class="nx">p</span><span class="p">.</span><span class="nf">getSlow</span><span class="p">(</span><span class="nx">pid</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="nf">runtime_procUnpin</span><span class="p">()</span> <span class="c1">//释放P，让其可以被抢占
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">race</span><span class="p">.</span><span class="nx">Enabled</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">race</span><span class="p">.</span><span class="nf">Enable</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">x</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">			<span class="nx">race</span><span class="p">.</span><span class="nf">Acquire</span><span class="p">(</span><span class="nf">poolRaceAddr</span><span class="p">(</span><span class="nx">x</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">x</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">p</span><span class="p">.</span><span class="nx">New</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">x</span> <span class="p">=</span> <span class="nx">p</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">x</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// Put adds x to the pool.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">Pool</span><span class="p">)</span> <span class="nf">Put</span><span class="p">(</span><span class="nx">x</span> <span class="nx">any</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">x</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="k">return</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">race</span><span class="p">.</span><span class="nx">Enabled</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nf">fastrandn</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">			<span class="c1">// Randomly drop x on floor.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="k">return</span>
-</span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">race</span><span class="p">.</span><span class="nf">ReleaseMerge</span><span class="p">(</span><span class="nf">poolRaceAddr</span><span class="p">(</span><span class="nx">x</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">race</span><span class="p">.</span><span class="nf">Disable</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">l</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">p</span><span class="p">.</span><span class="nf">pin</span><span class="p">()</span> <span class="c1">// 老规矩，先禁止P被抢占
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">l</span><span class="p">.</span><span class="nx">private</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">// 本地没有 则先放入本地
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">l</span><span class="p">.</span><span class="nx">private</span> <span class="p">=</span> <span class="nx">x</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">l</span><span class="p">.</span><span class="nx">shared</span><span class="p">.</span><span class="nf">pushHead</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="c1">// 否则放入全局
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="nf">runtime_procUnpin</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">race</span><span class="p">.</span><span class="nx">Enabled</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">race</span><span class="p">.</span><span class="nf">Enable</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h1 id="gc">GC</h1>
-<blockquote>
-<p>其实很好理解，正好是一次二级缓冲模型，第一次gc会将local放入 victim，第二gc victim不为空才会真正清理，local不会参与gc</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-              
-              <a class="muted-link mr-3" href="/tags/sync.pool">
-                <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-                  <path fill-rule="evenodd"
-                    d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-                  </path>
-                </svg>
-                sync.pool
-              </a>
-              
-              
-
-              Created
-              <relative-time datetime=" Fri, 15 Apr 2022 00:00:00 &#43;0000" class="no-wrap"
-                title=" Fri, 15 Apr 2022 00:00:00 &#43;0000">
-                Fri, 15 Apr 2022 00:00:00 &#43;0000
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://domyson.github.io/post/lang/cgo/">Cgo</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="cgo-一种go与c交互的技术">cgo 一种go与c交互的技术</h1>
-<h2 id="开启cgo">开启cgo</h2>
-<blockquote>
-<p>要求系统安装C/C++工具链，macos和linux(gcc 自带)，windows(mingw),并确保环境变量<code>CGO_ENAVBLE=on</code>,最后单个源码需要导入 <code>import &quot;C&quot;</code></p>
-</blockquote>
-<h2 id="cgo类型映射">cgo类型映射</h2>
-<table>
-  <thead>
-      <tr>
-          <th>C type</th>
-          <th>Cgo type</th>
-          <th>Go type</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>char</td>
-          <td>C.char</td>
-          <td>byte</td>
-      </tr>
-      <tr>
-          <td>signed char</td>
-          <td>C.schar</td>
-          <td>int8</td>
-      </tr>
-      <tr>
-          <td>unsigned char</td>
-          <td>C.uchar</td>
-          <td>uint8</td>
-      </tr>
-      <tr>
-          <td>short</td>
-          <td>C.short</td>
-          <td>int16</td>
-      </tr>
-      <tr>
-          <td>unsigned short</td>
-          <td>C.ushort</td>
-          <td>uint16</td>
-      </tr>
-      <tr>
-          <td>int</td>
-          <td>C.int</td>
-          <td>int32</td>
-      </tr>
-      <tr>
-          <td>unsigned int</td>
-          <td>C.uint</td>
-          <td>uint32</td>
-      </tr>
-      <tr>
-          <td>long</td>
-          <td>C.long</td>
-          <td>int32</td>
-      </tr>
-      <tr>
-          <td>unsigned long</td>
-          <td>C.ulong</td>
-          <td>uint32</td>
-      </tr>
-      <tr>
-          <td>long long int</td>
-          <td>C.longlong</td>
-          <td>int64</td>
-      </tr>
-      <tr>
-          <td>unsigned long long int</td>
-          <td>C.ulonglong</td>
-          <td>uint64</td>
-      </tr>
-      <tr>
-          <td>float</td>
-          <td>C.float</td>
-          <td>float32</td>
-      </tr>
-      <tr>
-          <td>double</td>
-          <td>C.double</td>
-          <td>double</td>
-      </tr>
-      <tr>
-          <td>size_t</td>
-          <td>C.size_t</td>
-          <td>uint</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="函数指针">函数指针</h3>
-<blockquote>
-<p>go引用c的函数指针比较特别</p>
-</blockquote>
-<ol>
-<li>
-<p>官方给出的<a href="https://github.com/golang/go/wiki/cgo#function-pointer-callbacks">Example</a></p>
-</li>
-<li>
-<p>我这里给出另外一种,通过c wrap 这个函数指针成一个普通函数，然后go调用它</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 06 Apr 2022 00:00:00 &#43;0000" class="no-wrap"
-                title=" Wed, 06 Apr 2022 00:00:00 &#43;0000">
-                Wed, 06 Apr 2022 00:00:00 &#43;0000
+              <relative-time datetime=" Sat, 30 Apr 2022 00:00:00 &#43;0000" class="no-wrap"
+                title=" Sat, 30 Apr 2022 00:00:00 &#43;0000">
+                Sat, 30 Apr 2022 00:00:00 &#43;0000
               </relative-time>
             </div>
           </div>

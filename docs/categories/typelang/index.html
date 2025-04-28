@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V23G8H27BQ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V23G8H27BQ');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <script type="application/javascript" src='https://domyson.github.io/js/theme-mode.js'></script>
@@ -153,7 +162,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">34</span>
+              <span class="Counter">37</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -442,7 +451,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">34</span>
+      <span class="Counter ">37</span>
     </a>
   </nav>
 </div>
@@ -856,14 +865,12 @@
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
                 <blockquote>
-<p>这篇文章将会是一个系列，更新会比源码慢，文档写的也不会写的很完全，名字暂定 <code>typelang</code>, C syntax-like</p>
-</blockquote>
+<p>这篇文章将会是一个系列，更新会比源码慢，文档写的也不会写的很完全，名字暂定 <code>typelang</code>, C syntax-like</p></blockquote>
 <h1 id="设计缘由">设计缘由</h1>
 <p>早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 <a href="/post/skynet/skynet">skynet</a> 写一门dsl，现在是用lua作为服务的脚本端。但由于的若约束性导致在开发的时候很多同时并不够优雅，总是以一种奇怪的方式来解决问题，Lua本身并没有任何问题，它被设计之初是为了修补C的不足，但它的语法设计却并不符合我的预期。</p>
 <p>尽管它的性能是脚本语言中顶尖的，但是一些隐式写法并不能保证它的预期性能，如混合<code>table</code>,过多的函数调用栈，字符串操作以及无类型系统。</p>
 <blockquote>
-<p>关于类型系统有利有弊，但我个人的观点是宁愿多出30%的开发时间，从而减少70%的bug。</p>
-</blockquote>
+<p>关于类型系统有利有弊，但我个人的观点是宁愿多出30%的开发时间，从而减少70%的bug。</p></blockquote>
               </div>
             </div>
 
