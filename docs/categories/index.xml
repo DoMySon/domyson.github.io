@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on 朝花夕拾</title>
+    <link>http://localhost:1313/categories/</link>
+    <description>Recent content in Categories on 朝花夕拾</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 14 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Etc</title>
+      <link>http://localhost:1313/categories/etc/</link>
+      <pubDate>Mon, 14 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/etc/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Skynet</title>
+      <link>http://localhost:1313/categories/skynet/</link>
+      <pubDate>Thu, 30 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/skynet/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Typelang</title>
+      <link>http://localhost:1313/categories/typelang/</link>
+      <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/typelang/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Zen</title>
+      <link>http://localhost:1313/categories/zen/</link>
+      <pubDate>Sat, 01 Apr 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/zen/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Linux</title>
+      <link>http://localhost:1313/categories/linux/</link>
+      <pubDate>Sat, 19 Nov 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/linux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Kproto</title>
+      <link>http://localhost:1313/categories/kproto/</link>
+      <pubDate>Wed, 21 Sep 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/kproto/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Go</title>
+      <link>http://localhost:1313/categories/go/</link>
+      <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/go/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Net</title>
+      <link>http://localhost:1313/categories/net/</link>
+      <pubDate>Sun, 09 Feb 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/net/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
