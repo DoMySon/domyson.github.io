@@ -34,7 +34,7 @@ PID 一个 message 最重要的是消息地址，如果一个消息没有地址�
 得益于go的简单性，可以使用 channel 来实现，但这种方式的实现性能不高，因为 channel 底层的结构使用的是互斥锁，
 所以我采用了mpsc 实现了无锁队列，性能更优于 channel
 TODO: 吞吐量对比
-消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet-x 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 struct{}{}。
+消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 struct{}{}。
 而且消息发送成功只能代表被 mailbox 接受了，不代表会被立即处理，而不会一定处理成功，所以需要正确理解这种方式。
 如果发送失败，那么一定失败，并返回一个错误
 接收 接受回调只包含5个关键参数 context,addr,session,mtype,argument
@@ -66,7 +66,7 @@ PID 一个 message 最重要的是消息地址，如果一个消息没有地址�
 得益于go的简单性，可以使用 channel 来实现，但这种方式的实现性能不高，因为 channel 底层的结构使用的是互斥锁，
 所以我采用了mpsc 实现了无锁队列，性能更优于 channel
 TODO: 吞吐量对比
-消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet-x 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 struct{}{}。
+消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 struct{}{}。
 而且消息发送成功只能代表被 mailbox 接受了，不代表会被立即处理，而不会一定处理成功，所以需要正确理解这种方式。
 如果发送失败，那么一定失败，并返回一个错误
 接收 接受回调只包含5个关键参数 context,addr,session,mtype,argument
@@ -98,7 +98,7 @@ PID 一个 message 最重要的是消息地址，如果一个消息没有地址�
 得益于go的简单性，可以使用 channel 来实现，但这种方式的实现性能不高，因为 channel 底层的结构使用的是互斥锁，
 所以我采用了mpsc 实现了无锁队列，性能更优于 channel
 TODO: 吞吐量对比
-消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet-x 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 struct{}{}。
+消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 struct{}{}。
 而且消息发送成功只能代表被 mailbox 接受了，不代表会被立即处理，而不会一定处理成功，所以需要正确理解这种方式。
 如果发送失败，那么一定失败，并返回一个错误
 接收 接受回调只包含5个关键参数 context,addr,session,mtype,argument
@@ -260,7 +260,7 @@ argument 才是真实的数据，它可以是任意值，特别的，在lua中�
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="简介">简介</h1>
-<p><code>skynet-x</code>是基于<code>actor</code> 消息的服务框架，那么我们需要定义一套标准且高效的消息结构</p>
+<p><code>skynet</code>是基于<code>actor</code> 消息的服务框架，那么我们需要定义一套标准且高效的消息结构</p>
 <h2 id="processor">Processor</h2>
 <p>一个伪线程的逻辑处理器概念，它分为独占和负载两种模式。</p>
 <ul>
@@ -277,7 +277,7 @@ argument 才是真实的数据，它可以是任意值，特别的，在lua中�
 <h2 id="pid">PID</h2>
 <p>一个 <code>message</code> 最重要的是消息地址，如果一个消息没有地址的话我们称为 <code>dead-letter</code>。 那么我们通过<code>Pid</code> 标定一个地址类型，</p>
 <p>它表示该服务的唯一id (本质上是一个<code>uint64</code>)的类习惯，它一定能确保在当前节点以及集群中唯一的。</p>
-<p>在服务本身未被关闭的时候，<code>pid</code>一定不会产生变动，但重新启动节点之后，它的值可能会发生改变，因为所有服务默认都是并发启动，除非手动指定了关系(这也是它与<code>skynet-x</code>的区别)，所以不要尝试保存这个<code>pid</code></p>
+<p>在服务本身未被关闭的时候，<code>pid</code>一定不会产生变动，但重新启动节点之后，它的值可能会发生改变，因为所有服务默认都是并发启动，除非手动指定了关系(这也是它与<code>skynet</code>的区别)，所以不要尝试保存这个<code>pid</code></p>
 <p>一旦能确定了一个<code>pid</code>的话，就可以通过 <code>skynet.send(pid,cmd,...) or skynet.call(ti,pid,cmd,...)</code> 将其发送出去了。</p>
 <h2 id="服务的消息队列">服务的消息队列</h2>
 <p><code>Actor</code> 模型最重要的的概念是 <code>mailbox</code>,它代表了一个实体需要处理的队列容器，</p>
@@ -288,7 +288,7 @@ argument 才是真实的数据，它可以是任意值，特别的，在lua中�
 <ul>
 <li>发送</li>
 </ul>
-<p>用户不需要构建这个结构体，仅仅需要指定 <code>destination</code> 以及需要发送的数据，而且 <code>skynet-x</code> 消息投递被设计成不允许发送 <code>nil</code> 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 <code>struct{}{}</code>。</p>
+<p>用户不需要构建这个结构体，仅仅需要指定 <code>destination</code> 以及需要发送的数据，而且 <code>skynet</code> 消息投递被设计成不允许发送 <code>nil</code> 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 <code>struct{}{}</code>。</p>
 <p>而且消息发送成功只能代表被 <code>mailbox</code> 接受了，不代表会被立即处理，而不会一定处理成功，所以需要正确理解这种方式。</p>
 <p>如果发送失败，那么一定失败，并返回一个错误</p>
 <ul>

@@ -28,7 +28,7 @@ sktpmd现在支持原始的tcp,udp,unix协议，后续规划可能由reliable ud
 使用 启动也非常简单，无须任何代码，仅仅只需要在 conf.conf 中配置一下即可，使用的时候跟节点内通讯无任何区别。因为我已经作平了本地和节点之间的差异。
 内部均由kproto进行编码,提供更快的序列化方式。
 example call
-skynet-x.send(&#34;host:port@name&#34;,&#34;rpc&#34;...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skynet-x.send(&#34;alias&#34;,&#34;rpc&#34;,...) -- 通过别名 skynet-x.send(pid, &#34;rpc&#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
+skynet.send(&#34;host:port@name&#34;,&#34;rpc&#34;...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skynet.send(&#34;alias&#34;,&#34;rpc&#34;,...) -- 通过别名 skynet.send(pid, &#34;rpc&#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
 基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，
 通过配置tun的规则开启多个，则可以实现业务拆分。
 2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&quot;n1.n2.n3@name&quot;)
@@ -53,7 +53,7 @@ sktpmd现在支持原始的tcp,udp,unix协议，后续规划可能由reliable ud
 使用 启动也非常简单，无须任何代码，仅仅只需要在 conf.conf 中配置一下即可，使用的时候跟节点内通讯无任何区别。因为我已经作平了本地和节点之间的差异。
 内部均由kproto进行编码,提供更快的序列化方式。
 example call
-skynet-x.send(&#34;host:port@name&#34;,&#34;rpc&#34;...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skynet-x.send(&#34;alias&#34;,&#34;rpc&#34;,...) -- 通过别名 skynet-x.send(pid, &#34;rpc&#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
+skynet.send(&#34;host:port@name&#34;,&#34;rpc&#34;...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skynet.send(&#34;alias&#34;,&#34;rpc&#34;,...) -- 通过别名 skynet.send(pid, &#34;rpc&#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
 基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，
 通过配置tun的规则开启多个，则可以实现业务拆分。
 2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&quot;n1.n2.n3@name&quot;)
@@ -78,7 +78,7 @@ sktpmd现在支持原始的tcp,udp,unix协议，后续规划可能由reliable ud
 使用 启动也非常简单，无须任何代码，仅仅只需要在 conf.conf 中配置一下即可，使用的时候跟节点内通讯无任何区别。因为我已经作平了本地和节点之间的差异。
 内部均由kproto进行编码,提供更快的序列化方式。
 example call
-skynet-x.send(&#34;host:port@name&#34;,&#34;rpc&#34;...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skynet-x.send(&#34;alias&#34;,&#34;rpc&#34;,...) -- 通过别名 skynet-x.send(pid, &#34;rpc&#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
+skynet.send(&#34;host:port@name&#34;,&#34;rpc&#34;...) -- 通过域名或者地址&#43;端口的形式和其他节点进行通讯 skynet.send(&#34;alias&#34;,&#34;rpc&#34;,...) -- 通过别名 skynet.send(pid, &#34;rpc&#34;,...) -- 通过pid亦可 tunnel 既然节点之间是双向连接，所以连接数量为 f(n) = n²-n，如果节点过的时候，势必造成 socket fd 消耗殆尽，
 基于这个问题，可以通过内置的tun，来设置代理，这么一来，tun的作用相当于这个集群节点的网关。因为其内部的节点相对于其他 tun 代理是不可见的，
 通过配置tun的规则开启多个，则可以实现业务拆分。
 2022-10-07 此模块被弃用，可以用多节点转接的方式或代理的方式做到，如 send(&quot;n1.n2.n3@name&quot;)
@@ -239,7 +239,7 @@ v1.6.0集群建立 v1.5.0 之前节点之间都是双向链接，但考虑到一
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="简介">简介</h1>
-<p><code>sktpmd</code>模块是<code>skynet-x</code>底层集群模块，它承担了<code>skynet-x</code>网络节点之间的通讯职能。全名为(<code>skynet port managment daemon</code>)</p>
+<p><code>sktpmd</code>模块是<code>skynet</code>底层集群模块，它承担了<code>skynet</code>网络节点之间的通讯职能。全名为(<code>skynet port managment daemon</code>)</p>
 <h1 id="架构">架构</h1>
 <ol>
 <li>

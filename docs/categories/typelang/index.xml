@@ -48,7 +48,7 @@
       <link>https://domyson.github.io/post/typelang/0/</link>
       <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
       <guid>https://domyson.github.io/post/typelang/0/</guid>
-      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;这篇文章将会是一个系列，更新会比源码慢，文档写的也不会写的很完全，名字暂定 &lt;code&gt;typelang&lt;/code&gt;, C syntax-like&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h1 id=&#34;设计缘由&#34;&gt;设计缘由&lt;/h1&gt;&#xA;&lt;p&gt;早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 &lt;a href=&#34;https://domyson.github.io/post/skynet/skynet&#34;&gt;skynet-x&lt;/a&gt; 写一门dsl，现在是用lua作为服务的脚本端。但由于的若约束性导致在开发的时候很多同时并不够优雅，总是以一种奇怪的方式来解决问题，Lua本身并没有任何问题，它被设计之初是为了修补C的不足，但它的语法设计却并不符合我的预期。&lt;/p&gt;&#xA;&lt;p&gt;尽管它的性能是脚本语言中顶尖的，但是一些隐式写法并不能保证它的预期性能，如混合&lt;code&gt;table&lt;/code&gt;,过多的函数调用栈，字符串操作以及无类型系统。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;关于类型系统有利有弊，但我个人的观点是宁愿多出30%的开发时间，从而减少70%的bug。&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;这篇文章将会是一个系列，更新会比源码慢，文档写的也不会写的很完全，名字暂定 &lt;code&gt;typelang&lt;/code&gt;, C syntax-like&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h1 id=&#34;设计缘由&#34;&gt;设计缘由&lt;/h1&gt;&#xA;&lt;p&gt;早在2019之前就想开发一门脚本语言，一是加深编译原理的理解，二是觉得程序员不应该消耗在语言特性上，也一直想为自己的服务端框架 &lt;a href=&#34;https://domyson.github.io/post/skynet/skynet&#34;&gt;skynet&lt;/a&gt; 写一门dsl，现在是用lua作为服务的脚本端。但由于的若约束性导致在开发的时候很多同时并不够优雅，总是以一种奇怪的方式来解决问题，Lua本身并没有任何问题，它被设计之初是为了修补C的不足，但它的语法设计却并不符合我的预期。&lt;/p&gt;&#xA;&lt;p&gt;尽管它的性能是脚本语言中顶尖的，但是一些隐式写法并不能保证它的预期性能，如混合&lt;code&gt;table&lt;/code&gt;,过多的函数调用栈，字符串操作以及无类型系统。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;关于类型系统有利有弊，但我个人的观点是宁愿多出30%的开发时间，从而减少70%的bug。&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
   </channel>
 </rss>
