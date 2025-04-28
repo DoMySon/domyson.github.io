@@ -68,3 +68,8 @@ href = "https://github.com/domyson"
   mediaType = "application/json"
   baseName = "index"
   isPlainText = false
+
+
+[services]
+  [services.googleAnalytics]
+    ID = "G-V23G8H27BQ"
