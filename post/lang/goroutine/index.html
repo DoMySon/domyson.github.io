@@ -212,12 +212,10 @@
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="栈">栈</h1>
 <blockquote>
-<p>一个 os 线程会有一个给固定大小的内存块（一般是 2MB），用来存储当前线程中调用或挂起函数的内部变量，固定大小的栈对于复杂和深层次递归是不够的，而 Goroutine 会以一个很小的栈（2KB）开始其生命周期，这个栈会动态伸缩，最大能到达 1GB（32位系统是 250M）</p>
-</blockquote>
+<p>一个 os 线程会有一个给固定大小的内存块（一般是 2MB），用来存储当前线程中调用或挂起函数的内部变量，固定大小的栈对于复杂和深层次递归是不够的，而 Goroutine 会以一个很小的栈（2KB）开始其生命周期，这个栈会动态伸缩，最大能到达 1GB（32位系统是 250M）</p></blockquote>
 <h1 id="调度方式">调度方式</h1>
 <blockquote>
-<p>os 线程由操作系统内核调用，每过一定时间（毫秒），硬件计时器会中断处理器，并调用一个名为 scheduler 的内建函数，这个函数会挂起当前执行的线程并保存内存中它的寄存器内存，然后检查线程列表并决定下一次执行哪个线程，并从内存中恢复该线程的寄存器信息，恢复该线程的线程并执行，这就是上下文切换，增加了 CPU 的运行周期。而 Go 的 runtime 包含了自身的调度器，和 os 线程不同是，<code>Goroutine</code> 属于用户级线程由语言支持，调度由语言支持，所有开销会减少很多（相比于内核上下文切换）。</p>
-</blockquote>
+<p>os 线程由操作系统内核调用，每过一定时间（毫秒），硬件计时器会中断处理器，并调用一个名为 scheduler 的内建函数，这个函数会挂起当前执行的线程并保存内存中它的寄存器内存，然后检查线程列表并决定下一次执行哪个线程，并从内存中恢复该线程的寄存器信息，恢复该线程的线程并执行，这就是上下文切换，增加了 CPU 的运行周期。而 Go 的 runtime 包含了自身的调度器，和 os 线程不同是，<code>Goroutine</code> 属于用户级线程由语言支持，调度由语言支持，所有开销会减少很多（相比于内核上下文切换）。</p></blockquote>
 <h1 id="go的调度器scheduler">Go的调度器（Scheduler）</h1>
 <ul>
 <li>
@@ -234,8 +232,7 @@
 </li>
 </ul>
 <blockquote>
-<p>Runtime 起始时会启动一些 G：垃圾回收的 G，执行调度的 G，运行用户代码的 G；并且会创建一个 M 用来开始 G 的运行。随着时间的推移，更多的 G 会被创建出来，更多的 M 也会被创建出来。</p>
-</blockquote>
+<p>Runtime 起始时会启动一些 G：垃圾回收的 G，执行调度的 G，运行用户代码的 G；并且会创建一个 M 用来开始 G 的运行。随着时间的推移，更多的 G 会被创建出来，更多的 M 也会被创建出来。</p></blockquote>
 <ol>
 <li>
 <p>它是运行在用户态的，</p>
@@ -262,8 +259,7 @@
 </ul>
 <h1 id="何时触发调度">何时触发调度</h1>
 <blockquote>
-<p>由于 Go 语言是协作式的调度，不会像线程那样，在时间片用完后，由 CPU 中断任务强行将其调度走。对于 Go 语言中运行时间过长的 goroutine，Go scheduler 有一个后台线程在持续监控，一旦发现 goroutine 运行超过 10 ms，会设置 goroutine 的 “抢占标志位”，之后调度器会处理。</p>
-</blockquote>
+<p>由于 Go 语言是协作式的调度，不会像线程那样，在时间片用完后，由 CPU 中断任务强行将其调度走。对于 Go 语言中运行时间过长的 goroutine，Go scheduler 有一个后台线程在持续监控，一旦发现 goroutine 运行超过 10 ms，会设置 goroutine 的 “抢占标志位”，之后调度器会处理。</p></blockquote>
 <ol>
 <li>syscall</li>
 <li>select-case</li>
@@ -275,8 +271,7 @@
 </ol>
 <h1 id="goroutine">Goroutine</h1>
 <blockquote>
-<p>Goroutine 可以看作对 thread 加的一层抽象，它更轻量级，可以单独执行。因为有了这层抽象，Gopher 不会直接面对 thread</p>
-</blockquote>
+<p>Goroutine 可以看作对 thread 加的一层抽象，它更轻量级，可以单独执行。因为有了这层抽象，Gopher 不会直接面对 thread</p></blockquote>
 <ol>
 <li>
 <p>创建一个 goroutine 的栈内存消耗为 2 KB，在运行过程中，如果栈空间不够用，会自动进行扩容</p>
@@ -304,16 +299,15 @@
 </ol>
 <h2 id="异常捕获">异常捕获</h2>
 <blockquote>
-<p>当启动多个 <code>goroutine</code> 时，如果其中一个 <code>goroutine</code> 异常了，并且我们并没有对进行异常处理，那么整个程序都会终止，所以最好每个 <code>goroutine</code> 所运行的函数都做异常处理，异常处理采用 <code>recover</code></p>
-</blockquote>
+<p>当启动多个 <code>goroutine</code> 时，如果其中一个 <code>goroutine</code> 异常了，并且我们并没有对进行异常处理，那么整个程序都会终止，所以最好每个 <code>goroutine</code> 所运行的函数都做异常处理，异常处理采用 <code>recover</code></p></blockquote>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">go</span> <span class="kd">func</span><span class="p">(){</span>
 </span></span><span class="line"><span class="cl">    <span class="k">defer</span> <span class="kd">func</span><span class="p">(){</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nb">recover</span><span class="p">();</span><span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="c1">//TODO
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//TODO</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">//Code...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nb">panic</span><span class="p">(</span><span class="s">&#34;exit&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//Code...</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">panic</span><span class="p">(</span><span class="s">&#34;exit&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="注意">注意</h3>
 <ol>
@@ -326,8 +320,7 @@
 </ol>
 <h2 id="如何同步">如何同步</h2>
 <blockquote>
-<p>某些情况是主线程退出，但一部分 <code>goroutine</code> 还未执行完毕</p>
-</blockquote>
+<p>某些情况是主线程退出，但一部分 <code>goroutine</code> 还未执行完毕</p></blockquote>
 <ul>
 <li>
 <p>通过 <code>sync.WaitGroup</code> 来保证所有 <code>goroutine</code> 执行完成</p>

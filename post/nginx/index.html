@@ -213,8 +213,7 @@ Nginx下载
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="简介">简介</h1>
 <blockquote>
-<p>Nginx功能丰富，可作为HTTP服务器，也可作为反向代理服务器，邮件服务器。支持FastCGI、SSL、Virtual Host、URL Rewrite、Gzip等功能。并且支持很多第三方的模块扩展。</p>
-</blockquote>
+<p>Nginx功能丰富，可作为HTTP服务器，也可作为反向代理服务器，邮件服务器。支持FastCGI、SSL、Virtual Host、URL Rewrite、Gzip等功能。并且支持很多第三方的模块扩展。</p></blockquote>
 <p><a href="http://nginx.org/en/download.html">Nginx下载</a></p>
 <h1 id="常用功能">常用功能</h1>
 <ul>
@@ -246,7 +245,7 @@ Nginx下载
 <h1 id="nginx正向代理">Nginx正向代理</h1>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="k">server</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1"># 配置DNS解析IP地址，比如 Google Public DNS，以及超时时间（5秒）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kn">resolver</span> <span class="mi">8</span><span class="s">.8.8.8</span><span class="p">;</span>    <span class="c1"># 必需
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kn">resolver</span> <span class="n">8.8.8.8</span><span class="p">;</span>    <span class="c1"># 必需
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kn">resolver_timeout</span> <span class="s">5s</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1"># 监听端口
@@ -275,8 +274,7 @@ Nginx下载
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><blockquote>
-<p>添加环境变量  <strong>http_proxy=http://192.168.1.9:8080</strong>  unix系统需要重新  <code>source /etc/profile</code> 来应用环境变量</p>
-</blockquote>
+<p>添加环境变量  <strong>http_proxy=http://192.168.1.9:8080</strong>  unix系统需要重新  <code>source /etc/profile</code> 来应用环境变量</p></blockquote>
 <h1 id="nginx文件服务器">Nginx文件服务器</h1>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">#增加一个 server 模块
@@ -284,7 +282,7 @@ Nginx下载
 </span></span><span class="line"><span class="cl"><span class="k">server{</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="s">listen</span>       <span class="mi">8080</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">server_name</span>  <span class="mi">8</span><span class="s">.8.8.8</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">server_name</span>  <span class="n">8.8.8.8</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">charset</span> <span class="s">utf-8</span><span class="p">;</span> <span class="c1">#设置编码，防止乱码
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">#root         /usr/share/nginx/html;
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">root</span>         <span class="s">/data/</span><span class="p">;</span>
@@ -497,8 +495,7 @@ Nginx下载
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
 </span></span></code></pre></div><h1 id="路径匹配规则">路径匹配规则</h1>
 <blockquote>
-<p>访问  <code>http://treasure.com/abc/index.html</code></p>
-</blockquote>
+<p>访问  <code>http://treasure.com/abc/index.html</code></p></blockquote>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">location</span> <span class="s">/abc/</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kn">proxy_pass</span> <span class="s">http://treasure.com/</span><span class="p">;</span> <span class="c1"># 有 / 后缀会被location 截断
@@ -520,8 +517,7 @@ Nginx下载
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
 </span></span></code></pre></div><h1 id="防盗链">防盗链</h1>
 <blockquote>
-<p>http标准协议中有专门的字段记录 <code>referer</code>，他可以追溯到请求时从哪个网站链接过来的，来对于资源文件，可以跟踪到包含显示他的网页地址是什么。因此所有防盗链方法都是基于这个Referer字段，nginx防盗链是通过分析访问资源的源网站，即referer来自哪里</p>
-</blockquote>
+<p>http标准协议中有专门的字段记录 <code>referer</code>，他可以追溯到请求时从哪个网站链接过来的，来对于资源文件，可以跟踪到包含显示他的网页地址是什么。因此所有防盗链方法都是基于这个Referer字段，nginx防盗链是通过分析访问资源的源网站，即referer来自哪里</p></blockquote>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="k">location</span> <span class="p">~</span><span class="sr">*</span> <span class="s">\.(gif|jpg|png|bmp)</span>$ <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kn">valid_referers</span> <span class="s">none</span> <span class="s">blocked</span> <span class="s">a.b.c</span> <span class="s">a1.b1.c1</span>
@@ -539,8 +535,7 @@ Nginx下载
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h1 id="高速缓存">高速缓存</h1>
 <blockquote>
-<p>Nginx可以缓存一些文件（一般是静态文件），减少Nginx与后端服务器的IO，提高用户访问速度。而且当后端服务器宕机时，Nginx服务器能给出相应的缓存文件响应相关的用户请求。</p>
-</blockquote>
+<p>Nginx可以缓存一些文件（一般是静态文件），减少Nginx与后端服务器的IO，提高用户访问速度。而且当后端服务器宕机时，Nginx服务器能给出相应的缓存文件响应相关的用户请求。</p></blockquote>
 <h1 id="第三方模块编译">第三方模块编译</h1>
 <p>待完善</p>
 <h1 id="源码分析">源码分析</h1>

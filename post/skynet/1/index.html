@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>message - 朝花夕拾</title>
+    <title>scheduler - 朝花夕拾</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -21,28 +21,24 @@
 
     
     <meta name="description"
-  content="简介 skynet-x是基于actor 消息的服务框架，那么我们需要定义一套标准且高效的消息结构
-Processor 一个伪线程的逻辑处理器概念，它分为独占和负载两种模式。
-独占Processor是为了更好的处理实时性更高的业务，它不会被其他任务抢占
-负载Processor又可分为两种运行态，均匀的处理业务以及从其他Processor上偷窃任务，尽量保证Processor不会过于闲置，除此之外，负载Processor可随着任务的变动而增加（不会超过最大设定值），特别的当某个任务陷入”死循环”或者是超出设定运行阈值的时候会重新创建一个Processor，并让之前的挂起（在C版本中将会被强制关闭）。
+  content="简介 skynet 实现了一套调度器机制，用以调度 process, 与云风大佬不同的是，sched 支持公平模式以及独占模式，独占模式主要是为了解决特性场景下业务的响应速度，从而提升体验感， 其次，不一定需要按照每个 process 对应一条协程，减少runtime调度以及内存的开销
+Sched 一个伪线程的逻辑处理器概念，它分为独占和负载两种模式。
+独占是为了更好的处理实时性更高的业务，它不会被其他任务抢占
+负载又可分为两种运行态，均匀的处理业务以及从其他process上偷窃任务，尽量保证Processor不会过于闲置，除此之外，负载Processor可随着任务的变动而增加（不会超过最大设定值），特别的当某个任务陷入”死循环”或者是超出设定运行阈值的时候会重新创建一个Processor`，并让之前的挂起（在C版本中将会被强制关闭）。
+多数时候协程过多会造成系统压力。
 C版本和Go版本调度和设计上差异不大，但一些细节上的处理可能不同，因为C可以提供更多的底层控制
-PID 一个 message 最重要的是消息地址，如果一个消息没有地址的话我们称为 dead-letter。 那么我们通过Pid 标定一个地址类型，
-它表示该服务的唯一id (本质上是一个uint64)的类习惯，它一定能确保在当前节点以及集群中唯一的。
-在服务本身未被关闭的时候，pid一定不会产生变动，但重新启动节点之后，它的值可能会发生改变，因为所有服务默认都是并发启动，除非手动指定了关系(这也是它与skynet-x的区别)，所以不要尝试保存这个pid
-一旦能确定了一个pid的话，就可以通过 skynet.send(pid,cmd,...) or skynet.call(ti,pid,cmd,...) 将其发送出去了。
+Process process 是一种用户态的伪概念，用于描述一个 actor的具体实现方式，也是 skynet最小调度单元，这种概念对于分布式而言更友好，无关乎process在哪，只需要知道 PID 或者 Alias 即可向其投送消息。 主要是对业务几乎无侵入
+Message message 是 skynet 基础消息承载结构
 服务的消息队列 Actor 模型最重要的的概念是 mailbox,它代表了一个实体需要处理的队列容器，
 得益于go的简单性，可以使用 channel 来实现，但这种方式的实现性能不高，因为 channel 底层的结构使用的是互斥锁，
 所以我采用了mpsc 实现了无锁队列，性能更优于 channel
 TODO: 吞吐量对比
-消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet-x 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 struct{}{}。
-而且消息发送成功只能代表被 mailbox 接受了，不代表会被立即处理，而不会一定处理成功，所以需要正确理解这种方式。
-如果发送失败，那么一定失败，并返回一个错误
-接收 接受回调只包含5个关键参数 context,addr,session,mtype,argument
-context 其实就是创建服务用户指定的结构指针，用于数据传递和状态修改
+消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 dest 以及需要发送的数据，而且 skynet 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 struct{}{}。
+至于这个节点是再本地，还是其他地方并不重要
+接收 接受回调只包含5个关键参数 context,addr,session,mtype,msg,size
+context 其实就是创建process指定的结构指针，用于表示处理上下文
+addr 即为投递者的Pid,(需要注意的是，skynet支持redirect 以及 fake模式，所以这地址需要在发送的时候明确)
 session 主要的作用是用以区分这条消息是否是同步请求， 如若大于0，则其值就是请求序列号,只需要通过 skynet.ret(msg) 返回即可
-mtype 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义，可作为rpc消息类型
-argument 才是真实的数据，它可以是任意值，特别的，在lua中这个值是会被解构，在跨节点通讯这个值恒为 []byte，当不需要时记得 skynet.free 1.4.0 这个由底层回收，用户不用关心
-异步消息 异步消息通过 skynet.send的方式进行投递，它只在乎这个消息有没有正确到达到对点服务，而不关心是否能被对点服务正确处理，并返回一个 error
 " />
 <meta name="keywords"
   content='computer tech' />
@@ -51,30 +47,26 @@ argument 才是真实的数据，它可以是任意值，特别的，在lua中�
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="message - 朝花夕拾" />
+<meta name="twitter:title" content="scheduler - 朝花夕拾" />
 <meta name="twitter:description"
-  content="简介 skynet-x是基于actor 消息的服务框架，那么我们需要定义一套标准且高效的消息结构
-Processor 一个伪线程的逻辑处理器概念，它分为独占和负载两种模式。
-独占Processor是为了更好的处理实时性更高的业务，它不会被其他任务抢占
-负载Processor又可分为两种运行态，均匀的处理业务以及从其他Processor上偷窃任务，尽量保证Processor不会过于闲置，除此之外，负载Processor可随着任务的变动而增加（不会超过最大设定值），特别的当某个任务陷入”死循环”或者是超出设定运行阈值的时候会重新创建一个Processor，并让之前的挂起（在C版本中将会被强制关闭）。
+  content="简介 skynet 实现了一套调度器机制，用以调度 process, 与云风大佬不同的是，sched 支持公平模式以及独占模式，独占模式主要是为了解决特性场景下业务的响应速度，从而提升体验感， 其次，不一定需要按照每个 process 对应一条协程，减少runtime调度以及内存的开销
+Sched 一个伪线程的逻辑处理器概念，它分为独占和负载两种模式。
+独占是为了更好的处理实时性更高的业务，它不会被其他任务抢占
+负载又可分为两种运行态，均匀的处理业务以及从其他process上偷窃任务，尽量保证Processor不会过于闲置，除此之外，负载Processor可随着任务的变动而增加（不会超过最大设定值），特别的当某个任务陷入”死循环”或者是超出设定运行阈值的时候会重新创建一个Processor`，并让之前的挂起（在C版本中将会被强制关闭）。
+多数时候协程过多会造成系统压力。
 C版本和Go版本调度和设计上差异不大，但一些细节上的处理可能不同，因为C可以提供更多的底层控制
-PID 一个 message 最重要的是消息地址，如果一个消息没有地址的话我们称为 dead-letter。 那么我们通过Pid 标定一个地址类型，
-它表示该服务的唯一id (本质上是一个uint64)的类习惯，它一定能确保在当前节点以及集群中唯一的。
-在服务本身未被关闭的时候，pid一定不会产生变动，但重新启动节点之后，它的值可能会发生改变，因为所有服务默认都是并发启动，除非手动指定了关系(这也是它与skynet-x的区别)，所以不要尝试保存这个pid
-一旦能确定了一个pid的话，就可以通过 skynet.send(pid,cmd,...) or skynet.call(ti,pid,cmd,...) 将其发送出去了。
+Process process 是一种用户态的伪概念，用于描述一个 actor的具体实现方式，也是 skynet最小调度单元，这种概念对于分布式而言更友好，无关乎process在哪，只需要知道 PID 或者 Alias 即可向其投送消息。 主要是对业务几乎无侵入
+Message message 是 skynet 基础消息承载结构
 服务的消息队列 Actor 模型最重要的的概念是 mailbox,它代表了一个实体需要处理的队列容器，
 得益于go的简单性，可以使用 channel 来实现，但这种方式的实现性能不高，因为 channel 底层的结构使用的是互斥锁，
 所以我采用了mpsc 实现了无锁队列，性能更优于 channel
 TODO: 吞吐量对比
-消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet-x 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 struct{}{}。
-而且消息发送成功只能代表被 mailbox 接受了，不代表会被立即处理，而不会一定处理成功，所以需要正确理解这种方式。
-如果发送失败，那么一定失败，并返回一个错误
-接收 接受回调只包含5个关键参数 context,addr,session,mtype,argument
-context 其实就是创建服务用户指定的结构指针，用于数据传递和状态修改
+消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 dest 以及需要发送的数据，而且 skynet 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 struct{}{}。
+至于这个节点是再本地，还是其他地方并不重要
+接收 接受回调只包含5个关键参数 context,addr,session,mtype,msg,size
+context 其实就是创建process指定的结构指针，用于表示处理上下文
+addr 即为投递者的Pid,(需要注意的是，skynet支持redirect 以及 fake模式，所以这地址需要在发送的时候明确)
 session 主要的作用是用以区分这条消息是否是同步请求， 如若大于0，则其值就是请求序列号,只需要通过 skynet.ret(msg) 返回即可
-mtype 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义，可作为rpc消息类型
-argument 才是真实的数据，它可以是任意值，特别的，在lua中这个值是会被解构，在跨节点通讯这个值恒为 []byte，当不需要时记得 skynet.free 1.4.0 这个由底层回收，用户不用关心
-异步消息 异步消息通过 skynet.send的方式进行投递，它只在乎这个消息有没有正确到达到对点服务，而不关心是否能被对点服务正确处理，并返回一个 error
 " />
 <meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -83,33 +75,29 @@ argument 才是真实的数据，它可以是任意值，特别的，在lua中�
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="message - 朝花夕拾">
+<meta property="og:title" content="scheduler - 朝花夕拾">
 <meta property="og:description"
-  content="简介 skynet-x是基于actor 消息的服务框架，那么我们需要定义一套标准且高效的消息结构
-Processor 一个伪线程的逻辑处理器概念，它分为独占和负载两种模式。
-独占Processor是为了更好的处理实时性更高的业务，它不会被其他任务抢占
-负载Processor又可分为两种运行态，均匀的处理业务以及从其他Processor上偷窃任务，尽量保证Processor不会过于闲置，除此之外，负载Processor可随着任务的变动而增加（不会超过最大设定值），特别的当某个任务陷入”死循环”或者是超出设定运行阈值的时候会重新创建一个Processor，并让之前的挂起（在C版本中将会被强制关闭）。
+  content="简介 skynet 实现了一套调度器机制，用以调度 process, 与云风大佬不同的是，sched 支持公平模式以及独占模式，独占模式主要是为了解决特性场景下业务的响应速度，从而提升体验感， 其次，不一定需要按照每个 process 对应一条协程，减少runtime调度以及内存的开销
+Sched 一个伪线程的逻辑处理器概念，它分为独占和负载两种模式。
+独占是为了更好的处理实时性更高的业务，它不会被其他任务抢占
+负载又可分为两种运行态，均匀的处理业务以及从其他process上偷窃任务，尽量保证Processor不会过于闲置，除此之外，负载Processor可随着任务的变动而增加（不会超过最大设定值），特别的当某个任务陷入”死循环”或者是超出设定运行阈值的时候会重新创建一个Processor`，并让之前的挂起（在C版本中将会被强制关闭）。
+多数时候协程过多会造成系统压力。
 C版本和Go版本调度和设计上差异不大，但一些细节上的处理可能不同，因为C可以提供更多的底层控制
-PID 一个 message 最重要的是消息地址，如果一个消息没有地址的话我们称为 dead-letter。 那么我们通过Pid 标定一个地址类型，
-它表示该服务的唯一id (本质上是一个uint64)的类习惯，它一定能确保在当前节点以及集群中唯一的。
-在服务本身未被关闭的时候，pid一定不会产生变动，但重新启动节点之后，它的值可能会发生改变，因为所有服务默认都是并发启动，除非手动指定了关系(这也是它与skynet-x的区别)，所以不要尝试保存这个pid
-一旦能确定了一个pid的话，就可以通过 skynet.send(pid,cmd,...) or skynet.call(ti,pid,cmd,...) 将其发送出去了。
+Process process 是一种用户态的伪概念，用于描述一个 actor的具体实现方式，也是 skynet最小调度单元，这种概念对于分布式而言更友好，无关乎process在哪，只需要知道 PID 或者 Alias 即可向其投送消息。 主要是对业务几乎无侵入
+Message message 是 skynet 基础消息承载结构
 服务的消息队列 Actor 模型最重要的的概念是 mailbox,它代表了一个实体需要处理的队列容器，
 得益于go的简单性，可以使用 channel 来实现，但这种方式的实现性能不高，因为 channel 底层的结构使用的是互斥锁，
 所以我采用了mpsc 实现了无锁队列，性能更优于 channel
 TODO: 吞吐量对比
-消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 destination 以及需要发送的数据，而且 skynet-x 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 struct{}{}。
-而且消息发送成功只能代表被 mailbox 接受了，不代表会被立即处理，而不会一定处理成功，所以需要正确理解这种方式。
-如果发送失败，那么一定失败，并返回一个错误
-接收 接受回调只包含5个关键参数 context,addr,session,mtype,argument
-context 其实就是创建服务用户指定的结构指针，用于数据传递和状态修改
+消息的接受和发送 发送 用户不需要构建这个结构体，仅仅需要指定 dest 以及需要发送的数据，而且 skynet 消息投递被设计成不允许发送 nil 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 struct{}{}。
+至于这个节点是再本地，还是其他地方并不重要
+接收 接受回调只包含5个关键参数 context,addr,session,mtype,msg,size
+context 其实就是创建process指定的结构指针，用于表示处理上下文
+addr 即为投递者的Pid,(需要注意的是，skynet支持redirect 以及 fake模式，所以这地址需要在发送的时候明确)
 session 主要的作用是用以区分这条消息是否是同步请求， 如若大于0，则其值就是请求序列号,只需要通过 skynet.ret(msg) 返回即可
-mtype 仅仅是一个消息类别的区分，类似于消息号，用户可自行定义，可作为rpc消息类型
-argument 才是真实的数据，它可以是任意值，特别的，在lua中这个值是会被解构，在跨节点通讯这个值恒为 []byte，当不需要时记得 skynet.free 1.4.0 这个由底层回收，用户不用关心
-异步消息 异步消息通过 skynet.send的方式进行投递，它只在乎这个消息有没有正确到达到对点服务，而不关心是否能被对点服务正确处理，并返回一个 error
 " />
 <meta property="og:url" content="https://domyson.github.io/post/skynet/1/" />
-<meta property="og:site_name" content="message" />
+<meta property="og:site_name" content="scheduler" />
 <meta property="og:image"
   content="https://domyson.github.io/">
 <meta property="og:image:width" content="2048">
@@ -210,7 +198,7 @@ argument 才是真实的数据，它可以是任意值，特别的，在lua中�
                   </span>
                   <span class="path-divider">/</span>
                   <strong class="css-truncate css-truncate-target mr-1" style="max-width: 410px">
-                    <a href="https://domyson.github.io/post/skynet/1/">message</a>
+                    <a href="https://domyson.github.io/post/skynet/1/">scheduler</a>
                   </strong>
                 </h1>
                 <div class="note m-0">
@@ -247,7 +235,7 @@ argument 才是真实的数据，它可以是任意值，特别的，在lua中�
                         </div>
                       </div>
                     </details-menu>
-                      1302 Words
+                      1195 Words
                     
 
                   </div>
@@ -260,25 +248,28 @@ argument 才是真实的数据，它可以是任意值，特别的，在lua中�
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="简介">简介</h1>
-<p><code>skynet-x</code>是基于<code>actor</code> 消息的服务框架，那么我们需要定义一套标准且高效的消息结构</p>
-<h2 id="processor">Processor</h2>
+<p><code>skynet</code> 实现了一套调度器机制，用以调度 <code>process</code>, 与云风大佬不同的是，<code>sched</code> 支持公平模式以及独占模式，独占模式主要是为了解决特性场景下业务的响应速度，从而提升体验感，
+其次，不一定需要按照每个 <code>process</code> 对应一条协程，减少<code>runtime</code>调度以及内存的开销</p>
+<h2 id="sched">Sched</h2>
 <p>一个伪线程的逻辑处理器概念，它分为独占和负载两种模式。</p>
 <ul>
 <li>
-<p>独占<code>Processor</code>是为了更好的处理实时性更高的业务，它不会被其他任务抢占</p>
+<p>独占是为了更好的处理实时性更高的业务，它不会被其他任务抢占</p>
 </li>
 <li>
-<p>负载<code>Processor</code>又可分为两种运行态，均匀的处理业务以及从其他<code>Processor</code>上偷窃任务，尽量保证<code>Processor</code>不会过于闲置，除此之外，负载<code>Processor</code>可随着任务的变动而增加（不会超过最大设定值），特别的当某个任务陷入”死循环”或者是超出设定运行阈值的时候会重新创建一个<code>Processor</code>，并让之前的挂起（在C版本中将会被强制关闭）。</p>
+<p>负载<code>又可分为两种运行态，均匀的处理业务以及从其他</code>process<code>上偷窃任务，尽量保证</code>Processor<code>不会过于闲置，除此之外，负载</code>Processor<code>可随着任务的变动而增加（不会超过最大设定值），特别的当某个任务陷入”死循环”或者是超出设定运行阈值的时候会重新创建一个</code>Processor`，并让之前的挂起（在C版本中将会被强制关闭）。</p>
+</li>
+<li>
+<p>多数时候协程过多会造成系统压力。</p>
 </li>
 </ul>
 <blockquote>
-<p>C版本和Go版本调度和设计上差异不大，但一些细节上的处理可能不同，因为C可以提供更多的底层控制</p>
-</blockquote>
-<h2 id="pid">PID</h2>
-<p>一个 <code>message</code> 最重要的是消息地址，如果一个消息没有地址的话我们称为 <code>dead-letter</code>。 那么我们通过<code>Pid</code> 标定一个地址类型，</p>
-<p>它表示该服务的唯一id (本质上是一个<code>uint64</code>)的类习惯，它一定能确保在当前节点以及集群中唯一的。</p>
-<p>在服务本身未被关闭的时候，<code>pid</code>一定不会产生变动，但重新启动节点之后，它的值可能会发生改变，因为所有服务默认都是并发启动，除非手动指定了关系(这也是它与<code>skynet-x</code>的区别)，所以不要尝试保存这个<code>pid</code></p>
-<p>一旦能确定了一个<code>pid</code>的话，就可以通过 <code>skynet.send(pid,cmd,...) or skynet.call(ti,pid,cmd,...)</code> 将其发送出去了。</p>
+<p>C版本和Go版本调度和设计上差异不大，但一些细节上的处理可能不同，因为C可以提供更多的底层控制</p></blockquote>
+<h2 id="process">Process</h2>
+<p><code>process</code> 是一种用户态的伪概念，用于描述一个 <code>actor</code>的具体实现方式，也是 <code>skynet</code>最小调度单元，这种概念对于分布式而言更友好，无关乎process在哪，只需要知道 <code>PID</code> 或者 <code>Alias</code> 即可向其投送消息。
+主要是对业务几乎无侵入</p>
+<h2 id="message">Message</h2>
+<p><code>message</code> 是 <code>skynet</code> 基础消息承载结构</p>
 <h2 id="服务的消息队列">服务的消息队列</h2>
 <p><code>Actor</code> 模型最重要的的概念是 <code>mailbox</code>,它代表了一个实体需要处理的队列容器，</p>
 <p>得益于<code>go</code>的简单性，可以使用 <code>channel</code> 来实现，但这种方式的实现性能不高，因为 <code>channel</code> 底层的结构使用的是互斥锁，</p>
@@ -288,16 +279,18 @@ argument 才是真实的数据，它可以是任意值，特别的，在lua中�
 <ul>
 <li>发送</li>
 </ul>
-<p>用户不需要构建这个结构体，仅仅需要指定 <code>destination</code> 以及需要发送的数据，而且 <code>skynet-x</code> 消息投递被设计成不允许发送 <code>nil</code> 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 <code>struct{}{}</code>。</p>
-<p>而且消息发送成功只能代表被 <code>mailbox</code> 接受了，不代表会被立即处理，而不会一定处理成功，所以需要正确理解这种方式。</p>
-<p>如果发送失败，那么一定失败，并返回一个错误</p>
+<p>用户不需要构建这个结构体，仅仅需要指定 <code>dest</code> 以及需要发送的数据，而且 <code>skynet</code> 消息投递被设计成不允许发送 <code>nil</code> 因为这是无任何意义的，相反它还会消耗服务投递的性能，如果确实有这种需求，可以发送 <code>struct{}{}</code>。</p>
+<p>至于这个节点是再本地，还是其他地方并不重要</p>
 <ul>
 <li>接收</li>
 </ul>
-<p>接受回调只包含<code>5</code>个关键参数 <code>context</code>,<code>addr</code>,<code>session</code>,<code>mtype</code>,<code>argument</code></p>
+<p>接受回调只包含<code>5</code>个关键参数 <code>context</code>,<code>addr</code>,<code>session</code>,<code>mtype</code>,<code>msg</code>,<code>size</code></p>
 <ul>
 <li>
-<p><code>context</code> 其实就是创建服务用户指定的结构指针，用于数据传递和状态修改</p>
+<p><code>context</code> 其实就是创建<code>process</code>指定的结构指针，用于表示处理上下文</p>
+</li>
+<li>
+<p><code>addr</code> 即为投递者的<code>Pid</code>,(需要注意的是，<code>skynet</code>支持<code>redirect</code> 以及 <code>fake</code>模式，所以这地址需要在发送的时候明确)</p>
 </li>
 <li>
 <p><code>session</code> 主要的作用是用以区分这条消息是否是同步请求， 如若大于0，则其值就是请求序列号,只需要通过 <code>skynet.ret(msg)</code> 返回即可</p>
@@ -310,12 +303,10 @@ argument 才是真实的数据，它可以是任意值，特别的，在lua中�
 </li>
 </ul>
 <h1 id="异步消息">异步消息</h1>
-<p>异步消息通过 <code>skynet.send</code>的方式进行投递，它只在乎这个消息有没有正确到达到对点服务，而不关心是否能被对点服务正确处理，并返回一个 <code>error</code></p>
+<p>异步消息通过 <code>skynet.send</code>的方式进行投递，它只在乎这个消息有没有正确投递出去，而不关心是否能被对点服务正确处理</p>
+<p>由于是基于<code>mailbox</code> 所有消息都是异步处理的，意味着时延性平均略高于同步</p>
 <h1 id="同步消息">同步消息</h1>
-<p>同步消息通过 <code>skynet.call</code>的方式进行投递，它会阻塞当前<code>coroutine</code>，它也返回一个错误，能解除此次阻塞只有两个条件，对点服务<code>skynet.ret</code> 或者达到了指定超时时间，</p>
-<blockquote>
-<p>超时一定需要大于<code>10ms</code>,这是内置计时器的最小精度,所以特别在远程通讯的时候要考虑到 i/o 的延时</p>
-</blockquote>
+<p>说是同步消息 其实本质上还是异步，这个不属于<code>skynet</code>的底层内容而是在上层基于业务需求而封装的 <code>伪</code>同步</p>
 </article>
               </div>
             </div>

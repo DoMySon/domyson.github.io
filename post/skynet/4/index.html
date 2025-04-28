@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://domyson.github.io/css/light.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://domyson.github.io/css/syntax.css' />
-    <title>Go GC分析 - 朝花夕拾</title>
+    <title>scheduler - 朝花夕拾</title>
     
     <link rel="icon" type="image/x-icon" href='/images/avatar.png'>
     
@@ -21,49 +21,17 @@
 
     
     <meta name="description"
-  content="如何启用GC跟踪 GODEBUG=gctrace=1 go run *.go
-其中 gctrace=1 表示只针对这个进程进行GC追踪
-标记流程 go采用三色标记法，主要是为了提高并发度，这样扫描过程可以拆分为多个阶段，而不用一次扫描全部
-黑 根节点扫描完毕，子节点也扫描完毕
-灰 根节点扫描完毕，子节点未扫描
-白 未扫描
-扫描是从 .bss .data goroutine栈开始扫描，最终遍历整个堆上的对象树
-标记 mark 标记过程是一个广度优先的遍历过程，扫描节点，将节点的子节点推送到任务队列中，然后递归扫描子叶节点，直到所有工作队列被排空
-mark阶段会将白色对象标记，并推入队列中变为灰色
-memory barrier 保障了代码描述中对内存的操作顺序，即不会在编译期被编译器进行调整，也不会在运行时被CPU的乱序执行所打乱
-write barrier 在应用进入 GC 标记阶段前的 stw 阶段，会将全局变量 runtime.writeBarrier.enabled 修改为 true，这时所有的堆上指针修改操作在修改之前便会额外调用 runtime.gcWriteBarrier
-由于GC和Go主程序并发执行，所以必须要在扫描时监控内存可能出现的状态改变，所以需要写屏障，所以需要暂停GO主程序（STW）
-hybrid wirte barrier (after go1.8) 改方式的基本思想是：对正在被覆盖的对象进行着色，且如果当时栈未扫描完成，则同样对指针进行着色
-GC流程 程序启动会为每个P分配一个 mark worker 来标记内存，负责为进入STW做前期工作
-起初认为所有 object 都被认定为白色 但栈，堆和全局变量的object被标记为灰色 GC会将灰色object标记为黑色，将灰色object所包含的所有指针所指向的地址都标记为灰色，递归这两个步骤，最终对象非黑即白，其中白色object即未被引用且可以被回收，如果object标记为no scan，则递归结束，标记为黑色
-todo https://blog.csdn.net/asd1126163471/article/details/124113816
-" />
+  content="等后续补充，很多概念描述起来比较绕，等有空再写 （偷个懒） " />
 <meta name="keywords"
   content='computer tech' />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://domyson.github.io/post/lang/gc/" />
+<link rel="canonical" href="https://domyson.github.io/post/skynet/4/" />
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Go GC分析 - 朝花夕拾" />
+<meta name="twitter:title" content="scheduler - 朝花夕拾" />
 <meta name="twitter:description"
-  content="如何启用GC跟踪 GODEBUG=gctrace=1 go run *.go
-其中 gctrace=1 表示只针对这个进程进行GC追踪
-标记流程 go采用三色标记法，主要是为了提高并发度，这样扫描过程可以拆分为多个阶段，而不用一次扫描全部
-黑 根节点扫描完毕，子节点也扫描完毕
-灰 根节点扫描完毕，子节点未扫描
-白 未扫描
-扫描是从 .bss .data goroutine栈开始扫描，最终遍历整个堆上的对象树
-标记 mark 标记过程是一个广度优先的遍历过程，扫描节点，将节点的子节点推送到任务队列中，然后递归扫描子叶节点，直到所有工作队列被排空
-mark阶段会将白色对象标记，并推入队列中变为灰色
-memory barrier 保障了代码描述中对内存的操作顺序，即不会在编译期被编译器进行调整，也不会在运行时被CPU的乱序执行所打乱
-write barrier 在应用进入 GC 标记阶段前的 stw 阶段，会将全局变量 runtime.writeBarrier.enabled 修改为 true，这时所有的堆上指针修改操作在修改之前便会额外调用 runtime.gcWriteBarrier
-由于GC和Go主程序并发执行，所以必须要在扫描时监控内存可能出现的状态改变，所以需要写屏障，所以需要暂停GO主程序（STW）
-hybrid wirte barrier (after go1.8) 改方式的基本思想是：对正在被覆盖的对象进行着色，且如果当时栈未扫描完成，则同样对指针进行着色
-GC流程 程序启动会为每个P分配一个 mark worker 来标记内存，负责为进入STW做前期工作
-起初认为所有 object 都被认定为白色 但栈，堆和全局变量的object被标记为灰色 GC会将灰色object标记为黑色，将灰色object所包含的所有指针所指向的地址都标记为灰色，递归这两个步骤，最终对象非黑即白，其中白色object即未被引用且可以被回收，如果object标记为no scan，则递归结束，标记为黑色
-todo https://blog.csdn.net/asd1126163471/article/details/124113816
-" />
+  content="等后续补充，很多概念描述起来比较绕，等有空再写 （偷个懒） " />
 <meta name="twitter:site" content="https://domyson.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -71,33 +39,17 @@ todo https://blog.csdn.net/asd1126163471/article/details/124113816
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="Go GC分析 - 朝花夕拾">
+<meta property="og:title" content="scheduler - 朝花夕拾">
 <meta property="og:description"
-  content="如何启用GC跟踪 GODEBUG=gctrace=1 go run *.go
-其中 gctrace=1 表示只针对这个进程进行GC追踪
-标记流程 go采用三色标记法，主要是为了提高并发度，这样扫描过程可以拆分为多个阶段，而不用一次扫描全部
-黑 根节点扫描完毕，子节点也扫描完毕
-灰 根节点扫描完毕，子节点未扫描
-白 未扫描
-扫描是从 .bss .data goroutine栈开始扫描，最终遍历整个堆上的对象树
-标记 mark 标记过程是一个广度优先的遍历过程，扫描节点，将节点的子节点推送到任务队列中，然后递归扫描子叶节点，直到所有工作队列被排空
-mark阶段会将白色对象标记，并推入队列中变为灰色
-memory barrier 保障了代码描述中对内存的操作顺序，即不会在编译期被编译器进行调整，也不会在运行时被CPU的乱序执行所打乱
-write barrier 在应用进入 GC 标记阶段前的 stw 阶段，会将全局变量 runtime.writeBarrier.enabled 修改为 true，这时所有的堆上指针修改操作在修改之前便会额外调用 runtime.gcWriteBarrier
-由于GC和Go主程序并发执行，所以必须要在扫描时监控内存可能出现的状态改变，所以需要写屏障，所以需要暂停GO主程序（STW）
-hybrid wirte barrier (after go1.8) 改方式的基本思想是：对正在被覆盖的对象进行着色，且如果当时栈未扫描完成，则同样对指针进行着色
-GC流程 程序启动会为每个P分配一个 mark worker 来标记内存，负责为进入STW做前期工作
-起初认为所有 object 都被认定为白色 但栈，堆和全局变量的object被标记为灰色 GC会将灰色object标记为黑色，将灰色object所包含的所有指针所指向的地址都标记为灰色，递归这两个步骤，最终对象非黑即白，其中白色object即未被引用且可以被回收，如果object标记为no scan，则递归结束，标记为黑色
-todo https://blog.csdn.net/asd1126163471/article/details/124113816
-" />
-<meta property="og:url" content="https://domyson.github.io/post/lang/gc/" />
-<meta property="og:site_name" content="Go GC分析" />
+  content="等后续补充，很多概念描述起来比较绕，等有空再写 （偷个懒） " />
+<meta property="og:url" content="https://domyson.github.io/post/skynet/4/" />
+<meta property="og:site_name" content="scheduler" />
 <meta property="og:image"
   content="https://domyson.github.io/">
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
 
-<meta property="article:published_time" content="2022-02-26 00:00:00 &#43;0000 UTC" />
+<meta property="article:published_time" content="2022-04-30 00:00:00 &#43;0000 UTC" />
 
 
 
@@ -192,13 +144,13 @@ todo https://blog.csdn.net/asd1126163471/article/details/124113816
                   </span>
                   <span class="path-divider">/</span>
                   <strong class="css-truncate css-truncate-target mr-1" style="max-width: 410px">
-                    <a href="https://domyson.github.io/post/lang/gc/">Go GC分析</a>
+                    <a href="https://domyson.github.io/post/skynet/4/">scheduler</a>
                   </strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Sat, 26 Feb 2022 00:00:00 &#43;0000"
+                  Created <relative-time datetime="Sat, 30 Apr 2022 00:00:00 &#43;0000"
                     class="no-wrap">
-                    Sat, 26 Feb 2022 00:00:00 &#43;0000</relative-time>
+                    Sat, 30 Apr 2022 00:00:00 &#43;0000</relative-time>
 
                   
                 </div>
@@ -229,22 +181,11 @@ todo https://blog.csdn.net/asd1126163471/article/details/124113816
                         </div>
                       </div>
                     </details-menu>
-                      654 Words
+                      28 Words
                     
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
-                    
-                    
-                    <a class="muted-link mr-3" href="/tags/gc">
-                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-                        <path fill-rule="evenodd"
-                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
-                        </path>
-                      </svg>
-                      GC
-                    </a>
-                    
                     
                   </div>
                 </div>
@@ -252,45 +193,19 @@ todo https://blog.csdn.net/asd1126163471/article/details/124113816
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><h1 id="如何启用gc跟踪">如何启用GC跟踪</h1>
-<blockquote>
-<p>GODEBUG=gctrace=1 go run *.go</p></blockquote>
-<p>其中 <code>gctrace=1</code> 表示只针对这个进程进行GC追踪</p>
-<h1 id="标记流程">标记流程</h1>
-<blockquote>
-<p>go采用三色标记法，主要是为了提高并发度，这样扫描过程可以拆分为多个阶段，而不用一次扫描全部</p></blockquote>
-<ul>
-<li>
-<p>黑 根节点扫描完毕，子节点也扫描完毕</p>
-</li>
-<li>
-<p>灰 根节点扫描完毕，子节点未扫描</p>
-</li>
-<li>
-<p>白 未扫描</p>
-</li>
-</ul>
-<p>扫描是从 .bss .data goroutine栈开始扫描，最终遍历整个堆上的对象树</p>
-<h2 id="标记-mark">标记 mark</h2>
-<p>标记过程是一个广度优先的遍历过程，扫描节点，将节点的子节点推送到任务队列中，然后递归扫描子叶节点，直到所有工作队列被排空</p>
-<p>mark阶段会将白色对象标记，并推入队列中变为灰色</p>
-<h1 id="memory-barrier">memory barrier</h1>
-<blockquote>
-<p>保障了代码描述中对内存的操作顺序，<code>即不会在编译期被编译器进行调整，也不会在运行时被CPU的乱序执行所打乱</code></p></blockquote>
-<h2 id="write-barrier">write barrier</h2>
-<p>在应用进入 GC 标记阶段前的 stw 阶段，会将全局变量 runtime.writeBarrier.enabled 修改为 true，这时所有的堆上指针修改操作在修改之前便会额外调用 runtime.gcWriteBarrier</p>
-<p>由于GC和Go主程序并发执行，所以必须要在扫描时监控内存可能出现的状态改变，所以需要写屏障，所以需要暂停GO主程序（STW）</p>
-<h2 id="hybrid-wirte-barrier-after-go18">hybrid wirte barrier (after go1.8)</h2>
-<blockquote>
-<p>改方式的基本思想是：对正在被覆盖的对象进行着色，且如果当时栈未扫描完成，则同样对指针进行着色</p></blockquote>
-<h1 id="gc流程">GC流程</h1>
-<p>程序启动会为每个P分配一个 mark worker 来标记内存，负责为进入STW做前期工作</p>
-<ul>
-<li>起初认为所有 object 都被认定为白色</li>
-<li>但栈，堆和全局变量的object被标记为灰色</li>
-</ul>
-<p>GC会将灰色object标记为黑色，将灰色object所包含的所有指针所指向的地址都标记为灰色，递归这两个步骤，最终对象非黑即白，其中白色object即未被引用且可以被回收，如果object标记为no scan，则递归结束，标记为黑色</p>
-<p>todo <a href="https://blog.csdn.net/asd1126163471/article/details/124113816">https://blog.csdn.net/asd1126163471/article/details/124113816</a></p>
+                <article class="markdown-body entry-content container-lg"><h1 id="等后续补充很多概念描述起来比较绕等有空再写-偷个懒">等后续补充，很多概念描述起来比较绕，等有空再写 （偷个懒）</h1>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7934154300350596"
+     crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7934154300350596"
+     data-ad-slot="3469296166"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 </article>
               </div>
             </div>
